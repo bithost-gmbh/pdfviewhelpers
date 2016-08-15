@@ -1,6 +1,6 @@
 plugin.tx_pdfviewhelpers.settings {
 	config {
-		tcpdfClass = Bithost\Pdfviewhelpers\Model\BithostTCPDF
+		tcpdfClass = Bithost\Pdfviewhelpers\Model\EmptyTCPDF
 		tcpdfLanguage = ger
 		jpgQuality = 100
 		allowedImageTypes {
@@ -40,7 +40,7 @@ plugin.tx_pdfviewhelpers.settings {
 		}
 	}
 	text {
-		color = #000
+		color =
 		fontFamily =
 		fontSize = 
 		padding {

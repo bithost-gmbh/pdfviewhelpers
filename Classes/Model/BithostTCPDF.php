@@ -45,7 +45,7 @@ class BithostTCPDF extends \TCPDF {
 		$this->SetTextColor(140, 140, 140);
 		$this->SetFontSize(11);
 
-		$this->Image($extPath . 'Resources/Public/images/logo.png', 15, 15, 56, 24, '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, FALSE, FALSE);
+		$this->Image($extPath . 'Resources/Public/Images/logo.png', 15, 15, 56, 24, '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, FALSE, FALSE);
 		$this->MultiCell(null, null, $address, 0, 'R', FALSE, 1, 0, 45, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);
 	}
 
