@@ -61,9 +61,9 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 	 */
 	public function initialize() {
 		$extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
-		$pdfClassName = empty($this->settings['config.']['tcpdfClass']) ? 'TCPDF' : $this->settings['config.']['tcpdfClass'];
+		$pdfClassName = empty($this->settings['config.']['class']) ? 'TCPDF' : $this->settings['config.']['class'];
 
-		require_once($extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->settings['config.']['tcpdfLanguage'] . '.php'); //todo check if necessary
+		require_once($extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->settings['config.']['language'] . '.php');
 		require_once($extPath . 'Resources/Private/PHP/tcpdf/tcpdf.php');
 
 		$this->setPDF(GeneralUtility::makeInstance($pdfClassName));

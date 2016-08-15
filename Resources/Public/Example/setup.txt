@@ -8,8 +8,8 @@ page {
 
 plugin.tx_pdfviewhelpers.settings {
 	config {
-		tcpdfClass = Bithost\Pdfviewhelpers\Model\BithostTCPDF
-		tcpdfLanguage = eng
+		class = Bithost\Pdfviewhelpers\Model\BithostTCPDF
+		language = eng
 	}
 	document {
 		title = Bithost document

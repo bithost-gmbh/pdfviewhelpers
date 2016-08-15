@@ -1,7 +1,7 @@
 plugin.tx_pdfviewhelpers.settings {
 	config {
-		tcpdfClass = Bithost\Pdfviewhelpers\Model\EmptyTCPDF
-		tcpdfLanguage = ger
+		class = Bithost\Pdfviewhelpers\Model\EmptyTCPDF
+		language = ger
 		jpgQuality = 100
 		allowedImageTypes {
 			image = jpg,png,gif
