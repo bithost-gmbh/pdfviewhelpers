@@ -38,6 +38,7 @@ The extension pdfviewhelpers is using [TCPDF](https://tcpdf.org/) for the PDF ge
 ```
 
 ### PDF Output
+
 ![Example PDF output](Resources/Public/Images/example_pdf.png)
 
 ## Bug Tracker
@@ -47,6 +48,10 @@ https://github.com/bithost-gmbh/pdfviewhelpers/issues
 ## Git Repository
 
 https://github.com/bithost-gmbh/pdfviewhelpers
+
+## TER 
+
+https://typo3.org/extensions/repository/view/pdfviewhelpers
 
 ## Contact
 
