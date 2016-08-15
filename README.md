@@ -38,7 +38,7 @@ The extension pdfviewhelpers is using [TCPDF](https://tcpdf.org/) for the PDF ge
 ```
 
 ### PDF Output
-![Example PDF output](Resources/Public/images/example_pdf.png)
+![Example PDF output](Resources/Public/Images/example_pdf.png)
 
 ## Bug Tracker
 
