@@ -51,6 +51,12 @@ class HeadlineViewHelper extends AbstractTextViewHelper {
 		if (!empty($this->settings['headline.']['fontSize'])) {
 			$this->overrideArgument('fontSize', 'integer', '', FALSE, $this->settings['headline.']['fontSize']);
 		}
+		if (!empty($this->settings['headline.']['alignment'])) {
+			$this->overrideArgument('alignment', 'string', '', FALSE, $this->settings['headline.']['alignment']);
+		}
+		if (!empty($this->settings['headline.']['paragraphSpacing'])) {
+			$this->overrideArgument('paragraphSpacing', 'float', '', FALSE, $this->settings['headline.']['paragraphSpacing']);
+		}
 	}
 
 	/**
