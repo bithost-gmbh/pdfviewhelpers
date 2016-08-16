@@ -32,6 +32,8 @@ plugin.tx_pdfviewhelpers.settings {
 		color = #000
 		fontFamily = helvetica
 		fontSize = 11
+		alignment = left
+		paragraphSpacing = 2
 		padding {
 			top = 0
 			right = 0
@@ -46,13 +48,13 @@ plugin.tx_pdfviewhelpers.settings {
 		padding {
 
 		}
-		alignment = left
-		paragraphSpacing = 2
 	}
 	headline {
 		color =
 		fontFamily = 
 		fontSize = 16
+		paragraphSpacing = 0
+		alignment =
 		padding {
 			top = 6
 			right = 0
