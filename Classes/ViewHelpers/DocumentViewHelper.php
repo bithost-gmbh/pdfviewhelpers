@@ -41,7 +41,14 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 	 *
 	 * @var array
 	 */
-	protected $tcpdfOutputContentDestinations = ['I', 'D', 'F', 'FI', 'FD'];
+	protected $tcpdfOutputContentDestinations = ['I', 'D', 'FI', 'FD'];
+
+	/**
+	 * TCPDF output destinations that save the pdf to the filesystem
+	 *
+	 * @var array
+	 */
+	protected $tcpdfSaveFileDestinations = ['F', 'FI', 'FD'];
 
 	/**
 	 * @return void
@@ -82,7 +89,13 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 	public function render() {
 		$this->renderChildren();
 
-		$this->getPDF()->Output($this->arguments['outputPath'], $this->arguments['outputDestination']);
+		$outputPath = $this->arguments['outputPath'];
+
+		if (in_array($this->arguments['outputDestination'], $this->tcpdfSaveFileDestinations)) {
+			$outputPath = PATH_site . $outputPath;
+		}
+
+		$this->getPDF()->Output($outputPath, $this->arguments['outputDestination']);
 
 		if (in_array($this->arguments['outputDestination'], $this->tcpdfOutputContentDestinations)) {
 			//flush and close all outputs in order to prevent TYPO3 from sending other contents and let it finish gracefully

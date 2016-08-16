@@ -60,19 +60,21 @@ class ImageViewHelper extends AbstractContentElementViewHelper {
 	public function render() {
 		$this->initializeMultiColumnSupport();
 
-		if (!file_exists($this->arguments['src'])) {
+		$src = PATH_site . $this->arguments['src'];
+
+		if (!file_exists($src)) {
 			throw new ValidationException('Image path "' . $this->arguments['src'] .  '" does not exist. ERROR: 1471036581', 1471036581);
 		}
 		
-		switch ($this->getImageRenderMode($this->arguments['src'])) {
+		switch ($this->getImageRenderMode($src)) {
 			case 'image':
-				$this->getPDF()->Image($this->arguments['src'], $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, TRUE, FALSE);
+				$this->getPDF()->Image($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, TRUE, FALSE);
 				break;
 			case 'imageEPS':
-				$this->getPDF()->ImageEps($this->arguments['src'], $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', TRUE, '', '', 0, TRUE, FALSE);
+				$this->getPDF()->ImageEps($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', TRUE, '', '', 0, TRUE, FALSE);
 				break;
 			case 'imageSVG':
-				$this->getPDF()->ImageSVG($this->arguments['src'], $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', '', '', 0, TRUE);
+				$this->getPDF()->ImageSVG($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', '', '', 0, TRUE);
 				break;
 		}
 
