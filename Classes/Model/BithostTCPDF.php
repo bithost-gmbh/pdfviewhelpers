@@ -40,7 +40,7 @@ class BithostTCPDF extends \TCPDF {
 	 */
 	public function Header() {
 		$extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
-		$address = "Bithost GmbH \nMilchubckstrasse 83 \nCH-8057 Zürich \n\nhallo@bithost.ch \n044 585 28 20 \n\nwww.bithost.ch";
+		$address = "Bithost GmbH \nMilchbuckstrasse 83 \nCH-8057 Zürich \n\nhallo@bithost.ch \n044 585 28 20 \n\nwww.bithost.ch";
 
 		$this->SetTextColor(140, 140, 140);
 		$this->SetFontSize(11);
