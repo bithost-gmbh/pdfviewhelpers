@@ -3,7 +3,7 @@
 $EM_CONF[$_EXTKEY] = [
 	'title' => 'PDF ViewHelpers',
 	'description' => 'Provides ViewHelpers to create PDF documents.',
-	'category' => 'plugin',
+	'category' => 'fe',
 	'author' => 'Markus Mächler, Esteban Marin',
 	'author_email' => 'markus.maechler@bithost.ch, esteban.marin@bithost.ch',
 	'author_company' => 'Bithost GmbH',
