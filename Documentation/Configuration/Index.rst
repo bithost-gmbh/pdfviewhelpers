@@ -64,6 +64,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	=============================== ===================================== ==========================================
 	config.class_                   :ref:`t3tsref:data-type-string`       Bithost\\Pdfviewhelpers\\Model\\EmptyTCPDF
 	config.language_                :ref:`t3tsref:data-type-string`       ger
+	config.disableCache_            :ref:`t3tsref:data-type-boolean`      1
 	config.jpgQuality_              :ref:`t3tsref:data-type-integer`      100
 	config.allowedImageTypes_       Array                                 *See static TypoScript template*
 	document.title_                 :ref:`t3tsref:data-type-string`       Default document title
@@ -133,11 +134,20 @@ You can easily provide your own class in order to render custom header and foote
 .. _config.language:
 
 config.language
-"""""""""""""""""
+"""""""""""""""
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.config.language =` :ref:`t3tsref:data-type-string`
 
 Decides which language settings are used from TCPDF. All possible language codes can be found in **Resources/Private/tcpdf/examples/lang/**.
+
+.. _config.disableCache:
+
+config.disableCache
+"""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.config.disableCache =` :ref:`t3tsref:data-type-boolean`
+
+Decides whether the TYPO3 frontend cache will be disabled or not.
 
 .. _config.jpgQuality:
 
@@ -356,9 +366,7 @@ You can have a look at the ViewHelpers in *Classes/ViewHelpers*. If you feel lik
 Caching
 -------
 
-The extension pdfviewhelpers does not provide any caching mechanism for the generated PDF documents nor does it secure
-that the content gets cached by the TYPO3 frontend cache. In fact caching must be disabled in most cases when using these
-ViewHelpers.
-
+The extension pdfviewhelpers does not provide any caching mechanism for the generated PDF documents. In fact caching
+is disabled by default because it makes not much sense to save a PDF document to the TYPO3 frontend cache.
 Since generating PDF documents is quite time consuming you should implement your own caching strategy by saving
-the generated PDF files to the filesystem.
+the generated PDF files to the filesystem and only generate them when necessary.

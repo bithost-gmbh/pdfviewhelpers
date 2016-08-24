@@ -81,6 +81,10 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 		$this->getPDF()->SetAuthor($this->arguments['author']);
 		$this->getPDF()->SetKeywords($this->arguments['keywords']);
 		$this->getPDF()->SetCreator($this->arguments['creator']);
+
+		if ($this->settings['config.']['disableCache']) {
+			$GLOBALS['TSFE']->set_no_cache();
+		}
 	}
 	
 	/**
