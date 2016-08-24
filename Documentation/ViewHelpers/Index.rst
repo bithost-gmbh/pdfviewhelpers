@@ -111,3 +111,26 @@ Rendering the image given as src, the path is always relative to the webroot.
 ::
 
 	<pdf:image src="typo3conf/ext/pdfviewhelpers/Resources/Public/Example/Bithost.jpg" width="200" />
+
+.. _htmlviewhelper:
+
+HtmlViewHelper
+--------------
+
+Rendering any html content using TCPDF's method writeHTML. The default text settings are those from generalText.
+It is possible to include a css style tag and also inline styles. This ViewHelper is especially useful for rendering Rich Text.
+
+::
+
+	<pdf:html>
+		<style>
+			h1 {
+				color: #ff642c;
+			}
+		</style>
+
+		<h1>Some html headline</h1>
+		<p style="color: #3a718a;">Lorem ipsum</p>
+
+		{someAdditionalRichText}
+	</pdf:html>
