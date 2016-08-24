@@ -53,6 +53,10 @@ https://github.com/bithost-gmbh/pdfviewhelpers
 
 https://typo3.org/extensions/repository/view/pdfviewhelpers
 
+## Full Documentation
+
+https://docs.typo3.org/typo3cms/extensions/pdfviewhelpers
+
 ## Contact
 
 * [@maechler](https://github.com/maechler) 
