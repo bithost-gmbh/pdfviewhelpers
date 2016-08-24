@@ -47,8 +47,8 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 		$this->registerArgument('fontSize', 'integer', '', FALSE, $this->settings['generalText.']['fontSize']);
 		$this->registerArgument('padding', 'array', '', FALSE, NULL);
 		$this->registerArgument('text', 'string', '', FALSE, NULL);
-		$this->registerArgument('alignment', 'string', 'Text Alignment. Possible values: "left", "center", "right", "justify". Defaults to "left"', false, 'left');
-		$this->registerArgument('paragraphSpacing', 'float', 'Spacing after each paragraph. Defaults to 0', FALSE, 0);
+		$this->registerArgument('alignment', 'string', 'Text Alignment. Possible values: "left", "center", "right", "justify". Defaults to "left"', false, $this->settings['generalText.']['alignment']);
+		$this->registerArgument('paragraphSpacing', 'float', 'Spacing after each paragraph. Defaults to 0', FALSE, $this->settings['generalText.']['paragraphSpacing']);
 	}
 
 	/**
