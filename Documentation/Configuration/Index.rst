@@ -74,8 +74,10 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	document.creator_               :ref:`t3tsref:data-type-string`       TYPO3 EXT:pdfviewhelpers
 	document.outputDestination_     :ref:`t3tsref:data-type-string`       I
 	document.outputPath_            :ref:`t3tsref:data-type-string`       document.pdf
+	document.sourceFile_            :ref:`t3tsref:data-type-string`
 	page.autoPageBreak_             :ref:`t3tsref:data-type-boolean`      0
 	page.margins_                   Array                                 {top: 15, right: 15, bottom: 15, left: 15}
+	page.importPage_                :ref:`t3tsref:data-type-integer`
 	generalText.trim_               :ref:`t3tsref:data-type-boolean`      1
 	generalText.color_              :ref:`t3tsref:data-type-string`       #000
 	generalText.fontFamily_         :ref:`t3tsref:data-type-string`       helvetica
@@ -244,6 +246,16 @@ The TCPDF output path of the document. If you are saving the file to filesystem 
 webroot directory e.g. *fileadmin/pdfviewhelpers/projectXY.pdf*.
 If you are sending it inline or as file download it is simply the name of the document e.g. *projectXY.pdf*.
 
+.. _document.sourceFile:
+
+document.sourceFile
+"""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.document.sourceFile =` :ref:`t3tsref:data-type-string`
+
+The sourceFile is a the path to a PDF document you want to use as a template (see also page.importPage). The path is
+always relative to the root directory of your TYPO3 installation.
+
 .. _page.autoPageBreak:
 
 page.autoPageBreak
@@ -261,6 +273,15 @@ page.margins
 :typoscript:`plugin.tx_pdfviewhelpers.settings.page.margins =` Array
 
 An array of the margins for each page.
+
+.. _page.importPage:
+
+page.importPage
+"""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.page.importPage =` :ref:`t3tsref:data-type-integer`
+
+Specifies which page should be used as template for the current page. Must be used together with document.sourceFile.
 
 .. _generalText.trim:
 

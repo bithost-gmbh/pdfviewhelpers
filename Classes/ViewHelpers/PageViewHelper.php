@@ -27,6 +27,9 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***/
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
+use FPDI;
+
 /**
  * PageViewHelper
  *
@@ -40,6 +43,7 @@ class PageViewHelper extends AbstractPDFViewHelper {
 	public function initializeArguments() {
 		$this->registerArgument('autoPageBreak', 'boolean', '', FALSE, $this->settings['page.']['autoPageBreak']);
 		$this->registerArgument('margins', 'array', '', FALSE, NULL);
+		$this->registerArgument('importPage', 'integer', '', FALSE, $this->settings['page.']['importPage']);
 	}
 	
 	/**
@@ -56,9 +60,26 @@ class PageViewHelper extends AbstractPDFViewHelper {
 	
 	/**
 	 * @return void
-	 */	
+	 *
+	 * @throws Exception
+	 */
 	public function render() {
+		$templateId = -1;
+
+		if (!empty($this->arguments['importPage'])) {
+			if ($this->getPDF() instanceof FPDI) {
+				$templateId = $this->getPDF()->importPage($this->arguments['importPage']);
+			} else {
+				throw new Exception('PDF object must be instance of FPDI to support option "sourceFile". ERROR: 1474144733', 1474144733);
+			}
+		}
+
 		$this->getPDF()->AddPage();
+
+		if (!empty($this->arguments['importPage'])) {
+			$this->getPDF()->useTemplate($templateId);
+		}
+
 		$this->renderChildren();
 	}
 }

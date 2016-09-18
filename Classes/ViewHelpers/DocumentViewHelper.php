@@ -27,8 +27,10 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***/
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use FPDI;
 
 /**
  * DocumentViewHelper
@@ -61,6 +63,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 		$this->registerArgument('creator', 'string', '', FALSE, $this->settings['document.']['creator']);
 		$this->registerArgument('outputDestination', 'string', '', FALSE, $this->settings['document.']['outputDestination']);
 		$this->registerArgument('outputPath', 'string', '', FALSE, $this->settings['document.']['outputPath']);
+		$this->registerArgument('sourceFile', 'string', '', FALSE, $this->settings['document.']['sourceFile']);
 	}
 	
 	/**
@@ -72,6 +75,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 
 		require_once($extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->settings['config.']['language'] . '.php');
 		require_once($extPath . 'Resources/Private/PHP/tcpdf/tcpdf.php');
+		require_once($extPath . 'Resources/Private/PHP/fpdi/fpdi.php');
 
 		$this->setPDF(GeneralUtility::makeInstance($pdfClassName));
 
@@ -81,6 +85,14 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 		$this->getPDF()->SetAuthor($this->arguments['author']);
 		$this->getPDF()->SetKeywords($this->arguments['keywords']);
 		$this->getPDF()->SetCreator($this->arguments['creator']);
+
+		if (!empty($this->arguments['sourceFile'])) {
+			if ($this->getPDF() instanceof FPDI) {
+				$this->getPDF()->setSourceFile(PATH_site . $this->arguments['sourceFile']);
+			} else {
+				throw new Exception('PDF object must be instance of FPDI to support option "sourceFile". ERROR: 1474144733', 1474144733);
+			}
+		}
 
 		if ($this->settings['config.']['disableCache']) {
 			$GLOBALS['TSFE']->set_no_cache();
