@@ -70,7 +70,7 @@ class PageViewHelper extends AbstractPDFViewHelper {
 			if ($this->getPDF() instanceof FPDI) {
 				$templateId = $this->getPDF()->importPage($this->arguments['importPage']);
 			} else {
-				throw new Exception('PDF object must be instance of FPDI to support option "sourceFile". ERROR: 1474144733', 1474144733);
+				throw new Exception('PDF object must be instance of FPDI to support option "importPage". ERROR: 1474144733', 1474144733);
 			}
 		}
 
