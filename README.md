@@ -9,7 +9,7 @@ the possibility to use existing PDF documents as template and extend them as you
 ## Example
 
 ### Fluid Template
-```
+```html
 {namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
 
 <pdf:document outputDestination="I" title="Bithost Example">
