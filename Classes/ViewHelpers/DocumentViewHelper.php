@@ -1,7 +1,8 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -25,7 +26,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -38,6 +39,7 @@ use FPDI;
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
 class DocumentViewHelper extends AbstractPDFViewHelper {
+
 	/**
 	 * TCPDF output destinations that send http headers and echo the pdf
 	 *
@@ -56,30 +58,30 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 	 * @return void
 	 */
 	public function initializeArguments() {
-		$this->registerArgument('title', 'string', '', FALSE, $this->settings['document.']['title']);
-		$this->registerArgument('subject', 'string', '', FALSE, $this->settings['document.']['subject']);
-		$this->registerArgument('author', 'string', '', FALSE, $this->settings['document.']['author']);
-		$this->registerArgument('keywords', 'string', '', FALSE, $this->settings['document.']['keywords']);
-		$this->registerArgument('creator', 'string', '', FALSE, $this->settings['document.']['creator']);
-		$this->registerArgument('outputDestination', 'string', '', FALSE, $this->settings['document.']['outputDestination']);
-		$this->registerArgument('outputPath', 'string', '', FALSE, $this->settings['document.']['outputPath']);
-		$this->registerArgument('sourceFile', 'string', '', FALSE, $this->settings['document.']['sourceFile']);
+		$this->registerArgument('title', 'string', '', FALSE, $this->settings['document']['title']);
+		$this->registerArgument('subject', 'string', '', FALSE, $this->settings['document']['subject']);
+		$this->registerArgument('author', 'string', '', FALSE, $this->settings['document']['author']);
+		$this->registerArgument('keywords', 'string', '', FALSE, $this->settings['document']['keywords']);
+		$this->registerArgument('creator', 'string', '', FALSE, $this->settings['document']['creator']);
+		$this->registerArgument('outputDestination', 'string', '', FALSE, $this->settings['document']['outputDestination']);
+		$this->registerArgument('outputPath', 'string', '', FALSE, $this->settings['document']['outputPath']);
+		$this->registerArgument('sourceFile', 'string', '', FALSE, $this->settings['document']['sourceFile']);
 	}
-	
+
 	/**
 	 * @return void
 	 */
 	public function initialize() {
 		$extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
-		$pdfClassName = empty($this->settings['config.']['class']) ? 'TCPDF' : $this->settings['config.']['class'];
+		$pdfClassName = empty($this->settings['config']['class']) ? 'TCPDF' : $this->settings['config']['class'];
 
-		require_once($extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->settings['config.']['language'] . '.php');
+		require_once($extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->settings['config']['language'] . '.php');
 		require_once($extPath . 'Resources/Private/PHP/tcpdf/tcpdf.php');
 		require_once($extPath . 'Resources/Private/PHP/fpdi/fpdi.php');
 
 		$this->setPDF(GeneralUtility::makeInstance($pdfClassName));
 
-		$this->getPDF()->setJPEGQuality($this->settings['config.']['jpgQuality']);
+		$this->getPDF()->setJPEGQuality($this->settings['config']['jpgQuality']);
 		$this->getPDF()->SetTitle($this->arguments['title']);
 		$this->getPDF()->SetSubject($this->arguments['subject']);
 		$this->getPDF()->SetAuthor($this->arguments['author']);
@@ -94,11 +96,11 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 			}
 		}
 
-		if ($this->settings['config.']['disableCache']) {
+		if ($GLOBALS['TSFE'] && $this->settings['config']['disableCache']) {
 			$GLOBALS['TSFE']->set_no_cache();
 		}
 	}
-	
+
 	/**
 	 * @return void
 	 */
@@ -120,4 +122,5 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 			flush();
 		}
 	}
+
 }

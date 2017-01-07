@@ -1,7 +1,8 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -25,7 +26,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use FPDI;
@@ -36,28 +37,28 @@ use FPDI;
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
 class PageViewHelper extends AbstractPDFViewHelper {
-	
+
 	/**
 	 * @return void
 	 */
 	public function initializeArguments() {
-		$this->registerArgument('autoPageBreak', 'boolean', '', FALSE, $this->settings['page.']['autoPageBreak']);
+		$this->registerArgument('autoPageBreak', 'boolean', '', FALSE, $this->settings['page']['autoPageBreak']);
 		$this->registerArgument('margins', 'array', '', FALSE, NULL);
-		$this->registerArgument('importPage', 'integer', '', FALSE, $this->settings['page.']['importPage']);
+		$this->registerArgument('importPage', 'integer', '', FALSE, $this->settings['page']['importPage']);
 	}
-	
+
 	/**
 	 * @return void
-	 */	
+	 */
 	public function initialize() {
 		if (is_null($this->arguments['margins'])) {
-			$this->arguments['margins'] = $this->settings['page.']['margins.'];
+			$this->arguments['margins'] = $this->settings['page']['margins'];
 		}
 
 		$this->getPDF()->SetMargins($this->arguments['margins']['left'], $this->arguments['margins']['top'], $this->arguments['margins']['right']);
 		$this->getPDF()->SetAutoPageBreak($this->arguments['autoPageBreak'], $this->arguments['margins']['bottom']);
 	}
-	
+
 	/**
 	 * @return void
 	 *
@@ -70,7 +71,7 @@ class PageViewHelper extends AbstractPDFViewHelper {
 			if ($this->getPDF() instanceof FPDI) {
 				$templateId = $this->getPDF()->importPage($this->arguments['importPage']);
 			} else {
-				throw new Exception('PDF object must be instance of FPDI to support option "importPage". ERROR: 1474144733', 1474144733);
+				throw new Exception('PDF object must be instance of FPDI to support option "sourceFile". ERROR: 1474144733', 1474144733);
 			}
 		}
 
@@ -82,4 +83,5 @@ class PageViewHelper extends AbstractPDFViewHelper {
 
 		$this->renderChildren();
 	}
+
 }

@@ -1,7 +1,8 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -25,7 +26,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 /**
  * HtmlViewHelper
@@ -33,20 +34,22 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
 class HtmlViewHelper extends AbstractContentElementViewHelper {
+
 	/**
 	 * @return void
 	 */
 	public function render() {
 		$html = $this->renderChildren();
-		$color = $this->convertHexToRGB($this->settings['generalText.']['color']);
-		$padding = $this->settings['generalText.']['padding.'];
+		$color = $this->convertHexToRGB($this->settings['generalText']['color']);
+		$padding = $this->settings['generalText']['padding'];
 
 		//reset settings to generalText
 		$this->getPDF()->SetTextColor($color['R'], $color['G'], $color['B']);
-		$this->getPDF()->SetFontSize($this->settings['generalText.']['fontSize']);
-		$this->getPDF()->SetFont($this->settings['generalText.']['fontFamily']);
+		$this->getPDF()->SetFontSize($this->settings['generalText']['fontSize']);
+		$this->getPDF()->SetFont($this->settings['generalText']['fontFamily']);
 		$this->getPDF()->setCellPaddings($padding['left'], $padding['top'], $padding['right'], $padding['bottom']);
 
 		$this->getPDF()->writeHTML($html, TRUE, FALSE, TRUE, FALSE, '');
 	}
+
 }

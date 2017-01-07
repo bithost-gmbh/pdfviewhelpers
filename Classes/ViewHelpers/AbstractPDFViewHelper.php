@@ -1,7 +1,8 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -25,7 +26,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -36,20 +37,21 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
 abstract class AbstractPDFViewHelper extends AbstractViewHelper {
+
 	/**
 	 * @var array
 	 */
 	protected $settings = [];
-	
+
 	/**
 	 * AbstractPDFViewHelper Constructor
 	 */
 	public function __construct() {
-		if (!isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_pdfviewhelpers.']['settings.'])) {
+		$this->configurationManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Configuration\ConfigurationManager');
+		$this->settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'Pdfviewhelpers', 'tx_pdfviewhelpers');
+		if (!is_array($this->settings)) {
 			throw new Exception('No pdfviewhelpers settings found. Please make sure you have inlcude the static TypoScript template. ERROR: 1470982083', 1470982083);
 		}
-
-		$this->settings = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_pdfviewhelpers.']['settings.'];
 	}
 
 	/**
@@ -66,7 +68,7 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper {
 			throw new Exception('The PDF Object has already been created, or the function setPDF() was not called from an instance of DocumentViewHelper. ERROR: 1363682312', 1363682312);
 		}
 	}
-	
+
 	/**
 	 * @return \TCPDF
 	 *
@@ -79,4 +81,5 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper {
 			throw new Exception('No PDF Object found. Please use the DocumentViewHelper first in your template! ERROR: 1363682433', 1363682433);
 		}
 	}
+
 }

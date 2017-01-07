@@ -1,7 +1,8 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -25,7 +26,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 /**
  * ColumnViewHelper
@@ -33,11 +34,12 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
 class ColumnViewHelper extends AbstractPDFViewHelper {
-	
+
 	/**
 	 * @return void
-	 */	
+	 */
 	public function render() {
 		$this->renderChildren();
 	}
+
 }

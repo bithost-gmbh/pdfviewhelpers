@@ -1,7 +1,8 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -25,7 +26,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 
@@ -35,20 +36,21 @@ use Bithost\Pdfviewhelpers\Exception\ValidationException;
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
 abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
+
 	/**
 	 * @return void
 	 */
 	public function initializeArguments() {
 		parent::initializeArguments();
 
-		$this->registerArgument('trim', 'boolean', '', FALSE, $this->settings['generalText.']['trim']);
-		$this->registerArgument('color', 'string', '', FALSE, $this->settings['generalText.']['color']);
-		$this->registerArgument('fontFamily', 'string', '', FALSE, $this->settings['generalText.']['fontFamily']);
-		$this->registerArgument('fontSize', 'integer', '', FALSE, $this->settings['generalText.']['fontSize']);
+		$this->registerArgument('trim', 'boolean', '', FALSE, $this->settings['generalText']['trim']);
+		$this->registerArgument('color', 'string', '', FALSE, $this->settings['generalText']['color']);
+		$this->registerArgument('fontFamily', 'string', '', FALSE, $this->settings['generalText']['fontFamily']);
+		$this->registerArgument('fontSize', 'integer', '', FALSE, $this->settings['generalText']['fontSize']);
 		$this->registerArgument('padding', 'array', '', FALSE, NULL);
 		$this->registerArgument('text', 'string', '', FALSE, NULL);
-		$this->registerArgument('alignment', 'string', 'Text Alignment. Possible values: "left", "center", "right", "justify". Defaults to "left"', false, $this->settings['generalText.']['alignment']);
-		$this->registerArgument('paragraphSpacing', 'float', 'Spacing after each paragraph. Defaults to 0', FALSE, $this->settings['generalText.']['paragraphSpacing']);
+		$this->registerArgument('alignment', 'string', 'Text Alignment. Possible values: "left", "center", "right", "justify". Defaults to "left"', false, $this->settings['generalText']['alignment']);
+		$this->registerArgument('paragraphSpacing', 'float', 'Spacing after each paragraph. Defaults to 0', FALSE, $this->settings['generalText']['paragraphSpacing']);
 	}
 
 	/**
@@ -84,35 +86,18 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 		$this->initializeMultiColumnSupport();
 
 		$paragraphs = explode(
-			"\n",
-			str_replace("\r\n", "\n", $this->arguments['text'])
+				"\n", str_replace("\r\n", "\n", $this->arguments['text'])
 		);
 		$posY = $this->arguments['posY'];
 
-		foreach($paragraphs as $paragraph) {
+		foreach ($paragraphs as $paragraph) {
 			$this->getPDF()->MultiCell(
-				$this->arguments['width'],
-				$this->arguments['height'] / count($paragraphs),
-				$paragraph,
-				0,
-				$this->getAlignmentString($this->arguments['alignment']),
-				FALSE,
-				1,
-				$this->arguments['posX'],
-				$posY,
-				TRUE,
-				0,
-				FALSE,
-				TRUE,
-				0,
-				'T',
-				FALSE
+					$this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->getAlignmentString($this->arguments['alignment']), FALSE, 1, $this->arguments['posX'], $posY, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE
 			);
 
-			if($this->isValidParagraphSpacing($this->arguments['paragraphSpacing'])
-				&& $this->arguments['paragraphSpacing'] > 0
+			if ($this->isValidParagraphSpacing($this->arguments['paragraphSpacing']) && $this->arguments['paragraphSpacing'] > 0
 			) {
-				$this->getPDF()->Ln((float)$this->arguments['paragraphSpacing'], false);
+				$this->getPDF()->Ln((float) $this->arguments['paragraphSpacing'], false);
 			}
 
 			$posY = $this->getPDF()->GetY();
@@ -130,7 +115,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 		if (is_numeric($fontSize)) {
 			return TRUE;
 		} else {
-			throw new ValidationException('FontSize must be an integer. ERROR: 1363765372',1363765372);
+			throw new ValidationException('FontSize must be an integer. ERROR: 1363765372', 1363765372);
 		}
 	}
 
@@ -142,15 +127,11 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 	 * @throws ValidationException
 	 */
 	protected function isValidPadding($padding) {
-		if (isset($padding['top'], $padding['right'], $padding['bottom'], $padding['left'])
-			&& is_numeric($padding['top'])
-			&& is_numeric($padding['right'])
-			&& is_numeric($padding['bottom'])
-			&& is_numeric($padding['left'])
+		if (isset($padding['top'], $padding['right'], $padding['bottom'], $padding['left']) && is_numeric($padding['top']) && is_numeric($padding['right']) && is_numeric($padding['bottom']) && is_numeric($padding['left'])
 		) {
 			return TRUE;
 		} else {
-			throw new ValidationException('Padding must be an Array with Elements: top:[int],right:[int],bottom:[int],left:[int] ERROR: 1363769351',1363769351);
+			throw new ValidationException('Padding must be an Array with Elements: top:[int],right:[int],bottom:[int],left:[int] ERROR: 1363769351', 1363769351);
 		}
 	}
 
@@ -165,7 +146,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 		if (is_numeric($paragraphSpacing)) {
 			return TRUE;
 		} else {
-			throw new ValidationException('ParagraphSpacing must be an integer. ERROR: 1363765379',1363765379);
+			throw new ValidationException('ParagraphSpacing must be an integer. ERROR: 1363765379', 1363765379);
 		}
 	}
 
@@ -180,7 +161,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 		if (in_array($alignment, ['left', 'center', 'right', 'justify'])) {
 			return TRUE;
 		} else {
-			throw new ValidationException('Alignment must be "left", "center", "right" or "justify". ERROR: 1363765672',1363765672);
+			throw new ValidationException('Alignment must be "left", "center", "right" or "justify". ERROR: 1363765672', 1363765672);
 		}
 	}
 
@@ -192,13 +173,18 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 	protected function getAlignmentString($alignment) {
 		$alignmentString = 'L';
 
-		switch($alignment) {
-			case 'left': $alignmentString = 'L'; break;
-			case 'center': $alignmentString = 'C'; break;
-			case 'right': $alignmentString = 'R'; break;
-			case 'justify': $alignmentString = 'J'; break;
+		switch ($alignment) {
+			case 'left': $alignmentString = 'L';
+				break;
+			case 'center': $alignmentString = 'C';
+				break;
+			case 'right': $alignmentString = 'R';
+				break;
+			case 'justify': $alignmentString = 'J';
+				break;
 		}
 
 		return $alignmentString;
 	}
+
 }

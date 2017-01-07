@@ -1,7 +1,8 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -25,7 +26,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 /**
  * TextViewHelper
@@ -33,53 +34,52 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
 class TextViewHelper extends AbstractTextViewHelper {
+
 	/**
 	 * @return void
 	 */
 	public function initializeArguments() {
 		parent::initializeArguments();
 
-		if (!empty($this->settings['text.']['trim'])) {
-			$this->overrideArgument('trim', 'boolean', '', FALSE, $this->settings['text.']['trim']);
+		if (!empty($this->settings['text']['trim'])) {
+			$this->overrideArgument('trim', 'boolean', '', FALSE, $this->settings['text']['trim']);
 		}
-		if (!empty($this->settings['text.']['color'])) {
-			$this->overrideArgument('color', 'string', '', FALSE, $this->settings['text.']['color']);
+		if (!empty($this->settings['text']['color'])) {
+			$this->overrideArgument('color', 'string', '', FALSE, $this->settings['text']['color']);
 		}
-		if (!empty($this->settings['text.']['fontFamily'])) {
-			$this->overrideArgument('fontFamily', 'string', '', FALSE, $this->settings['text.']['fontFamily']);
+		if (!empty($this->settings['text']['fontFamily'])) {
+			$this->overrideArgument('fontFamily', 'string', '', FALSE, $this->settings['text']['fontFamily']);
 		}
-		if (!empty($this->settings['text.']['fontSize'])) {
-			$this->overrideArgument('fontSize', 'integer', '', FALSE, $this->settings['text.']['fontSize']);
+		if (!empty($this->settings['text']['fontSize'])) {
+			$this->overrideArgument('fontSize', 'integer', '', FALSE, $this->settings['text']['fontSize']);
 		}
-		if (!empty($this->settings['text.']['alignment'])) {
-			$this->overrideArgument('alignment', 'string', '', FALSE, $this->settings['text.']['alignment']);
+		if (!empty($this->settings['text']['alignment'])) {
+			$this->overrideArgument('alignment', 'string', '', FALSE, $this->settings['text']['alignment']);
 		}
-		if (!empty($this->settings['text.']['paragraphSpacing'])) {
-			$this->overrideArgument('paragraphSpacing', 'float', '', FALSE, $this->settings['text.']['paragraphSpacing']);
+		if (!empty($this->settings['text']['paragraphSpacing'])) {
+			$this->overrideArgument('paragraphSpacing', 'float', '', FALSE, $this->settings['text']['paragraphSpacing']);
 		}
 	}
 
 	/**
 	 * @return void
-	 */	
+	 */
 	public function initialize() {
 		parent::initialize();
 
 		if (!is_array($this->arguments['padding'])) {
-			if (!empty($this->settings['text.']['padding.'])) {
-				$this->arguments['padding'] = $this->settings['text.']['padding.'];
+			if (!empty($this->settings['text']['padding'])) {
+				$this->arguments['padding'] = $this->settings['text']['padding'];
 			} else {
-				$this->arguments['padding'] = $this->settings['generalText.']['padding.'];
+				$this->arguments['padding'] = $this->settings['generalText']['padding'];
 			}
 		}
 
 		if ($this->isValidPadding($this->arguments['padding'])) {
 			$this->getPDF()->setCellPaddings(
-				$this->arguments['padding']['left'],
-				$this->arguments['padding']['top'],
-				$this->arguments['padding']['right'],
-				$this->arguments['padding']['bottom']
+					$this->arguments['padding']['left'], $this->arguments['padding']['top'], $this->arguments['padding']['right'], $this->arguments['padding']['bottom']
 			);
 		}
 	}
+
 }
