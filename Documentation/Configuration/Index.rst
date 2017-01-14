@@ -62,7 +62,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	=============================== ===================================== ==========================================
 	Property                        Data type                             Default
 	=============================== ===================================== ==========================================
-	config.class_                   :ref:`t3tsref:data-type-string`       Bithost\\Pdfviewhelpers\\Model\\EmptyTCPDF
+	config.class_                   :ref:`t3tsref:data-type-string`       Bithost\\Pdfviewhelpers\\Model\\EmptyFPDI
 	config.language_                :ref:`t3tsref:data-type-string`       ger
 	config.disableCache_            :ref:`t3tsref:data-type-boolean`      1
 	config.jpgQuality_              :ref:`t3tsref:data-type-integer`      100
@@ -126,9 +126,10 @@ config.class
 :typoscript:`plugin.tx_pdfviewhelpers.settings.config.class =` :ref:`t3tsref:data-type-string`
 
 Decides which PHP class should be used as TCPDF object. The class must inherit from \\TCPDF. If this setting is left empty \\TCPDF is used as class.
-There are two other possibilities shipped with this extension:
+There are three other possibilities shipped with this extension:
 
 * Bithost\\Pdfviewhelpers\\Model\\EmptyTCPDF: renders empty headers and footers
+* Bithost\\Pdfviewhelpers\\Model\\EmptyFPDI: renders empty headers and footers, able to load PDFs as template documents
 * Bithost\\Pdfviewhelpers\\Model\\BithostTCPDF: renders headers belonging to the example
 
 You can easily provide your own class in order to render custom header and footers or to customize TCPDF in any way.
