@@ -1,6 +1,6 @@
 plugin.tx_pdfviewhelpers.settings {
 	config {
-		class = Bithost\Pdfviewhelpers\Model\EmptyTCPDF
+		class = Bithost\Pdfviewhelpers\Model\EmptyFPDI
 		language = ger
 		disableCache = 1
 		jpgQuality = 100
