@@ -1,7 +1,8 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -25,7 +26,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 /**
  * HeadlineViewHelper
@@ -33,29 +34,30 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
 class HeadlineViewHelper extends AbstractTextViewHelper {
+
 	/**
 	 * @return void
 	 */
 	public function initializeArguments() {
 		parent::initializeArguments();
 
-		if (!empty($this->settings['text.']['trim'])) {
-			$this->overrideArgument('trim', 'boolean', '', FALSE, $this->settings['text.']['trim']);
+		if (!empty($this->settings['text']['trim'])) {
+			$this->overrideArgument('trim', 'boolean', '', FALSE, $this->settings['text']['trim']);
 		}
-		if (!empty($this->settings['headline.']['color'])) {
-			$this->overrideArgument('color', 'string', '', FALSE, $this->settings['headline.']['color']);
+		if (!empty($this->settings['headline']['color'])) {
+			$this->overrideArgument('color', 'string', '', FALSE, $this->settings['headline']['color']);
 		}
-		if (!empty($this->settings['headline.']['fontFamily'])) {
-			$this->overrideArgument('fontFamily', 'string', '', FALSE, $this->settings['headline.']['fontFamily']);
+		if (!empty($this->settings['headline']['fontFamily'])) {
+			$this->overrideArgument('fontFamily', 'string', '', FALSE, $this->settings['headline']['fontFamily']);
 		}
-		if (!empty($this->settings['headline.']['fontSize'])) {
-			$this->overrideArgument('fontSize', 'integer', '', FALSE, $this->settings['headline.']['fontSize']);
+		if (!empty($this->settings['headline']['fontSize'])) {
+			$this->overrideArgument('fontSize', 'integer', '', FALSE, $this->settings['headline']['fontSize']);
 		}
-		if (!empty($this->settings['headline.']['alignment'])) {
-			$this->overrideArgument('alignment', 'string', '', FALSE, $this->settings['headline.']['alignment']);
+		if (!empty($this->settings['headline']['alignment'])) {
+			$this->overrideArgument('alignment', 'string', '', FALSE, $this->settings['headline']['alignment']);
 		}
-		if (!empty($this->settings['headline.']['paragraphSpacing'])) {
-			$this->overrideArgument('paragraphSpacing', 'float', '', FALSE, $this->settings['headline.']['paragraphSpacing']);
+		if (!empty($this->settings['headline']['paragraphSpacing'])) {
+			$this->overrideArgument('paragraphSpacing', 'float', '', FALSE, $this->settings['headline']['paragraphSpacing']);
 		}
 	}
 
@@ -64,17 +66,18 @@ class HeadlineViewHelper extends AbstractTextViewHelper {
 	 */
 	public function initialize() {
 		parent::initialize();
-		
+
 		if (empty($this->arguments['padding'])) {
-			if (!empty($this->settings['headline.']['padding.'])) {
-				$this->arguments['padding'] = $this->settings['headline.']['padding.'];
+			if (!empty($this->settings['headline']['padding'])) {
+				$this->arguments['padding'] = $this->settings['headline']['padding'];
 			} else {
-				$this->arguments['padding'] = $this->settings['generalText.']['padding.'];
+				$this->arguments['padding'] = $this->settings['generalText']['padding'];
 			}
 		}
-		
+
 		if ($this->isValidPadding($this->arguments['padding'])) {
-			$this->getPDF()->setCellPaddings($this->arguments['padding']['left'],$this->arguments['padding']['top'],$this->arguments['padding']['right'],$this->arguments['padding']['bottom']);
+			$this->getPDF()->setCellPaddings($this->arguments['padding']['left'], $this->arguments['padding']['top'], $this->arguments['padding']['right'], $this->arguments['padding']['bottom']);
 		}
 	}
+
 }

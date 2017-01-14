@@ -1,7 +1,8 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -25,7 +26,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode;
@@ -36,6 +37,7 @@ use TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode;
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
 class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\Fluid\Core\ViewHelper\Facets\ChildNodeAccessInterface {
+
 	/**
 	 * @var array
 	 */
@@ -43,12 +45,12 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
 
 	/**
 	 * @var array
-	 */	
+	 */
 	private $multiColumnContext = [];
-	
+
 	/**
 	 * @return void
-	 */	
+	 */
 	public function initialize() {
 		$this->multiColumnContext['pageWidth'] = $this->getPDF()->getPageWidth();
 		$this->multiColumnContext['pageMargins'] = $this->getPDF()->getMargins();
@@ -59,42 +61,41 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
 		$this->multiColumnContext['posX'] = $this->getPDF()->GetX();
 		$this->multiColumnContext['currentPosX'] = $this->getPDF()->GetX();
 		$this->multiColumnContext['startingPage'] = $this->getPDF()->getPage();
-		
+
 		foreach ($this->childNodes as $childNode) {
-			if ($childNode instanceof \TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode
-				&& $childNode->getViewHelperClassName() === 'Bithost\Pdfviewhelpers\ViewHelpers\ColumnViewHelper'
+			if ($childNode instanceof \TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode && $childNode->getViewHelperClassName() === 'Bithost\Pdfviewhelpers\ViewHelpers\ColumnViewHelper'
 			) {
 				$this->multiColumnContext['columns'][] = $childNode;
-				$this->multiColumnContext['numberOfColumns']++;
+				$this->multiColumnContext['numberOfColumns'] ++;
 			}
 		}
 		$this->multiColumnContext['columnWidth'] = $this->multiColumnContext['pageWidthWithoutMargins'] / $this->multiColumnContext['numberOfColumns'];
 		$this->multiColumnContext['isInAColumn'] = TRUE;
 	}
-	
+
 	/**
 	 * @return void
-	 */	
+	 */
 	public function render() {
 		$this->setMultiColumnContext($this->multiColumnContext);
 
 		/** @var ViewHelperNode $column */
 		foreach ($this->multiColumnContext['columns'] as $column) {
 			$this->multiColumnContext = $this->getMultiColumnContext();
-			
+
 			$this->getPDF()->setPage($this->multiColumnContext['startingPage']);
 			$this->getPDF()->SetY($this->multiColumnContext['posY']);
-			
+
 			$column->evaluate($this->renderingContext);
-			
+
 			if ($this->multiColumnContext['longestColumnPosY'] < $this->getPDF()->GetY()) {
 				$this->multiColumnContext['longestColumnPosY'] = $this->getPDF()->GetY();
 			}
-			
+
 			$this->multiColumnContext['currentPosX'] += $this->multiColumnContext['columnWidth'];
 			$this->setMultiColumnContext($this->multiColumnContext);
 		}
-		
+
 		$this->multiColumnContext['isInAColumn'] = FALSE;
 
 		$this->getPDF()->SetY($this->multiColumnContext['longestColumnPosY']);
@@ -109,8 +110,8 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
 	 */
 	public function setChildNodes(array $childNodes) {
 		$this->childNodes = $childNodes;
-	}		
-	
+	}
+
 	/**
 	 * @param array $multiColumnContext
 	 *
@@ -118,8 +119,8 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
 	 */
 	private function setMultiColumnContext(array $multiColumnContext) {
 		$this->viewHelperVariableContainer->addOrUpdate('MultiColumnViewHelper', 'multiColumnContext', $multiColumnContext);
-	}	
-	
+	}
+
 	/**
 	 * @return array $multiColumnContext
 	 *
@@ -132,4 +133,5 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
 			throw new Exception('No multiColumnContext found! ERROR: 1363872784', 1363872784);
 		}
 	}
+
 }

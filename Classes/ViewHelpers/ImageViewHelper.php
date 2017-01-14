@@ -1,7 +1,8 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -25,7 +26,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 
@@ -35,19 +36,19 @@ use Bithost\Pdfviewhelpers\Exception\ValidationException;
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
 class ImageViewHelper extends AbstractContentElementViewHelper {
-	
+
 	/**
 	 * @return void
 	 */
 	public function initializeArguments() {
 		parent::initializeArguments();
-		
+
 		$this->registerArgument('src', 'string', '', TRUE, NULL);
 	}
-	
+
 	/**
 	 * @return void
-	 */	
+	 */
 	public function initialize() {
 		parent::initialize();
 	}
@@ -63,9 +64,9 @@ class ImageViewHelper extends AbstractContentElementViewHelper {
 		$src = PATH_site . $this->arguments['src'];
 
 		if (!file_exists($src)) {
-			throw new ValidationException('Image path "' . $this->arguments['src'] .  '" does not exist. ERROR: 1471036581', 1471036581);
+			throw new ValidationException('Image path "' . $this->arguments['src'] . '" does not exist. ERROR: 1471036581', 1471036581);
 		}
-		
+
 		switch ($this->getImageRenderMode($src)) {
 			case 'image':
 				$this->getPDF()->Image($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, TRUE, FALSE);
@@ -80,4 +81,5 @@ class ImageViewHelper extends AbstractContentElementViewHelper {
 
 		$this->getPDF()->SetY($this->getPDF()->getImageRBY());
 	}
+
 }
