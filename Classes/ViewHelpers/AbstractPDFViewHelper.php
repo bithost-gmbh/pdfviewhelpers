@@ -59,7 +59,7 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper {
 		$this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'Pdfviewhelpers', 'tx_pdfviewhelpers');
 
 		if (!is_array($this->settings)) {
-			throw new Exception('No pdfviewhelpers settings found. Please make sure you have inlcude the static TypoScript template. ERROR: 1470982083', 1470982083);
+			throw new Exception('No pdfviewhelpers settings found. Please make sure you have included the static TypoScript template. ERROR: 1470982083', 1470982083);
 		}
 	}
 
