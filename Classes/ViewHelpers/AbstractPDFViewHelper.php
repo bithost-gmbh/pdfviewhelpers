@@ -30,7 +30,6 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -55,7 +54,7 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper {
 	 * AbstractPDFViewHelper Constructor
 	 */
 	public function __construct() {
-		$this->configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
+        $this->configurationManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
 		$this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'Pdfviewhelpers', 'tx_pdfviewhelpers');
 
 		if (!is_array($this->settings)) {
