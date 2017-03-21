@@ -41,7 +41,7 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
 	/**
 	 * @var array
 	 */
-	private $childNodes = [];
+	protected $childNodes = [];
 
 	/**
 	 * @var array
