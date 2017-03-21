@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -46,16 +47,15 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper {
 	protected $settings = [];
 
 	/**
-	 * @var ConfigurationManagerInterface
-	 */
-	protected $configurationManager;
-
-	/**
 	 * AbstractPDFViewHelper Constructor
 	 */
 	public function __construct() {
-        $this->configurationManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
-		$this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'Pdfviewhelpers', 'tx_pdfviewhelpers');
+		/** @var ObjectManager $objectManager */
+		$objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+		/** @var ConfigurationManagerInterface $configurationManager */
+		$configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
+
+		$this->settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'Pdfviewhelpers', 'tx_pdfviewhelpers');
 
 		if (!is_array($this->settings)) {
 			throw new Exception('No pdfviewhelpers settings found. Please make sure you have included the static TypoScript template. ERROR: 1470982083', 1470982083);
