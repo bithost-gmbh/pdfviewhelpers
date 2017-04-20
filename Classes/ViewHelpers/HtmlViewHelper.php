@@ -28,6 +28,8 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
+
 /**
  * HtmlViewHelper
  *
@@ -38,10 +40,32 @@ class HtmlViewHelper extends AbstractContentElementViewHelper {
 	/**
 	 * @return void
 	 */
+	public function initializeArguments() {
+		parent::initializeArguments();
+
+		$this->registerArgument('styleSheet', 'string', '', FALSE, $this->settings['html']['styleSheet']);
+	}
+
+	/**
+	 * @return void
+	 *
+	 * @throws ValidationException if an invalid style sheet path is provided
+	 */
 	public function render() {
 		$html = $this->renderChildren();
+		$htmlStyle = '';
 		$color = $this->convertHexToRGB($this->settings['generalText']['color']);
 		$padding = $this->settings['generalText']['padding'];
+
+		if (!empty($this->arguments['styleSheet'])) {
+			$styleSheetPath = PATH_site . $this->arguments['styleSheet'];
+
+			if (!file_exists($styleSheetPath) || !is_readable($styleSheetPath)) {
+				throw new ValidationException('Path to style sheet "' . $styleSheetPath . '" does not exist or file is not readable. ERROR: 1492706529', 1492706529);
+			}
+
+			$htmlStyle = '<style>' . file_get_contents($styleSheetPath) . '</style>';
+		}
 
 		//reset settings to generalText
 		$this->getPDF()->SetTextColor($color['R'], $color['G'], $color['B']);
@@ -49,7 +73,7 @@ class HtmlViewHelper extends AbstractContentElementViewHelper {
 		$this->getPDF()->SetFont($this->settings['generalText']['fontFamily']);
 		$this->getPDF()->setCellPaddings($padding['left'], $padding['top'], $padding['right'], $padding['bottom']);
 
-		$this->getPDF()->writeHTML($html, TRUE, FALSE, TRUE, FALSE, '');
+		$this->getPDF()->writeHTML($htmlStyle . $html, TRUE, FALSE, TRUE, FALSE, '');
 	}
 
 }

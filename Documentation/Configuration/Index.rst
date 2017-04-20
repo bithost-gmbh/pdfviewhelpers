@@ -106,6 +106,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	list.bulletColor_               :ref:`t3tsref:data-type-string`       #000
 	list.bulletImageSrc_            :ref:`t3tsref:data-type-string`
 	list.bulletSize_                :ref:`t3tsref:data-type-float`        1.5
+	html.styleSheet_                :ref:`t3tsref:data-type-string`
 	=============================== ===================================== ==========================================
 
 
@@ -182,7 +183,7 @@ The title of the generated PDF document.
 .. _document.subject:
 
 document.subject
-""""""""""""""
+""""""""""""""""
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.document.subject =` :ref:`t3tsref:data-type-string`
 
@@ -373,6 +374,15 @@ list.bulletSize
 :typoscript:`plugin.tx_pdfviewhelpers.settings.list.bulletSize =` :ref:`t3tsref:data-type-float`
 
 The size of the bullet as floating point value.
+
+.. _html.styleSheet:
+
+html.styleSheet
+"""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.html.styleSheet =` :ref:`t3tsref:data-type-string`
+
+The path to a style sheet being used in the HtmlViewHelper. The path is relative to the webroot directory, e.g. "fileadmin/pdf_style.css".
 
 Advanced Customization
 ----------------------
