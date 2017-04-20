@@ -1,2 +1,4 @@
 .DS_Store
 /.idea
+/Documentation/conf.py
+/Documentation.out
