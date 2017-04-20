@@ -104,7 +104,7 @@ Rendering a list given as a one dimensional array.
 .. _imageviewhelper:
 
 ImageViewHelper
---------------
+---------------
 
 Rendering the image given as src, the path is always relative to the webroot.
 
@@ -134,3 +134,24 @@ It is possible to include a css style tag and also inline styles. This ViewHelpe
 
 		{someAdditionalRichText}
 	</pdf:html>
+
+
+.. _pagebreakviewhelper:
+
+PageBreakViewHelper
+-------------------
+
+Adds a page break within a single page. Can be used for conditional page breaks for instance.
+
+::
+
+	<pdf:page>
+		Page 1
+		<pdf:pageBreak />
+		Page 2
+
+		Conditional page break
+		<f:if condition="{someCondition}">
+			<pdf:pageBreak />
+		</f:if>
+	</pdf:page>
