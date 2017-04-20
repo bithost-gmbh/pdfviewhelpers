@@ -29,10 +29,13 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\AbstractNode;
 use TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode;
+use TYPO3\CMS\Fluid\Core\Compiler\TemplateCompiler;
 
 /**
  * MultiColumnViewHelper
+ * ATTENTION: Templates using this ViewHelper may not be compiled and thus lead to longer loading times (see method compile)
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
@@ -134,4 +137,21 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
 		}
 	}
 
+	/**
+	 * Disable compilation of templates using MultiColumnViewHelper because it is currently not possible
+	 * to access child nodes within a compiled template.
+	 *
+	 * @param string $argumentsName
+	 * @param string $closureName
+	 * @param string $initializationPhpCode
+	 * @param AbstractNode $node
+	 * @param TemplateCompiler $compiler
+	 *
+	 * @return string
+	 */
+	public function compile($argumentsName, $closureName, &$initializationPhpCode, AbstractNode $node, TemplateCompiler $compiler) {
+		$compiler->disable();
+
+		return '\'\'';
+	}
 }
