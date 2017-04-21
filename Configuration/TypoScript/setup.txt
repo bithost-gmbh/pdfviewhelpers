@@ -36,6 +36,7 @@ plugin.tx_pdfviewhelpers.settings {
 		color = #000
 		fontFamily = helvetica
 		fontSize = 11
+		fontStyle = R
 		alignment = left
 		paragraphSpacing = 2
 		padding {
@@ -50,6 +51,7 @@ plugin.tx_pdfviewhelpers.settings {
 		color =
 		fontFamily =
 		fontSize =
+		fontStyle =
 		alignment =
 		paragraphSpacing =
 		padding {
@@ -61,6 +63,7 @@ plugin.tx_pdfviewhelpers.settings {
 		color =
 		fontFamily = 
 		fontSize = 16
+		fontStyle =
 		alignment =
 		paragraphSpacing = 0
 		padding {
@@ -73,7 +76,8 @@ plugin.tx_pdfviewhelpers.settings {
 	list {
 		color =
 		fontFamily =
-		fontSize = 
+		fontSize =
+		fontStyle =
 		padding {
 			top = 0
 			right = 0

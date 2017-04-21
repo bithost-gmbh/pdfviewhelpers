@@ -5,6 +5,7 @@
 - Adds PageBreakViewHelper, [#16](https://github.com/bithost-gmbh/pdfviewhelpers/issues/16)
 - Adds possibility to load html styles from external file, [#14](https://github.com/bithost-gmbh/pdfviewhelpers/issues/14)
 - Adds orientation to PageViewHelper
+- Adds fontStyle to text
 
 ## 1.2.3, March 21, 2017
 - Fixes configuration manager initialization error, [#19](https://github.com/bithost-gmbh/pdfviewhelpers/issues/19)

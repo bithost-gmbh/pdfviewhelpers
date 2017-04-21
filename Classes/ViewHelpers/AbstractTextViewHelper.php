@@ -47,6 +47,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 		$this->registerArgument('color', 'string', '', FALSE, $this->settings['generalText']['color']);
 		$this->registerArgument('fontFamily', 'string', '', FALSE, $this->settings['generalText']['fontFamily']);
 		$this->registerArgument('fontSize', 'integer', '', FALSE, $this->settings['generalText']['fontSize']);
+		$this->registerArgument('fontStyle', 'string', '', FALSE, $this->settings['generalText']['fontStyle']);
 		$this->registerArgument('padding', 'array', '', FALSE, NULL);
 		$this->registerArgument('text', 'string', '', FALSE, NULL);
 		$this->registerArgument('alignment', 'string', 'Text Alignment. Possible values: "left", "center", "right", "justify". Defaults to "left"', false, $this->settings['generalText']['alignment']);
@@ -76,7 +77,9 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 			$this->getPDF()->SetFontSize($this->arguments['fontSize']);
 		}
 
-		$this->getPDF()->SetFont($this->arguments['fontFamily']);
+		if ($this->isValidFontStyle($this->arguments['fontStyle'])) {
+			$this->getPDF()->SetFont($this->arguments['fontFamily'], self::convertToTcpdfFontStyle($this->arguments['fontStyle']));
+		}
 	}
 
 	/**
@@ -102,6 +105,22 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 
 			$posY = $this->getPDF()->GetY();
 		}
+	}
+
+	/**
+	 * Converts pdfviewhelper fontStyle syntax to TCPDF syntax. This function is necessary because TCPDF uses an empty
+	 * string to represent "regular", but we can not do this because of the settings inheritance (empty means inherit).
+	 *
+	 * @param string $pdfviewhelperFontStyle
+	 *
+	 * @return string
+	 */
+	public static function convertToTcpdfFontStyle($pdfviewhelperFontStyle) {
+		if ($pdfviewhelperFontStyle === 'R') {
+			return '';
+		}
+
+		return $pdfviewhelperFontStyle;
 	}
 
 	/**
@@ -162,6 +181,21 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 			return TRUE;
 		} else {
 			throw new ValidationException('Alignment must be "left", "center", "right" or "justify". ERROR: 1363765672', 1363765672);
+		}
+	}
+
+	/**
+	 * @param string $fontStyle
+	 *
+	 * @return boolean
+	 *
+	 * @throws ValidationException
+	 */
+	protected function isValidFontStyle($fontStyle) {
+		if (in_array($fontStyle, ['B', 'I', 'U', 'R'])) {
+			return TRUE;
+		} else {
+			throw new ValidationException('FontStyle must be "B" (bold), "I" (italic), "U" (underline) or "R" (regular). ERROR: 1492799612', 1492799612);
 		}
 	}
 

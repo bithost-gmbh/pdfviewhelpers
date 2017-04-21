@@ -83,24 +83,28 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	generalText.color_              :ref:`t3tsref:data-type-string`       #000
 	generalText.fontFamily_         :ref:`t3tsref:data-type-string`       helvetica
 	generalText.fontSize_           :ref:`t3tsref:data-type-integer`      11
+	generalText.fontStyle_          :ref:`t3tsref:data-type-string`       R
 	generalText.padding_            Array                                 {top: 0, right: 0, bottom: 0, left: 0}
 	generalText.alignment_          :ref:`t3tsref:data-type-string`       left
 	generalText.paragraphSpacing_   :ref:`t3tsref:data-type-integer`      2
 	text.color.                     :ref:`t3tsref:data-type-string`       *See generalText*
 	text.fontFamily                 :ref:`t3tsref:data-type-string`       *See generalText*
 	text.fontSize                   :ref:`t3tsref:data-type-integer`      *See generalText*
+	text.fontStyle                  :ref:`t3tsref:data-type-string`       *See generalText*
 	text.padding                    Array                                 *See generalText*
 	text.alignment                  :ref:`t3tsref:data-type-string`       *See generalText*
 	text.paragraphSpacing           :ref:`t3tsref:data-type-integer`      *See generalText*
 	headline.color                  :ref:`t3tsref:data-type-string`       *See generalText*
 	headline.fontFamily             :ref:`t3tsref:data-type-string`       *See generalText*
 	headline.fontSize               :ref:`t3tsref:data-type-integer`      *See generalText*
+	headline.fontStyle              :ref:`t3tsref:data-type-string`       *See generalText*
 	headline.padding                Array                                 *See generalText*
 	headline.alignment              :ref:`t3tsref:data-type-string`       *See generalText*
 	headline.paragraphSpacing       :ref:`t3tsref:data-type-integer`      *See generalText*
 	list.color                      :ref:`t3tsref:data-type-string`       *See generalText*
 	list.fontFamily                 :ref:`t3tsref:data-type-string`       *See generalText*
 	list.fontSize                   :ref:`t3tsref:data-type-integer`      *See generalText*
+	list.fontStyle                  :ref:`t3tsref:data-type-string`       *See generalText*
 	list.padding                    Array                                 *See generalText*
 	list.alignment                  :ref:`t3tsref:data-type-string`       *See generalText*
 	list.paragraphSpacing           :ref:`t3tsref:data-type-integer`      *See generalText*
@@ -330,6 +334,15 @@ generalText.fontSize
 :typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.fontSize =`  :ref:`t3tsref:data-type-integer`
 
 The font size being used.
+
+.. _generalText.fontStyle:
+
+generalText.fontStyle
+"""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.fontStyle =`  :ref:`t3tsref:data-type-string`
+
+The font style being used. Possible values are: R (regular), B (bold), I (italic), U (underline)
 
 .. _generalText.padding:
 

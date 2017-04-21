@@ -52,6 +52,9 @@ class ListViewHelper extends AbstractTextViewHelper {
 		if (!empty($this->settings['list']['fontSize'])) {
 			$this->overrideArgument('fontSize', 'integer', '', FALSE, $this->settings['list']['fontSize']);
 		}
+		if (!empty($this->settings['list']['fontStyle'])) {
+			$this->overrideArgument('fontStyle', 'string', '', FALSE, $this->settings['list']['fontStyle']);
+		}
 
 		$this->registerArgument('listElements', 'array', '', TRUE, NULL);
 		$this->registerArgument('bulletColor', 'string', '', FALSE, $this->settings['list']['bulletColor']);

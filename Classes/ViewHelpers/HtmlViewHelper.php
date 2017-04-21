@@ -70,7 +70,7 @@ class HtmlViewHelper extends AbstractContentElementViewHelper {
 		//reset settings to generalText
 		$this->getPDF()->SetTextColor($color['R'], $color['G'], $color['B']);
 		$this->getPDF()->SetFontSize($this->settings['generalText']['fontSize']);
-		$this->getPDF()->SetFont($this->settings['generalText']['fontFamily']);
+		$this->getPDF()->SetFont($this->settings['generalText']['fontFamily'], AbstractTextViewHelper::convertToTcpdfFontStyle($this->settings['generalText']['fontStyle']));
 		$this->getPDF()->setCellPaddings($padding['left'], $padding['top'], $padding['right'], $padding['bottom']);
 
 		$this->getPDF()->writeHTML($htmlStyle . $html, TRUE, FALSE, TRUE, FALSE, '');

@@ -53,6 +53,9 @@ class TextViewHelper extends AbstractTextViewHelper {
 		if (!empty($this->settings['text']['fontSize'])) {
 			$this->overrideArgument('fontSize', 'integer', '', FALSE, $this->settings['text']['fontSize']);
 		}
+		if (!empty($this->settings['text']['fontStyle'])) {
+			$this->overrideArgument('fontStyle', 'string', '', FALSE, $this->settings['text']['fontStyle']);
+		}
 		if (!empty($this->settings['text']['alignment'])) {
 			$this->overrideArgument('alignment', 'string', '', FALSE, $this->settings['text']['alignment']);
 		}
