@@ -75,12 +75,15 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 		$extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
 		$pdfClassName = empty($this->settings['config']['class']) ? 'TCPDF' : $this->settings['config']['class'];
 
+		//Load TCPDF and FPDI dependencies
 		require_once($extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->settings['config']['language'] . '.php');
 		require_once($extPath . 'Resources/Private/PHP/tcpdf/tcpdf.php');
 		require_once($extPath . 'Resources/Private/PHP/fpdi/fpdi.php');
 
+		//Set PDF and document properties
 		$this->setPDF(GeneralUtility::makeInstance($pdfClassName));
 
+		$this->getPDF()->setFontSubsetting($this->settings['config']['fonts']['subset'] === '1');
 		$this->getPDF()->setJPEGQuality($this->settings['config']['jpgQuality']);
 		$this->getPDF()->SetTitle($this->arguments['title']);
 		$this->getPDF()->SetSubject($this->arguments['subject']);
@@ -88,6 +91,19 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 		$this->getPDF()->SetKeywords($this->arguments['keywords']);
 		$this->getPDF()->SetCreator($this->arguments['creator']);
 
+		//Add custom fonts
+		foreach ($this->settings['config']['fonts']['addTTFFont'] as $ttfFontName => $ttfFont) {
+			$path = PATH_site . $ttfFont['path'];
+			$type = isset($ttfFont['type']) ? $ttfFont['type'] : 'TrueTypeUnicode';
+
+			$fontName = \TCPDF_FONTS::addTTFfont($path, $type);
+
+			if ($fontName === false) {
+				throw new Exception('Font "' . $ttfFontName . '" could not be added. ERROR: 1492808000', 1492808000);
+			}
+		}
+
+		//Add FPDI sourceFile if given
 		if (!empty($this->arguments['sourceFile'])) {
 			if ($this->getPDF() instanceof FPDI) {
 				$this->getPDF()->setSourceFile(PATH_site . $this->arguments['sourceFile']);
@@ -96,6 +112,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 			}
 		}
 
+		//Disables cache if set so and in frontend mode
 		if ($GLOBALS['TSFE'] && $this->settings['config']['disableCache']) {
 			$GLOBALS['TSFE']->set_no_cache();
 		}

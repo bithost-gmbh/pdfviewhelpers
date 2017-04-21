@@ -77,7 +77,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 			$this->getPDF()->SetFontSize($this->arguments['fontSize']);
 		}
 
-		if ($this->isValidFontStyle($this->arguments['fontStyle'])) {
+		if ($this->isValidFontFamily($this->arguments['fontFamily']) && $this->isValidFontStyle($this->arguments['fontStyle'])) {
 			$this->getPDF()->SetFont($this->arguments['fontFamily'], self::convertToTcpdfFontStyle($this->arguments['fontStyle']));
 		}
 	}
@@ -196,6 +196,35 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 			return TRUE;
 		} else {
 			throw new ValidationException('FontStyle must be "B" (bold), "I" (italic), "U" (underline) or "R" (regular). ERROR: 1492799612', 1492799612);
+		}
+	}
+
+	/**
+	 * Check fontFamily for compatibility with TCPDF naming conventions
+	 *
+	 * @param string $fontFamily
+	 *
+	 * @return boolean
+	 *
+	 * @throws ValidationException
+	 */
+	protected function isValidFontFamily($fontFamily) {
+		//TCPDF transformation START
+		$tcpdfFontFamilyName = strtolower($fontFamily);
+		$tcpdfFontFamilyName = preg_replace('/[^a-z0-9_]/', '', $tcpdfFontFamilyName);
+		$search  = ['bold', 'oblique', 'italic', 'regular'];
+		$replace = ['b', 'i', 'i', ''];
+		$tcpdfFontFamilyName = str_replace($search, $replace, $tcpdfFontFamilyName);
+		if (empty($tcpdfFontFamilyName)) {
+			// set generic name
+			$tcpdfFontFamilyName = 'tcpdffont';
+		}
+		//TCPDF transformation END
+
+		if ($fontFamily === $tcpdfFontFamilyName) {
+			return TRUE;
+		} else {
+			throw new ValidationException('Invalid fontFamily name "' . $fontFamily . '". Name must only contain letters "a-z0-9_" and none of the words "bold", "oblique", "italic" and "regular". ERROR: 1492809393', 1492809393);
 		}
 	}
 

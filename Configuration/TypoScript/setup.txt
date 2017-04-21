@@ -9,6 +9,17 @@ plugin.tx_pdfviewhelpers.settings {
 			imageEPS = ai,eps
 			imageSVG = svg
 		}
+		fonts {
+			subset = 1
+			addTTFFont {
+#				roboto {
+#					path = typo3conf/ext/pdfviewhelpers/Resources/Public/Example/Roboto.ttf
+#				}
+#				opensans {
+#					path = typo3conf/ext/pdfviewhelpers/Resources/Public/Example/OpenSans.ttf
+#				}
+			}
+		}
 	}
 	document {
 		title = Default document title
