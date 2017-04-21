@@ -6,6 +6,8 @@
 - Adds possibility to load html styles from external file, [#14](https://github.com/bithost-gmbh/pdfviewhelpers/issues/14)
 - Adds orientation to PageViewHelper
 - Adds fontStyle to text
+- Adds a TypoScript way for adding custom fonts, [#9](https://github.com/bithost-gmbh/pdfviewhelpers/issues/9)
+- Updates documentation 
 
 ## 1.2.3, March 21, 2017
 - Fixes configuration manager initialization error, [#19](https://github.com/bithost-gmbh/pdfviewhelpers/issues/19)
