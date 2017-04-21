@@ -11,8 +11,17 @@
 ViewHelpers
 ===========
 
+- DocumentViewHelper_
+- PageViewHelper_
+- PageBreakViewHelper_
+- MultiColumnViewHelper_
+- HeadlineViewHelper_
+- TextViewHelper_
+- ListViewHelper_
+- ImageViewHelper_
+- HtmlViewHelper_
 
-.. _documentviewhelper:
+.. _DocumentViewHelper:
 
 DocumentViewHelper
 ------------------
@@ -20,13 +29,27 @@ DocumentViewHelper
 This ViewHelper must be to first to be used in your template and wrap all the other ViewHelpers. It is responsible for
 generating the document.
 
+**Simple Usage**
 ::
 
-	<pdf:document outputDestination="I" title="Bithost Example">
+	<pdf:document>
 		[..]
 	</pdf:document>
 
-.. _pageviewhelper:
+**Advanced Usage**
+::
+
+	<pdf:document
+		title="Bithost Example"
+		subject="Welcome message"
+		author="Bithost GmbH"
+		keywords="example, test"
+		outputDestination="I"
+		outputPath="example.pdf">
+		[..]
+	</pdf:document>
+
+.. _PageViewHelper:
 
 PageViewHelper
 --------------
@@ -44,7 +67,27 @@ This ViewHelper must be placed right within a document ViewHelper. It can be use
 		</pdf:page>
 	</pdf:document>
 
-.. _multicolumnviewhelper:
+.. _PageBreakViewHelper:
+
+PageBreakViewHelper
+-------------------
+
+Adds a page break within a single page. Can be used for conditional page breaks for instance.
+
+::
+
+	<pdf:page>
+		Page 1
+		<pdf:pageBreak />
+		Page 2
+
+		Conditional page break
+		<f:if condition="{someCondition}">
+			<pdf:pageBreak />
+		</f:if>
+	</pdf:page>
+
+.. _MultiColumnViewHelper:
 
 MultiColumnViewHelper / ColumnViewHelper
 ----------------------------------------
@@ -67,7 +110,7 @@ These ViewHelpers have to be used together in order to generate a multi column l
 		</pdf:column>
 	</pdf:multiColumn>
 
-.. _headlineviewhelper:
+.. _HeadlineViewHelper:
 
 HeadlineViewHelper
 ------------------
@@ -79,7 +122,7 @@ Rendering text using the settings for headlines.
 	<pdf:headline>Title</pdf:headline>
 	<pdf:headline text="Alternative syntax"/>
 
-.. _textviewhelper:
+.. _TextViewHelper:
 
 TextViewHelper
 --------------
@@ -91,7 +134,7 @@ Rendering text using the settings for text.
 	<pdf:text>Title</pdf:text>
 	<pdf:text text="Alternative syntax"/>
 
-.. _listviewhelper:
+.. _ListViewHelper:
 
 ListViewHelper
 --------------
@@ -103,7 +146,7 @@ Rendering a list given as a one dimensional array.
 	<pdf:list listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}"/>
 	<pdf:list listElements="{someArrayProperty}"/>
 
-.. _imageviewhelper:
+.. _ImageViewHelper:
 
 ImageViewHelper
 ---------------
@@ -114,7 +157,7 @@ Rendering the image given as src, the path is always relative to the webroot.
 
 	<pdf:image src="typo3conf/ext/pdfviewhelpers/Resources/Public/Example/Bithost.jpg" width="200" />
 
-.. _htmlviewhelper:
+.. _HtmlViewHelper:
 
 HtmlViewHelper
 --------------
@@ -136,24 +179,3 @@ It is possible to include a css style tag and also inline styles. This ViewHelpe
 
 		{someAdditionalRichText}
 	</pdf:html>
-
-
-.. _pagebreakviewhelper:
-
-PageBreakViewHelper
--------------------
-
-Adds a page break within a single page. Can be used for conditional page breaks for instance.
-
-::
-
-	<pdf:page>
-		Page 1
-		<pdf:pageBreak />
-		Page 2
-
-		Conditional page break
-		<f:if condition="{someCondition}">
-			<pdf:pageBreak />
-		</f:if>
-	</pdf:page>
