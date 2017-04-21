@@ -51,6 +51,8 @@ MultiColumnViewHelper / ColumnViewHelper
 
 These ViewHelpers have to be used together in order to generate a multi column layout. Columns are always of equal width.
 
+**Important:** The parsing of the Fluid template can not be cached when these ViewHelpers are used. This can lead to a significant loss in performance.
+
 ::
 
 	<pdf:multiColumn>
