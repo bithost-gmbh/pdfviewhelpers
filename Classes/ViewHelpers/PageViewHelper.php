@@ -45,6 +45,7 @@ class PageViewHelper extends AbstractPDFViewHelper {
 		$this->registerArgument('autoPageBreak', 'boolean', '', FALSE, $this->settings['page']['autoPageBreak']);
 		$this->registerArgument('margins', 'array', '', FALSE, NULL);
 		$this->registerArgument('importPage', 'integer', '', FALSE, $this->settings['page']['importPage']);
+		$this->registerArgument('orientation', 'string', '', FALSE, $this->settings['page']['orientation']);
 	}
 
 	/**
@@ -75,7 +76,7 @@ class PageViewHelper extends AbstractPDFViewHelper {
 			}
 		}
 
-		$this->getPDF()->AddPage();
+		$this->getPDF()->AddPage($this->arguments['orientation']);
 
 		if (!empty($this->arguments['importPage'])) {
 			$this->getPDF()->useTemplate($templateId);

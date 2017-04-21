@@ -29,6 +29,7 @@ plugin.tx_pdfviewhelpers.settings {
 			left = 15
 		}
 		importPage =
+		orientation = P
 	}
 	generalText {
 		trim = 1

@@ -78,6 +78,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	page.autoPageBreak_             :ref:`t3tsref:data-type-boolean`      0
 	page.margins_                   Array                                 {top: 15, right: 15, bottom: 15, left: 15}
 	page.importPage_                :ref:`t3tsref:data-type-integer`
+	page.orientation_               :ref:`t3tsref:data-type-string`       P
 	generalText.trim_               :ref:`t3tsref:data-type-boolean`      1
 	generalText.color_              :ref:`t3tsref:data-type-string`       #000
 	generalText.fontFamily_         :ref:`t3tsref:data-type-string`       helvetica
@@ -284,6 +285,15 @@ page.importPage
 :typoscript:`plugin.tx_pdfviewhelpers.settings.page.importPage =` :ref:`t3tsref:data-type-integer`
 
 Specifies which page should be used as template for the current page. Must be used together with document.sourceFile.
+
+.. _page.orientation:
+
+page.orientation
+""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.page.orientation =` :ref:`t3tsref:data-type-string`
+
+Defines the orientation of the current page and the following pages. Possible values are P (portrait) and L (landscape).
 
 .. _generalText.trim:
 
