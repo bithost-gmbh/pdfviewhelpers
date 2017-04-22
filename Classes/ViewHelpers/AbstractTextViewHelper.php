@@ -44,6 +44,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 		parent::initializeArguments();
 
 		$this->registerArgument('trim', 'boolean', '', FALSE, $this->settings['generalText']['trim']);
+		$this->registerArgument('removeDoubleWhitespace', 'boolean', '', FALSE, $this->settings['generalText']['removeDoubleWhitespace']);
 		$this->registerArgument('color', 'string', '', FALSE, $this->settings['generalText']['color']);
 		$this->registerArgument('fontFamily', 'string', '', FALSE, $this->settings['generalText']['fontFamily']);
 		$this->registerArgument('fontSize', 'integer', '', FALSE, $this->settings['generalText']['fontSize']);
@@ -66,6 +67,10 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 
 		if ($this->arguments['trim']) {
 			$this->arguments['text'] = trim($this->arguments['text']);
+		}
+
+		if ($this->arguments['removeDoubleWhitespace']) {
+			$this->arguments['text'] = preg_replace('/\s+/', ' ', $this->arguments['text']);
 		}
 
 		if ($this->isValidColor($this->arguments['color'])) {

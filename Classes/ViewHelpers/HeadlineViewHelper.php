@@ -41,8 +41,11 @@ class HeadlineViewHelper extends AbstractTextViewHelper {
 	public function initializeArguments() {
 		parent::initializeArguments();
 
-		if (!empty($this->settings['headline']['trim'])) {
-			$this->overrideArgument('trim', 'boolean', '', FALSE, $this->settings['headline']['trim']);
+		if (strlen($this->settings['headline']['trim'])) {
+			$this->overrideArgument('trim', 'boolean', '', FALSE, (boolean) $this->settings['headline']['trim']);
+		}
+		if (strlen($this->settings['headline']['removeDoubleWhitespace'])) {
+			$this->overrideArgument('removeDoubleWhitespace', 'boolean', '', FALSE, (boolean) $this->settings['headline']['removeDoubleWhitespace']);
 		}
 		if (!empty($this->settings['headline']['color'])) {
 			$this->overrideArgument('color', 'string', '', FALSE, $this->settings['headline']['color']);

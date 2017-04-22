@@ -41,8 +41,11 @@ class TextViewHelper extends AbstractTextViewHelper {
 	public function initializeArguments() {
 		parent::initializeArguments();
 
-		if (!empty($this->settings['text']['trim'])) {
-			$this->overrideArgument('trim', 'boolean', '', FALSE, $this->settings['text']['trim']);
+		if (strlen($this->settings['text']['trim'])) {
+			$this->overrideArgument('trim', 'boolean', '', FALSE, (boolean) $this->settings['text']['trim']);
+		}
+		if (strlen($this->settings['text']['removeDoubleWhitespace'])) {
+			$this->overrideArgument('removeDoubleWhitespace', 'boolean', '', FALSE, (boolean) $this->settings['text']['removeDoubleWhitespace']);
 		}
 		if (!empty($this->settings['text']['color'])) {
 			$this->overrideArgument('color', 'string', '', FALSE, $this->settings['text']['color']);

@@ -44,6 +44,7 @@ plugin.tx_pdfviewhelpers.settings {
 	}
 	generalText {
 		trim = 1
+		removeDoubleWhitespace = 1
 		color = #000
 		fontFamily = helvetica
 		fontSize = 11
@@ -59,6 +60,7 @@ plugin.tx_pdfviewhelpers.settings {
 	}
 	text {
 		trim =
+		removeDoubleWhitespace =
 		color =
 		fontFamily =
 		fontSize =
@@ -71,6 +73,7 @@ plugin.tx_pdfviewhelpers.settings {
 	}
 	headline {
 		trim =
+		removeDoubleWhitespace =
 		color =
 		fontFamily = 
 		fontSize = 16
@@ -86,6 +89,7 @@ plugin.tx_pdfviewhelpers.settings {
 	}
 	list {
 		trim =
+		removeDoubleWhitespace =
 		color =
 		fontFamily =
 		fontSize =

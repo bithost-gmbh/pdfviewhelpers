@@ -7,6 +7,7 @@
 - Adds orientation to PageViewHelper
 - Adds fontStyle to text
 - Adds a TypoScript way for adding custom fonts, [#9](https://github.com/bithost-gmbh/pdfviewhelpers/issues/9)
+- Adds minor improvements on text handling
 - Updates documentation 
 
 ## 1.2.3, March 21, 2017

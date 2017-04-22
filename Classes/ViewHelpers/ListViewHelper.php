@@ -43,8 +43,11 @@ class ListViewHelper extends AbstractTextViewHelper {
 	public function initializeArguments() {
 		parent::initializeArguments();
 
-		if (!empty($this->settings['list']['trim'])) {
-			$this->overrideArgument('trim', 'boolean', '', FALSE, $this->settings['list']['trim']);
+		if (strlen($this->settings['list']['trim'])) {
+			$this->overrideArgument('trim', 'boolean', '', FALSE, (boolean) $this->settings['list']['trim']);
+		}
+		if (strlen($this->settings['list']['removeDoubleWhitespace'])) {
+			$this->overrideArgument('removeDoubleWhitespace', 'boolean', '', FALSE, (boolean) $this->settings['list']['removeDoubleWhitespace']);
 		}
 		if (!empty($this->settings['list']['color'])) {
 			$this->overrideArgument('color', 'string', '', FALSE, $this->settings['list']['color']);
