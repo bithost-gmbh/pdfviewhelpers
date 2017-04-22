@@ -70,7 +70,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 		}
 
 		if ($this->arguments['removeDoubleWhitespace']) {
-			$this->arguments['text'] = preg_replace('/\s+/', ' ', $this->arguments['text']);
+			$this->arguments['text'] = preg_replace('/[ \t]+/', ' ', $this->arguments['text']);
 		}
 
 		if ($this->isValidColor($this->arguments['color'])) {
@@ -94,13 +94,17 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 		$this->initializeMultiColumnSupport();
 
 		$paragraphs = explode(
-				"\n", str_replace("\r\n", "\n", $this->arguments['text'])
+			"\n", str_replace("\r\n", "\n", $this->arguments['text'])
 		);
 		$posY = $this->arguments['posY'];
 
 		foreach ($paragraphs as $paragraph) {
+			if ($this->arguments['trim']) {
+				$paragraph = trim($paragraph);
+			}
+
 			$this->getPDF()->MultiCell(
-					$this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->getAlignmentString($this->arguments['alignment']), FALSE, 1, $this->arguments['posX'], $posY, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE
+				$this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->getAlignmentString($this->arguments['alignment']), FALSE, 1, $this->arguments['posX'], $posY, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE
 			);
 
 			if ($this->isValidParagraphSpacing($this->arguments['paragraphSpacing']) && $this->arguments['paragraphSpacing'] > 0
