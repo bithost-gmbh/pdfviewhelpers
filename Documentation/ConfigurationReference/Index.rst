@@ -85,7 +85,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	generalText.fontSize_           :ref:`t3tsref:data-type-integer`      11
 	generalText.fontStyle_          :ref:`t3tsref:data-type-string`       R
 	generalText.padding_            Array                                 {top: 0, right: 0, bottom: 0, left: 0}
-	generalText.alignment_          :ref:`t3tsref:data-type-string`       left
+	generalText.alignment_          :ref:`t3tsref:data-type-string`       L
 	generalText.paragraphSpacing_   :ref:`t3tsref:data-type-integer`      2
 	text.color.                     :ref:`t3tsref:data-type-string`       *See generalText*
 	text.fontFamily                 :ref:`t3tsref:data-type-string`       *See generalText*
@@ -98,16 +98,15 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	headline.fontFamily             :ref:`t3tsref:data-type-string`       *See generalText*
 	headline.fontSize               :ref:`t3tsref:data-type-integer`      *See generalText*
 	headline.fontStyle              :ref:`t3tsref:data-type-string`       *See generalText*
-	headline.padding                Array                                 *See generalText*
+	headline.padding                Array                                 {top: 6, right: 0, bottom: 3, left: 0}
 	headline.alignment              :ref:`t3tsref:data-type-string`       *See generalText*
 	headline.paragraphSpacing       :ref:`t3tsref:data-type-integer`      *See generalText*
 	list.color                      :ref:`t3tsref:data-type-string`       *See generalText*
 	list.fontFamily                 :ref:`t3tsref:data-type-string`       *See generalText*
 	list.fontSize                   :ref:`t3tsref:data-type-integer`      *See generalText*
 	list.fontStyle                  :ref:`t3tsref:data-type-string`       *See generalText*
-	list.padding                    Array                                 *See generalText*
-	list.alignment                  :ref:`t3tsref:data-type-string`       *See generalText*
-	list.paragraphSpacing           :ref:`t3tsref:data-type-integer`      *See generalText*
+	list.padding                    Array                                 {top: 0, right: 0, bottom: 2, left: 1}
+	list.alignment                  :ref:`t3tsref:data-type-string`       L
 	list.bulletColor_               :ref:`t3tsref:data-type-string`       #000
 	list.bulletImageSrc_            :ref:`t3tsref:data-type-string`
 	list.bulletSize_                :ref:`t3tsref:data-type-float`        1.5
@@ -360,7 +359,7 @@ generalText.alignment
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.alignment =` :ref:`t3tsref:data-type-string`
 
-Possible values are: 'left', 'center', 'right', 'justify'
+Possible values are: 'L' (left), 'C' (center), 'R' (right), 'J' (justify)
 
 .. _generalText.paragraphSpacing:
 
