@@ -237,13 +237,21 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 		$alignmentString = 'L';
 
 		switch ($alignment) {
-			case 'left': $alignmentString = 'L';
+			case 'left':
+			case 'L':
+				$alignmentString = 'L';
 				break;
-			case 'center': $alignmentString = 'C';
+			case 'center':
+			case 'C':
+				$alignmentString = 'C';
 				break;
-			case 'right': $alignmentString = 'R';
+			case 'right':
+			case 'R':
+				$alignmentString = 'R';
 				break;
-			case 'justify': $alignmentString = 'J';
+			case 'justify':
+			case 'J':
+				$alignmentString = 'J';
 				break;
 		}
 

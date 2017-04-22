@@ -43,6 +43,9 @@ class ListViewHelper extends AbstractTextViewHelper {
 	public function initializeArguments() {
 		parent::initializeArguments();
 
+		if (!empty($this->settings['list']['trim'])) {
+			$this->overrideArgument('trim', 'boolean', '', FALSE, $this->settings['list']['trim']);
+		}
 		if (!empty($this->settings['list']['color'])) {
 			$this->overrideArgument('color', 'string', '', FALSE, $this->settings['list']['color']);
 		}
@@ -54,6 +57,9 @@ class ListViewHelper extends AbstractTextViewHelper {
 		}
 		if (!empty($this->settings['list']['fontStyle'])) {
 			$this->overrideArgument('fontStyle', 'string', '', FALSE, $this->settings['list']['fontStyle']);
+		}
+		if (!empty($this->settings['list']['alignment'])) {
+			$this->overrideArgument('alignment', 'string', '', FALSE, $this->settings['list']['alignment']);
 		}
 
 		$this->registerArgument('listElements', 'array', '', TRUE, NULL);
@@ -124,7 +130,7 @@ class ListViewHelper extends AbstractTextViewHelper {
 				$this->getPDF()->Image($this->arguments['bulletImageSrc'], $bulletPosX, $currentPosY + $relativBulletPosY, $this->arguments['bulletSize'], NULL, '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, TRUE, FALSE);
 			}
 
-			$this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, 'L', FALSE, 1, $textPosX, $currentPosY, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);
+			$this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->getAlignmentString($this->arguments['alignment']), FALSE, 1, $textPosX, $currentPosY, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);
 
 			$currentPosY += $this->getPDF()->getStringHeight($textWidth, $listElement);
 		}
