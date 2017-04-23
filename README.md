@@ -40,7 +40,7 @@ the possibility to use existing PDF documents as template and extend them as you
 
 ### PDF Output
 
-![Example PDF output](Resources/Public/Images/example_pdf.png)
+![Example PDF output](Resources/Public/Examples/BasicUsage/output.png)
 
 ## Bug Tracker
 
