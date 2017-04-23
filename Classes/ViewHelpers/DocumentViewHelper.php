@@ -94,7 +94,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 		//Add custom fonts
 		foreach ($this->settings['config']['fonts']['addTTFFont'] as $ttfFontName => $ttfFont) {
 			$path = PATH_site . $ttfFont['path'];
-			$type = isset($ttfFont['type']) ? $ttfFont['type'] : 'TrueTypeUnicode';
+			$type = isset($ttfFont['type']) ? $ttfFont['type'] : '';
 
 			$fontName = \TCPDF_FONTS::addTTFfont($path, $type);
 

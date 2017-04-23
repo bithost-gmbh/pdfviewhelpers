@@ -25,8 +25,8 @@ TypoScript
 				path = typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Roboto.ttf
 				# it is also possible to define the type of the font
 				# possible values are TrueTypeUnicode, OpenTypeUnicode, TrueType, OpenType, Type1, CID-0
-				# defaults to TrueTypeUnicode anyways, so the next line is actually useless
-				type = TrueTypeUnicode
+				# can be left out in order for TCPDF to auto detect the type
+				#type = TrueTypeUnicode
 			}
 			opensans {
 				path = typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf
