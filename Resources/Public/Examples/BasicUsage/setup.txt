@@ -2,7 +2,7 @@ page = PAGE
 page {
 	10 = FLUIDTEMPLATE
 	10 {
-		file = EXT:pdfviewhelpers/Resources/Public/Example/Bithost.html
+		file = EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.html
 	}
 }
 

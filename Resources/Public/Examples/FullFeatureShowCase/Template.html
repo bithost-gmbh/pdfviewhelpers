@@ -1,0 +1,103 @@
+{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
+
+<pdf:document outputPath="overwritten_name.pdf">
+    <pdf:page>
+        <pdf:headline fontSize="20">Full Feature Show Case</pdf:headline>
+        <pdf:text>Randomly showing some features of pdfviewhelpers.</pdf:text>
+
+        <pdf:headline>Typography</pdf:headline>
+        <pdf:text fontStyle="B">Bold text</pdf:text>
+        <pdf:text fontStyle="I">Italic text</pdf:text>
+        <pdf:text fontStyle="U">Underlined text</pdf:text>
+        <pdf:text color="#1F8A70">Colored text</pdf:text>
+        <pdf:text alignment="L">Alignment Left</pdf:text>
+        <pdf:text alignment="C">Alignment Center</pdf:text>
+        <pdf:text alignment="R">Alignment Right</pdf:text>
+
+        <pdf:text color="#BEDB39" padding="{top:6, right:80, bottom:6, left:20}">
+            Text with special padding. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et dolores et ea rebum.
+        </pdf:text>
+
+        <pdf:multiColumn>
+            <pdf:column>
+                <pdf:text>
+                    Text with normal paragraph spacing.
+                    Shown here.
+                </pdf:text>
+            </pdf:column>
+            <pdf:column>
+                <pdf:text paragraphSpacing="2">
+                    Text with extended paragraph spacing.
+                    Shown here.
+                </pdf:text>
+            </pdf:column>
+            <pdf:column>
+                <pdf:text paragraphSpacing="4">
+                    Text with even more extended paragraph spacing.
+                    Shown here.
+                </pdf:text>
+            </pdf:column>
+        </pdf:multiColumn>
+
+        <pdf:headline>Custom fonts</pdf:headline>
+        <pdf:text fontFamily="opensans">Custom font Open Sans automatically converted from TTF file.</pdf:text>
+        <pdf:text fontFamily="roboto">Custom font Roboto automatically converted from TTF file.</pdf:text>
+        <pdf:text fontFamily="roboto" color="#BEDB39">Custom font Roboto even colored!</pdf:text>
+
+        <pdf:headline>Strangely styled lists</pdf:headline>
+        <pdf:list listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}" />
+        <pdf:list
+                color="#333"
+                bulletSize="2"
+                bulletColor="#1F8A70"
+                fontStyle="R"
+                listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}" />
+    </pdf:page>
+    <pdf:page orientation="L">
+        <pdf:headline>Image in different sizes</pdf:headline>
+        <pdf:image src="typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Bithost.jpg" width="100" />
+        <pdf:image src="typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Bithost.jpg" width="70" />
+        <pdf:image src="typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Bithost.jpg" width="50" />
+    </pdf:page>
+    <pdf:page>
+        <pdf:headline>HTML content being styled externally</pdf:headline>
+        <pdf:html styleSheet="typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/styles.css">
+            <h1>Headline 1</h1>
+            <h2>Headline 2</h2>
+            <h3>Headline 3</h3>
+
+            <a href="https://www.bithost.ch">A Link to click</a>
+
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+
+            <h3 style="color: #333;">Table</h3>
+            <table cellpadding="4" cellspacing="4">
+                <thead>
+                    <tr>
+                        <th>Head 1</th>
+                        <th>Head 2</th>
+                        <th>Head 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Content 1</td>
+                        <td>Content 2</td>
+                        <td>Content 3</td>
+                    </tr>
+                    <tr>
+                        <td>More Content 1</td>
+                        <td>More Content 2</td>
+                        <td>More Content 3</td>
+                    </tr>
+                    <tr>
+                        <td>Content 1</td>
+                        <td>Content 2</td>
+                        <td>Content 3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </pdf:html>
+    </pdf:page>
+</pdf:document>

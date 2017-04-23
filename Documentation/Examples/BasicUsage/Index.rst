@@ -3,24 +3,14 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../Includes.txt
+.. include:: ../../Includes.txt
 
+.. _basicusage:
 
-.. _example:
+Basic Usage
+===========
 
-Example
-=======
-
-
-.. _intro:
-
-Intro
------
-
-There is an example being shipped with this extension, you will find the code in **Resources/Public/Example**.
-Be aware that the static TypoScript template must be included for this example!
-
-.. _typoscript:
+.. _basicusage_typoscript:
 
 TypoScript
 ----------
@@ -31,7 +21,7 @@ TypoScript
 	page {
 		10 = FLUIDTEMPLATE
 		10 {
-			file = EXT:pdfviewhelpers/Resources/Public/Example/Bithost.html
+			file = EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.html
 		}
 	}
 
@@ -50,7 +40,7 @@ TypoScript
 		}
 	}
 
-.. php:
+.. _basicusage_php:
 
 PHP
 ---
@@ -107,7 +97,7 @@ the behaviour of TCPDF in any way.
 			$this->SetTextColor(140, 140, 140);
 			$this->SetFontSize(11);
 
-			$this->Image($extPath . 'Resources/Public/Images/logo.png', 15, 15, 56, 24, '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, FALSE, FALSE);
+			$this->Image($extPath . 'Resources/Public/Examples/BasicUsage/logo.png', 15, 15, 56, 24, '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, FALSE, FALSE);
 			$this->MultiCell(null, null, $address, 0, 'R', FALSE, 1, 0, 45, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);
 		}
 
@@ -120,7 +110,7 @@ the behaviour of TCPDF in any way.
 	}
 
 
-.. _fluid:
+.. _basicusage_fluid:
 
 Fluid Template
 --------------
@@ -152,7 +142,7 @@ Fluid Template
 					</pdf:text>
 				</pdf:column>
 				<pdf:column>
-					<pdf:image src="typo3conf/ext/pdfviewhelpers/Resources/Public/Example/Bithost.jpg" width="200" />
+					<pdf:image src="typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg" width="200" />
 					<pdf:text padding="{top:1, right:0, bottom:0, left:0}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
 				</pdf:column>
 			</pdf:multiColumn>
@@ -162,10 +152,12 @@ Fluid Template
 	</pdf:document>
 
 
+.. _basicusage_output:
+
 PDF Output
 ----------
 
-.. figure:: ../../Resources/Public/Images/example_pdf.png
+.. figure:: ../../../Resources/Public/Examples/BasicUsage/output.png
    :width: 600px
    :align: left
    :alt: Bithost Example

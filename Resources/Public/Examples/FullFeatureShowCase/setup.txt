@@ -1,0 +1,51 @@
+page = PAGE
+page {
+	10 = FLUIDTEMPLATE
+	10 {
+		file = EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Template.html
+	}
+}
+
+plugin.tx_pdfviewhelpers.settings {
+	config {
+		class = Bithost\Pdfviewhelpers\Model\FullFeatureShowCase
+		jpgQuality = 80
+		fonts {
+			addTTFFont {
+				roboto {
+					path = typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Roboto.ttf
+				}
+				opensans {
+					path = typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf
+				}
+			}
+		}
+	}
+	document {
+		title = Full Feature Show Case Title
+		subject = No Subject
+		keywords = full, feature, show, case
+		outputDestination = I
+		outputPath = fullfeatureshowcase.pdf
+	}
+	page {
+		margins {
+			top = 20
+			right = 15
+			bottom = 20
+			left = 15
+		}
+	}
+	generalText {
+		color = #555
+	}
+	headline {
+		fontFamily = courier
+		fontStyle = B
+	}
+	list {
+		color = #1F8A70
+		fontStyle = I
+		bulletColor = #BEDB39
+	}
+}

@@ -27,32 +27,40 @@ namespace Bithost\Pdfviewhelpers\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***/
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-
 /**
- * BithostTCPDF
+ * FullFeatureShowCase
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class BithostTCPDF extends \TCPDF {
+class FullFeatureShowCase extends \FPDI {
 	/**
 	 * @return void
 	 */
 	public function Header() {
-		$extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
-		$address = "Bithost GmbH \nMilchbuckstrasse 83 \nCH-8057 Zürich \n\nhallo@bithost.ch \n044 585 28 20 \n\nwww.bithost.ch";
+		$header1 = "Bithost GmbH - Milchbuckstrasse 83 CH-8057 Zürich";
+		$header2 = "hallo@bithost.ch - www.bithost.ch";
 
 		$this->SetTextColor(140, 140, 140);
 		$this->SetFontSize(11);
 
-		$this->Image($extPath . 'Resources/Public/Examples/BasicUsage/logo.png', 15, 15, 56, 24, '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, FALSE, FALSE);
-		$this->MultiCell(null, null, $address, 0, 'R', FALSE, 1, 0, 45, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);
+		$this->MultiCell(null, null, $header1, 0, 'L', FALSE, 1, 15, 10, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);
+		$this->MultiCell(null, null, $header2, 0, 'R', FALSE, 1, 15, 10, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);
+
+		$this->SetDrawColor(140, 140, 140);
+		$this->Line(15, $this->y + 5, $this->w - 15, $this->y + 5);
 	}
 
 	/**
 	 * @return void
 	 */
 	public function Footer() {
+		$this->SetY(-20);
+		$this->SetDrawColor(140, 140, 140);
+		$this->Line(15, $this->y, $this->w - 15, $this->y);
 
+		$this->SetY(-17);
+		$this->SetTextColor(140, 140, 140);
+		$this->SetFontSize(11);
+		$this->Cell($this->w - 15, 10, 'Page '.$this->getAliasNumPage() . ' of '.$this->getAliasNbPages(), 0, false, 'C', 0, '', 1, false, 'T', 'M');
 	}
 }

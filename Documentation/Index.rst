@@ -56,6 +56,5 @@ PDF ViewHelpers
 	Introduction/Index
 	ConfigurationReference/Index
 	ViewHelpers/Index
-	Example/Index
-	TemplatePDF/Index
+	Examples/Index
 	Links
