@@ -2,6 +2,7 @@
 
 ## 1.x.x
 - Removes default font type in order for TCPDF to auto detect type
+- Adds .htaccess protection to folder Resources/Private, [#27](https://github.com/bithost-gmbh/pdfviewhelpers/pull/27) (Thanks [@derhansen](https://github.com/derhansen))
 
 ## 1.3.0, April 23, 2017
 - Adds support for TYPO3 8.7 LTS, [#18](https://github.com/bithost-gmbh/pdfviewhelpers/issues/18)
