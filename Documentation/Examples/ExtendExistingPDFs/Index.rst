@@ -84,7 +84,7 @@ Fluid Template
 PDF Output
 ----------
 
-.. figure:: ../../../Resources/Public/Examples/ExtendExistingPDFs/output.png
+.. figure:: _assets/output.png
    :width: 600px
    :align: left
    :alt: Extend Existing PDFs Example

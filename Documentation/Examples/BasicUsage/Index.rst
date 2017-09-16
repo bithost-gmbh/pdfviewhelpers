@@ -157,7 +157,7 @@ Fluid Template
 PDF Output
 ----------
 
-.. figure:: ../../../Resources/Public/Examples/BasicUsage/output.png
+.. figure:: _assets/output.png
    :width: 600px
    :align: left
    :alt: Bithost Example

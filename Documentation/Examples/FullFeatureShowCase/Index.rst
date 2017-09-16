@@ -274,17 +274,17 @@ Fluid Template
 PDF Output
 ----------
 
-.. figure:: ../../../Resources/Public/Examples/FullFeatureShowCase/output_1.png
+.. figure:: _assets/output_1.png
    :width: 500px
    :align: left
    :alt: Full Feature Show Case rendered PDF
 
-.. figure:: ../../../Resources/Public/Examples/FullFeatureShowCase/output_2.png
+.. figure:: _assets/output_2.png
    :width: 700px
    :align: left
    :alt: Full Feature Show Case rendered PDF
 
-.. figure:: ../../../Resources/Public/Examples/FullFeatureShowCase/output_3.png
+.. figure:: _assets/output_3.png
    :width: 500px
    :align: left
    :alt: Full Feature Show Case rendered PDF
