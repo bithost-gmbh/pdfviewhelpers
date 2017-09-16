@@ -1,10 +1,12 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 1.x.x
+## 1.3.1 - September 16, 2017
 - Removes default font type in order for TCPDF to auto detect type
 - Adds .htaccess protection to folder Resources/Private, [#27](https://github.com/bithost-gmbh/pdfviewhelpers/pull/27) (Thanks [@derhansen](https://github.com/derhansen))
+- Fixes images not loaded anymore in documentation
+- Adds new extension icon
 
-## 1.3.0, April 23, 2017
+## 1.3.0 - April 23, 2017
 - Adds support for TYPO3 8.7 LTS, [#18](https://github.com/bithost-gmbh/pdfviewhelpers/issues/18)
 - Adds PageBreakViewHelper, [#16](https://github.com/bithost-gmbh/pdfviewhelpers/issues/16)
 - Adds possibility to load html styles from external file, [#14](https://github.com/bithost-gmbh/pdfviewhelpers/issues/14)
@@ -14,7 +16,7 @@
 - Adds minor improvements on text handling
 - Updates documentation 
 
-## 1.2.3, March 21, 2017
+## 1.2.3 - March 21, 2017
 - Fixes configuration manager initialization error, [#19](https://github.com/bithost-gmbh/pdfviewhelpers/issues/19)
 
 ## 1.2.2 - March 16, 2017

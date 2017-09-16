@@ -29,7 +29,7 @@ PDF ViewHelpers
 		pdf, generation, generator, fluid, viewhelper, fpdi, tcpdf
 
 	:Copyright:
-		2016
+		2016 - 2017
 
 	:Author:
 		Markus Mächler, Esteban Marin
