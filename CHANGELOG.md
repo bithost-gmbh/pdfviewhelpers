@@ -1,7 +1,7 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
 ## 1.3.2 - Oktober 30, 2017
-- Fixes Warning in TCPDF on PHP 7.1.x [#28](https://github.com/bithost-gmbh/pdfviewhelpers/issues/28) (Thanks [@koritnik](https://github.com/koritnik))
+- Fixes Warning in TCPDF on PHP 7.1.x, [#28](https://github.com/bithost-gmbh/pdfviewhelpers/issues/28) (Thanks [@koritnik](https://github.com/koritnik))
 
 ## 1.3.1 - September 16, 2017
 - Removes default font type in order for TCPDF to auto detect type
