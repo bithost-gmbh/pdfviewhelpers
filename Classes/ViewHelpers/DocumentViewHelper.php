@@ -75,7 +75,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 		if (!isset($GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers'])){
 			$GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers'] = array();
 		}
-        $GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers']['pdfOutput'] = true;
+		$GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers']['pdfOutput'] = true;
 
 		$extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
 		$pdfClassName = empty($this->settings['config']['class']) ? 'TCPDF' : $this->settings['config']['class'];
