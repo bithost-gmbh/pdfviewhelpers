@@ -72,9 +72,9 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 	 * @return void
 	 */
 	public function initialize() {
-        if (!isset($GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers'])){
-            $GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers'] = array();
-        }
+		if (!isset($GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers'])){
+			$GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers'] = array();
+		}
         $GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers']['pdfOutput'] = true;
 
 		$extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
