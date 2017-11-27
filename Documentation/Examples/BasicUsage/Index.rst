@@ -17,11 +17,19 @@ TypoScript
 
 ::
 
-	page = PAGE
-	page {
+	pdfpage = PAGE
+	pdfpage {
 		10 = FLUIDTEMPLATE
 		10 {
 			file = EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.html
+		}
+		# ensure there is no other output apart from the pdf
+		# take a look at the generated pdf file (end!) in a text editor to verify there is no other output
+		# like warnings, error messages or html code
+		config {
+			disableAllHeaderCode = 1
+			xhtml_cleaning = 0
+			admPanel = 0
 		}
 	}
 
