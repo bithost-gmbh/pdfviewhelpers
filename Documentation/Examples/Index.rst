@@ -18,3 +18,4 @@ Be aware that the static TypoScript template must be included for the examples t
 	BasicUsage/Index
 	ExtendExistingPDFs/Index
 	FullFeatureShowCase/Index
+	PdfaShowCase/Index
