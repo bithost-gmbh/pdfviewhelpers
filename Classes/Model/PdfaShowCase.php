@@ -41,6 +41,7 @@ class PdfaTCPDF extends \TCPDF {
      * @return void
      */
     public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $pdfa=true) {
+        // Set pdfa parameter to true
         parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache, true);
     }
 

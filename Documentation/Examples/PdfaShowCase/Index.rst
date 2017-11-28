@@ -17,14 +17,14 @@ PDF/a Show Case
 Intro
 -----
 
-Its's possible to render the output as a valide PDF/a document.
+Its's possible to render the output as a valid PDF/a document.
 
 .. _pdfashowcase_typoscript:
 
 TypoScript
 ----------
 
-Be sure to disable all header data, to ensure taht all HTML header output is disabled. Some variables on page properties are used to fill the meta data.
+Be sure to disable all header data, to ensure that all HTML header output is disabled. Some variables on page properties are used to fill the meta data.
 
 ::
 
@@ -40,8 +40,7 @@ Be sure to disable all header data, to ensure taht all HTML header output is dis
 		10 = FLUIDTEMPLATE
 		10 {
 			file = EXT:pdfviewhelpers/Resources/Public/Examples/PdfaShowCase/Template.html
-            variables {
-
+			variables {
                fileTitle = TEXT
                fileTitle {
                   field = title
@@ -80,10 +79,9 @@ Be sure to disable all header data, to ensure taht all HTML header output is dis
                }
             }
 		}
-
 	}
 
-	plugin.tx_pdfviewhelpers.settings {
+    plugin.tx_pdfviewhelpers.settings {
 		config {
 			class = Bithost\Pdfviewhelpers\Model\PdfaShowCase
 			jpgQuality = 80
@@ -176,26 +174,27 @@ A custom PHP class is needed to override the TCPDF constructor, to be able to se
 
    class PdfaTCPDF extends \TCPDF {
 
-       /**
+        /**
         * @return void
         */
-       public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $pdfa=true) {
-           parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache, true);
-       }
+        public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $pdfa=true) {
+            // Set pdfa parameter to true
+            parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache, true);
+        }
 
-       /**
+        /**
         * @return void
         */
-       public function Header() {
+        public function Header() {
 
-       }
+        }
 
-       /**
+        /**
         * @return void
         */
-       public function Footer() {
+        public function Footer() {
 
-       }
+        }
    }
 
 
