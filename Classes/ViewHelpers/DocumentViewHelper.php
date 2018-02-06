@@ -32,6 +32,7 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use FPDI;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * DocumentViewHelper
@@ -72,10 +73,9 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 	 * @return void
 	 */
 	public function initialize() {
-		if (!isset($GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers'])){
-			$GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers'] = array();
+		if (isset($GLOBALS['TSFE']->applicationData)){
+			$GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers']['pdfOutput'] = true;
 		}
-		$GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers']['pdfOutput'] = true;
 
 		$extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
 		$pdfClassName = empty($this->settings['config']['class']) ? 'TCPDF' : $this->settings['config']['class'];
@@ -118,7 +118,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 		}
 
 		//Disables cache if set so and in frontend mode
-		if ($GLOBALS['TSFE'] && $this->settings['config']['disableCache']) {
+		if ($GLOBALS['TSFE'] instanceof TypoScriptFrontendController && $this->settings['config']['disableCache']) {
 			$GLOBALS['TSFE']->set_no_cache();
 		}
 	}
