@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 1.3.3 - November 27, 2017
+- Prevents any output after the pdf file, allowing to validate against PDF/A with a custom constructor, [#32](https://github.com/bithost-gmbh/pdfviewhelpers/issues/32) (Thanks [@koritnik](https://github.com/koritnik))
+- Updates documentation
+
 ## 1.3.2 - Oktober 30, 2017
 - Fixes Warning in TCPDF on PHP 7.1.x, [#28](https://github.com/bithost-gmbh/pdfviewhelpers/issues/28) (Thanks [@koritnik](https://github.com/koritnik))
 
