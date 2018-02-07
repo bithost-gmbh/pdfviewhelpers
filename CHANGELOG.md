@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 1.3.4 - February 7, 2018
+- Fixes bug in BE context, [#35](https://github.com/bithost-gmbh/pdfviewhelpers/issues/35) (Thanks [@liayn](https://github.com/liayn))
+- Adds more bugs to fix later
+
 ## 1.3.3 - November 27, 2017
 - Prevents any output after the pdf file, allowing to validate against PDF/A with a custom constructor, [#32](https://github.com/bithost-gmbh/pdfviewhelpers/issues/32) (Thanks [@koritnik](https://github.com/koritnik))
 - Updates documentation
