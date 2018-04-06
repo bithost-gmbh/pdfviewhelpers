@@ -3,6 +3,7 @@
 ## 1.3.5
 - Fixes posX and posY not working, [#37](https://github.com/bithost-gmbh/pdfviewhelpers/issues/37) (Thanks [@PeterSchuhmann](https://github.com/PeterSchuhmann))
 - Updates TCPDF to version 6.2.17
+- Updates FPDI to version 1.6.2
 
 ## 1.3.4 - February 7, 2018
 - Fixes bug in BE context, [#35](https://github.com/bithost-gmbh/pdfviewhelpers/issues/35) (Thanks [@liayn](https://github.com/liayn))
