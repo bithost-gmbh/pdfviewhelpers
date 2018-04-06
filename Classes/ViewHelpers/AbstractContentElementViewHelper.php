@@ -59,8 +59,13 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper {
 			$this->isValidHeight($this->arguments['height']);
 		}
 
-		$this->arguments['posX'] = $this->getPDF()->GetX();
-		$this->arguments['posY'] = $this->getPDF()->GetY();
+		if (is_null($this->arguments['posX'])) {
+			$this->arguments['posX'] = $this->getPDF()->GetX();
+		}
+
+		if (is_null($this->arguments['posY'])) {
+			$this->arguments['posY'] = $this->getPDF()->GetY();
+		}
 	}
 
 	/**
