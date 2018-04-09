@@ -35,7 +35,7 @@ use Bithost\Pdfviewhelpers\Model\TCPDF;
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
 
-class PdfaTCPDF extends \TCPDF {
+class PdfaShowCase extends \TCPDF {
 
     /**
      * @return void

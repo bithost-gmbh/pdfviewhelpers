@@ -1,0 +1,95 @@
+pdfpage = PAGE
+pdfpage {
+	config {
+		disableAllHeaderCode = 1
+		xhtml_cleaning = 0
+		admPanel = 0
+	}
+
+	10 = FLUIDTEMPLATE
+	10 {
+		file = EXT:pdfviewhelpers/Resources/Public/Examples/PdfaShowCase/Template.html
+		variables {
+			fileTitle = TEXT
+			fileTitle {
+				field = title
+				wrap = |.pdf
+			}
+
+			docTitle = TEXT
+			docTitle {
+				field = title
+				wrap = |
+			}
+
+			docAuthor = TEXT
+			docAuthor {
+				field = author
+				wrap = |
+			}
+
+			docDate = TEXT
+			docDate {
+				field = starttime
+				date = d.m.Y
+				wrap = |
+			}
+
+			docAbstract = TEXT
+			docAbstract {
+				field = abstract
+				wrap = |
+			}
+
+			docKeywords = TEXT
+			docKeywords {
+				field = keywords
+				wrap = |
+			}
+		}
+	}
+}
+
+plugin.tx_pdfviewhelpers.settings {
+	config {
+		class = Bithost\Pdfviewhelpers\Model\PdfaShowCase
+		jpgQuality = 80
+		fonts {
+			addTTFFont {
+				roboto {
+					path = typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Roboto.ttf
+				}
+				opensans {
+					path = typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf
+				}
+			}
+		}
+	}
+	document {
+		title = PDFa Show Case Title
+		subject = No Subject
+		keywords = full, feature, show, case
+		outputDestination = I
+		outputPath = pdfa.pdf
+	}
+	page {
+		margins {
+			top = 20
+			right = 15
+			bottom = 20
+			left = 15
+		}
+	}
+	generalText {
+		color = #555
+	}
+	headline {
+		fontFamily = courier
+		fontStyle = B
+	}
+	list {
+		color = #555
+		fontStyle = I
+		bulletColor = #555
+	}
+}
