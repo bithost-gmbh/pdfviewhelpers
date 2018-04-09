@@ -5,6 +5,7 @@
 - Updates TCPDF to version 6.2.17
 - Updates FPDI to version 1.6.2
 - Improves PdfaShowCase example
+- Adds option sRGBMode to config
 
 ## 1.3.4 - February 7, 2018
 - Fixes bug in BE context, [#35](https://github.com/bithost-gmbh/pdfviewhelpers/issues/35) (Thanks [@liayn](https://github.com/liayn))

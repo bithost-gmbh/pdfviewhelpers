@@ -88,6 +88,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 		//Set PDF and document properties
 		$this->setPDF(GeneralUtility::makeInstance($pdfClassName));
 
+		$this->getPDF()->setSRGBmode($this->settings['config']['sRGBMode'] === '1');
 		$this->getPDF()->setFontSubsetting($this->settings['config']['fonts']['subset'] === '1');
 		$this->getPDF()->setJPEGQuality($this->settings['config']['jpgQuality']);
 		$this->getPDF()->SetTitle($this->arguments['title']);

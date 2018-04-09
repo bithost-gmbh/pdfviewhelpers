@@ -4,6 +4,7 @@ plugin.tx_pdfviewhelpers.settings {
 		language = ger
 		disableCache = 1
 		jpgQuality = 100
+		sRGBMode = 0
 		allowedImageTypes {
 			image = jpg,png,gif
 			imageEPS = ai,eps

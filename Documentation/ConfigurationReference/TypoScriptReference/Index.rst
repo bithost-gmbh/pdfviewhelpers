@@ -47,6 +47,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	config.language_                             :ref:`t3tsref:data-type-string`       ger
 	config.disableCache_                         :ref:`t3tsref:data-type-boolean`      1
 	config.jpgQuality_                           :ref:`t3tsref:data-type-integer`      100
+	config.sRGBMode_                             :ref:`t3tsref:data-type-boolean`      0
 	config.allowedImageTypes_                    Array                                 *See static TypoScript template*
 	config.fonts.subset_                         :ref:`t3tsref:data-type-boolean`      1
 	config.fonts.addTTFFont_                     Array
@@ -155,6 +156,15 @@ config.jpgQuality
 :typoscript:`plugin.tx_pdfviewhelpers.settings.config.jpgQuality =` :ref:`t3tsref:data-type-integer`
 
 JpgQuality being used, values from 0 - 100.
+
+.. _config.sRGBMode:
+
+config.sRGBMode
+"""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.config.sRGBMode =` :ref:`t3tsref:data-type-boolean`
+
+Enable sRGBMode, see TCPDF documentation for further information.
 
 .. _config.allowedImageTypes:
 
