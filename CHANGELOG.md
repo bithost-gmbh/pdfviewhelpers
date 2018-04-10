@@ -7,6 +7,7 @@
 - Improves PdfaShowCase example
 - Adds option sRGBMode to config, [#38](https://github.com/bithost-gmbh/pdfviewhelpers/issues/38)
 - Adds GetPosXViewHelper and GetPosYViewHelper, [#40](https://github.com/bithost-gmbh/pdfviewhelpers/issues/40)
+- Adds custom ViewHelper documentation, [#26](https://github.com/bithost-gmbh/pdfviewhelpers/issues/26)
 
 ## 1.3.4 - February 7, 2018
 - Fixes bug in BE context, [#35](https://github.com/bithost-gmbh/pdfviewhelpers/issues/35) (Thanks [@liayn](https://github.com/liayn))
