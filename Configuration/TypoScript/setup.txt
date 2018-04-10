@@ -23,9 +23,9 @@ plugin.tx_pdfviewhelpers.settings {
 		}
 	}
 	document {
-		title = Default document title
+		title =
 		subject =
-		author = Bithost GmbH
+		author =
 		keywords =
 		creator = TYPO3 EXT:pdfviewhelpers
 		outputDestination = I
