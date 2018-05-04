@@ -29,6 +29,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use Bithost\Pdfviewhelpers\Model\EmptyFPDI;
 use FPDI;
 
 /**
@@ -68,8 +69,14 @@ class PageViewHelper extends AbstractPDFViewHelper {
 	 */
 	public function render() {
 		$templateId = -1;
+		$hasImportedPage = !empty($this->arguments['importPage']);
 
-		if (!empty($this->arguments['importPage'])) {
+		//reset import template on this page in order to avoid duplicate usage
+		if ($this->getPDF() instanceof EmptyFPDI) {
+			$this->getPDF()->setImportTemplateOnThisPage(false);
+		}
+
+		if ($hasImportedPage) {
 			if ($this->getPDF() instanceof FPDI) {
 				$templateId = $this->getPDF()->importPage($this->arguments['importPage']);
 			} else {
@@ -79,8 +86,13 @@ class PageViewHelper extends AbstractPDFViewHelper {
 
 		$this->getPDF()->AddPage($this->arguments['orientation'], $this->arguments['format']);
 
-		if (!empty($this->arguments['importPage'])) {
+		if ($hasImportedPage) {
 			$this->getPDF()->useTemplate($templateId);
+		}
+
+		//set whether to import the template on an automatic page break or not
+		if ($this->getPDF() instanceof EmptyFPDI) {
+			$this->getPDF()->setImportTemplateOnThisPage($hasImportedPage);
 		}
 
 		$this->renderChildren();

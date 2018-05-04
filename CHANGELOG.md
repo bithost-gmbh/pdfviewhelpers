@@ -2,9 +2,10 @@
 
 ## 1.5.0 - Not yet released
 - Updates documentation
-- Adds automatic hyphenation to all textual ViewHelpers, [#44](https://github.com/bithost-gmbh/pdfviewhelpers/issues/44)
+- Adds (optional) automatic hyphenation to all textual ViewHelpers, [#44](https://github.com/bithost-gmbh/pdfviewhelpers/issues/44)
 - Adds support for absolute, relative and TYPO3 EXT: paths, [#43](https://github.com/bithost-gmbh/pdfviewhelpers/issues/43)
 - Adds format to PageViewHelper, [#42](https://github.com/bithost-gmbh/pdfviewhelpers/issues/42)
+- Fixes importPage does not work with autoPageBreak=1, [#41](https://github.com/bithost-gmbh/pdfviewhelpers/issues/41)
 
 ## 1.4.0 - April 10, 2018
 - Fixes posX and posY not working, [#37](https://github.com/bithost-gmbh/pdfviewhelpers/issues/37) (Thanks [@PeterSchuhmann](https://github.com/PeterSchuhmann))
