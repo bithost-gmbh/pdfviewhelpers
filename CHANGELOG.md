@@ -1,6 +1,6 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 1.5.0 - Not yet released
+## 1.5.0 - May 4, 2018
 - Updates documentation
 - Adds (optional) automatic hyphenation to all textual ViewHelpers, [#44](https://github.com/bithost-gmbh/pdfviewhelpers/issues/44)
 - Adds support for absolute, relative and TYPO3 EXT: paths, [#43](https://github.com/bithost-gmbh/pdfviewhelpers/issues/43)
