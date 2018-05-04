@@ -27,5 +27,6 @@ Rendering a list given as a one dimensional array.
 		fontSize="14"
 		fontStyle="B"
 		alignment="C"
+		autoHyphenation="1"
 		listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}"
 		/>

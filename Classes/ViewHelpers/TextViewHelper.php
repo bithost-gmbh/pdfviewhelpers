@@ -65,6 +65,9 @@ class TextViewHelper extends AbstractTextViewHelper {
 		if (!empty($this->settings['text']['paragraphSpacing'])) {
 			$this->overrideArgument('paragraphSpacing', 'float', '', FALSE, $this->settings['text']['paragraphSpacing']);
 		}
+		if (strlen($this->settings['text']['autoHyphenation'])) {
+			$this->overrideArgument('autoHyphenation', 'boolean', '', FALSE, $this->settings['text']['autoHyphenation']);
+		}
 	}
 
 	/**

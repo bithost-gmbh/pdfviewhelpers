@@ -53,6 +53,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 		$this->registerArgument('text', 'string', '', FALSE, NULL);
 		$this->registerArgument('alignment', 'string', 'Text Alignment. Possible values: "left", "center", "right", "justify". Defaults to "left"', false, $this->settings['generalText']['alignment']);
 		$this->registerArgument('paragraphSpacing', 'float', 'Spacing after each paragraph. Defaults to 0', FALSE, $this->settings['generalText']['paragraphSpacing']);
+		$this->registerArgument('autoHyphenation', 'boolean', '', FALSE, $this->settings['generalText']['autoHyphenation']);
 	}
 
 	/**
@@ -71,6 +72,10 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper {
 
 		if ($this->arguments['removeDoubleWhitespace']) {
 			$this->arguments['text'] = preg_replace('/[ \t]+/', ' ', $this->arguments['text']);
+		}
+
+		if ($this->arguments['autoHyphenation']) {
+			$this->arguments['text'] = $this->hyphenateText($this->arguments['text']);
 		}
 
 		if ($this->isValidColor($this->arguments['color'])) {

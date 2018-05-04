@@ -64,6 +64,9 @@ class ListViewHelper extends AbstractTextViewHelper {
 		if (!empty($this->settings['list']['alignment'])) {
 			$this->overrideArgument('alignment', 'string', '', FALSE, $this->settings['list']['alignment']);
 		}
+		if (!empty($this->settings['list']['autoHyphenation'])) {
+			$this->overrideArgument('autoHyphenation', 'boolean', '', FALSE, $this->settings['list']['autoHyphenation']);
+		}
 
 		$this->registerArgument('listElements', 'array', '', TRUE, NULL);
 		$this->registerArgument('bulletColor', 'string', '', FALSE, $this->settings['list']['bulletColor']);
@@ -131,6 +134,10 @@ class ListViewHelper extends AbstractTextViewHelper {
 				);
 			} else {
 				$this->getPDF()->Image($this->arguments['bulletImageSrc'], $bulletPosX, $currentPosY + $relativBulletPosY, $this->arguments['bulletSize'], NULL, '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, TRUE, FALSE);
+			}
+
+			if ($this->arguments['autoHyphenation']) {
+				$listElement = $this->hyphenateText($listElement);
 			}
 
 			$this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->getAlignmentString($this->arguments['alignment']), FALSE, 1, $textPosX, $currentPosY, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);

@@ -29,6 +29,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -90,4 +91,22 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper {
 		}
 	}
 
+	/**
+	 * @param string $text
+	 *
+	 * @return string
+	 *
+	 * @throws ValidationException
+	 */
+	protected function hyphenateText($text) {
+		$hyphenFilePath = GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Resources/Private/Hyphenation/' . $this->settings['config']['hyphenFile']);
+
+		if (!file_exists($hyphenFilePath) || !is_readable($hyphenFilePath)) {
+			throw new ValidationException('Path to hyphen file "' . $hyphenFilePath . '" does not exist or file is not readable. ERROR: 1525410458', 1525410458);
+		}
+
+		$text = $this->getPDF()->hyphenateText($text, $hyphenFilePath);
+
+		return $text;
+	}
 }

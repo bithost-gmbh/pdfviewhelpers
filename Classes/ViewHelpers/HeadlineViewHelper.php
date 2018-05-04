@@ -65,6 +65,9 @@ class HeadlineViewHelper extends AbstractTextViewHelper {
 		if (!empty($this->settings['headline']['paragraphSpacing'])) {
 			$this->overrideArgument('paragraphSpacing', 'float', '', FALSE, $this->settings['headline']['paragraphSpacing']);
 		}
+		if (strlen($this->settings['headline']['autoHyphenation'])) {
+			$this->overrideArgument('autoHyphenation', 'boolean', '', FALSE, $this->settings['headline']['autoHyphenation']);
+		}
 	}
 
 	/**

@@ -2,6 +2,7 @@ plugin.tx_pdfviewhelpers.settings {
 	config {
 		class = Bithost\Pdfviewhelpers\Model\EmptyFPDI
 		language = ger
+		hyphenFile = hyph-de-ch-1901.tex
 		disableCache = 1
 		jpgQuality = 100
 		sRGBMode = 0
@@ -52,6 +53,7 @@ plugin.tx_pdfviewhelpers.settings {
 		fontStyle = R
 		alignment = L
 		paragraphSpacing = 2
+		autoHyphenation = 0
 		padding {
 			top = 0
 			right = 0
@@ -68,6 +70,7 @@ plugin.tx_pdfviewhelpers.settings {
 		fontStyle =
 		alignment =
 		paragraphSpacing =
+		autoHyphenation =
 		padding {
 
 		}
@@ -81,6 +84,7 @@ plugin.tx_pdfviewhelpers.settings {
 		fontStyle =
 		alignment =
 		paragraphSpacing = 0
+		autoHyphenation =
 		padding {
 			top = 6
 			right = 0
@@ -96,6 +100,7 @@ plugin.tx_pdfviewhelpers.settings {
 		fontSize =
 		fontStyle =
 		alignment = L
+		autoHyphenation =
 		padding {
 			top = 0
 			right = 0
@@ -107,8 +112,7 @@ plugin.tx_pdfviewhelpers.settings {
 		bulletSize = 1.5
 	}
 	html {
-		autoHyphenation = 0
-		hyphenFile = hyph-de-ch-1901.tex
+		autoHyphenation =
 		styleSheet =
 	}
 }

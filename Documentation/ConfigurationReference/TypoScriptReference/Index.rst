@@ -45,6 +45,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	============================================ ===================================== ==========================================
 	config.class_                                :ref:`t3tsref:data-type-string`       Bithost\\Pdfviewhelpers\\Model\\EmptyFPDI
 	config.language_                             :ref:`t3tsref:data-type-string`       ger
+	config.hyphenFile_                           :ref:`t3tsref:data-type-string`       hyph-de-ch-1901.tex
 	config.disableCache_                         :ref:`t3tsref:data-type-boolean`      1
 	config.jpgQuality_                           :ref:`t3tsref:data-type-integer`      100
 	config.sRGBMode_                             :ref:`t3tsref:data-type-boolean`      0
@@ -72,6 +73,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	generalText.padding_                         Array                                 {top: 0, right: 0, bottom: 0, left: 0}
 	generalText.alignment_                       :ref:`t3tsref:data-type-string`       L
 	generalText.paragraphSpacing_                :ref:`t3tsref:data-type-integer`      2
+	generalText.autoHyphenation_                 :ref:`t3tsref:data-type-boolean`      0
 	text.trim                                    :ref:`t3tsref:data-type-boolean`      *See generalText*
 	text.removeDoubleWhitespace                  :ref:`t3tsref:data-type-boolean`      *See generalText*
 	text.color.                                  :ref:`t3tsref:data-type-string`       *See generalText*
@@ -81,6 +83,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	text.padding                                 Array                                 *See generalText*
 	text.alignment                               :ref:`t3tsref:data-type-string`       *See generalText*
 	text.paragraphSpacing                        :ref:`t3tsref:data-type-integer`      *See generalText*
+	text.autoHyphenation                         :ref:`t3tsref:data-type-boolean`      *See generalText*
 	headline.trim                                :ref:`t3tsref:data-type-boolean`      *See generalText*
 	headline.removeDoubleWhitespace              :ref:`t3tsref:data-type-boolean`      *See generalText*
 	headline.color                               :ref:`t3tsref:data-type-string`       *See generalText*
@@ -90,6 +93,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	headline.padding                             Array                                 {top: 6, right: 0, bottom: 3, left: 0}
 	headline.alignment                           :ref:`t3tsref:data-type-string`       *See generalText*
 	headline.paragraphSpacing                    :ref:`t3tsref:data-type-integer`      *See generalText*
+	headline.autoHyphenation                     :ref:`t3tsref:data-type-boolean`      *See generalText*
 	list.trim                                    :ref:`t3tsref:data-type-boolean`      *See generalText*
 	list.removeDoubleWhitespace                  :ref:`t3tsref:data-type-boolean`      *See generalText*
 	list.color                                   :ref:`t3tsref:data-type-string`       *See generalText*
@@ -101,8 +105,8 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	list.bulletColor_                            :ref:`t3tsref:data-type-string`       #000
 	list.bulletImageSrc_                         :ref:`t3tsref:data-type-string`
 	list.bulletSize_                             :ref:`t3tsref:data-type-float`        1.5
-	html.autoHyphenation_                        :ref:`t3tsref:data-type-boolean`      0
-	html.hyphenFile_                             :ref:`t3tsref:data-type-string`       hyph-de-ch-1901.tex
+	list.autoHyphenation                         :ref:`t3tsref:data-type-boolean`      *See generalText*
+	html.autoHyphenation                         :ref:`t3tsref:data-type-boolean`      *See generalText*
 	html.styleSheet_                             :ref:`t3tsref:data-type-string`
 	============================================ ===================================== ==========================================
 
@@ -140,6 +144,18 @@ config.language
 :typoscript:`plugin.tx_pdfviewhelpers.settings.config.language =` :ref:`t3tsref:data-type-string`
 
 Decides which language settings are used from TCPDF. All possible language codes can be found in **Resources/Private/tcpdf/examples/lang/**.
+
+.. _config.hyphenFile:
+
+config.hyphenFile
+"""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.config.hyphenFile =` :ref:`t3tsref:data-type-string`
+
+The name of the hyphen file used for the automatic hyphenation. This needs to be set according to the language of your document.
+All possible values can be found in the directory "pdfviewhelpers/Resources/Private/Hyphenation/"
+
+Example values are: hyph-de-1996.tex, hyph-en-gb.tex, hyph-nl.tex, hyph-fr.tex
 
 .. _config.disableCache:
 
@@ -400,6 +416,16 @@ generalText.paragraphSpacing
 
 Defines the spacing of paragraphs separated by new lines.
 
+.. _generalText.autoHyphenation:
+
+generalText.autoHyphenation
+"""""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.autoHyphenation =` :ref:`t3tsref:data-type-boolean`
+
+A boolean value indicating whether to use TCPDF's automatic hyphenation or not. You can also add soft hyphens yourself to your text with "&shy;".
+If you use automatic hyphenation please make sure that you configure "config.hyphenFile" to match your language.
+
 .. _list.bulletColor:
 
 list.bulletColor
@@ -426,28 +452,6 @@ list.bulletSize
 :typoscript:`plugin.tx_pdfviewhelpers.settings.list.bulletSize =` :ref:`t3tsref:data-type-float`
 
 The size of the bullet as floating point value.
-
-.. _html.autoHyphenation:
-
-html.autoHyphenation
-""""""""""""""""""""
-
-:typoscript:`plugin.tx_pdfviewhelpers.settings.html.autoHyphenation =` :ref:`t3tsref:data-type-boolean`
-
-A boolean value indicating whether to use TCPDF's automatic hyphenation or not. You can also add soft hyphens yourself to your text with "&shy;".
-If you use automatic Hyphenation please make sure that you configure "html.hyphenFile" to match your language.
-
-.. _html.hyphenFile:
-
-html.hyphenFile
-"""""""""""""""
-
-:typoscript:`plugin.tx_pdfviewhelpers.settings.html.hyphenFile =` :ref:`t3tsref:data-type-string`
-
-The name of the hyphen file used for the automatic hyphenation. This needs to be set according to the language of your document.
-All possible values can be found in the directory "pdfviewhelpers/Resources/Private/Hyphenation/"
-
-Example values are: hyph-de-1996.tex, hyph-en-gb.tex, hyph-nl.tex, hyph-fr.tex
 
 .. _html.styleSheet:
 
