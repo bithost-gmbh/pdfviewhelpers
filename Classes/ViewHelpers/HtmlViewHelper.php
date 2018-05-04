@@ -29,6 +29,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * HtmlViewHelper
@@ -43,6 +44,8 @@ class HtmlViewHelper extends AbstractContentElementViewHelper {
 	public function initializeArguments() {
 		parent::initializeArguments();
 
+		$this->registerArgument('autoHyphenation', 'boolean', '', FALSE, $this->settings['html']['autoHyphenation']);
+		$this->registerArgument('hyphenFile', 'string', '', FALSE, $this->settings['html']['hyphenFile']);
 		$this->registerArgument('styleSheet', 'string', '', FALSE, $this->settings['html']['styleSheet']);
 	}
 
@@ -65,6 +68,16 @@ class HtmlViewHelper extends AbstractContentElementViewHelper {
 			}
 
 			$htmlStyle = '<style>' . file_get_contents($styleSheetPath) . '</style>';
+		}
+
+		if ($this->arguments['autoHyphenation']) {
+			$hyphenFilePath = GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Resources/Private/Hyphenation/' . $this->arguments['hyphenFile']);
+
+			if (!file_exists($hyphenFilePath) || !is_readable($hyphenFilePath)) {
+				throw new ValidationException('Path to hyphen file "' . $hyphenFilePath . '" does not exist or file is not readable. ERROR: 1525410458', 1525410458);
+			}
+
+			$html = $this->getPDF()->hyphenateText($html, $hyphenFilePath);
 		}
 
 		//reset settings to generalText

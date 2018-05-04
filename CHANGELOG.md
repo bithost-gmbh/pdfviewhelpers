@@ -2,6 +2,7 @@
 
 ## 1.4.1 - Not yet released
 - Updates documentation
+- Adds automatic hyphenation to HtmlViewHelper, [#44](https://github.com/bithost-gmbh/pdfviewhelpers/issues/44)
 
 ## 1.4.0 - April 10, 2018
 - Fixes posX and posY not working, [#37](https://github.com/bithost-gmbh/pdfviewhelpers/issues/37) (Thanks [@PeterSchuhmann](https://github.com/PeterSchuhmann))

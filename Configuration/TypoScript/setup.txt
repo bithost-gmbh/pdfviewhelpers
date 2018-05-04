@@ -107,6 +107,8 @@ plugin.tx_pdfviewhelpers.settings {
 		bulletSize = 1.5
 	}
 	html {
+		autoHyphenation = 0
+		hyphenFile = hyph-de-ch-1901.tex
 		styleSheet =
 	}
 }

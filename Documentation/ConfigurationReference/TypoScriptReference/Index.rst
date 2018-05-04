@@ -101,6 +101,8 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	list.bulletColor_                            :ref:`t3tsref:data-type-string`       #000
 	list.bulletImageSrc_                         :ref:`t3tsref:data-type-string`
 	list.bulletSize_                             :ref:`t3tsref:data-type-float`        1.5
+	html.autoHyphenation_                        :ref:`t3tsref:data-type-boolean`      0
+	html.hyphenFile_                             :ref:`t3tsref:data-type-string`       hyph-de-ch-1901.tex
 	html.styleSheet_                             :ref:`t3tsref:data-type-string`
 	============================================ ===================================== ==========================================
 
@@ -424,6 +426,28 @@ list.bulletSize
 :typoscript:`plugin.tx_pdfviewhelpers.settings.list.bulletSize =` :ref:`t3tsref:data-type-float`
 
 The size of the bullet as floating point value.
+
+.. _html.autoHyphenation:
+
+html.autoHyphenation
+""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.html.autoHyphenation =` :ref:`t3tsref:data-type-boolean`
+
+A boolean value indicating whether to use TCPDF's automatic hyphenation or not. You can also add soft hyphens yourself to your text with "&shy;".
+If you use automatic Hyphenation please make sure that you configure "html.hyphenFile" to match your language.
+
+.. _html.hyphenFile:
+
+html.hyphenFile
+"""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.html.hyphenFile =` :ref:`t3tsref:data-type-string`
+
+The name of the hyphen file used for the automatic hyphenation. This needs to be set according to the language of your document.
+All possible values can be found in the directory "pdfviewhelpers/Resources/Private/Hyphenation/"
+
+Example values are: hyph-de-1996.tex, hyph-en-gb.tex, hyph-nl.tex, hyph-fr.tex
 
 .. _html.styleSheet:
 
