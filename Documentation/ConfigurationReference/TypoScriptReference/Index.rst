@@ -64,6 +64,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	page.margins_                                Array                                 {top: 15, right: 15, bottom: 15, left: 15}
 	page.importPage_                             :ref:`t3tsref:data-type-integer`
 	page.orientation_                            :ref:`t3tsref:data-type-string`       P
+	page.format_                                 :ref:`t3tsref:data-type-string`       A4
 	generalText.trim_                            :ref:`t3tsref:data-type-boolean`      1
 	generalText.removeDoubleWhitespace_          :ref:`t3tsref:data-type-boolean`      1
 	generalText.color_                           :ref:`t3tsref:data-type-string`       #000
@@ -333,6 +334,15 @@ page.orientation
 :typoscript:`plugin.tx_pdfviewhelpers.settings.page.orientation =` :ref:`t3tsref:data-type-string`
 
 Defines the orientation of the current page and the following pages. Possible values are P (portrait) and L (landscape).
+
+.. _page.format:
+
+page.format
+"""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.page.format =` :ref:`t3tsref:data-type-string`
+
+Defines the format of the current page. Possible values are e.g. A0 - A12, to see all possible values you have to check \TCPDF_STATIC::$page_formats
 
 .. _generalText.trim:
 

@@ -43,6 +43,7 @@ plugin.tx_pdfviewhelpers.settings {
 		}
 		importPage =
 		orientation = P
+		format = A4
 	}
 	generalText {
 		trim = 1

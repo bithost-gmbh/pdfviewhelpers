@@ -46,6 +46,7 @@ class PageViewHelper extends AbstractPDFViewHelper {
 		$this->registerArgument('margins', 'array', '', FALSE, NULL);
 		$this->registerArgument('importPage', 'integer', '', FALSE, $this->settings['page']['importPage']);
 		$this->registerArgument('orientation', 'string', '', FALSE, $this->settings['page']['orientation']);
+		$this->registerArgument('format', 'string', '', FALSE, $this->settings['page']['format']);
 	}
 
 	/**
@@ -76,7 +77,7 @@ class PageViewHelper extends AbstractPDFViewHelper {
 			}
 		}
 
-		$this->getPDF()->AddPage($this->arguments['orientation']);
+		$this->getPDF()->AddPage($this->arguments['orientation'], $this->arguments['format']);
 
 		if (!empty($this->arguments['importPage'])) {
 			$this->getPDF()->useTemplate($templateId);
