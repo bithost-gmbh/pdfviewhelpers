@@ -29,6 +29,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * ImageViewHelper
@@ -61,7 +62,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper {
 	public function render() {
 		$this->initializeMultiColumnSupport();
 
-		$src = PATH_site . $this->arguments['src'];
+		$src = GeneralUtility::getFileAbsFileName($this->arguments['src']);
 
 		if (!file_exists($src)) {
 			throw new ValidationException('Image path "' . $this->arguments['src'] . '" does not exist. ERROR: 1471036581', 1471036581);

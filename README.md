@@ -28,7 +28,7 @@ the possibility to use existing PDF documents as template and extend them as you
 				<pdf:text>Lorem ipsum dolor [..] sit amet.</pdf:text>
 			</pdf:column>
 			<pdf:column>
-				<pdf:image src="typo3conf/ext/pdfviewhelpers/Resources/Public/Images/example.jpg" width="200" />
+				<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Images/example.jpg" width="200" />
 				<pdf:text padding="{top:1, right:0, bottom:0, left:0}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
 			</pdf:column>
 		</pdf:multiColumn>

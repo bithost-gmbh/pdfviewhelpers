@@ -64,7 +64,7 @@ class HtmlViewHelper extends AbstractContentElementViewHelper {
 		$padding = $this->settings['generalText']['padding'];
 
 		if (!empty($this->arguments['styleSheet'])) {
-			$styleSheetPath = PATH_site . $this->arguments['styleSheet'];
+			$styleSheetPath = GeneralUtility::getFileAbsFileName($this->arguments['styleSheet']);
 
 			if (!file_exists($styleSheetPath) || !is_readable($styleSheetPath)) {
 				throw new ValidationException('Path to style sheet "' . $styleSheetPath . '" does not exist or file is not readable. ERROR: 1492706529', 1492706529);

@@ -88,10 +88,10 @@ Be sure to disable all header data, to ensure that all HTML header output is dis
 			fonts {
 				addTTFFont {
 					roboto {
-						path = typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Roboto.ttf
+						path = EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Roboto.ttf
 					}
 					opensans {
-						path = typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf
+						path = EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf
 					}
 				}
 			}

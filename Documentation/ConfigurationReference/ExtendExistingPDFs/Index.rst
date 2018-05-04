@@ -22,7 +22,7 @@ TypoScript
 			class = Bithost\Pdfviewhelpers\Model\EmptyFPDI
 		}
 		document {
-			sourceFile = typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/ExtendExistingPDFs/pdf_template.pdf
+			sourceFile = EXT:pdfviewhelpers/Resources/Public/Examples/ExtendExistingPDFs/pdf_template.pdf
 		}
 		page {
 			importPage = 1
@@ -37,7 +37,7 @@ Fluid Template
 
 	{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
 
-	<pdf:document sourceFile="typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/ExtendExistingPDFs/pdf_template.pdf">
+	<pdf:document sourceFile="EXT:pdfviewhelpers/Resources/Public/Examples/ExtendExistingPDFs/pdf_template.pdf">
 		<pdf:page importPage="1" margins="{top: 80, right: 20, bottom: 40, left: 20}">
 			<pdf:text>Your own text is shown here.</pdf:text>
 		</pdf:page>

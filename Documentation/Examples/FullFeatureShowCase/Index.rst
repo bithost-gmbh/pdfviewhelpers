@@ -49,10 +49,10 @@ TypoScript
 			fonts {
 				addTTFFont {
 					roboto {
-						path = typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Roboto.ttf
+						path = EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Roboto.ttf
 					}
 					opensans {
-						path = typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf
+						path = EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf
 					}
 				}
 			}
@@ -214,29 +214,41 @@ Fluid Template
 				</pdf:column>
 			</pdf:multiColumn>
 
+			<pdf:multiColumn>
+				<pdf:column>
+					<pdf:text autoHyphenation="0" padding="{top:0, right:2, bottom:0, left:0}">
+						ThisisalongtextWITHOUTautomatichyphenationbeingactivated.
+					</pdf:text>
+				</pdf:column>
+				<pdf:column>
+					<pdf:text autoHyphenation="1" padding="{top:0, right:0, bottom:0, left:2}">
+						ThisisalongtextWITHautomatichyphenationbeingactivated.
+					</pdf:text>
+				</pdf:column>
+			</pdf:multiColumn>
+
 			<pdf:headline>Custom fonts</pdf:headline>
 			<pdf:text fontFamily="opensans">Custom font Open Sans automatically converted from TTF file.</pdf:text>
 			<pdf:text fontFamily="roboto">Custom font Roboto automatically converted from TTF file.</pdf:text>
 			<pdf:text fontFamily="roboto" color="#BEDB39">Custom font Roboto even colored!</pdf:text>
 
-			<pdf:headline>Strangely styled lists</pdf:headline>
-			<pdf:list listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}" />
+			<pdf:headline>Strangely styled list</pdf:headline>
 			<pdf:list
 					color="#333"
 					bulletSize="2"
 					bulletColor="#1F8A70"
-					fontStyle="R"
+					fontStyle="I"
 					listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}" />
 		</pdf:page>
 		<pdf:page orientation="L">
 			<pdf:headline>Image in different sizes</pdf:headline>
-			<pdf:image src="typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Bithost.jpg" width="100" />
-			<pdf:image src="typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Bithost.jpg" width="70" />
-			<pdf:image src="typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Bithost.jpg" width="50" />
+			<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Bithost.jpg" width="100" />
+			<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Bithost.jpg" width="70" />
+			<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Bithost.jpg" width="50" />
 		</pdf:page>
 		<pdf:page>
 			<pdf:headline>HTML content being styled externally</pdf:headline>
-			<pdf:html styleSheet="typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/styles.css">
+			<pdf:html styleSheet="EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/styles.css">
 				<h1>Headline 1</h1>
 				<h2>Headline 2</h2>
 				<h3>Headline 3</h3>
@@ -274,6 +286,9 @@ Fluid Template
 					</tbody>
 				</table>
 			</pdf:html>
+
+			<pdf:headline>Position ViewHelpers</pdf:headline>
+			<pdf:text>This text will be rendered at position x={pdf:getPosX()} and y={pdf:getPosY()}</pdf:text>
 		</pdf:page>
 	</pdf:document>
 

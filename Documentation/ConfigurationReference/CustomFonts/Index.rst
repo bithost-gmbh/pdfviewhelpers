@@ -22,14 +22,14 @@ TypoScript
 	plugin.tx_pdfviewhelpers.settings.config.fonts {
 		addTTFFont {
 			roboto {
-				path = typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Roboto.ttf
+				path = EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Roboto.ttf
 				# it is also possible to define the type of the font
 				# possible values are TrueTypeUnicode, TrueType, Type1, CID0JP = CID-0 Japanese, CID0KR = CID-0 Korean, CID0CS = CID-0 Chinese Simplified, CID0CT = CID-0 Chinese Traditional
 				# can be left out in order for TCPDF to auto detect the type
 				# type = TrueTypeUnicode
 			}
 			opensans {
-				path = typo3conf/ext/pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf
+				path = EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf
 			}
 		}
 	}

@@ -29,6 +29,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use FPDI;
@@ -99,7 +100,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 
 		//Add custom fonts
 		foreach ($this->settings['config']['fonts']['addTTFFont'] as $ttfFontName => $ttfFont) {
-			$path = PATH_site . $ttfFont['path'];
+			$path = GeneralUtility::getFileAbsFileName($ttfFont['path']);
 			$type = isset($ttfFont['type']) ? $ttfFont['type'] : '';
 
 			$fontName = \TCPDF_FONTS::addTTFfont($path, $type);
@@ -111,8 +112,14 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 
 		//Add FPDI sourceFile if given
 		if (!empty($this->arguments['sourceFile'])) {
+			$sourceFilePath = GeneralUtility::getFileAbsFileName($this->arguments['sourceFile']);
+
+			if (!file_exists($sourceFilePath) || !is_readable($sourceFilePath)) {
+				throw new ValidationException('The provided source file "' . $sourceFilePath . '" does not exist or the file is not readable. ERROR: 1525452207', 1525452207);
+			}
+
 			if ($this->getPDF() instanceof FPDI) {
-				$this->getPDF()->setSourceFile(PATH_site . $this->arguments['sourceFile']);
+				$this->getPDF()->setSourceFile($sourceFilePath);
 			} else {
 				throw new Exception('PDF object must be instance of FPDI to support option "sourceFile". ERROR: 1474144733', 1474144733);
 			}
@@ -133,7 +140,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 		$outputPath = $this->arguments['outputPath'];
 
 		if (in_array($this->arguments['outputDestination'], $this->tcpdfSaveFileDestinations)) {
-			$outputPath = PATH_site . $outputPath;
+			$outputPath = GeneralUtility::getFileAbsFileName($outputPath);
 		}
 
 		$this->getPDF()->Output($outputPath, $this->arguments['outputDestination']);

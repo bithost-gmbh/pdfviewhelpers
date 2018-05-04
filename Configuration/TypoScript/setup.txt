@@ -15,10 +15,10 @@ plugin.tx_pdfviewhelpers.settings {
 			subset = 1
 			addTTFFont {
 #				roboto {
-#					path = typo3conf/ext/pdfviewhelpers/Resources/Public/Example/Roboto.ttf
+#					path = EXT:pdfviewhelpers/Resources/Public/Example/Roboto.ttf
 #				}
 #				opensans {
-#					path = typo3conf/ext/pdfviewhelpers/Resources/Public/Example/OpenSans.ttf
+#					path = EXT:pdfviewhelpers/Resources/Public/Example/OpenSans.ttf
 #				}
 			}
 		}

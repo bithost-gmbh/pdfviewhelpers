@@ -296,8 +296,7 @@ document.sourceFile
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.document.sourceFile =` :ref:`t3tsref:data-type-string`
 
-The sourceFile is a the path to a PDF document you want to use as a template (see also page.importPage). The path is
-always relative to the root directory of your TYPO3 installation.
+The sourceFile is a the path to a PDF document you want to use as a template (see also page.importPage).
 
 .. _page.autoPageBreak:
 
@@ -460,4 +459,4 @@ html.styleSheet
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.html.styleSheet =` :ref:`t3tsref:data-type-string`
 
-The path to a style sheet being used in the HtmlViewHelper. The path is relative to the webroot directory, e.g. "fileadmin/pdf_style.css".
+The path to a style sheet being used in the HtmlViewHelper. The can be provided relative to the webroot directory, e.g. "fileadmin/pdf_style.css".
