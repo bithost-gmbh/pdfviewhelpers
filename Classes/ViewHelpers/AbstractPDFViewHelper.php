@@ -92,6 +92,19 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper {
 	}
 
 	/**
+	 * @return void
+	 *
+	 * @throws Exception
+	 */
+	protected function removePDF() {
+		if ($this instanceof DocumentViewHelper && $this->viewHelperVariableContainer->exists('DocumentViewHelper', 'pdf')) {
+			$this->viewHelperVariableContainer->remove('DocumentViewHelper', 'pdf');
+		} else {
+			throw new Exception('The PDF Object has not yet been created, or the function removePDF() was not called from an instance of DocumentViewHelper. ERROR: 1526021339', 1526021339);
+		}
+	}
+
+	/**
 	 * @param string $text
 	 *
 	 * @return string

@@ -1,5 +1,8 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 1.5.1 - Not yet released
+- Fixes not able to create multiple PDF documents per request
+
 ## 1.5.0 - May 4, 2018
 - Updates documentation
 - Adds (optional) automatic hyphenation to all textual ViewHelpers, [#44](https://github.com/bithost-gmbh/pdfviewhelpers/issues/44)

@@ -144,6 +144,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 		}
 
 		$this->getPDF()->Output($outputPath, $this->arguments['outputDestination']);
+		$this->removePDF(); //allow creation of multiple PDFs per request
 
 		if (in_array($this->arguments['outputDestination'], $this->tcpdfOutputContentDestinations)) {
 			//flush and close all outputs in order to prevent TYPO3 from sending other contents and let it finish gracefully
