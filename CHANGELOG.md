@@ -2,6 +2,7 @@
 
 ## 1.5.1 - Not yet released
 - Fixes not able to create multiple PDF documents per request
+- Updates documentation
 
 ## 1.5.0 - May 4, 2018
 - Updates documentation
