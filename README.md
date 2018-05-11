@@ -1,3 +1,7 @@
+[![TYPO3](https://img.shields.io/badge/TYPO3-6%20LTS-brightgreen.svg)](https://typo3.org/)
+[![TYPO3](https://img.shields.io/badge/TYPO3-7%20LTS-brightgreen.svg)](https://typo3.org/)
+[![TYPO3](https://img.shields.io/badge/TYPO3-8%20LTS-brightgreen.svg)](https://typo3.org/)
+
 # TYPO3 CMS Extension pdfviewhelpers
 
 ## Introduction
