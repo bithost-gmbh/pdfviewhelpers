@@ -33,24 +33,27 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class GetPosXViewHelper extends AbstractPDFViewHelper {
-	/**
-	 * @return void
-	 */
-	public function initializeArguments() {
-		parent::initializeArguments();
+class GetPosXViewHelper extends AbstractPDFViewHelper
+{
+    /**
+     * @return void
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
 
-		$this->registerArgument('absolute', 'boolean', '', FALSE, FALSE);
-	}
+        $this->registerArgument('absolute', 'boolean', '', false, false);
+    }
 
-	/**
-	 * @return integer
-	 */
-	public function render() {
-		if ($this->arguments['absolute']) {
-			return $this->getPDF()->GetAbsX();
-		} else {
-			return $this->getPDF()->GetX();
-		}
-	}
+    /**
+     * @return integer
+     */
+    public function render()
+    {
+        if ($this->arguments['absolute']) {
+            return $this->getPDF()->GetAbsX();
+        } else {
+            return $this->getPDF()->GetX();
+        }
+    }
 }

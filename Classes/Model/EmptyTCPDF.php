@@ -1,4 +1,5 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\Model;
 
 /***
@@ -32,18 +33,19 @@ namespace Bithost\Pdfviewhelpers\Model;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class EmptyTCPDF extends \TCPDF {
-	/**
-	 * @return void
-	 */
-	public function Header() {
+class EmptyTCPDF extends \TCPDF
+{
+    /**
+     * @return void
+     */
+    public function Header() // phpcs:ignore
+    {
+    }
 
-	}
-
-	/**
-	 * @return void
-	 */
-	public function Footer() {
-
-	}
+    /**
+     * @return void
+     */
+    public function Footer() // phpcs:ignore
+    {
+    }
 }

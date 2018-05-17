@@ -1,4 +1,5 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\Model;
 
 /***
@@ -34,25 +35,27 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class BithostTCPDF extends \TCPDF {
-	/**
-	 * @return void
-	 */
-	public function Header() {
-		$extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
-		$address = "Bithost GmbH \nMilchbuckstrasse 83 \nCH-8057 Zürich \n\nhallo@bithost.ch \n044 585 28 20 \n\nwww.bithost.ch";
+class BithostTCPDF extends \TCPDF
+{
+    /**
+     * @return void
+     */
+    public function Header() // phpcs:ignore
+    {
+        $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
+        $address = "Bithost GmbH \nMilchbuckstrasse 83 \nCH-8057 Zürich \n\nhallo@bithost.ch \n044 585 28 20 \n\nwww.bithost.ch";
 
-		$this->SetTextColor(140, 140, 140);
-		$this->SetFontSize(11);
+        $this->SetTextColor(140, 140, 140);
+        $this->SetFontSize(11);
 
-		$this->Image($extPath . 'Resources/Public/Examples/BasicUsage/logo.png', 15, 15, 56, 24, '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, FALSE, FALSE);
-		$this->MultiCell(null, null, $address, 0, 'R', FALSE, 1, 0, 45, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);
-	}
+        $this->Image($extPath . 'Resources/Public/Examples/BasicUsage/logo.png', 15, 15, 56, 24, '', '', '', false, 300, '', false, false, 0, false, false, false, false);
+        $this->MultiCell(null, null, $address, 0, 'R', false, 1, 0, 45, true, 0, false, true, 0, 'T', false);
+    }
 
-	/**
-	 * @return void
-	 */
-	public function Footer() {
-
-	}
+    /**
+     * @return void
+     */
+    public function Footer() // phpcs:ignore
+    {
+    }
 }

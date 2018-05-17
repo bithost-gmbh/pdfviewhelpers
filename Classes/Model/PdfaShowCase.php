@@ -1,4 +1,5 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\Model;
 
 /***
@@ -34,13 +35,13 @@ use Bithost\Pdfviewhelpers\Model\TCPDF;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-
-class PdfaShowCase extends \TCPDF {
-
+class PdfaShowCase extends \TCPDF
+{
     /**
      * @return void
      */
-    public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $pdfa=true) {
+    public function __construct($orientation = 'P', $unit = 'mm', $format = 'A4', $unicode = true, $encoding = 'UTF-8', $diskcache = false, $pdfa = true)
+    {
         // Set pdfa parameter to true
         parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache, true);
     }
@@ -48,14 +49,14 @@ class PdfaShowCase extends \TCPDF {
     /**
      * @return void
      */
-    public function Header() {
-
+    public function Header() // phpcs:ignore
+    {
     }
 
     /**
      * @return void
      */
-    public function Footer() {
-
+    public function Footer() // phpcs:ignore
+    {
     }
 }

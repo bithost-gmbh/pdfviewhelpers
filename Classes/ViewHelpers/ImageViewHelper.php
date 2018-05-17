@@ -36,51 +36,53 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class ImageViewHelper extends AbstractContentElementViewHelper {
+class ImageViewHelper extends AbstractContentElementViewHelper
+{
+    /**
+     * @return void
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
 
-	/**
-	 * @return void
-	 */
-	public function initializeArguments() {
-		parent::initializeArguments();
+        $this->registerArgument('src', 'string', '', true, null);
+    }
 
-		$this->registerArgument('src', 'string', '', TRUE, NULL);
-	}
+    /**
+     * @return void
+     */
+    public function initialize()
+    {
+        parent::initialize();
+    }
 
-	/**
-	 * @return void
-	 */
-	public function initialize() {
-		parent::initialize();
-	}
+    /**
+     * @return void
+     *
+     * @throws ValidationException
+     */
+    public function render()
+    {
+        $this->initializeMultiColumnSupport();
 
-	/**
-	 * @return void
-	 *
-	 * @throws ValidationException
-	 */
-	public function render() {
-		$this->initializeMultiColumnSupport();
+        $src = GeneralUtility::getFileAbsFileName($this->arguments['src']);
 
-		$src = GeneralUtility::getFileAbsFileName($this->arguments['src']);
+        if (!file_exists($src)) {
+            throw new ValidationException('Image path "' . $this->arguments['src'] . '" does not exist. ERROR: 1471036581', 1471036581);
+        }
 
-		if (!file_exists($src)) {
-			throw new ValidationException('Image path "' . $this->arguments['src'] . '" does not exist. ERROR: 1471036581', 1471036581);
-		}
+        switch ($this->getImageRenderMode($src)) {
+            case 'image':
+                $this->getPDF()->Image($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', '', '', false, 300, '', false, false, 0, false, false, true, false);
+                break;
+            case 'imageEPS':
+                $this->getPDF()->ImageEps($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', true, '', '', 0, true, false);
+                break;
+            case 'imageSVG':
+                $this->getPDF()->ImageSVG($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', '', '', 0, true);
+                break;
+        }
 
-		switch ($this->getImageRenderMode($src)) {
-			case 'image':
-				$this->getPDF()->Image($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, TRUE, FALSE);
-				break;
-			case 'imageEPS':
-				$this->getPDF()->ImageEps($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', TRUE, '', '', 0, TRUE, FALSE);
-				break;
-			case 'imageSVG':
-				$this->getPDF()->ImageSVG($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', '', '', 0, TRUE);
-				break;
-		}
-
-		$this->getPDF()->SetY($this->getPDF()->getImageRBY());
-	}
-
+        $this->getPDF()->SetY($this->getPDF()->getImageRBY());
+    }
 }

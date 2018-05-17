@@ -31,79 +31,84 @@ want to add custom header and footer to your PDF or if you want to change constr
 
 ::
 
-	<?php
-	namespace Vendor\YourExtension\Model;
+    <?php
 
-	/***
-	 *
-	 * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
-	 *
-	 *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
-	 *           Esteban Marin <esteban.marin@bithost.ch>, Bithost GmbH
-	 *
-	 *  All rights reserved
-	 *
-	 *  This script is part of the TYPO3 project. The TYPO3 project is
-	 *  free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 3 of the License, or
-	 *  (at your option) any later version.
-	 *
-	 *  The GNU General Public License can be found at
-	 *  http://www.gnu.org/copyleft/gpl.html.
-	 *
-	 *  This script is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU General Public License for more details.
-	 *
-	 *  This copyright notice MUST APPEAR in all copies of the script!
-	 ***/
+    namespace Vendor\YourExtension\Model;
 
-	use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+    /***
+     *
+     * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
+     *
+     *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
+     *           Esteban Marin <esteban.marin@bithost.ch>, Bithost GmbH
+     *
+     *  All rights reserved
+     *
+     *  This script is part of the TYPO3 project. The TYPO3 project is
+     *  free software; you can redistribute it and/or modify
+     *  it under the terms of the GNU General Public License as published by
+     *  the Free Software Foundation; either version 3 of the License, or
+     *  (at your option) any later version.
+     *
+     *  The GNU General Public License can be found at
+     *  http://www.gnu.org/copyleft/gpl.html.
+     *
+     *  This script is distributed in the hope that it will be useful,
+     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     *  GNU General Public License for more details.
+     *
+     *  This copyright notice MUST APPEAR in all copies of the script!
+     ***/
 
-	/**
-	 * MyPDF
-	 *
-	 * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
-	 */
-	class MyPDF extends \FPDI {
-		/**
-		 * @return void
-		 */
-		public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $pdfa=false) {
-			$myFormat = 'A3';
-			parent::__construct($orientation, $unit, $myFormat, $unicode, $encoding, $diskcache, $pdfa);
-		}
+    use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-		/**
-		 * @return void
-		 */
-		public function Header() {
-			$extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
-			$address = "Bithost GmbH \nMilchubckstrasse 83 \nCH-8057 Zürich \n\nhallo@bithost.ch \n044 585 28 20 \n\nwww.bithost.ch";
+    /**
+     * MyPDF
+     *
+     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
+     */
+    class MyPDF extends \FPDI
+    {
+        /**
+         * @return void
+         */
+        public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $pdfa=false)
+        {
+            $myFormat = 'A3';
+            parent::__construct($orientation, $unit, $myFormat, $unicode, $encoding, $diskcache, $pdfa);
+        }
 
-			$this->SetTextColor(140, 140, 140);
-			$this->SetFontSize(11);
+        /**
+         * @return void
+         */
+        public function Header()
+        {
+            $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
+            $address = "Bithost GmbH \nMilchubckstrasse 83 \nCH-8057 Zürich \n\nhallo@bithost.ch \n044 585 28 20 \n\nwww.bithost.ch";
 
-			$this->Image($extPath . 'Resources/Public/Examples/BasicUsage/logo.png', 15, 15, 56, 24, '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, FALSE, FALSE);
-			$this->MultiCell(null, null, $address, 0, 'R', FALSE, 1, 0, 45, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);
-		}
+            $this->SetTextColor(140, 140, 140);
+            $this->SetFontSize(11);
 
-		/**
-		 * @return void
-		 */
-		public function Footer() {
-			$this->SetY(-20);
-			$this->SetDrawColor(140, 140, 140);
-			$this->Line(15, $this->y, $this->w - 15, $this->y);
+            $this->Image($extPath . 'Resources/Public/Examples/BasicUsage/logo.png', 15, 15, 56, 24, '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, FALSE, FALSE);
+            $this->MultiCell(null, null, $address, 0, 'R', FALSE, 1, 0, 45, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);
+        }
 
-			$this->SetY(-17);
-			$this->SetTextColor(140, 140, 140);
-			$this->SetFontSize(11);
-			$this->Cell($this->w - 15, 10, 'Page '.$this->getAliasNumPage() . ' of '.$this->getAliasNbPages(), 0, false, 'C', 0, '', 1, false, 'T', 'M');
-		}
-	}
+        /**
+         * @return void
+         */
+        public function Footer()
+        {
+            $this->SetY(-20);
+            $this->SetDrawColor(140, 140, 140);
+            $this->Line(15, $this->y, $this->w - 15, $this->y);
+
+            $this->SetY(-17);
+            $this->SetTextColor(140, 140, 140);
+            $this->SetFontSize(11);
+            $this->Cell($this->w - 15, 10, 'Page '.$this->getAliasNumPage() . ' of '.$this->getAliasNbPages(), 0, false, 'C', 0, '', 1, false, 'T', 'M');
+        }
+    }
 
 
 Create your own ViewHelper
@@ -120,72 +125,74 @@ you can do with it: https://tcpdf.org/examples/
 
 ::
 
-	<?php
-	namespace Vendor\YourExtension\ViewHelpers;
+    <?php
 
-	/***
-	 *
-	 * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
-	 *
-	 *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
-	 *           Esteban Marin <esteban.marin@bithost.ch>, Bithost GmbH
-	 *
-	 *  All rights reserved
-	 *
-	 *  This script is part of the TYPO3 project. The TYPO3 project is
-	 *  free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 3 of the License, or
-	 *  (at your option) any later version.
-	 *
-	 *  The GNU General Public License can be found at
-	 *  http://www.gnu.org/copyleft/gpl.html.
-	 *
-	 *  This script is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU General Public License for more details.
-	 *
-	 *  This copyright notice MUST APPEAR in all copies of the script!
-	 ***/
+    namespace Vendor\YourExtension\ViewHelpers;
 
-	use Bithost\Pdfviewhelpers\ViewHelpers\AbstractContentElementViewHelper;
+    /***
+     *
+     * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
+     *
+     *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
+     *           Esteban Marin <esteban.marin@bithost.ch>, Bithost GmbH
+     *
+     *  All rights reserved
+     *
+     *  This script is part of the TYPO3 project. The TYPO3 project is
+     *  free software; you can redistribute it and/or modify
+     *  it under the terms of the GNU General Public License as published by
+     *  the Free Software Foundation; either version 3 of the License, or
+     *  (at your option) any later version.
+     *
+     *  The GNU General Public License can be found at
+     *  http://www.gnu.org/copyleft/gpl.html.
+     *
+     *  This script is distributed in the hope that it will be useful,
+     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     *  GNU General Public License for more details.
+     *
+     *  This copyright notice MUST APPEAR in all copies of the script!
+     ***/
 
-	/**
-	 * BarcodeViewHelper
-	 *
-	 * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
-	 */
-	class BarcodeViewHelper extends AbstractContentElementViewHelper {
-		/**
-		 * @param string $title
-		 *
-		 * @return void
-		 */
-		public function render($title) {
-			$style = [
-				'position' => '',
-				'align' => 'C',
-				'stretch' => FALSE,
-				'fitwidth' => TRUE,
-				'cellfitalign' => '',
-				'border' => TRUE,
-				'hpadding' => 'auto',
-				'vpadding' => 'auto',
-				'fgcolor' => [0,0,0],
-				'bgcolor' => FALSE,
-				'text' => TRUE,
-				'font' => 'helvetica',
-				'fontsize' => 8,
-				'stretchtext' => 4
-			];
+    use Bithost\Pdfviewhelpers\ViewHelpers\AbstractContentElementViewHelper;
 
-			$this->getPDF()->SetFontSize(12);
-			$this->getPDF()->Cell(0, 0, $title, 0, 1);
+    /**
+     * BarcodeViewHelper
+     *
+     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
+     */
+    class BarcodeViewHelper extends AbstractContentElementViewHelper {
+        /**
+         * @param string $title
+         *
+         * @return void
+         */
+        public function render($title)
+        {
+            $style = [
+                'position' => '',
+                'align' => 'C',
+                'stretch' => FALSE,
+                'fitwidth' => TRUE,
+                'cellfitalign' => '',
+                'border' => TRUE,
+                'hpadding' => 'auto',
+                'vpadding' => 'auto',
+                'fgcolor' => [0,0,0],
+                'bgcolor' => FALSE,
+                'text' => TRUE,
+                'font' => 'helvetica',
+                'fontsize' => 8,
+                'stretchtext' => 4
+            ];
 
-			$this->getPDF()->write1DBarcode('CODE 39', 'C39', '', '', '', 18, 0.4, $style, 'N');
-		}
-	}
+            $this->getPDF()->SetFontSize(12);
+            $this->getPDF()->Cell(0, 0, $title, 0, 1);
+
+            $this->getPDF()->write1DBarcode('CODE 39', 'C39', '', '', '', 18, 0.4, $style, 'N');
+        }
+    }
 
 *Fluid*
 
