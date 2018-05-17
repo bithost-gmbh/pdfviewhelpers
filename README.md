@@ -17,28 +17,29 @@ the possibility to use existing PDF documents as template and extend them as you
 {namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
 
 <pdf:document outputDestination="I" title="Bithost Example">
-	<pdf:page>
-		<pdf:text color="#8C8C8C">
-			Zurich, <f:format.date format="d.m.Y" >now</f:format.date>
-		</pdf:text>
-		<pdf:headline>Welcome to the extension pdfviewhelpers</pdf:headline>
-		<pdf:text>Lorem ipsum  vero [..] ipsum dolor sit amet.</pdf:text>
-		
-		<pdf:headline>Some more information</pdf:headline>
-		<pdf:multiColumn>
-			<pdf:column>
-				<pdf:text>Lorem ipsum [..] sed diam voluptua:</pdf:text>
-				<pdf:list listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}"/>
-				<pdf:text>Lorem ipsum dolor [..] sit amet.</pdf:text>
-			</pdf:column>
-			<pdf:column>
-				<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Images/example.jpg" width="200" />
-				<pdf:text padding="{top:1, right:0, bottom:0, left:0}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
-			</pdf:column>
-		</pdf:multiColumn>
+    <pdf:page>
+        <pdf:text color="#8C8C8C">
+            Zurich, <f:format.date format="d.m.Y" >now</f:format.date>
+        </pdf:text>
+    
+        <pdf:headline>Welcome to the extension pdfviewhelpers</pdf:headline>
+        <pdf:text>Lorem ipsum  vero [..] ipsum dolor sit amet.</pdf:text>
 
-		<pdf:text>Lorem ipsum [..] sit amet.</pdf:text>
-	</pdf:page>
+        <pdf:headline>Some more information</pdf:headline>
+        <pdf:multiColumn>
+            <pdf:column>
+                <pdf:text>Lorem ipsum [..] sed diam voluptua:</pdf:text>
+                <pdf:list listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}"/>
+                <pdf:text>Lorem ipsum dolor [..] sit amet.</pdf:text>
+            </pdf:column>
+            <pdf:column>
+                <pdf:image src="EXT:pdfviewhelpers/Resources/Public/Images/example.jpg" width="200" />
+                <pdf:text padding="{top:1, right:0, bottom:0, left:0}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
+            </pdf:column>
+        </pdf:multiColumn>
+
+        <pdf:text>Lorem ipsum [..] sit amet.</pdf:text>
+    </pdf:page>
 </pdf:document>
 ```
 
