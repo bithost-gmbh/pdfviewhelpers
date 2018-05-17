@@ -5,6 +5,7 @@
 - Updates documentation
 - Fixes PHP 5.4 compatibility error
 - Moves ExtensionManagementUtility::addStaticFile to Overrides/sys_template.php, [#45](https://github.com/bithost-gmbh/pdfviewhelpers/issues/45)
+- Fixes outputDestination E and S not really working, [#47](https://github.com/bithost-gmbh/pdfviewhelpers/issues/47)
 
 ## 1.5.0 - May 4, 2018
 - Updates documentation

@@ -57,6 +57,13 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 	protected $tcpdfSaveFileDestinations = ['F', 'FI', 'FD'];
 
 	/**
+	 * TCPDF output destinations that return the pdf as string
+	 *
+	 * @var array
+	 */
+	protected $tcpdfReturnContentDestinations = ['S', 'E'];
+
+	/**
 	 * @return void
 	 */
 	public function initializeArguments() {
@@ -74,7 +81,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 	 * @return void
 	 */
 	public function initialize() {
-		if (isset($GLOBALS['TSFE']->applicationData)){
+		if (isset($GLOBALS['TSFE']->applicationData) && in_array($this->arguments['outputDestination'], $this->tcpdfOutputContentDestinations)){
 			$GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers']['pdfOutput'] = true;
 		}
 
@@ -132,7 +139,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 	}
 
 	/**
-	 * @return void
+	 * @return string
 	 */
 	public function render() {
 		$this->renderChildren();
@@ -143,7 +150,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 			$outputPath = GeneralUtility::getFileAbsFileName($outputPath);
 		}
 
-		$this->getPDF()->Output($outputPath, $this->arguments['outputDestination']);
+		$output = $this->getPDF()->Output($outputPath, $this->arguments['outputDestination']);
 		$this->removePDF(); //allow creation of multiple PDFs per request
 
 		if (in_array($this->arguments['outputDestination'], $this->tcpdfOutputContentDestinations)) {
@@ -152,6 +159,8 @@ class DocumentViewHelper extends AbstractPDFViewHelper {
 			ob_flush();
 			flush();
 		}
+
+		return in_array($this->arguments['outputDestination'], $this->tcpdfReturnContentDestinations) ? $output : '';
 	}
 
 }

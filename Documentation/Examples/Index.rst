@@ -19,3 +19,4 @@ Be aware that the static TypoScript template must be included for the examples t
 	ExtendExistingPDFs/Index
 	FullFeatureShowCase/Index
 	PdfaShowCase/Index
+	StandaloneRendering/Index
