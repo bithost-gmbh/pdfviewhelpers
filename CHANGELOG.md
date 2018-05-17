@@ -4,6 +4,7 @@
 - Fixes not able to create multiple PDF documents per request
 - Updates documentation
 - Fixes PHP 5.4 compatibility error
+- Moves ExtensionManagementUtility::addStaticFile to Overrides/sys_template.php, [#45](https://github.com/bithost-gmbh/pdfviewhelpers/issues/45)
 
 ## 1.5.0 - May 4, 2018
 - Updates documentation
