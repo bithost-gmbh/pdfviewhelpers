@@ -43,6 +43,27 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 abstract class AbstractPDFViewHelper extends AbstractViewHelper {
 
 	/**
+	 * Do not escape output of ViewHelpers
+	 *
+	 * @var boolean
+	 */
+	protected $escapingInterceptorEnabled = FALSE;
+
+	/**
+	 * Do not escape output of ViewHelpers
+	 *
+	 * @var boolean
+	 */
+	protected $escapeChildren = FALSE;
+
+	/**
+	 * Do not escape output of ViewHelpers
+	 *
+	 * @var boolean
+	 */
+	protected $escapeOutput = FALSE;
+
+	/**
 	 * @var array
 	 */
 	protected $settings = [];
