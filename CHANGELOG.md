@@ -1,6 +1,6 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 1.5.1 - Not yet released
+## 1.5.1 - May 17, 2018
 - Fixes not able to create multiple PDF documents per request
 - Updates documentation
 - Fixes PHP 5.4 compatibility error
