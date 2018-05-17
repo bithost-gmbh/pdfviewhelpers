@@ -33,11 +33,13 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class GetPosYViewHelper extends AbstractPDFViewHelper {
-	/**
-	 * @return integer
-	 */
-	public function render() {
-		return $this->getPDF()->GetY();
-	}
+class GetPosYViewHelper extends AbstractPDFViewHelper
+{
+    /**
+     * @return integer
+     */
+    public function render()
+    {
+        return $this->getPDF()->GetY();
+    }
 }

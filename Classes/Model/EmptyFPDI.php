@@ -1,4 +1,5 @@
 <?php
+
 namespace Bithost\Pdfviewhelpers\Model;
 
 /***
@@ -34,49 +35,51 @@ use FPDI;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class EmptyFPDI extends FPDI {
-	/**
-	 * Indicating whether the current page is using a template.
-	 * This is needed to automatically add the template on an automatic page break.
-	 *
-	 * @var bool
-	 */
-	protected $importTemplateOnThisPage = false;
+class EmptyFPDI extends FPDI
+{
+    /**
+     * Indicating whether the current page is using a template.
+     * This is needed to automatically add the template on an automatic page break.
+     *
+     * @var bool
+     */
+    protected $importTemplateOnThisPage = false;
 
-	/**
-	 * @return void
-	 */
-	public function Header() {
+    /**
+     * @return void
+     */
+    public function Header() // phpcs:ignore
+    {
+    }
 
-	}
+    /**
+     * @return void
+     */
+    public function Footer() // phpcs:ignore
+    {
+    }
 
-	/**
-	 * @return void
-	 */
-	public function Footer() {
+    /**
+     * Fixes importPage not working with autoPageBreak=1, see https://github.com/bithost-gmbh/pdfviewhelpers/issues/41
+     *
+     * @inheritdoc
+     */
+    public function AddPage($orientation = '', $format = '', $rotationOrKeepmargins = false, $tocpage = false) // phpcs:ignore
+    {
+        parent::AddPage($orientation, $format, $rotationOrKeepmargins, $tocpage);
 
-	}
+        if ($this->importTemplateOnThisPage && $this->tpl !== 0) {
+            $this->useTemplate($this->tpl);
+        }
+    }
 
-	/**
-	 * Fixes importPage not working with autoPageBreak=1, see https://github.com/bithost-gmbh/pdfviewhelpers/issues/41
-	 *
-	 * @inheritdoc
-	 */
-	public function AddPage($orientation = '', $format = '', $rotationOrKeepmargins = false, $tocpage = false)
-	{
-		parent::AddPage($orientation, $format, $rotationOrKeepmargins, $tocpage);
-
-		if ($this->importTemplateOnThisPage && $this->tpl !== 0) {
-			$this->useTemplate($this->tpl);
-		}
-	}
-
-	/**
-	 * @param bool $importTemplateOnThisPage
-	 *
-	 * @return void
-	 */
-	public function setImportTemplateOnThisPage($importTemplateOnThisPage) {
-		$this->importTemplateOnThisPage = $importTemplateOnThisPage;
-	}
+    /**
+     * @param bool $importTemplateOnThisPage
+     *
+     * @return void
+     */
+    public function setImportTemplateOnThisPage($importTemplateOnThisPage)
+    {
+        $this->importTemplateOnThisPage = $importTemplateOnThisPage;
+    }
 }

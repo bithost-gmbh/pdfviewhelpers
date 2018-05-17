@@ -33,13 +33,13 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class ColumnViewHelper extends AbstractPDFViewHelper {
-
-	/**
-	 * @return void
-	 */
-	public function render() {
-		$this->renderChildren();
-	}
-
+class ColumnViewHelper extends AbstractPDFViewHelper
+{
+    /**
+     * @return void
+     */
+    public function render()
+    {
+        $this->renderChildren();
+    }
 }

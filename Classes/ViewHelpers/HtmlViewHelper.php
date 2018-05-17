@@ -36,54 +36,55 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class HtmlViewHelper extends AbstractContentElementViewHelper {
+class HtmlViewHelper extends AbstractContentElementViewHelper
+{
+    /**
+     * @return void
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
 
-	/**
-	 * @return void
-	 */
-	public function initializeArguments() {
-		parent::initializeArguments();
+        $this->registerArgument('autoHyphenation', 'boolean', '', false, $this->settings['generalText']['autoHyphenation']);
+        $this->registerArgument('styleSheet', 'string', '', false, $this->settings['html']['styleSheet']);
 
-		$this->registerArgument('autoHyphenation', 'boolean', '', FALSE, $this->settings['generalText']['autoHyphenation']);
-		$this->registerArgument('styleSheet', 'string', '', FALSE, $this->settings['html']['styleSheet']);
+        if (strlen($this->settings['html']['autoHyphenation'])) {
+            $this->overrideArgument('autoHyphenation', 'boolean', '', false, $this->settings['html']['autoHyphenation']);
+        }
+    }
 
-		if (strlen($this->settings['html']['autoHyphenation'])) {
-			$this->overrideArgument('autoHyphenation', 'boolean', '', FALSE, $this->settings['html']['autoHyphenation']);
-		}
-	}
+    /**
+     * @return void
+     *
+     * @throws ValidationException if an invalid style sheet path is provided
+     */
+    public function render()
+    {
+        $html = $this->renderChildren();
+        $htmlStyle = '';
+        $color = $this->convertHexToRGB($this->settings['generalText']['color']);
+        $padding = $this->settings['generalText']['padding'];
 
-	/**
-	 * @return void
-	 *
-	 * @throws ValidationException if an invalid style sheet path is provided
-	 */
-	public function render() {
-		$html = $this->renderChildren();
-		$htmlStyle = '';
-		$color = $this->convertHexToRGB($this->settings['generalText']['color']);
-		$padding = $this->settings['generalText']['padding'];
+        if (!empty($this->arguments['styleSheet'])) {
+            $styleSheetPath = GeneralUtility::getFileAbsFileName($this->arguments['styleSheet']);
 
-		if (!empty($this->arguments['styleSheet'])) {
-			$styleSheetPath = GeneralUtility::getFileAbsFileName($this->arguments['styleSheet']);
+            if (!file_exists($styleSheetPath) || !is_readable($styleSheetPath)) {
+                throw new ValidationException('Path to style sheet "' . $styleSheetPath . '" does not exist or file is not readable. ERROR: 1492706529', 1492706529);
+            }
 
-			if (!file_exists($styleSheetPath) || !is_readable($styleSheetPath)) {
-				throw new ValidationException('Path to style sheet "' . $styleSheetPath . '" does not exist or file is not readable. ERROR: 1492706529', 1492706529);
-			}
+            $htmlStyle = '<style>' . file_get_contents($styleSheetPath) . '</style>';
+        }
 
-			$htmlStyle = '<style>' . file_get_contents($styleSheetPath) . '</style>';
-		}
+        if ($this->arguments['autoHyphenation']) {
+            $html = $this->hyphenateText($html);
+        }
 
-		if ($this->arguments['autoHyphenation']) {
-			$html = $this->hyphenateText($html);
-		}
+        //reset settings to generalText
+        $this->getPDF()->SetTextColor($color['R'], $color['G'], $color['B']);
+        $this->getPDF()->SetFontSize($this->settings['generalText']['fontSize']);
+        $this->getPDF()->SetFont($this->settings['generalText']['fontFamily'], AbstractTextViewHelper::convertToTcpdfFontStyle($this->settings['generalText']['fontStyle']));
+        $this->getPDF()->setCellPaddings($padding['left'], $padding['top'], $padding['right'], $padding['bottom']);
 
-		//reset settings to generalText
-		$this->getPDF()->SetTextColor($color['R'], $color['G'], $color['B']);
-		$this->getPDF()->SetFontSize($this->settings['generalText']['fontSize']);
-		$this->getPDF()->SetFont($this->settings['generalText']['fontFamily'], AbstractTextViewHelper::convertToTcpdfFontStyle($this->settings['generalText']['fontStyle']));
-		$this->getPDF()->setCellPaddings($padding['left'], $padding['top'], $padding['right'], $padding['bottom']);
-
-		$this->getPDF()->writeHTML($htmlStyle . $html, TRUE, FALSE, TRUE, FALSE, '');
-	}
-
+        $this->getPDF()->writeHTML($htmlStyle . $html, true, false, true, false, '');
+    }
 }
