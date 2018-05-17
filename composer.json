@@ -4,7 +4,7 @@
 	"version": "1.5.0",
 	"license": "GPL-2.0",
 	"description": "This is a TYPO3 CMS extension that provides various Fluid ViewHelpers to generate PDF documents.",
-	"keywords": ["PDF", "ViewHelpers", "Fluid", "generation", "generator"],
+	"keywords": ["PDF", "ViewHelpers", "Fluid", "generation", "generator", "TCPDF", "FPDI"],
 	"homepage": "https://github.com/bithost-gmbh/pdfviewhelpers",
 	"authors": [
 		{
