@@ -39,119 +39,125 @@ use TYPO3\CMS\Fluid\Core\Compiler\TemplateCompiler;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\Fluid\Core\ViewHelper\Facets\ChildNodeAccessInterface {
+class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\Fluid\Core\ViewHelper\Facets\ChildNodeAccessInterface
+{
+    /**
+     * @var array
+     */
+    protected $childNodes = [];
 
-	/**
-	 * @var array
-	 */
-	protected $childNodes = [];
+    /**
+     * @var array
+     */
+    private $multiColumnContext = [];
 
-	/**
-	 * @var array
-	 */
-	private $multiColumnContext = [];
+    /**
+     * @return void
+     */
+    public function initialize()
+    {
+        $this->multiColumnContext['pageWidth'] = $this->getPDF()->getPageWidth();
+        $this->multiColumnContext['pageMargins'] = $this->getPDF()->getMargins();
+        $this->multiColumnContext['pageWidthWithoutMargins'] = $this->multiColumnContext['pageWidth'] - $this->multiColumnContext['pageMargins']['right'] - $this->multiColumnContext['pageMargins']['left'];
+        $this->multiColumnContext['numberOfColumns'] = 0;
+        $this->multiColumnContext['posY'] = $this->getPDF()->GetY();
+        $this->multiColumnContext['longestColumnPosY'] = 0;
+        $this->multiColumnContext['posX'] = $this->getPDF()->GetX();
+        $this->multiColumnContext['currentPosX'] = $this->getPDF()->GetX();
+        $this->multiColumnContext['startingPage'] = $this->getPDF()->getPage();
 
-	/**
-	 * @return void
-	 */
-	public function initialize() {
-		$this->multiColumnContext['pageWidth'] = $this->getPDF()->getPageWidth();
-		$this->multiColumnContext['pageMargins'] = $this->getPDF()->getMargins();
-		$this->multiColumnContext['pageWidthWithoutMargins'] = $this->multiColumnContext['pageWidth'] - $this->multiColumnContext['pageMargins']['right'] - $this->multiColumnContext['pageMargins']['left'];
-		$this->multiColumnContext['numberOfColumns'] = 0;
-		$this->multiColumnContext['posY'] = $this->getPDF()->GetY();
-		$this->multiColumnContext['longestColumnPosY'] = 0;
-		$this->multiColumnContext['posX'] = $this->getPDF()->GetX();
-		$this->multiColumnContext['currentPosX'] = $this->getPDF()->GetX();
-		$this->multiColumnContext['startingPage'] = $this->getPDF()->getPage();
+        foreach ($this->childNodes as $childNode) {
+            if ($childNode instanceof \TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode && $childNode->getViewHelperClassName() === 'Bithost\Pdfviewhelpers\ViewHelpers\ColumnViewHelper'
+            ) {
+                $this->multiColumnContext['columns'][] = $childNode;
+                $this->multiColumnContext['numberOfColumns']++;
+            }
+        }
+        $this->multiColumnContext['columnWidth'] = $this->multiColumnContext['pageWidthWithoutMargins'] / $this->multiColumnContext['numberOfColumns'];
+        $this->multiColumnContext['isInAColumn'] = true;
+    }
 
-		foreach ($this->childNodes as $childNode) {
-			if ($childNode instanceof \TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode && $childNode->getViewHelperClassName() === 'Bithost\Pdfviewhelpers\ViewHelpers\ColumnViewHelper'
-			) {
-				$this->multiColumnContext['columns'][] = $childNode;
-				$this->multiColumnContext['numberOfColumns'] ++;
-			}
-		}
-		$this->multiColumnContext['columnWidth'] = $this->multiColumnContext['pageWidthWithoutMargins'] / $this->multiColumnContext['numberOfColumns'];
-		$this->multiColumnContext['isInAColumn'] = TRUE;
-	}
+    /**
+     * @return void
+     */
+    public function render()
+    {
+        $this->setMultiColumnContext($this->multiColumnContext);
 
-	/**
-	 * @return void
-	 */
-	public function render() {
-		$this->setMultiColumnContext($this->multiColumnContext);
+        /** @var ViewHelperNode $column */
+        foreach ($this->multiColumnContext['columns'] as $column) {
+            $this->multiColumnContext = $this->getMultiColumnContext();
 
-		/** @var ViewHelperNode $column */
-		foreach ($this->multiColumnContext['columns'] as $column) {
-			$this->multiColumnContext = $this->getMultiColumnContext();
+            $this->getPDF()->setPage($this->multiColumnContext['startingPage']);
+            $this->getPDF()->SetY($this->multiColumnContext['posY']);
 
-			$this->getPDF()->setPage($this->multiColumnContext['startingPage']);
-			$this->getPDF()->SetY($this->multiColumnContext['posY']);
+            $column->evaluate($this->renderingContext);
 
-			$column->evaluate($this->renderingContext);
+            if ($this->multiColumnContext['longestColumnPosY'] < $this->getPDF()->GetY()) {
+                $this->multiColumnContext['longestColumnPosY'] = $this->getPDF()->GetY();
+            }
 
-			if ($this->multiColumnContext['longestColumnPosY'] < $this->getPDF()->GetY()) {
-				$this->multiColumnContext['longestColumnPosY'] = $this->getPDF()->GetY();
-			}
+            $this->multiColumnContext['currentPosX'] += $this->multiColumnContext['columnWidth'];
+            $this->setMultiColumnContext($this->multiColumnContext);
+        }
 
-			$this->multiColumnContext['currentPosX'] += $this->multiColumnContext['columnWidth'];
-			$this->setMultiColumnContext($this->multiColumnContext);
-		}
+        $this->multiColumnContext['isInAColumn'] = false;
 
-		$this->multiColumnContext['isInAColumn'] = FALSE;
+        $this->getPDF()->SetY($this->multiColumnContext['longestColumnPosY']);
+        $this->getPDF()->SetX($this->multiColumnContext['posX']);
+        $this->setMultiColumnContext($this->multiColumnContext);
+    }
 
-		$this->getPDF()->SetY($this->multiColumnContext['longestColumnPosY']);
-		$this->getPDF()->SetX($this->multiColumnContext['posX']);
-		$this->setMultiColumnContext($this->multiColumnContext);
-	}
+    /**
+     * @param array $childNodes
+     *
+     * @return void
+     */
+    public function setChildNodes(array $childNodes)
+    {
+        $this->childNodes = $childNodes;
+    }
 
-	/**
-	 * @param array $childNodes
-	 *
-	 * @return void
-	 */
-	public function setChildNodes(array $childNodes) {
-		$this->childNodes = $childNodes;
-	}
+    /**
+     * @param array $multiColumnContext
+     *
+     * @return void
+     */
+    private function setMultiColumnContext(array $multiColumnContext)
+    {
+        $this->viewHelperVariableContainer->addOrUpdate('MultiColumnViewHelper', 'multiColumnContext', $multiColumnContext);
+    }
 
-	/**
-	 * @param array $multiColumnContext
-	 *
-	 * @return void
-	 */
-	private function setMultiColumnContext(array $multiColumnContext) {
-		$this->viewHelperVariableContainer->addOrUpdate('MultiColumnViewHelper', 'multiColumnContext', $multiColumnContext);
-	}
+    /**
+     * @return array $multiColumnContext
+     *
+     * @throws Exception
+     */
+    private function getMultiColumnContext()
+    {
+        if ($this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'multiColumnContext')) {
+            return $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'multiColumnContext');
+        } else {
+            throw new Exception('No multiColumnContext found! ERROR: 1363872784', 1363872784);
+        }
+    }
 
-	/**
-	 * @return array $multiColumnContext
-	 *
-	 * @throws Exception
-	 */
-	private function getMultiColumnContext() {
-		if ($this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'multiColumnContext')) {
-			return $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'multiColumnContext');
-		} else {
-			throw new Exception('No multiColumnContext found! ERROR: 1363872784', 1363872784);
-		}
-	}
+    /**
+     * Disable compilation of templates using MultiColumnViewHelper because it is currently not possible
+     * to access child nodes within a compiled template.
+     *
+     * @param string $argumentsName
+     * @param string $closureName
+     * @param string $initializationPhpCode
+     * @param AbstractNode $node
+     * @param TemplateCompiler $compiler
+     *
+     * @return string
+     */
+    public function compile($argumentsName, $closureName, &$initializationPhpCode, AbstractNode $node, TemplateCompiler $compiler)
+    {
+        $compiler->disable();
 
-	/**
-	 * Disable compilation of templates using MultiColumnViewHelper because it is currently not possible
-	 * to access child nodes within a compiled template.
-	 *
-	 * @param string $argumentsName
-	 * @param string $closureName
-	 * @param string $initializationPhpCode
-	 * @param AbstractNode $node
-	 * @param TemplateCompiler $compiler
-	 *
-	 * @return string
-	 */
-	public function compile($argumentsName, $closureName, &$initializationPhpCode, AbstractNode $node, TemplateCompiler $compiler) {
-		$compiler->disable();
-
-		return '\'\'';
-	}
+        return '\'\'';
+    }
 }

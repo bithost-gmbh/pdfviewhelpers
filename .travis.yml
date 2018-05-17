@@ -1,0 +1,13 @@
+sudo: false
+
+language: php
+
+php:
+  - 7.0
+
+before_script:
+    - pear install pear/PHP_CodeSniffer
+    - phpenv rehash
+
+script:
+    - phpcs -n --standard=PSR2 Classes/

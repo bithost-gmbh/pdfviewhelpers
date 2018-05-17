@@ -172,7 +172,8 @@ A custom PHP class is needed to override the TCPDF constructor, to be able to se
     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
     */
 
-   class PdfaTCPDF extends \TCPDF {
+   class PdfaTCPDF extends \TCPDF
+   {
 
         /**
         * @return void
@@ -185,14 +186,16 @@ A custom PHP class is needed to override the TCPDF constructor, to be able to se
         /**
         * @return void
         */
-        public function Header() {
+        public function Header()
+        {
 
         }
 
         /**
         * @return void
         */
-        public function Footer() {
+        public function Footer()
+        {
 
         }
    }
