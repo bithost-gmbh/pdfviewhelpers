@@ -28,82 +28,84 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 /**
- * PageViewHelperTest
+ * TextViewHelperTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class DocumentViewHelperTest extends AbstractFunctionalTest
+class TextViewHelperTest extends AbstractFunctionalTest
 {
     /**
-     * @test
+     * @var string
      */
-    public function testMetaInformation()
-    {
-        $output = $this->renderFluidTemplate($this->getFixturePath('DocumentViewHelper/MetaInformation.html'));
-        $pdf = $this->parseContent($output);
-        $details = $pdf->getDetails();
-
-        $this->assertEquals('TYPO3 EXT:pdfviewhelpers', $details['Creator']);
-    }
+    protected $untrimmedText = "\n\n\t\t     Some text containing        double whitespaces    \t\n\t\n";
 
     /**
      * @test
      */
-    public function testMetaInformationOverwrite()
+    public function testTrimAndRemoveDoubleWhitespace()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('DocumentViewHelper/MetaInformationOverwrite.html'),
-            ['creator' => 'Some other creator']
+            $this->getFixturePath('TextViewHelper/Text.html'),
+            ['text' => $this->untrimmedText]
         );
         $pdf = $this->parseContent($output);
-        $details = $pdf->getDetails();
 
-        $this->assertEquals('Some other creator', $details['Creator']);
+        $this->assertContains('Some text containing double whitespaces', $pdf->getText());
     }
 
     /**
      * @test
      */
-    public function testOutputDestinationF()
+    public function testNotRemoveDoubleWhitespace()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('DocumentViewHelper/OutputDestination.html'),
-            ['outputDestination' => 'F']
+            $this->getFixturePath('TextViewHelper/TextOverwrite.html'),
+            ['text' => $this->untrimmedText, 'trim' => 1, 'removeDoubleWhitespace' => 0]
         );
-        $savePath = GeneralUtility::getFileAbsFileName('DocumentOutputDestination.pdf');
+        $pdf = $this->parseContent($output);
 
-        $this->assertEmpty(trim($output));
-        $this->assertFileExists($savePath);
-        $this->assertNotEmpty(file_get_contents($savePath));
-        $this->assertGreaterThan(5000, filesize($savePath));
+        $this->assertContains(trim($this->untrimmedText), $pdf->getText());
     }
 
     /**
      * @test
      */
-    public function testOutputDestinationS()
+    public function testColorShort()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('DocumentViewHelper/OutputDestination.html'),
-            ['outputDestination' => 'S']
+            $this->getFixturePath('TextViewHelper/TextColor.html'),
+            ['color' => '#333']
         );
+        $pdf = $this->parseContent($output);
 
-        $this->assertNotEmpty(trim($output));
+        $this->assertContains('Text', $pdf->getText());
     }
 
     /**
      * @test
      */
-    public function testOutputDestinationE()
+    public function testColorLong()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('DocumentViewHelper/OutputDestination.html'),
-            ['outputDestination' => 'E']
+            $this->getFixturePath('TextViewHelper/TextColor.html'),
+            ['color' => '#123456']
         );
+        $pdf = $this->parseContent($output);
 
-        $this->assertNotEmpty(trim($output));
+        $this->assertContains('Text', $pdf->getText());
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException \Bithost\Pdfviewhelpers\Exception\ValidationException
+     */
+    public function testInvalidColor()
+    {
+        $this->renderFluidTemplate(
+            $this->getFixturePath('TextViewHelper/TextColor.html'),
+            ['color' => '#1']
+        );
     }
 }

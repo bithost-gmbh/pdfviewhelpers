@@ -29,13 +29,14 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Fixtures\Examples;
  ***/
 
 use Bithost\Pdfviewhelpers\Model\EmptyFPDI;
+use Bithost\Pdfviewhelpers\Model\FullFeatureShowCase;
 
 /**
- * TestPDF
+ * FullFeatureShowCaseTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class FullFeatureShowCaseTest extends \TCPDF
+class FullFeatureShowCaseTest extends FullFeatureShowCase
 {
     /**
      * @return void
@@ -48,38 +49,5 @@ class FullFeatureShowCaseTest extends \TCPDF
         $this->doc_creation_timestamp = strtotime('28 mar 2013');
         $this->doc_modification_timestamp = $this->doc_creation_timestamp;
         $this->file_id = md5('foobar');
-    }
-
-    /**
-     * @return void
-     */
-    public function Header() // phpcs:ignore
-    {
-        $header1 = "Bithost GmbH - Milchbuckstrasse 83 CH-8057 Zürich";
-        $header2 = "hallo@bithost.ch - www.bithost.ch";
-
-        $this->SetTextColor(140, 140, 140);
-        $this->SetFontSize(11);
-
-        $this->MultiCell(null, null, $header1, 0, 'L', false, 1, 15, 10, true, 0, false, true, 0, 'T', false);
-        $this->MultiCell(null, null, $header2, 0, 'R', false, 1, 15, 10, true, 0, false, true, 0, 'T', false);
-
-        $this->SetDrawColor(140, 140, 140);
-        $this->Line(15, $this->y + 5, $this->w - 15, $this->y + 5);
-    }
-
-    /**
-     * @return void
-     */
-    public function Footer() // phpcs:ignore
-    {
-        $this->SetY(-20);
-        $this->SetDrawColor(140, 140, 140);
-        $this->Line(15, $this->y, $this->w - 15, $this->y);
-
-        $this->SetY(-17);
-        $this->SetTextColor(140, 140, 140);
-        $this->SetFontSize(11);
-        $this->Cell($this->w - 15, 10, 'Page ' . $this->getAliasNumPage() . ' of ' . $this->getAliasNbPages(), 0, false, 'C', 0, '', 1, false, 'T', 'M');
     }
 }

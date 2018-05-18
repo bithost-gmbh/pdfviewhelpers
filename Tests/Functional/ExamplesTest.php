@@ -43,10 +43,21 @@ class ExamplesTest extends AbstractFunctionalTest
         $this->setUpPage([$this->getFixturePath('Examples/FullFeatureShowCase.txt')]);
 
         $output = $this->renderFluidTemplate($this->getFixturePath('Examples/FullFeatureShowCase.html'));
-        $expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/FullFeatureShowCase.pdf')));
-        $actualHash = sha1($output);
+        $pdf = $this->parseContent($output);
+        $text = $pdf->getText();
 
-        $this->assertEquals($expectedHash, $actualHash);
+        $this->assertEquals(3, count($pdf->getPages()));
+        $this->assertContains('hallo@bithost.ch - www.bithost.ch', $text);
+        $this->assertContains('Full Feature Show Case', $text);
+        $this->assertContains('Application Development', $text);
+        $this->assertContains('HTML content being styled externally', $text);
+        $this->assertContains('A Link to click', $text);
+
+        //do not assert file equality, because the files generated on the server are not equal to the local files
+        //comparing hashes of two locally generated files works however
+        //$expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/FullFeatureShowCase.pdf')));
+        //$actualHash = sha1($output);
+        //$this->assertEquals($expectedHash, $actualHash);
     }
 
     /**
@@ -57,9 +68,43 @@ class ExamplesTest extends AbstractFunctionalTest
         $this->setUpPage([$this->getFixturePath('Examples/BasicUsage.txt')]);
 
         $output = $this->renderFluidTemplate($this->getFixturePath('Examples/BasicUsage.html'));
-        $expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/BasicUsage.pdf')));
-        $actualHash = sha1($output);
+        $pdf = $this->parseContent($output);
+        $text = $pdf->getText();
 
-        $this->assertEquals($expectedHash, $actualHash);
+        $this->assertEquals(1, count($pdf->getPages()));
+        $this->assertContains('28.03.2013', $text);
+        $this->assertContains('Welcome to the extension pdfviewhelpers', $text);
+        $this->assertContains('Some more information', $text);
+        $this->assertContains('Lorem ipsum', $text);
+        $this->assertContains('Esteban Marín, Markus Mächler', $text);
+        $this->assertContains('Bithost GmbH', $text);
+
+        //$expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/BasicUsage.pdf')));
+        //$actualHash = sha1($output);
+        //$this->assertEquals($expectedHash, $actualHash);
+    }
+
+    /**
+     * @test
+     */
+    public function testExtendExistingPDFs()
+    {
+        $this->setUpPage([$this->getFixturePath('Examples/ExtendExistingPDFs.txt')]);
+
+        $output = $this->renderFluidTemplate($this->getFixturePath('Examples/ExtendExistingPDFs.html'));
+        $pdf = $this->parseContent($output);
+        $text = $pdf->getText();
+
+        $this->assertEquals(1, count($pdf->getPages()));
+        $this->assertContains('Mega GmbH', $text);
+        $this->assertContains('Ansprechpartner', $text);
+        $this->assertContains('www.bithost.ch', $text);
+        $this->assertContains('Here is your header', $text);
+        $this->assertContains('Here is the HTML header', $text);
+        $this->assertContains('Lorem ipsum dolor sit amet', $text);
+
+        //$expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/ExtendExistingPDFs.pdf')));
+        //$actualHash = sha1($output);
+        //$this->assertEquals($expectedHash, $actualHash);
     }
 }

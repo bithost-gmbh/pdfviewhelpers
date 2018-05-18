@@ -28,14 +28,14 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Fixtures\Examples;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***/
 
-use Bithost\Pdfviewhelpers\Model\BithostTCPDF;
+use Bithost\Pdfviewhelpers\Model\EmptyFPDI;
 
 /**
- * BasicUsageTest
+ * FullFeatureShowCaseTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class BasicUsageTest extends BithostTCPDF
+class ExtendExistingPDFsTest extends EmptyFPDI
 {
     /**
      * @return void

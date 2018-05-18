@@ -53,6 +53,8 @@ abstract class AbstractFunctionalTest extends FunctionalTestCase
 
     /**
      * Setup TYPO3 environment
+     *
+     * @return void
      */
     public function setUp()
     {
@@ -64,6 +66,10 @@ abstract class AbstractFunctionalTest extends FunctionalTestCase
 
     /**
      * Load TypoScript files
+     *
+     * @param array $typoScriptFiles
+     *
+     * @return void
      */
     public function setUpPage($typoScriptFiles = [])
     {

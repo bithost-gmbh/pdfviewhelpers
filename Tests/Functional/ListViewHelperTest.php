@@ -1,8 +1,8 @@
 <?php
 
-namespace Bithost\Pdfviewhelpers\Tests\Functional\Fixtures\Examples;
+namespace Bithost\Pdfviewhelpers\Tests\Functional;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -26,27 +26,29 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Fixtures\Examples;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
-
-use Bithost\Pdfviewhelpers\Model\BithostTCPDF;
+ * * */
 
 /**
- * BasicUsageTest
+ * ListViewHelperTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class BasicUsageTest extends BithostTCPDF
+class ListViewHelperTest extends AbstractFunctionalTest
 {
     /**
-     * @return void
+     * @test
      */
-    public function __construct($orientation = 'P', $unit = 'mm', $format = 'A4', $unicode = true, $encoding = 'UTF-8', $diskcache = false, $pdfa = true)
+    public function testListRendered()
     {
-        parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache, $pdfa);
+        $listElements = ['lorem', 'ipsum', 'dolor'];
+        $output = $this->renderFluidTemplate(
+            $this->getFixturePath('ListViewHelper/List.html'),
+            ['listElements' => $listElements]
+        );
+        $pdf = $this->parseContent($output);
 
-        //overwrite creation time and file_id in order to be able to compare file contents
-        $this->doc_creation_timestamp = strtotime('28 mar 2013');
-        $this->doc_modification_timestamp = $this->doc_creation_timestamp;
-        $this->file_id = md5('foobar');
+        foreach ($listElements as $listElement) {
+            $this->assertContains($listElement, $pdf->getText());
+        }
     }
 }
