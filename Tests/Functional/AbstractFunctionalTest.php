@@ -29,6 +29,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  * * */
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use Smalot\PdfParser\Document;
 use Smalot\PdfParser\Parser;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Fluid\View\StandaloneView;
@@ -51,18 +52,11 @@ abstract class AbstractFunctionalTest extends FunctionalTestCase
     protected $coreExtensionsToLoad = ['extbase', 'fluid'];
 
     /**
-     * @var Parser
-     */
-    protected $parser;
-
-    /**
      * Setup TYPO3 environment
      */
     public function setUp()
     {
         parent::setUp();
-
-        $this->parser = new Parser();
 
         $this->importDataSet($this->getFixturePath('pages.xml'));
         $this->setUpPage();
@@ -111,5 +105,29 @@ abstract class AbstractFunctionalTest extends FunctionalTestCase
     protected function getFixturePath($path)
     {
         return __DIR__ . '/Fixtures/' . $path;
+    }
+
+    /**
+     * @param string $filename
+     *
+     * @return Document
+     */
+    public function parseFile($filename)
+    {
+        $parser = new Parser();
+
+        return $parser->parseFile($filename);
+    }
+
+    /**
+     * @param string $content
+     *
+     * @return Document
+     */
+    public function parseContent($content)
+    {
+        $parser = new Parser();
+
+        return $parser->parseContent($content);
     }
 }

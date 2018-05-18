@@ -41,7 +41,7 @@ class PageViewHelperTest extends AbstractFunctionalTest
     public function testAddPages()
     {
         $output = $this->renderFluidTemplate($this->getFixturePath('PageViewHelper/AddPages.html'));
-        $pdf = $this->parser->parseContent($output);
+        $pdf = $this->parseContent($output);
         $text = $pdf->getText();
 
         $this->assertEquals(3, count($pdf->getPages()));

@@ -41,7 +41,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTest
     public function testMetaInformation()
     {
         $output = $this->renderFluidTemplate($this->getFixturePath('DocumentViewHelper/MetaData.html'));
-        $pdf = $this->parser->parseContent($output);
+        $pdf = $this->parseContent($output);
         $details = $pdf->getDetails();
 
         $this->assertEquals('TYPO3 EXT:pdfviewhelpers', $details['Creator']);
