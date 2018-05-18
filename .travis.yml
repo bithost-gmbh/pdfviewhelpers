@@ -2,12 +2,25 @@ sudo: false
 
 language: php
 
-php:
-  - 7.0
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.0
+      env: TYPO3_VERSION=^7
+    - php: 7.1
+      env: TYPO3_VERSION=^8
+
+before_install:
+  - composer self-update
+  - composer --version
 
 before_script:
-    - pear install pear/PHP_CodeSniffer
-    - phpenv rehash
+  - composer require typo3/minimal=$TYPO3_VERSION
+  - export TYPO3_PATH_WEB=$PWD/.Build/Web
+  - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
 
 script:
-    - phpcs -n --standard=PSR2 Classes/
+  - phpcs -n --standard=PSR2 Classes/
+  - .Build/bin/phpunit --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml Tests/Functional
+

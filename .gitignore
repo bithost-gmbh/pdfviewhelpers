@@ -2,3 +2,5 @@
 /.idea
 /Documentation/conf.py
 /Documentation.out
+/.Build
+/composer.lock

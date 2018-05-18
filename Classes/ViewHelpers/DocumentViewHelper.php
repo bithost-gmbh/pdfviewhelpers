@@ -91,9 +91,14 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $pdfClassName = empty($this->settings['config']['class']) ? 'TCPDF' : $this->settings['config']['class'];
 
         //Load TCPDF and FPDI dependencies
-        require_once($extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->settings['config']['language'] . '.php');
-        require_once($extPath . 'Resources/Private/PHP/tcpdf/tcpdf.php');
-        require_once($extPath . 'Resources/Private/PHP/fpdi/fpdi.php');
+        if (!class_exists('\TCPDF')) {
+            require_once($extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->settings['config']['language'] . '.php');
+            require_once($extPath . 'Resources/Private/PHP/tcpdf/tcpdf.php');
+        }
+
+        if (!class_exists('\FPDI')) {
+            require_once($extPath . 'Resources/Private/PHP/fpdi/fpdi.php');
+        }
 
         //Set PDF and document properties
         $this->setPDF(GeneralUtility::makeInstance($pdfClassName));
