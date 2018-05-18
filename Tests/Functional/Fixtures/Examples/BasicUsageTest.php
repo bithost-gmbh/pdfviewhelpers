@@ -1,8 +1,8 @@
 <?php
 
-namespace Bithost\Pdfviewhelpers\Tests\Functional;
+namespace Bithost\Pdfviewhelpers\Tests\Functional\Fixtures\Examples;
 
-/* * *
+/***
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -26,40 +26,41 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- * * */
+ ***/
+
+use Bithost\Pdfviewhelpers\Model\EmptyFPDI;
 
 /**
- * PageViewHelperTest
+ * TestPDF
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class ExamplesTest extends AbstractFunctionalTest
+class BasicUsageTest extends \TCPDF
 {
     /**
-     * @test
+     * @return void
      */
-    public function testFullFeatureShowCase()
+    public function __construct($orientation = 'P', $unit = 'mm', $format = 'A4', $unicode = true, $encoding = 'UTF-8', $diskcache = false, $pdfa = true)
     {
-        $this->setUpPage([$this->getFixturePath('Examples/FullFeatureShowCase.txt')]);
+        parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache, $pdfa);
 
-        $output = $this->renderFluidTemplate($this->getFixturePath('Examples/FullFeatureShowCase.html'));
-        $expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/FullFeatureShowCase.pdf')));
-        $actualHash = sha1($output);
-
-        $this->assertEquals($expectedHash, $actualHash);
+        //overwrite creation time and file_id in order to be able to compare file contents
+        $this->doc_creation_timestamp = strtotime('28 mar 2013');
+        $this->doc_modification_timestamp = $this->doc_creation_timestamp;
+        $this->file_id = md5('foobar');
     }
 
     /**
-     * @test
+     * @return void
      */
-    public function testBasicUsage()
+    public function Header() // phpcs:ignore
     {
-        $this->setUpPage([$this->getFixturePath('Examples/BasicUsage.txt')]);
+    }
 
-        $output = $this->renderFluidTemplate($this->getFixturePath('Examples/BasicUsage.html'));
-        $expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/BasicUsage.pdf')));
-        $actualHash = sha1($output);
-
-        $this->assertEquals($expectedHash, $actualHash);
+    /**
+     * @return void
+     */
+    public function Footer() // phpcs:ignore
+    {
     }
 }
