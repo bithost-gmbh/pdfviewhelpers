@@ -1,0 +1,45 @@
+plugin.tx_pdfviewhelpers.settings {
+	config {
+		class = Bithost\Pdfviewhelpers\Tests\Functional\Fixtures\Examples\FullFeatureShowCaseTest
+		jpgQuality = 80
+		fonts {
+			addTTFFont {
+				roboto {
+					path = EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Roboto.ttf
+				}
+				opensans {
+					path = EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf
+				}
+			}
+		}
+	}
+	document {
+		title = Full Feature Show Case Title
+		subject = No Subject
+		keywords = full, feature, show, case
+		outputDestination = I
+		outputPath = fullfeatureshowcase.pdf
+	}
+	page {
+		margins {
+			top = 20
+			right = 15
+			bottom = 20
+			left = 15
+		}
+	}
+	generalText {
+		color = #555
+	}
+	headline {
+		fontFamily = courier
+		fontStyle = B
+	}
+	list {
+		color = #1F8A70
+		fontStyle = I
+		bulletColor = #BEDB39
+	}
+}
+
+module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers

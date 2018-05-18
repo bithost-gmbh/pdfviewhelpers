@@ -2,6 +2,7 @@
 
 ## 1.?.? - Not yet released
 - Changes code style to PSR-2
+- Adds functional tests
 
 ## 1.5.1 - May 17, 2018
 - Fixes not able to create multiple PDF documents per request

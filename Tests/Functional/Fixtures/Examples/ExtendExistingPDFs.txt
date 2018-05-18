@@ -1,0 +1,7 @@
+plugin.tx_pdfviewhelpers.settings {
+	config {
+		class = Bithost\Pdfviewhelpers\Tests\Functional\Fixtures\Examples\ExtendExistingPDFsTest
+	}
+}
+
+module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers
