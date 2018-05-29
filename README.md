@@ -60,6 +60,10 @@ https://github.com/bithost-gmbh/pdfviewhelpers
 
 https://typo3.org/extensions/repository/view/pdfviewhelpers
 
+## Packagist 
+
+https://packagist.org/packages/bithost-gmbh/pdfviewhelpers
+
 ## Full Documentation
 
 https://docs.typo3.org/typo3cms/extensions/pdfviewhelpers

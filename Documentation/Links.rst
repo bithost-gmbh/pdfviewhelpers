@@ -20,5 +20,8 @@ Links
 :Git Repository:
 	https://github.com/bithost-gmbh/pdfviewhelpers
 
+:Packagist:
+	https://packagist.org/packages/bithost-gmbh/pdfviewhelpers
+
 :Contact:
 	`@maechler @macjohnny <https://www.bithost.ch/kontakt/>`__
