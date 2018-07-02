@@ -1,8 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 1.?.? - Not yet released
-- Changes code style to PSR-2
-- Adds functional tests
+## 1.5.2 - Not yet released
+- Raises PHP minimum requirement, [#56](https://github.com/bithost-gmbh/pdfviewhelpers/issues/56)
+- Changes code style to PSR-2, [#23](https://github.com/bithost-gmbh/pdfviewhelpers/issues/23)
+- Adds functional tests, [#21](https://github.com/bithost-gmbh/pdfviewhelpers/issues/21)
 
 ## 1.5.1 - May 17, 2018
 - Fixes not able to create multiple PDF documents per request
