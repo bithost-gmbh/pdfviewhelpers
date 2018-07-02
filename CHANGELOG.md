@@ -1,6 +1,6 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 1.5.2 - Not yet released
+## 1.5.2 - July 2, 2018
 - Raises PHP minimum requirement, [#56](https://github.com/bithost-gmbh/pdfviewhelpers/issues/56)
 - Changes code style to PSR-2, [#23](https://github.com/bithost-gmbh/pdfviewhelpers/issues/23)
 - Adds functional tests, [#21](https://github.com/bithost-gmbh/pdfviewhelpers/issues/21)
