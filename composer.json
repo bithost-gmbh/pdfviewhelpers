@@ -27,13 +27,13 @@
 	"autoload": {
 		"psr-4": {
 			"Bithost\\Pdfviewhelpers\\": "Classes"
-		}
+		},
+		"classmap": ["Resources/Private/PHP/tcpdf/", "Resources/Private/PHP/fpdi/"]
 	},
 	"autoload-dev": {
 		"psr-4": {
 			"Bithost\\Pdfviewhelpers\\Tests\\": "Tests"
-		},
-		"classmap": ["Resources/Private/PHP/tcpdf/", "Resources/Private/PHP/fpdi/"]
+		}
 	},
 	"replace": {
 		"pdfviewhelpers": "self.version",
