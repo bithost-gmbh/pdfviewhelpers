@@ -28,7 +28,9 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -45,7 +47,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('src', 'string', '', true, null);
+        $this->registerArgument('src', 'mixed', '', true, null);
     }
 
     /**
@@ -65,13 +67,23 @@ class ImageViewHelper extends AbstractContentElementViewHelper
     {
         $this->initializeMultiColumnSupport();
 
-        $src = GeneralUtility::getFileAbsFileName($this->arguments['src']);
+        if (is_string($this->arguments['src'])) {
+            $src = GeneralUtility::getFileAbsFileName($this->arguments['src']);
+            $extension =  pathinfo($src, PATHINFO_EXTENSION);
 
-        if (!file_exists($src)) {
-            throw new ValidationException('Image path "' . $this->arguments['src'] . '" does not exist. ERROR: 1471036581', 1471036581);
+            if (!file_exists($src)) {
+                throw new ValidationException('Image path "' . $this->arguments['src'] . '" does not exist. ERROR: 1471036581', 1471036581);
+            }
+        } else if ($this->arguments['src'] instanceof FileInterface) {
+            /** @var FileInterface $file */
+            $file = $this->arguments['src'];
+            $src = '@' . $file->getContents();
+            $extension = $file->getExtension();
+        } else {
+            throw new Exception("Invalid image src provided, must be either a string or implement FileInterface. ERROR: 1534185744", 1534185744);
         }
 
-        switch ($this->getImageRenderMode($src)) {
+        switch ($this->getImageRenderMode($extension)) {
             case 'image':
                 $this->getPDF()->Image($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', '', '', false, 300, '', false, false, 0, false, false, true, false);
                 break;
