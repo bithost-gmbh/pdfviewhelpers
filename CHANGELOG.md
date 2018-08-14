@@ -1,5 +1,10 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 1.6.0 - August 14, 2018
+- Adds support for TYPO3 9 LTS, [#59](https://github.com/bithost-gmbh/pdfviewhelpers/issues/59) (Thanks [@luberti](https://github.com/luberti))
+- Drops support for TYPO3 6 LTS
+- Adds support for FAL images, [#52](https://github.com/bithost-gmbh/pdfviewhelpers/issues/52)
+
 ## 1.5.2 - July 2, 2018
 - Changes PHP requirement to minimum 5.4, [#56](https://github.com/bithost-gmbh/pdfviewhelpers/issues/56)
 - Changes code style to PSR-2, [#23](https://github.com/bithost-gmbh/pdfviewhelpers/issues/23)

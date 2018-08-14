@@ -99,7 +99,7 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
      */
     protected function convertImageTypeStringToImageTypeArray($imageTypes)
     {
-        return explode(',', str_replace(' ', '', $imageTypes));
+        return explode(',', str_replace(' ', '', strtolower($imageTypes)));
     }
 
     /**
@@ -116,21 +116,21 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @param string $src
+     * @param string $extension
      *
      * @return string
      *
      * @throws ValidationException
      */
-    protected function getImageRenderMode($src)
+    protected function getImageRenderMode($extension)
     {
-        $fileExtension = pathinfo($src, PATHINFO_EXTENSION);
+        $extension = strtolower($extension);
 
-        if (in_array($fileExtension, $this->convertImageTypeStringToImageTypeArray($this->settings['config']['allowedImageTypes']['image']))) {
+        if (in_array($extension, $this->convertImageTypeStringToImageTypeArray($this->settings['config']['allowedImageTypes']['image']))) {
             return 'image';
-        } elseif (in_array($fileExtension, $this->convertImageTypeStringToImageTypeArray($this->settings['config']['allowedImageTypes']['imageEPS']))) {
+        } elseif (in_array($extension, $this->convertImageTypeStringToImageTypeArray($this->settings['config']['allowedImageTypes']['imageEPS']))) {
             return 'imageEPS';
-        } elseif (in_array($fileExtension, $this->convertImageTypeStringToImageTypeArray($this->settings['config']['allowedImageTypes']['imageSVG']))) {
+        } elseif (in_array($extension, $this->convertImageTypeStringToImageTypeArray($this->settings['config']['allowedImageTypes']['imageSVG']))) {
             return 'imageSVG';
         } else {
             throw new ValidationException('Imagetype is not supported. ERROR: 1363778014', 1363778014);

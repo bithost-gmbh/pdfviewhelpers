@@ -8,8 +8,10 @@
 ImageViewHelper
 ---------------
 
-Rendering the image given as src, the path is always relative to the webroot.
+This ViewHelper renders an image given as src. As src argument you may provide a valid TYPO3 path or an object implementing TYPO3 FAL FileInterface (e.g. File or FileReference).
 
 ::
 
 	<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Example/Bithost.jpg" width="200" />
+	<pdf:image src="{file}" />
+	<pdf:image src="{fileReference}" />
