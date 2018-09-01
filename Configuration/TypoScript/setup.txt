@@ -45,6 +45,12 @@ plugin.tx_pdfviewhelpers.settings {
 		orientation = P
 		format = A4
 	}
+	header {
+		posY = 5
+	}
+	footer {
+		posY = -10
+	}
 	generalText {
 		trim = 1
 		removeDoubleWhitespace = 1

@@ -1,0 +1,15 @@
+{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
+
+<pdf:document outputDestination="I" title="Bithost Example">
+	<pdf:header>
+		<pdf:text>Header - page {pdf:getPageNumberAlias()} of {pdf:getTotalNumberOfPagesAlias()}</pdf:text>
+	</pdf:header>
+	<pdf:footer>
+		<pdf:text>Footer - page {pdf:getPageNumberAlias()} of {pdf:getTotalNumberOfPagesAlias()}</pdf:text>
+	</pdf:footer>
+	<pdf:page>
+		<pdf:text>Content goes here: page 1</pdf:text>
+		<pdf:pageBreak />
+		<pdf:text>Content goes here: page 2</pdf:text>
+	</pdf:page>
+</pdf:document>
