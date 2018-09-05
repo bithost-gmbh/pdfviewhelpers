@@ -29,6 +29,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers\Graphics;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\ViewHelpers\AbstractContentElementViewHelper;
 
 /**
@@ -63,12 +64,16 @@ class LineViewHelper extends AbstractContentElementViewHelper
         $this->arguments['style'] = is_array($this->arguments['style']) ? array_merge($this->settings['graphics']['line']['style'], $this->arguments['style']) :$this->settings['graphics']['line']['style'];
         $this->arguments['padding'] = is_array($this->arguments['padding']) ? array_merge($this->settings['graphics']['line']['padding'], $this->arguments['padding']) : $this->settings['graphics']['line']['padding'];
 
+        $this->isValidPadding($this->arguments['padding']);
+
         if ($this->isValidColor($this->arguments['style']['color'])) {
             $this->arguments['style']['color'] = $this->convertHexToRGB($this->arguments['style']['color']);
         }
 
         if (is_numeric($this->arguments['style']['width'])) {
             $this->arguments['style']['width'] = (float) $this->arguments['style']['width'];
+        } else {
+            throw new ValidationException('Invalid Line width "' . $this->arguments['style']['width'] . '" provided, must be numeric. ERROR: 1536157900', 1536157900);
         }
 
         // render horizontal line by default

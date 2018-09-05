@@ -28,6 +28,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 
 /**
@@ -59,6 +60,8 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     public function initialize()
     {
@@ -96,6 +99,8 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     public function render()
     {
@@ -150,23 +155,6 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
             return true;
         } else {
             throw new ValidationException('FontSize must be an integer. ERROR: 1363765372', 1363765372);
-        }
-    }
-
-    /**
-     * @param array $padding
-     *
-     * @return boolean
-     *
-     * @throws ValidationException
-     */
-    protected function isValidPadding($padding)
-    {
-        if (isset($padding['top'], $padding['right'], $padding['bottom'], $padding['left']) && is_numeric($padding['top']) && is_numeric($padding['right']) && is_numeric($padding['bottom']) && is_numeric($padding['left'])
-        ) {
-            return true;
-        } else {
-            throw new ValidationException('Padding must be an Array with Elements: top:[int],right:[int],bottom:[int],left:[int] ERROR: 1363769351', 1363769351);
         }
     }
 

@@ -221,4 +221,24 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
             throw new ValidationException('Height must be an integer. ERROR: 1363766372', 1363765372);
         }
     }
+
+    /**
+     * @param array $padding
+     *
+     * @return boolean
+     *
+     * @throws ValidationException
+     */
+    protected function isValidPadding($padding)
+    {
+        if (count($padding) === 4
+            && isset($padding['top'], $padding['right'], $padding['bottom'], $padding['left'])
+            && is_numeric($padding['top']) && is_numeric($padding['right'])
+            && is_numeric($padding['bottom']) && is_numeric($padding['left'])
+        ) {
+            return true;
+        } else {
+            throw new ValidationException('Padding must be an Array with Elements: top:[int],right:[int],bottom:[int],left:[int] ERROR: 1363769351', 1363769351);
+        }
+    }
 }
