@@ -1,6 +1,11 @@
 .DS_Store
 /.idea
+
 /Documentation/conf.py
 /Documentation.out
+
 /.Build
 /composer.lock
+
+/Resources/Private/PHP/tcpdf/fonts/opensans*
+/Resources/Private/PHP/tcpdf/fonts/roboto*
