@@ -122,6 +122,20 @@ plugin.tx_pdfviewhelpers.settings {
 		autoHyphenation =
 		styleSheet =
 	}
+	graphics {
+		line {
+			padding {
+				top = 4
+				right = 0
+				bottom = 5
+				left = 0
+			}
+			style {
+				width = 0.25
+				color = #000
+			}
+		}
+	}
 }
 
 module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers

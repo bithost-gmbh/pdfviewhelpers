@@ -18,4 +18,17 @@ plugin.tx_pdfviewhelpers.settings {
 	config {
 		class = Bithost\Pdfviewhelpers\Model\BasePDF
 	}
+	page {
+		autoPageBreak = 1
+		margins {
+			top = 25
+			bottom = 25
+		}
+	}
+	header {
+		posY = 10
+	}
+	footer {
+		posY = -15
+	}
 }

@@ -4,6 +4,7 @@
 - Replaces EmptyFPDI and EmptyTCPDF by BasePDF
 - Adds HeaderViewHelper and FooterViewHelper, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)
 - Adds PageNumberAliasViewHelper and TotalNumberOfPagesAliasViewHelpers, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)
+- Adds LineViewHelper
 - Fixes MultiColumnViewHelper columns not correctly initialized
 
 ## 1.6.0 - August 14, 2018
