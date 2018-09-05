@@ -35,7 +35,7 @@ TypoScript
 
 	plugin.tx_pdfviewhelpers.settings {
 		config {
-			class = Bithost\Pdfviewhelpers\Model\Bithost
+			class = Bithost\Pdfviewhelpers\Model\BasicUsage
 			language = eng
 		}
 		document {

@@ -28,14 +28,14 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Fixtures\Examples;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***/
 
-use Bithost\Pdfviewhelpers\Model\Bithost;
+use Bithost\Pdfviewhelpers\Model\BasicUsage;
 
 /**
  * BasicUsageTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class BasicUsageTest extends Bithost
+class BasicUsageTest extends BasicUsage
 {
     /**
      * @return void

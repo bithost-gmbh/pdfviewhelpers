@@ -31,11 +31,11 @@ namespace Bithost\Pdfviewhelpers\Model;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
- * Bithost template PDF
+ * BasicUsage template PDF
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class Bithost extends BasePDF
+class BasicUsage extends BasePDF
 {
     /**
      * @return void
