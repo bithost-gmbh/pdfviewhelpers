@@ -59,6 +59,7 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
         $this->multiColumnContext['pageWidth'] = $this->getPDF()->getPageWidth();
         $this->multiColumnContext['pageMargins'] = $this->getPDF()->getMargins();
         $this->multiColumnContext['pageWidthWithoutMargins'] = $this->multiColumnContext['pageWidth'] - $this->multiColumnContext['pageMargins']['right'] - $this->multiColumnContext['pageMargins']['left'];
+        $this->multiColumnContext['columns'] = [];
         $this->multiColumnContext['numberOfColumns'] = 0;
         $this->multiColumnContext['posY'] = $this->getPDF()->GetY();
         $this->multiColumnContext['longestColumnPosY'] = 0;
