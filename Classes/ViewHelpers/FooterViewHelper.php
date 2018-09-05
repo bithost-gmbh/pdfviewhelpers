@@ -36,7 +36,7 @@ use Bithost\Pdfviewhelpers\Model\BasePDF;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class FooterViewHelper extends AbstractContentElementViewHelper
+class FooterViewHelper extends AbstractPDFViewHelper
 {
     /**
      * @return void
@@ -45,24 +45,38 @@ class FooterViewHelper extends AbstractContentElementViewHelper
     {
         parent::initializeArguments();
 
-        $this->overrideArgument('posY', 'integer', '', false, $this->settings['footer']['posY']);
+        $this->registerArgument('posY', 'integer', '', false, $this->settings['footer']['posY']);
+        $this->registerArgument('scope', 'string', '', false, null);
     }
 
     /**
-     * @throws Exception
-     *
      * @return void
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        if ($this->arguments['scope'] === null) {
+            $this->arguments['scope'] = $this->viewHelperVariableContainer->get('DocumentViewHelper', 'defaultHeaderFooterScope');
+        }
+    }
+
+    /**
+     * @return void
+     *
+     * @throws Exception
      */
     public function render()
     {
         if (!($this->getPDF() instanceof BasePDF)) {
-            throw new  Exception("Your PDF class must be an instance of Bithost\\Pdfviewhelpers\\Model\\BasePDF in order to support Header and Footer ViewHelper.");
+            throw new  Exception("Your PDF class must be an instance of Bithost\\Pdfviewhelpers\\Model\\BasePDF in order to support Header and Footer ViewHelper. ERROR: 1535952895", 1535952895);
         }
 
+        /** @var BasePDF $pdf */
+        $pdf = $this->getPDF();
         $arguments = $this->arguments;
         $renderChildrenClosure = $this->buildRenderChildrenClosure();
-        $pdf = $this->getPDF();
-        $footerClosure = function() use ($pdf, $arguments, $renderChildrenClosure) {
+        $footerClosure = function () use ($pdf, $arguments, $renderChildrenClosure) {
             if ($arguments['posY']) {
                 $pdf->SetY($arguments['posY']);
             }
@@ -70,6 +84,6 @@ class FooterViewHelper extends AbstractContentElementViewHelper
             $renderChildrenClosure();
         };
 
-        $this->getPDF()->setFooterClosure($footerClosure);
+        $pdf->setFooterClosure($footerClosure, $arguments['scope']);
     }
 }

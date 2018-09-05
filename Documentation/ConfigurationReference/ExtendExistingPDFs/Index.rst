@@ -19,7 +19,7 @@ TypoScript
 
 	plugin.tx_pdfviewhelpers.settings {
 		config {
-			class = Bithost\Pdfviewhelpers\Model\EmptyFPDI
+			class = Bithost\Pdfviewhelpers\Model\BasePDF
 		}
 		document {
 			sourceFile = EXT:pdfviewhelpers/Resources/Public/Examples/ExtendExistingPDFs/pdf_template.pdf

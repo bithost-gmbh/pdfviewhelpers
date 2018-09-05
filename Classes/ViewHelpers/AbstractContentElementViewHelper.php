@@ -28,7 +28,9 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use Bithost\Pdfviewhelpers\Model\BasePDF;
 
 /**
  * AbstractContentElementViewHelper
@@ -50,6 +52,8 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     public function initialize()
     {
@@ -67,6 +71,27 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
 
         if (is_null($this->arguments['posY'])) {
             $this->arguments['posY'] = $this->getPDF()->GetY();
+        }
+
+        $this->initializeHeaderAndFooter();
+    }
+
+    /**
+     * @return void
+     *
+     * @throws Exception
+     */
+    public function initializeHeaderAndFooter()
+    {
+        if (!($this->getPDF() instanceof BasePDF)) {
+            return;
+        }
+
+        if ($this->viewHelperVariableContainer->get('DocumentViewHelper', 'pageNeedsHeader')) {
+            $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pageNeedsHeader', false);
+
+            $this->getPDF()->renderHeader();
+            $this->getPDF()->renderFooter();
         }
     }
 

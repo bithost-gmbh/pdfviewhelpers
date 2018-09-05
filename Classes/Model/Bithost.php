@@ -28,24 +28,34 @@ namespace Bithost\Pdfviewhelpers\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***/
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 /**
- * EmptyTCPDF, Needed because TCPDF adds a line to the header by default
+ * Bithost template PDF
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class EmptyTCPDF extends \TCPDF
+class Bithost extends BasePDF
 {
     /**
      * @return void
      */
-    public function Header() // phpcs:ignore
+    public function basePdfHeader()
     {
+        $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
+        $address = "Bithost GmbH \nMilchbuckstrasse 83 \nCH-8057 Zürich \n\nhallo@bithost.ch \n044 585 28 20 \n\nwww.bithost.ch";
+
+        $this->SetTextColor(140, 140, 140);
+        $this->SetFontSize(11);
+
+        $this->Image($extPath . 'Resources/Public/Examples/BasicUsage/logo.png', 15, 15, 56, 24, '', '', '', false, 300, '', false, false, 0, false, false, false, false);
+        $this->MultiCell(null, null, $address, 0, 'R', false, 1, 0, 45, true, 0, false, true, 0, 'T', false);
     }
 
     /**
      * @return void
      */
-    public function Footer() // phpcs:ignore
+    public function basePdfFooter()
     {
     }
 }

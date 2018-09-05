@@ -36,13 +36,6 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
 class PageViewHelperTest extends AbstractFunctionalTest
 {
     /**
-     * 150 words 890 characters
-     *
-     * @var string
-     */
-    protected $loremIpsumText = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
-
-    /**
      * @test
      */
     public function testAddPages()
@@ -91,22 +84,5 @@ class PageViewHelperTest extends AbstractFunctionalTest
         $pdf = $this->parseContent($output);
 
         $this->assertEquals(1, count($pdf->getPages()));
-    }
-
-    /**
-     * @param integer $duplicates
-     *
-     * @return string
-     */
-    protected function getLongLoremIpsumText($duplicates)
-    {
-        $longLoremIpsumText = '';
-        $duplicates = max($duplicates, 0);
-
-        for ($i=0; $i < $duplicates; $i++) {
-            $longLoremIpsumText .= $this->loremIpsumText;
-        }
-
-        return $longLoremIpsumText;
     }
 }

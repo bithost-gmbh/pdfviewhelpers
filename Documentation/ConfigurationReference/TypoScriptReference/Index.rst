@@ -43,7 +43,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	============================================ ===================================== ==========================================
 	Property                                     Data type                             Default
 	============================================ ===================================== ==========================================
-	config.class_                                :ref:`t3tsref:data-type-string`       Bithost\\Pdfviewhelpers\\Model\\EmptyFPDI
+	config.class_                                :ref:`t3tsref:data-type-string`       Bithost\\Pdfviewhelpers\\Model\\BasePDF
 	config.language_                             :ref:`t3tsref:data-type-string`       ger
 	config.hyphenFile_                           :ref:`t3tsref:data-type-string`       hyph-de-ch-1901.tex
 	config.disableCache_                         :ref:`t3tsref:data-type-boolean`      1
@@ -128,14 +128,10 @@ config.class
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.config.class =` :ref:`t3tsref:data-type-string`
 
-Decides which PHP class should be used as TCPDF object. The class must inherit from \\TCPDF. If this setting is left empty \\TCPDF is used as class.
-There are three other possibilities shipped with this extension:
+Decides which PHP class should be used as TCPDF object. You can easily provide your own class in order to render custom header and footers or to customize TCPDF in any way.
+If you provide your own class, please make sure to inherit from Bithost\\Pdfviewhelpers\\Model\\BasePDF in order make use of all the features of this extension.
+If this setting is left empty \\TCPDF is used as class.
 
-* Bithost\\Pdfviewhelpers\\Model\\EmptyTCPDF: renders empty headers and footers
-* Bithost\\Pdfviewhelpers\\Model\\EmptyFPDI: renders empty headers and footers, able to load PDFs as template documents
-* Bithost\\Pdfviewhelpers\\Model\\BithostTCPDF: renders headers belonging to the example
-
-You can easily provide your own class in order to render custom header and footers or to customize TCPDF in any way.
 
 .. _config.language:
 

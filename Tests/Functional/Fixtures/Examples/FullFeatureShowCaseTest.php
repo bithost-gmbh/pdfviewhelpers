@@ -28,7 +28,6 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Fixtures\Examples;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***/
 
-use Bithost\Pdfviewhelpers\Model\EmptyFPDI;
 use Bithost\Pdfviewhelpers\Model\FullFeatureShowCase;
 
 /**

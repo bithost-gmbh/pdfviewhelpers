@@ -16,7 +16,7 @@ pdfpage {
 
 plugin.tx_pdfviewhelpers.settings {
 	config {
-		class = Bithost\Pdfviewhelpers\Model\BithostTCPDF
+		class = Bithost\Pdfviewhelpers\Model\Bithost
 		language = eng
 	}
 	document {

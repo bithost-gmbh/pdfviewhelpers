@@ -29,7 +29,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
-use Bithost\Pdfviewhelpers\Model\EmptyFPDI;
+use Bithost\Pdfviewhelpers\Model\BasePDF;
 use FPDI;
 
 /**
@@ -53,6 +53,8 @@ class PageViewHelper extends AbstractPDFViewHelper
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     public function initialize()
     {
@@ -62,6 +64,8 @@ class PageViewHelper extends AbstractPDFViewHelper
 
         $this->getPDF()->SetMargins($this->arguments['margins']['left'], $this->arguments['margins']['top'], $this->arguments['margins']['right']);
         $this->getPDF()->SetAutoPageBreak($this->arguments['autoPageBreak'], $this->arguments['margins']['bottom']);
+
+        $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'defaultHeaderFooterScope', BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
     }
 
     /**
@@ -75,7 +79,8 @@ class PageViewHelper extends AbstractPDFViewHelper
         $hasImportedPage = !empty($this->arguments['importPage']);
 
         //reset import template on this page in order to avoid duplicate usage
-        if ($this->getPDF() instanceof EmptyFPDI) {
+        if ($this->getPDF() instanceof BasePDF) {
+            $this->getPDF()->setIsAutoPageBreak(false);
             $this->getPDF()->setImportTemplateOnThisPage(false);
         }
 
@@ -89,15 +94,34 @@ class PageViewHelper extends AbstractPDFViewHelper
 
         $this->getPDF()->AddPage($this->arguments['orientation'], $this->arguments['format']);
 
+        $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pageNeedsHeader', true);
+
         if ($hasImportedPage) {
             $this->getPDF()->useTemplate($templateId);
         }
 
         //set whether to import the template on an automatic page break or not
-        if ($this->getPDF() instanceof EmptyFPDI) {
+        if ($this->getPDF() instanceof BasePDF) {
+            $this->getPDF()->setIsAutoPageBreak(true);
             $this->getPDF()->setImportTemplateOnThisPage($hasImportedPage);
         }
 
         $this->renderChildren();
+
+        if ($this->viewHelperVariableContainer->get('DocumentViewHelper', 'pageNeedsHeader')) {
+            $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pageNeedsHeader', false);
+
+            $this->getPDF()->renderHeader();
+            $this->getPDF()->renderFooter();
+        }
+
+        //reset default header and footer scope to document
+        $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'defaultHeaderFooterScope', BasePDF::SCOPE_DOCUMENT);
+
+        if ($this->getPDF() instanceof BasePDF) {
+            //reset page header and footer
+            $this->getPDF()->setHeaderClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
+            $this->getPDF()->setFooterClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
+        }
     }
 }

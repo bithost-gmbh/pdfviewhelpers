@@ -35,7 +35,7 @@ TypoScript
 
 	plugin.tx_pdfviewhelpers.settings {
 		config {
-			class = Bithost\Pdfviewhelpers\Model\BithostTCPDF
+			class = Bithost\Pdfviewhelpers\Model\Bithost
 			language = eng
 		}
 		document {
@@ -91,11 +91,11 @@ the behaviour of TCPDF in any way.
     use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
     /**
-     * BithostTCPDF
+     * BasePDF
      *
      * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
      */
-    class BithostTCPDF extends \TCPDF
+    class Bithost extends BasePDF
     {
         /**
          * @return void
