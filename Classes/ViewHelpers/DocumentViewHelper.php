@@ -91,9 +91,6 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
         $pdfClassName = empty($this->settings['config']['class']) ? 'TCPDF' : $this->settings['config']['class'];
 
-        //Autoload class TCPDF in order for fpdi_bridge to be able to correctly determine its parent class
-        class_exists('TCPDF', true);
-
         //Load TCPDF language settings
         require_once($extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->settings['config']['language'] . '.php');
 

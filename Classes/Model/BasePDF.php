@@ -31,6 +31,9 @@ namespace Bithost\Pdfviewhelpers\Model;
 use FPDI;
 use Closure;
 
+//Autoload class TCPDF in order for fpdi_bridge to be able to correctly determine its parent class
+class_exists('TCPDF', true);
+
 /**
  * BasePDF
  *
