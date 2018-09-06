@@ -66,7 +66,7 @@ Fluid Template
 					<pdf:text color="#AAA">Bithost GmbH</pdf:text>
 				</pdf:column>
 				<pdf:column>
-					<pdf:text alignment="R" color="#AAA">Milchbuckstrasse 83 - 8057 Zürich</pdf:text>
+					<pdf:text alignment="right" color="#AAA">Milchbuckstrasse 83 - 8057 Zürich</pdf:text>
 				</pdf:column>
 			</pdf:multiColumn>
 		</pdf:header>
@@ -78,7 +78,7 @@ Fluid Template
 		<pdf:page margins="{top: 45, right: 15, bottom: 25, left: 15}">
 			<pdf:header scope="thisPage">
 				<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/HeaderAndFooter/logo.png" width="40" />
-				<pdf:text color="#AAA" alignment="R" posY="10" paragraphSpacing="0">
+				<pdf:text color="#AAA" alignment="right" posY="10" paragraphSpacing="0">
 					Bithost GmbH
 					Milchbuckstrasse 83
 					CH-8057 Zürich
@@ -86,7 +86,7 @@ Fluid Template
 				</pdf:text>
 			</pdf:header>
 			<pdf:footer>
-				<pdf:text alignment="C" color="#AAA">First page different</pdf:text>
+				<pdf:text alignment="center" color="#AAA">First page different</pdf:text>
 			</pdf:footer>
 			<pdf:text>
 				First page - different header and footer applied.

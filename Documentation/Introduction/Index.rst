@@ -36,5 +36,5 @@ Key features
 - Load existing PDF documents as template
 - Fully customizable by writing your own ViewHelpers
 - Rich inheritance based TypoScript settings
-- Supported output destinations: string, inline, download and filesystem
+- Supported output destinations: string, inline, download and file
 - Usable both in frontend and backend

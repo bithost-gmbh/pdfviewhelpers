@@ -92,8 +92,8 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
             $this->getPDF()->SetFontSize($this->arguments['fontSize']);
         }
 
-        if ($this->isValidFontFamily($this->arguments['fontFamily']) && $this->isValidFontStyle($this->arguments['fontStyle'])) {
-            $this->getPDF()->SetFont($this->arguments['fontFamily'], self::convertToTcpdfFontStyle($this->arguments['fontStyle']));
+        if ($this->isValidFontFamily($this->arguments['fontFamily'])) {
+            $this->getPDF()->SetFont($this->arguments['fontFamily'], $this->convertToTcpdfFontStyle($this->arguments['fontStyle']));
         }
     }
 
@@ -114,7 +114,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
                 $paragraph = trim($paragraph);
             }
 
-            $this->getPDF()->MultiCell($this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->getAlignmentString($this->arguments['alignment']), false, 1, $this->arguments['posX'], $posY, true, 0, false, true, 0, 'T', false);
+            $this->getPDF()->MultiCell($this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->convertToTcpdfAlignment($this->arguments['alignment']), false, 1, $this->arguments['posX'], $posY, true, 0, false, true, 0, 'T', false);
 
             if ($this->isValidParagraphSpacing($this->arguments['paragraphSpacing']) && $this->arguments['paragraphSpacing'] > 0
             ) {
@@ -123,23 +123,6 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
 
             $posY = $this->getPDF()->GetY();
         }
-    }
-
-    /**
-     * Converts pdfviewhelper fontStyle syntax to TCPDF syntax. This function is necessary because TCPDF uses an empty
-     * string to represent "regular", but we can not do this because of the settings inheritance (empty means inherit).
-     *
-     * @param string $pdfviewhelperFontStyle
-     *
-     * @return string
-     */
-    public static function convertToTcpdfFontStyle($pdfviewhelperFontStyle)
-    {
-        if ($pdfviewhelperFontStyle === 'R') {
-            return '';
-        }
-
-        return $pdfviewhelperFontStyle;
     }
 
     /**
@@ -171,38 +154,6 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
             return true;
         } else {
             throw new ValidationException('ParagraphSpacing must be an integer. ERROR: 1363765379', 1363765379);
-        }
-    }
-
-    /**
-     * @param string $alignment
-     *
-     * @return boolean
-     *
-     * @throws ValidationException
-     */
-    protected function isValidAlignment($alignment)
-    {
-        if (in_array($alignment, ['left', 'center', 'right', 'justify'])) {
-            return true;
-        } else {
-            throw new ValidationException('Alignment must be "left", "center", "right" or "justify". ERROR: 1363765672', 1363765672);
-        }
-    }
-
-    /**
-     * @param string $fontStyle
-     *
-     * @return boolean
-     *
-     * @throws ValidationException
-     */
-    protected function isValidFontStyle($fontStyle)
-    {
-        if (in_array($fontStyle, ['B', 'I', 'U', 'R'])) {
-            return true;
-        } else {
-            throw new ValidationException('FontStyle must be "B" (bold), "I" (italic), "U" (underline) or "R" (regular). ERROR: 1492799612', 1492799612);
         }
     }
 
@@ -240,30 +191,26 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
      * @param string $alignment
      *
      * @return string
+     *
+     * @throws Exception
      */
-    protected function getAlignmentString($alignment)
+    protected function convertToTcpdfAlignment($alignment)
     {
-        $alignmentString = 'L';
-
         switch ($alignment) {
             case 'left':
             case 'L':
-                $alignmentString = 'L';
-                break;
+                return 'L';
             case 'center':
             case 'C':
-                $alignmentString = 'C';
-                break;
+                return 'C';
             case 'right':
             case 'R':
-                $alignmentString = 'R';
-                break;
+                return 'R';
             case 'justify':
             case 'J':
-                $alignmentString = 'J';
-                break;
+                return 'J';
+            default:
+                throw new ValidationException('Invalid alignment "' . $alignment . '" provided. ERROR: 1536237714', 1536237714);
         }
-
-        return $alignmentString;
     }
 }

@@ -39,7 +39,7 @@ Fluid Template - return String
 
 	{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
 
-	<pdf:document outputDestination="S">
+	<pdf:document outputDestination="string">
 		<pdf:page>
 			<pdf:text>Your content</pdf:text>
 		</pdf:page>
@@ -55,7 +55,7 @@ Fluid Template - save file
 
 	{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
 
-	<pdf:document outputDestination="F" outputPath="fileadmin/document.pdf">
+	<pdf:document outputDestination="file" outputPath="fileadmin/document.pdf">
 		<pdf:page>
 			<pdf:text>Your content</pdf:text>
 		</pdf:page>

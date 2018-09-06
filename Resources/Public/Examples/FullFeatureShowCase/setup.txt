@@ -33,7 +33,7 @@ plugin.tx_pdfviewhelpers.settings {
 		title = Full Feature Show Case Title
 		subject = No Subject
 		keywords = full, feature, show, case
-		outputDestination = I
+		outputDestination = inline
 		outputPath = fullfeatureshowcase.pdf
 	}
 	page {
@@ -49,11 +49,11 @@ plugin.tx_pdfviewhelpers.settings {
 	}
 	headline {
 		fontFamily = courier
-		fontStyle = B
+		fontStyle = bold
 	}
 	list {
 		color = #1F8A70
-		fontStyle = I
+		fontStyle = italic
 		bulletColor = #BEDB39
 	}
 }

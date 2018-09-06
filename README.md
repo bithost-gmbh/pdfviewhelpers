@@ -20,7 +20,7 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
 - Load existing PDF documents as template
 - Fully customizable by writing your own ViewHelpers
 - Rich inheritance based TypoScript settings
-- Supported output destinations: string, inline, download and filesystem
+- Supported output destinations: string, inline, download and file
 - Usable both in frontend and backend
 
 ## Example
@@ -29,10 +29,10 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
 ```xml
 {namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
 
-<pdf:document outputDestination="I" title="Bithost Example">
+<pdf:document outputDestination="inline" title="Bithost Example">
     <pdf:header>
         <pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/logo.png" width="40" />
-        <pdf:text alignment="R" color="#8C8C8C" paragraphSpacing="0" posY="15">
+        <pdf:text alignment="right" color="#8C8C8C" paragraphSpacing="0" posY="15">
             Bithost GmbH
             Milchbuckstrasse 83
             CH-8057 Zürich
@@ -50,7 +50,7 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
                 <pdf:text color="#8C8C8C">Page {pdf:getPageNumberAlias()}</pdf:text>
             </pdf:column>
             <pdf:column>
-                <pdf:text alignment="R" color="#8C8C8C">EXT:pdfviewhelpers - Basic usage example</pdf:text>
+                <pdf:text alignment="right" color="#8C8C8C">EXT:pdfviewhelpers - Basic usage example</pdf:text>
             </pdf:column>
         </pdf:multiColumn>
     </pdf:footer>

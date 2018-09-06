@@ -29,7 +29,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  * * */
 
 /**
- * PageViewHelperTest
+ * ExamplesTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */

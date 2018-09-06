@@ -26,8 +26,8 @@ Rendering a list given as a one dimensional array.
 		color="#999999"
 		fontFamily="arial"
 		fontSize="14"
-		fontStyle="B"
-		alignment="C"
+		fontStyle="bold"
+		alignment="center"
 		autoHyphenation="1"
 		padding="{top:1, right:0, bottom:0, left:0}"
 

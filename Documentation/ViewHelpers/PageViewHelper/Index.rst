@@ -26,10 +26,10 @@ This ViewHelper must be placed right within a document ViewHelper. It can be use
 ::
 
 	<pdf:document>
-		<pdf:page autoPageBreak="1" orientation="L" format="A5">
+		<pdf:page autoPageBreak="1" orientation="landscape" format="A5">
 			<pdf:text>Page 1</pdf:text>
 		</pdf:page>
-		<pdf:page autoPageBreak="0" orientation="P" format="A3">
+		<pdf:page autoPageBreak="0" orientation="portrait" format="A3">
 			<pdf:text>Page 2</pdf:text>
 		</pdf:page>
 	</pdf:document>

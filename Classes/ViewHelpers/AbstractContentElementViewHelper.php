@@ -241,4 +241,34 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
             throw new ValidationException('Padding must be an Array with Elements: top:[int],right:[int],bottom:[int],left:[int] ERROR: 1363769351', 1363769351);
         }
     }
+
+    /**
+     * Converts pdfviewhelper fontStyle syntax to TCPDF syntax. This function is necessary because TCPDF uses an empty
+     * string to represent "regular", but we can not do this because of the settings inheritance (empty means inherit).
+     *
+     * @param string $fontStyle
+     *
+     * @return string
+     *
+     * @throws Exception
+     */
+    public function convertToTcpdfFontStyle($fontStyle)
+    {
+        switch ($fontStyle) {
+            case 'bold':
+            case 'B':
+                return 'B';
+            case 'italic':
+            case 'I':
+                return 'I';
+            case 'underline':
+            case 'U':
+                return 'U';
+            case 'regular':
+            case 'R':
+                return '';
+            default:
+                throw new ValidationException('Invalid font style "' . $fontStyle . '" provided. ERROR: 1536238089', 1536238089);
+        }
+    }
 }

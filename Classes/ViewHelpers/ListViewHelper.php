@@ -28,6 +28,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 
 /**
@@ -78,7 +79,7 @@ class ListViewHelper extends AbstractTextViewHelper
     /**
      * @return void
      *
-     * @throws ValidationException
+     * @throws Exception
      */
     public function initialize()
     {
@@ -141,7 +142,7 @@ class ListViewHelper extends AbstractTextViewHelper
                 $listElement = $this->hyphenateText($listElement);
             }
 
-            $this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->getAlignmentString($this->arguments['alignment']), false, 1, $textPosX, $currentPosY, true, 0, false, true, 0, 'T', false);
+            $this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->convertToTcpdfAlignment($this->arguments['alignment']), false, 1, $textPosX, $currentPosY, true, 0, false, true, 0, 'T', false);
 
             $currentPosY += $this->getPDF()->getStringHeight($textWidth, $listElement);
         }
@@ -161,7 +162,7 @@ class ListViewHelper extends AbstractTextViewHelper
         if (count($listElements) == count($listElements, COUNT_RECURSIVE)) {
             return true;
         } else {
-            throw new ValidationException('Only one dimensional Arrays allowed. ERROR: 1363779014', 1363779014);
+            throw new ValidationException('Only one dimensional arrays are allowed for the ListViewHelper. ERROR: 1363779014', 1363779014);
         }
     }
 }

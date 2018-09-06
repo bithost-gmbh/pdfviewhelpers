@@ -29,6 +29,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Model\BasePDF;
 use FPDI;
 
@@ -62,8 +63,7 @@ class PageViewHelper extends AbstractPDFViewHelper
             $this->arguments['margins'] = $this->settings['page']['margins'];
         }
 
-        $this->getPDF()->SetMargins($this->arguments['margins']['left'], $this->arguments['margins']['top'], $this->arguments['margins']['right']);
-        $this->getPDF()->SetAutoPageBreak($this->arguments['autoPageBreak'], $this->arguments['margins']['bottom']);
+        $this->arguments['orientation'] = $this->convertToTcpdfOrientation($this->arguments['orientation']);
 
         $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'defaultHeaderFooterScope', BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
     }
@@ -92,6 +92,8 @@ class PageViewHelper extends AbstractPDFViewHelper
             }
         }
 
+        $this->getPDF()->SetMargins($this->arguments['margins']['left'], $this->arguments['margins']['top'], $this->arguments['margins']['right']);
+        $this->getPDF()->SetAutoPageBreak($this->arguments['autoPageBreak'], $this->arguments['margins']['bottom']);
         $this->getPDF()->AddPage($this->arguments['orientation'], $this->arguments['format']);
 
         $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pageNeedsHeader', true);
@@ -122,6 +124,27 @@ class PageViewHelper extends AbstractPDFViewHelper
             //reset page header and footer
             $this->getPDF()->setHeaderClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
             $this->getPDF()->setFooterClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
+        }
+    }
+
+    /**
+     * @param string $orientation
+     *
+     * @return string
+     *
+     * @throws Exception
+     */
+    protected function convertToTcpdfOrientation($orientation)
+    {
+        switch ($orientation) {
+            case 'portrait':
+            case 'P':
+                return 'P';
+            case 'landscape':
+            case 'L':
+                return 'L';
+            default:
+                throw new ValidationException('Invalid page orientation "' . $orientation . '" provided. ERROR: 1536238253', 1536238253);
         }
     }
 }
