@@ -16,7 +16,6 @@ pdfpage {
 
 plugin.tx_pdfviewhelpers.settings {
 	config {
-		class = Bithost\Pdfviewhelpers\Model\BasicUsage
 		language = eng
 	}
 	document {
@@ -26,5 +25,28 @@ plugin.tx_pdfviewhelpers.settings {
 		keywords = Example, Test, Just to show how it works
 		creator = TYPO3 pdfviewhelpers
 		outputPath = bithost_example.pdf
+	}
+	header {
+		posY = 15
+	}
+	footer {
+		posY = -15
+	}
+	text {
+		paragraphSpacing = 0
+	}
+	page {
+		margins {
+			top = 65
+			bottom = 25
+		}
+	}
+	graphics {
+		line {
+			padding {
+				top = 0
+				bottom = 1.5
+			}
+		}
 	}
 }

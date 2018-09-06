@@ -1,9 +1,34 @@
 {namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
 
 <pdf:document outputDestination="S" title="Bithost Example">
+    <pdf:header>
+        <pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/logo.png" width="40" />
+        <pdf:text alignment="R" color="#8C8C8C" paragraphSpacing="0" posY="15">
+            Bithost GmbH
+            Milchbuckstrasse 83
+            CH-8057 Zürich
+
+            hallo@bithost.ch
+            044 585 28 20
+
+            www.bithost.ch
+        </pdf:text>
+    </pdf:header>
+    <pdf:footer>
+        <pdf:graphics.line style="{color: '#8C8C8C'}" />
+        <pdf:multiColumn>
+            <pdf:column>
+                <pdf:text color="#8C8C8C">Page {pdf:getPageNumberAlias()}</pdf:text>
+            </pdf:column>
+            <pdf:column>
+                <pdf:text alignment="R" color="#8C8C8C">EXT:pdfviewhelpers - Basic usage example</pdf:text>
+            </pdf:column>
+        </pdf:multiColumn>
+    </pdf:footer>
+
     <pdf:page>
-        <pdf:text padding="{top:65, right:0, bottom:4, left:0}" color="#8C8C8C">
-            Zurich, <f:format.date format="d.m.Y" >28 mar 2013</f:format.date>
+        <pdf:text posY="50" padding="{top:0, right:0, bottom:4, left:0}" color="#8C8C8C">
+            Zurich, <f:format.date format="d.m.Y" >now</f:format.date>
         </pdf:text>
         <pdf:headline>Welcome to the extension pdfviewhelpers</pdf:headline>
         <pdf:text>
@@ -23,7 +48,7 @@
                 </pdf:text>
             </pdf:column>
             <pdf:column>
-                <pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg" width="200" />
+                <pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg" />
                 <pdf:text padding="{top:1, right:0, bottom:0, left:0}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
             </pdf:column>
         </pdf:multiColumn>

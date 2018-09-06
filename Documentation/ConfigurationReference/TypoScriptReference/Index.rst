@@ -13,17 +13,11 @@ Settings inheritance
 
 To avoid redundancy there is an inheritance structure within the settings. There are basically three levels top down:
 
-1. plugin.tx_pdfviewhelpers.settings.document|page|generalText:
+1. **plugin.tx_pdfviewhelpers.settings.document|page|generalText:** The top level are global settings for document, page and generalText (all textual output).
 
-The top level are global settings for document, page and generalText (all textual output).
+2. **plugin.tx_pdfviewhelpers.settings.headline|text|list:** Headline, text and list inherit settings from generalText. All the settings from generalText may be overwritten here with specific settings.
 
-2. plugin.tx_pdfviewhelpers.settings.headline|text|list:
-
-Headline, text and list inherit settings from generalText. All the settings from generalText may be overwritten here with specific settings.
-
-3. Fluid ViewHelper attributes:
-
-The bottom level are Fluid ViewHelper attributes. All settings for document, page, headline, text and list may be overwritten using Fluid ViewHelper attributes with the same name. e.g:
+3. **Fluid ViewHelper attributes:** The bottom level are Fluid ViewHelper attributes. All TypoScript settings may be overwritten using Fluid ViewHelper attributes with the same name. e.g:
 
 ::
 
@@ -65,6 +59,8 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	page.importPage_                             :ref:`t3tsref:data-type-integer`
 	page.orientation_                            :ref:`t3tsref:data-type-string`       P
 	page.format_                                 :ref:`t3tsref:data-type-string`       A4
+	header.posY_                                 :ref:`t3tsref:data-type-integer`      5
+	footer.posY_                                 :ref:`t3tsref:data-type-integer`      -10
 	generalText.trim_                            :ref:`t3tsref:data-type-boolean`      1
 	generalText.removeDoubleWhitespace_          :ref:`t3tsref:data-type-boolean`      1
 	generalText.color_                           :ref:`t3tsref:data-type-string`       #000
@@ -109,6 +105,8 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	list.autoHyphenation                         :ref:`t3tsref:data-type-boolean`      *See generalText*
 	html.autoHyphenation                         :ref:`t3tsref:data-type-boolean`      *See generalText*
 	html.styleSheet_                             :ref:`t3tsref:data-type-string`
+	graphics.line.padding_                       Array                                 {top: 4, right: 0, bottom: 5, left: 0}
+	graphics.line.style_                         Array                                 {width: 0.25, color: #000}
 	============================================ ===================================== ==========================================
 
 
@@ -340,6 +338,24 @@ page.format
 
 Defines the format of the current page. Possible values are e.g. A0 - A12, to see all possible values you have to check \TCPDF_STATIC::$page_formats
 
+.. _header.posY:
+
+header.posY
+"""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.header.posY =` :ref:`t3tsref:data-type-integer`
+
+Defines the header position relative to the top of the page.
+
+.. _footer.posY:
+
+footer.posY
+"""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.footer.posY =` :ref:`t3tsref:data-type-integer`
+
+Defines the footer position relative to the top of the page. You can use negative numbers to place the footer relative to the bottom of the page.
+
 .. _generalText.trim:
 
 generalText.trim
@@ -466,3 +482,21 @@ html.styleSheet
 :typoscript:`plugin.tx_pdfviewhelpers.settings.html.styleSheet =` :ref:`t3tsref:data-type-string`
 
 The path to a style sheet being used in the HtmlViewHelper. The can be provided relative to the webroot directory, e.g. "fileadmin/pdf_style.css".
+
+.. _graphics.line.padding:
+
+graphics.line.padding
+"""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.graphics.line.padding =` Array
+
+Defines the padding around a line.
+
+.. _graphics.line.style:
+
+graphics.line.style
+"""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.graphics.line.style =` Array
+
+An array defining line styles, please see the https://tcpdf.org/examples/example_012/ for all possible values.

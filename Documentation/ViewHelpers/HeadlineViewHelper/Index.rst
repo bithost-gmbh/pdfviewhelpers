@@ -21,11 +21,13 @@ Rendering text using the settings for headlines.
 
 	<pdf:headline
 		trim="0"
+		removeDoubleWhitespace="1"
 		color="#333"
 		fontFamily="arial"
 		fontSize="22"
 		fontStyle="B"
 		alignment="R"
+		paragraphSpacing="0"
 		autoHyphenation="1"
 		padding="{top:1, right:0, bottom:0, left:0}"
 		>Title</pdf:headline>

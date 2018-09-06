@@ -2,7 +2,7 @@ pdfpage = PAGE
 pdfpage {
 	10 = FLUIDTEMPLATE
 	10 {
-		file = EXT:pdfviewhelpers/Resources/Public/Examples/HeaderFooter/Template.html
+		file = EXT:pdfviewhelpers/Resources/Public/Examples/HeaderAndFooter/Template.html
 	}
 	# ensure there is no other output apart from the pdf
 	# take a look at the generated pdf file (end!) in a text editor to verify there is no other output

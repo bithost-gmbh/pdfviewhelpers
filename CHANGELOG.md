@@ -6,6 +6,7 @@
 - Adds PageNumberAliasViewHelper and TotalNumberOfPagesAliasViewHelpers, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)
 - Adds LineViewHelper
 - Fixes MultiColumnViewHelper columns not correctly initialized
+- Removes example class BithostTCPDF
 
 ## 1.6.0 - August 14, 2018
 - Adds support for TYPO3 9 LTS, [#59](https://github.com/bithost-gmbh/pdfviewhelpers/issues/59) (Thanks [@luberti](https://github.com/luberti))
