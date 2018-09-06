@@ -77,11 +77,11 @@ TypoScript
 		}
 		headline {
 			fontFamily = courier
-			fontStyle = B
+			fontStyle = bold
 		}
 		list {
 			color = #1F8A70
-			fontStyle = I
+			fontStyle = italic
 			bulletColor = #BEDB39
 		}
 	}
@@ -185,13 +185,13 @@ Fluid Template
 			<pdf:text>Randomly showing some features of pdfviewhelpers.</pdf:text>
 
 			<pdf:headline>Typography</pdf:headline>
-			<pdf:text fontStyle="B">Bold text</pdf:text>
-			<pdf:text fontStyle="I">Italic text</pdf:text>
-			<pdf:text fontStyle="U">Underlined text</pdf:text>
+			<pdf:text fontStyle="bold">Bold text</pdf:text>
+			<pdf:text fontStyle="italic">Italic text</pdf:text>
+			<pdf:text fontStyle="underline">Underlined text</pdf:text>
 			<pdf:text color="#1F8A70">Colored text</pdf:text>
-			<pdf:text alignment="L">Alignment Left</pdf:text>
-			<pdf:text alignment="C">Alignment Center</pdf:text>
-			<pdf:text alignment="R">Alignment Right</pdf:text>
+			<pdf:text alignment="left">Alignment Left</pdf:text>
+			<pdf:text alignment="center">Alignment Center</pdf:text>
+			<pdf:text alignment="right">Alignment Right</pdf:text>
 
 			<pdf:text color="#BEDB39" padding="{top:6, right:80, bottom:6, left:20}">
 				Text with special padding. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et dolores et ea rebum.
@@ -244,7 +244,7 @@ Fluid Template
 					fontStyle="I"
 					listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}" />
 		</pdf:page>
-		<pdf:page orientation="L">
+		<pdf:page orientation="landscape">
 			<pdf:headline>Image in different sizes</pdf:headline>
 			<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Bithost.jpg" width="100" />
 			<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Bithost.jpg" width="70" />

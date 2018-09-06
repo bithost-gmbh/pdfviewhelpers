@@ -1,0 +1,22 @@
+plugin.tx_pdfviewhelpers.settings {
+	document {
+		outputDestination = string
+	}
+	page {
+		orientation = portrait
+	}
+	text {
+		fontStyle = regular
+		alignment = left
+	}
+	headline {
+		fontStyle = bold
+		alignment = center
+	}
+	list {
+		fontStyle = italic
+		alignment = right
+	}
+}
+
+module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers

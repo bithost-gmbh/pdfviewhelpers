@@ -1,6 +1,6 @@
 <?php
 
-namespace Bithost\Pdfviewhelpers\Tests\Functional;
+namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 /* * *
  *
@@ -28,23 +28,29 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
+
 /**
- * MultiColumnViewHelperTest
+ * ListViewHelperTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class MultiColumnViewHelperTest extends AbstractFunctionalTest
+class ListViewHelperTest extends AbstractFunctionalTest
 {
     /**
      * @test
      */
-    public function testMultipleColumnsRendered()
+    public function testListRendered()
     {
-        $output = $this->renderFluidTemplate($this->getFixturePath('MultiColumnViewHelper/MultiColumn.html'));
+        $listElements = ['lorem', 'ipsum', 'dolor'];
+        $output = $this->renderFluidTemplate(
+            $this->getFixturePath('ListViewHelper/List.html'),
+            ['listElements' => $listElements]
+        );
         $pdf = $this->parseContent($output);
 
-        $this->assertContains('Column 1', $pdf->getText());
-        $this->assertContains('Column 2', $pdf->getText());
-        $this->assertContains('Column 3', $pdf->getText());
+        foreach ($listElements as $listElement) {
+            $this->assertContains($listElement, $pdf->getText());
+        }
     }
 }

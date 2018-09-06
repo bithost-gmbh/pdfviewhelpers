@@ -210,9 +210,9 @@ Fluid Template
 ::
 
    {namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
-   <pdf:document outputDestination="I" outputPath="{fileTitle}" author="{docAuthor}" title="{docTitle}" creator="PDF View Helpers" keywords="{docKeywords}" subject="{docAbstract}">
+   <pdf:document outputDestination="inline" outputPath="{fileTitle}" author="{docAuthor}" title="{docTitle}" creator="PDF View Helpers" keywords="{docKeywords}" subject="{docAbstract}">
        <pdf:page autoPageBreak="0">
-           <pdf:headline trim="0" color="#333" fontSize="18" fontStyle="R" alignment="L" >Lorem ipsum dolor sit amet</pdf:headline>
+           <pdf:headline trim="0" color="#333" fontSize="18" fontStyle="regular" alignment="left" >Lorem ipsum dolor sit amet</pdf:headline>
            <pdf:text>
                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et dolores et ea rebum.
            </pdf:text>

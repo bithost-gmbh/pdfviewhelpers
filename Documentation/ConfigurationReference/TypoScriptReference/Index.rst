@@ -51,13 +51,13 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	document.author_                             :ref:`t3tsref:data-type-string`
 	document.keywords_                           :ref:`t3tsref:data-type-string`
 	document.creator_                            :ref:`t3tsref:data-type-string`       TYPO3 EXT:pdfviewhelpers
-	document.outputDestination_                  :ref:`t3tsref:data-type-string`       I
+	document.outputDestination_                  :ref:`t3tsref:data-type-string`       inline
 	document.outputPath_                         :ref:`t3tsref:data-type-string`       document.pdf
 	document.sourceFile_                         :ref:`t3tsref:data-type-string`
 	page.autoPageBreak_                          :ref:`t3tsref:data-type-boolean`      0
 	page.margins_                                Array                                 {top: 15, right: 15, bottom: 15, left: 15}
 	page.importPage_                             :ref:`t3tsref:data-type-integer`
-	page.orientation_                            :ref:`t3tsref:data-type-string`       P
+	page.orientation_                            :ref:`t3tsref:data-type-string`       portrait
 	page.format_                                 :ref:`t3tsref:data-type-string`       A4
 	header.posY_                                 :ref:`t3tsref:data-type-integer`      5
 	footer.posY_                                 :ref:`t3tsref:data-type-integer`      -10
@@ -66,9 +66,9 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	generalText.color_                           :ref:`t3tsref:data-type-string`       #000
 	generalText.fontFamily_                      :ref:`t3tsref:data-type-string`       helvetica
 	generalText.fontSize_                        :ref:`t3tsref:data-type-integer`      11
-	generalText.fontStyle_                       :ref:`t3tsref:data-type-string`       R
+	generalText.fontStyle_                       :ref:`t3tsref:data-type-string`       regular
 	generalText.padding_                         Array                                 {top: 0, right: 0, bottom: 0, left: 0}
-	generalText.alignment_                       :ref:`t3tsref:data-type-string`       L
+	generalText.alignment_                       :ref:`t3tsref:data-type-string`       left
 	generalText.paragraphSpacing_                :ref:`t3tsref:data-type-integer`      2
 	generalText.autoHyphenation_                 :ref:`t3tsref:data-type-boolean`      0
 	text.trim                                    :ref:`t3tsref:data-type-boolean`      *See generalText*
@@ -98,7 +98,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	list.fontSize                                :ref:`t3tsref:data-type-integer`      *See generalText*
 	list.fontStyle                               :ref:`t3tsref:data-type-string`       *See generalText*
 	list.padding                                 Array                                 {top: 0, right: 0, bottom: 2, left: 1}
-	list.alignment                               :ref:`t3tsref:data-type-string`       L
+	list.alignment                               :ref:`t3tsref:data-type-string`       left
 	list.bulletColor_                            :ref:`t3tsref:data-type-string`       #000
 	list.bulletImageSrc_                         :ref:`t3tsref:data-type-string`
 	list.bulletSize_                             :ref:`t3tsref:data-type-float`        1.5
@@ -261,17 +261,17 @@ document.outputDestination
 
 The TCPDF output destination for the PDF. Possible values are:
 
-	================= ======================================================================================
-	outputDestination Description
-	================= ======================================================================================
-	I                 Sending the PDF inline to the browser.
-	D                 Sending the PDF as immediate file download.
-	F                 Saving the PDF to the specified outputPath.
-	FI                Saving the PDF to the specified outputPath and sending it inline to the browser.
-	FD                Saving the PDF to the specified outputPath and sending it as immediate file download.
-	E                 Return the PDF as base64 mime multi-part email attachment (RFC 2045).
-	S                 Return the PDF as string.
-	================= ======================================================================================
+	================== ======================================================================================
+	outputDestination  Description
+	================== ======================================================================================
+	I / inline         Sending the PDF inline to the browser.
+	D / download       Sending the PDF as immediate file download.
+	F / file           Saving the PDF to the specified outputPath.
+	FI / file-inline   Saving the PDF to the specified outputPath and sending it inline to the browser.
+	FD / file-download Saving the PDF to the specified outputPath and sending it as immediate file download.
+	E / email          Return the PDF as base64 mime multi-part email attachment (RFC 2045).
+	S / string         Return the PDF as string.
+	================== ======================================================================================
 
 .. _document.outputPath:
 
@@ -327,7 +327,7 @@ page.orientation
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.page.orientation =` :ref:`t3tsref:data-type-string`
 
-Defines the orientation of the current page and the following pages. Possible values are P (portrait) and L (landscape).
+Defines the orientation of the current page and the following pages. Possible values are ``P`` / ``portrait`` and ``L`` / ``landscape``.
 
 .. _page.format:
 
@@ -408,7 +408,7 @@ generalText.fontStyle
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.fontStyle =`  :ref:`t3tsref:data-type-string`
 
-The font style being used. Possible values are: R (regular), B (bold), I (italic), U (underline)
+The font style being used. Possible values are: ``R`` / ``regular``, ``B`` / ``bold``, ``I`` / ``italic``, ``U`` / ``underline``
 
 .. _generalText.padding:
 
@@ -426,7 +426,7 @@ generalText.alignment
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.alignment =` :ref:`t3tsref:data-type-string`
 
-Possible values are: 'L' (left), 'C' (center), 'R' (right), 'J' (justify)
+Possible values are: ``L`` / ``left``, ``C`` / ``center``, ``R`` / ``right``, ``J`` / ``justify``
 
 .. _generalText.paragraphSpacing:
 

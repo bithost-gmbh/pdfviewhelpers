@@ -26,7 +26,7 @@ generating the document.
 		subject="Welcome message"
 		author="Bithost GmbH"
 		keywords="example, test"
-		outputDestination="I"
+		outputDestination="inline"
 		outputPath="example.pdf">
 		[..]
 	</pdf:document>

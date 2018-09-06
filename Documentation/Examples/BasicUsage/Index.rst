@@ -77,10 +77,10 @@ Fluid Template
 
 ::
 
-	<pdf:document outputDestination="S" title="Bithost Example">
+	<pdf:document outputDestination="string" title="Bithost Example">
 		<pdf:header>
 			<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/logo.png" width="40" />
-			<pdf:text alignment="R" color="#8C8C8C" paragraphSpacing="0" posY="15">
+			<pdf:text alignment="right" color="#8C8C8C" paragraphSpacing="0" posY="15">
 				Bithost GmbH
 				Milchbuckstrasse 83
 				CH-8057 Zürich
@@ -98,7 +98,7 @@ Fluid Template
 					<pdf:text color="#8C8C8C">Page {pdf:getPageNumberAlias()}</pdf:text>
 				</pdf:column>
 				<pdf:column>
-					<pdf:text alignment="R" color="#8C8C8C">EXT:pdfviewhelpers - Basic usage example</pdf:text>
+					<pdf:text alignment="right" color="#8C8C8C">EXT:pdfviewhelpers - Basic usage example</pdf:text>
 				</pdf:column>
 			</pdf:multiColumn>
 		</pdf:footer>

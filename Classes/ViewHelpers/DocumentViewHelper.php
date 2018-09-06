@@ -81,9 +81,13 @@ class DocumentViewHelper extends AbstractPDFViewHelper
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     public function initialize()
     {
+        $this->arguments['outputDestination'] = $this->convertToTcpdfOutputDestination($this->arguments['outputDestination']);
+
         if (isset($GLOBALS['TSFE']->applicationData) && in_array($this->arguments['outputDestination'], $this->tcpdfOutputContentDestinations)) {
             $GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers']['pdfOutput'] = true;
         }
@@ -165,5 +169,41 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         }
 
         return in_array($this->arguments['outputDestination'], $this->tcpdfReturnContentDestinations) ? $output : '';
+    }
+
+    /**
+     * @param string $outputDestination
+     *
+     * @return string
+     *
+     * @throws Exception
+     */
+    protected function convertToTcpdfOutputDestination($outputDestination)
+    {
+        switch ($outputDestination) {
+            case 'inline':
+            case 'I':
+                return 'I';
+            case 'download':
+            case 'D':
+                return 'D';
+            case 'file':
+            case 'F':
+                return 'F';
+            case 'file-inline':
+            case 'FI':
+                return 'FI';
+            case 'file-download':
+            case 'FD':
+                return 'FD';
+            case 'email':
+            case 'E':
+                return 'E';
+            case 'string':
+            case 'S':
+                return 'S';
+            default:
+                throw new ValidationException('Invalid output destination "' . $outputDestination . '" provided. ERROR: 1536238646', 1536238646);
+        }
     }
 }
