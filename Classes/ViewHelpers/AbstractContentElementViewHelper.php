@@ -28,7 +28,9 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use Bithost\Pdfviewhelpers\Model\BasePDF;
 
 /**
  * AbstractContentElementViewHelper
@@ -50,6 +52,8 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     public function initialize()
     {
@@ -67,6 +71,27 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
 
         if (is_null($this->arguments['posY'])) {
             $this->arguments['posY'] = $this->getPDF()->GetY();
+        }
+
+        $this->initializeHeaderAndFooter();
+    }
+
+    /**
+     * @return void
+     *
+     * @throws Exception
+     */
+    public function initializeHeaderAndFooter()
+    {
+        if (!($this->getPDF() instanceof BasePDF)) {
+            return;
+        }
+
+        if ($this->viewHelperVariableContainer->get('DocumentViewHelper', 'pageNeedsHeader')) {
+            $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pageNeedsHeader', false);
+
+            $this->getPDF()->renderHeader();
+            $this->getPDF()->renderFooter();
         }
     }
 
@@ -194,6 +219,26 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
             return true;
         } else {
             throw new ValidationException('Height must be an integer. ERROR: 1363766372', 1363765372);
+        }
+    }
+
+    /**
+     * @param array $padding
+     *
+     * @return boolean
+     *
+     * @throws ValidationException
+     */
+    protected function isValidPadding($padding)
+    {
+        if (count($padding) === 4
+            && isset($padding['top'], $padding['right'], $padding['bottom'], $padding['left'])
+            && is_numeric($padding['top']) && is_numeric($padding['right'])
+            && is_numeric($padding['bottom']) && is_numeric($padding['left'])
+        ) {
+            return true;
+        } else {
+            throw new ValidationException('Padding must be an Array with Elements: top:[int],right:[int],bottom:[int],left:[int] ERROR: 1363769351', 1363769351);
         }
     }
 }

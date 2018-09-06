@@ -35,7 +35,6 @@ TypoScript
 
 	plugin.tx_pdfviewhelpers.settings {
 		config {
-			class = Bithost\Pdfviewhelpers\Model\BithostTCPDF
 			language = eng
 		}
 		document {
@@ -46,81 +45,30 @@ TypoScript
 			creator = TYPO3 pdfviewhelpers
 			outputPath = bithost_example.pdf
 		}
+		header {
+			posY = 15
+		}
+		footer {
+			posY = -15
+		}
+		text {
+			paragraphSpacing = 0
+		}
+		page {
+			margins {
+				top = 65
+				bottom = 25
+			}
+		}
+		graphics {
+			line {
+				padding {
+					top = 0
+					bottom = 1.5
+				}
+			}
+		}
 	}
-
-.. _basicusage_php:
-
-PHP
----
-
-A custom PHP class is needed if you want to add header and footer to all the pages or if you want to customize
-the behaviour of TCPDF in any way.
-
-::
-
-    <?php
-
-    namespace Bithost\Pdfviewhelpers\Model;
-
-    /***
-     *
-     * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
-     *
-     *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
-     *           Esteban Marin <esteban.marin@bithost.ch>, Bithost GmbH
-     *
-     *  All rights reserved
-     *
-     *  This script is part of the TYPO3 project. The TYPO3 project is
-     *  free software; you can redistribute it and/or modify
-     *  it under the terms of the GNU General Public License as published by
-     *  the Free Software Foundation; either version 3 of the License, or
-     *  (at your option) any later version.
-     *
-     *  The GNU General Public License can be found at
-     *  http://www.gnu.org/copyleft/gpl.html.
-     *
-     *  This script is distributed in the hope that it will be useful,
-     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *  GNU General Public License for more details.
-     *
-     *  This copyright notice MUST APPEAR in all copies of the script!
-     ***/
-
-    use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-
-    /**
-     * BithostTCPDF
-     *
-     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
-     */
-    class BithostTCPDF extends \TCPDF
-    {
-        /**
-         * @return void
-         */
-        public function Header()
-        {
-            $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
-            $address = "Bithost GmbH \nMilchubckstrasse 83 \nCH-8057 Zürich \n\nhallo@bithost.ch \n044 585 28 20 \n\nwww.bithost.ch";
-
-            $this->SetTextColor(140, 140, 140);
-            $this->SetFontSize(11);
-
-            $this->Image($extPath . 'Resources/Public/Examples/BasicUsage/logo.png', 15, 15, 56, 24, '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, FALSE, FALSE);
-            $this->MultiCell(null, null, $address, 0, 'R', FALSE, 1, 0, 45, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);
-        }
-
-        /**
-         * @return void
-         */
-        public function Footer()
-        {
-
-        }
-    }
-
 
 .. _basicusage_fluid:
 
@@ -129,11 +77,34 @@ Fluid Template
 
 ::
 
-	{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
+	<pdf:document outputDestination="S" title="Bithost Example">
+		<pdf:header>
+			<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/logo.png" width="40" />
+			<pdf:text alignment="R" color="#8C8C8C" paragraphSpacing="0" posY="15">
+				Bithost GmbH
+				Milchbuckstrasse 83
+				CH-8057 Zürich
 
-	<pdf:document outputDestination="I" title="Bithost Example">
+				hallo@bithost.ch
+				044 585 28 20
+
+				www.bithost.ch
+			</pdf:text>
+		</pdf:header>
+		<pdf:footer>
+			<pdf:graphics.line style="{color: '#8C8C8C'}" />
+			<pdf:multiColumn>
+				<pdf:column>
+					<pdf:text color="#8C8C8C">Page {pdf:getPageNumberAlias()}</pdf:text>
+				</pdf:column>
+				<pdf:column>
+					<pdf:text alignment="R" color="#8C8C8C">EXT:pdfviewhelpers - Basic usage example</pdf:text>
+				</pdf:column>
+			</pdf:multiColumn>
+		</pdf:footer>
+
 		<pdf:page>
-			<pdf:text padding="{top:65, right:0, bottom:4, left:0}" color="#8C8C8C">
+			<pdf:text posY="50" padding="{top:0, right:0, bottom:4, left:0}" color="#8C8C8C">
 				Zurich, <f:format.date format="d.m.Y" >now</f:format.date>
 			</pdf:text>
 			<pdf:headline>Welcome to the extension pdfviewhelpers</pdf:headline>
@@ -154,7 +125,7 @@ Fluid Template
 					</pdf:text>
 				</pdf:column>
 				<pdf:column>
-					<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg" width="200" />
+					<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg" />
 					<pdf:text padding="{top:1, right:0, bottom:0, left:0}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
 				</pdf:column>
 			</pdf:multiColumn>

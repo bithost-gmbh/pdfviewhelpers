@@ -9,13 +9,13 @@ Advanced Customization
 ----------------------
 
 To completely customize the PDF creation you have the options to provide your own PDF class or write your own ViewHelper.
-When providing your own PDF class it is recommend to always extend from FPDI and not TCPDF in order to be able to load existing PDF documents as template.
+When providing your own PDF class it is recommend to always extend from ``Bithost\Pdfviewhelpers\Model\BasePDF`` in order to be able to use features like header and footer ViewHelpers.
 If you feel like your custom ViewHelper might be useful for everybody, feel free to create a pull request!
 
 Extend FPDI / TCPDF class
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-You can provide your own PDF class in order to customize its behaviour as you want. This is for instance needed if you
-want to add custom header and footer to your PDF or if you want to change constructor arguments.
+You can provide your own PDF class in order to customize its behaviour as you want. This is for instance needed if you want to change constructor arguments or
+you want to render header and footer without the ViewHelpers provided.
 
 *TypoScript*
 
@@ -68,7 +68,7 @@ want to add custom header and footer to your PDF or if you want to change constr
      *
      * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
      */
-    class MyPDF extends \FPDI
+    class MyPDF extends \Bithost\Pdfviewhelpers\Model\BasePDF
     {
         /**
          * @return void
@@ -82,7 +82,7 @@ want to add custom header and footer to your PDF or if you want to change constr
         /**
          * @return void
          */
-        public function Header()
+        public function basePdfHeader()
         {
             $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
             $address = "Bithost GmbH \nMilchubckstrasse 83 \nCH-8057 Zürich \n\nhallo@bithost.ch \n044 585 28 20 \n\nwww.bithost.ch";
@@ -97,7 +97,7 @@ want to add custom header and footer to your PDF or if you want to change constr
         /**
          * @return void
          */
-        public function Footer()
+        public function basePdfFooter()
         {
             $this->SetY(-20);
             $this->SetDrawColor(140, 140, 140);
@@ -114,11 +114,12 @@ want to add custom header and footer to your PDF or if you want to change constr
 Create your own ViewHelper
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When writing your own ViewHelper you have the options to extend *AbstractContentElementViewHelper* or *AbstractPDFViewHelper*. If your ViewHelper
-will add some content to the PDF, you might want to extend *AbstractContentElementViewHelper* in order to inherit its position properties.
-If your ViewHelper does not add content (e.g. GetPosXViewHelper or PageBreakViewHelper) you can directly extend *AbstractPDFViewHelper*.
+When writing your own ViewHelper you have the options to extend ``AbstractContentElementViewHelper`` or ``AbstractPDFViewHelper``. If your ViewHelper
+will add some content to the PDF, you should extend ``AbstractContentElementViewHelper`` in order to inherit its position properties and allow the
+header and footer ViewHelpers to work properly.
+If your ViewHelper does not add content (e.g. GetPosXViewHelper or PageBreakViewHelper) you can directly extend ``AbstractPDFViewHelper``.
 
-Within your ViewHelper you have full access to the public API of TCPDF using *$this->getPDF()*. Please see the TCPDF examples in order to see what
+Within your ViewHelper you have full access to the public API of TCPDF using ``$this->getPDF()``. Please see the TCPDF examples in order to see what
 you can do with it: https://tcpdf.org/examples/
 
 *PHP*

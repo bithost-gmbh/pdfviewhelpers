@@ -1,6 +1,6 @@
 plugin.tx_pdfviewhelpers.settings {
 	config {
-		class = Bithost\Pdfviewhelpers\Model\EmptyFPDI
+		class = Bithost\Pdfviewhelpers\Model\BasePDF
 		language = ger
 		hyphenFile = hyph-de-ch-1901.tex
 		disableCache = 1
@@ -44,6 +44,12 @@ plugin.tx_pdfviewhelpers.settings {
 		importPage =
 		orientation = P
 		format = A4
+	}
+	header {
+		posY = 5
+	}
+	footer {
+		posY = -10
 	}
 	generalText {
 		trim = 1
@@ -115,6 +121,20 @@ plugin.tx_pdfviewhelpers.settings {
 	html {
 		autoHyphenation =
 		styleSheet =
+	}
+	graphics {
+		line {
+			padding {
+				top = 4
+				right = 0
+				bottom = 5
+				left = 0
+			}
+			style {
+				width = 0.25
+				color = #000
+			}
+		}
 	}
 }
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Bithost\Pdfviewhelpers\Model;
+namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -26,26 +26,20 @@ namespace Bithost\Pdfviewhelpers\Model;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 /**
- * EmptyTCPDF, Needed because TCPDF adds a line to the header by default
+ * GetPageNumberAliasViewHelper
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class EmptyTCPDF extends \TCPDF
+class GetPageNumberAliasViewHelper extends AbstractPDFViewHelper
 {
     /**
-     * @return void
+     * @return string
      */
-    public function Header() // phpcs:ignore
+    public function render()
     {
-    }
-
-    /**
-     * @return void
-     */
-    public function Footer() // phpcs:ignore
-    {
+        return $this->getPDF()->getAliasNumPage();
     }
 }

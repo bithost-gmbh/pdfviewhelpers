@@ -28,14 +28,12 @@ namespace Bithost\Pdfviewhelpers\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***/
 
-use Bithost\Pdfviewhelpers\Model\TCPDF;
-
 /**
  * PdfaTCPDF, overrides constructor to set pdfa param as true
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class PdfaShowCase extends \TCPDF
+class PdfaShowCase extends BasePDF
 {
     /**
      * @return void
@@ -44,19 +42,5 @@ class PdfaShowCase extends \TCPDF
     {
         // Set pdfa parameter to true
         parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache, true);
-    }
-
-    /**
-     * @return void
-     */
-    public function Header() // phpcs:ignore
-    {
-    }
-
-    /**
-     * @return void
-     */
-    public function Footer() // phpcs:ignore
-    {
     }
 }

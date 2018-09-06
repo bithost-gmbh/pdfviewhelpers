@@ -30,6 +30,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use Bithost\Pdfviewhelpers\Model\BasePDF;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use FPDI;
@@ -90,9 +91,6 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
         $pdfClassName = empty($this->settings['config']['class']) ? 'TCPDF' : $this->settings['config']['class'];
 
-        //Autoload class TCPDF in order for fpdi_bridge to be able to correctly determine its parent class
-        class_exists('TCPDF', true);
-
         //Load TCPDF language settings
         require_once($extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->settings['config']['language'] . '.php');
 
@@ -139,6 +137,8 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         if ($GLOBALS['TSFE'] instanceof TypoScriptFrontendController && $this->settings['config']['disableCache']) {
             $GLOBALS['TSFE']->set_no_cache();
         }
+
+        $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'defaultHeaderFooterScope', BasePDF::SCOPE_DOCUMENT);
     }
 
     /**

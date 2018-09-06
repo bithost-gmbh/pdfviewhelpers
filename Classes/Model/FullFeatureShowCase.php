@@ -33,12 +33,12 @@ namespace Bithost\Pdfviewhelpers\Model;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class FullFeatureShowCase extends \FPDI
+class FullFeatureShowCase extends BasePDF
 {
     /**
      * @return void
      */
-    public function Header() // phpcs:ignore
+    public function basePdfHeader()
     {
         $header1 = "Bithost GmbH - Milchbuckstrasse 83 CH-8057 Zürich";
         $header2 = "hallo@bithost.ch - www.bithost.ch";
@@ -56,7 +56,7 @@ class FullFeatureShowCase extends \FPDI
     /**
      * @return void
      */
-    public function Footer() // phpcs:ignore
+    public function basePdfFooter()
     {
         $this->SetY(-20);
         $this->SetDrawColor(140, 140, 140);
