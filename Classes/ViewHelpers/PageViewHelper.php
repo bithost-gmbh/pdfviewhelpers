@@ -45,6 +45,8 @@ class PageViewHelper extends AbstractPDFViewHelper
      */
     public function initializeArguments()
     {
+        parent::initializeArguments();
+
         $this->registerArgument('autoPageBreak', 'boolean', '', false, $this->settings['page']['autoPageBreak']);
         $this->registerArgument('margins', 'array', '', false, null);
         $this->registerArgument('importPage', 'integer', '', false, $this->settings['page']['importPage']);
@@ -59,6 +61,8 @@ class PageViewHelper extends AbstractPDFViewHelper
      */
     public function initialize()
     {
+        parent::initialize();
+
         if (is_null($this->arguments['margins'])) {
             $this->arguments['margins'] = $this->settings['page']['margins'];
         }

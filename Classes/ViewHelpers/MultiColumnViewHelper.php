@@ -53,9 +53,13 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     public function initialize()
     {
+        parent::initialize();
+
         $this->multiColumnContext['pageWidth'] = $this->getPDF()->getPageWidth();
         $this->multiColumnContext['pageMargins'] = $this->getPDF()->getMargins();
         $this->multiColumnContext['pageWidthWithoutMargins'] = $this->multiColumnContext['pageWidth'] - $this->multiColumnContext['pageMargins']['right'] - $this->multiColumnContext['pageMargins']['left'];
@@ -80,6 +84,8 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     public function render()
     {
