@@ -1,12 +1,13 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
 ## 2.0.0 - Not yet released
-- Replaces EmptyFPDI and EmptyTCPDF by BasePDF
 - Adds HeaderViewHelper and FooterViewHelper, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)
 - Adds PageNumberAliasViewHelper and TotalNumberOfPagesAliasViewHelpers, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)
 - Adds LineViewHelper
-- Fixes MultiColumnViewHelper columns not correctly initialized
+- Adds speaking settings
+- Replaces EmptyFPDI and EmptyTCPDF by BasePDF
 - Removes example class BithostTCPDF
+- Fixes MultiColumnViewHelper columns not correctly initialized
 
 ## 1.6.0 - August 14, 2018
 - Adds support for TYPO3 9 LTS, [#59](https://github.com/bithost-gmbh/pdfviewhelpers/issues/59) (Thanks [@luberti](https://github.com/luberti))

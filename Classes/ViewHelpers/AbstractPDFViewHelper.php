@@ -70,6 +70,8 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
 
     /**
      * AbstractPDFViewHelper Constructor
+     *
+     * @throws Exception
      */
     public function __construct()
     {
@@ -80,7 +82,7 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
 
         $this->settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'Pdfviewhelpers', 'tx_pdfviewhelpers');
 
-        if (!is_array($this->settings)) {
+        if (!is_array($this->settings) || !isset($this->settings['staticTypoScriptSetupIncluded'])) {
             throw new Exception('No pdfviewhelpers settings found. Please make sure you have included the static TypoScript template. ERROR: 1470982083', 1470982083);
         }
     }
