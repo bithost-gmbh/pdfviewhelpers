@@ -85,13 +85,8 @@ class ListViewHelper extends AbstractTextViewHelper
     {
         parent::initialize();
 
-        if (!is_array($this->arguments['padding'])) {
-            if (!empty($this->settings['list']['padding'])) {
-                $this->arguments['padding'] = $this->settings['list']['padding'];
-            } else {
-                $this->arguments['padding'] = $this->settings['generalText']['padding'];
-            }
-        }
+        $this->arguments['padding'] = array_merge($this->settings['generalText']['padding'], $this->settings['text']['padding'], $this->arguments['padding']);
+
         if ($this->isValidPadding($this->arguments['padding'])) {
             $this->getPDF()->setCellPaddings(0, 0, $this->arguments['padding']['right'], 0);
         }

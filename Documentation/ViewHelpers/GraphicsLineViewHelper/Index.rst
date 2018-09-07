@@ -21,5 +21,5 @@ Please see https://tcpdf.org/examples/example_012/ to find out what values can b
 ::
 
 	<pdf:graphics.line
-		padding="{top:1, right:0, bottom:0, left:0}"
+		padding="{top: 1, right: 10, bottom: 1, left: 10}"
 		style="{color: '#8C8C8C', width: 0.5}" />

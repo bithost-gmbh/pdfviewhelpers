@@ -52,14 +52,6 @@ class ImageViewHelper extends AbstractContentElementViewHelper
 
     /**
      * @return void
-     */
-    public function initialize()
-    {
-        parent::initialize();
-    }
-
-    /**
-     * @return void
      *
      * @throws ValidationException
      */

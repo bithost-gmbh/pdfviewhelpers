@@ -110,4 +110,44 @@ class TextViewHelperTest extends AbstractFunctionalTest
             ['color' => '#1']
         );
     }
+
+    /**
+     * @test
+     */
+    public function testPartialPaddingOverwrite()
+    {
+        $output = $this->renderFluidTemplate(
+            $this->getFixturePath('TextViewHelper/TextPadding.html'),
+            ['padding' => ['top' => 2]]
+        );
+        $pdf = $this->parseContent($output);
+
+        $this->assertContains('Text', $pdf->getText());
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException \Bithost\Pdfviewhelpers\Exception\ValidationException
+     */
+    public function testInvalidPAddingKey()
+    {
+        $this->renderFluidTemplate(
+            $this->getFixturePath('TextViewHelper/TextPadding.html'),
+            ['padding' => ['tops' => 2]]
+        );
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException \Bithost\Pdfviewhelpers\Exception\ValidationException
+     */
+    public function testInvalidPAdding()
+    {
+        $this->renderFluidTemplate(
+            $this->getFixturePath('TextViewHelper/TextPadding.html'),
+            ['padding' => ['bottom' => 'lorem']]
+        );
+    }
 }

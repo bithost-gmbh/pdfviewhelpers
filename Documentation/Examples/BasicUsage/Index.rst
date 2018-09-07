@@ -104,7 +104,7 @@ Fluid Template
 		</pdf:footer>
 
 		<pdf:page>
-			<pdf:text posY="50" padding="{top:0, right:0, bottom:4, left:0}" color="#8C8C8C">
+			<pdf:text posY="50" padding="{bottom: 4}" color="#8C8C8C">
 				Zurich, <f:format.date format="d.m.Y" >now</f:format.date>
 			</pdf:text>
 			<pdf:headline>Welcome to the extension pdfviewhelpers</pdf:headline>
@@ -126,11 +126,11 @@ Fluid Template
 				</pdf:column>
 				<pdf:column>
 					<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg" />
-					<pdf:text padding="{top:1, right:0, bottom:0, left:0}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
+					<pdf:text padding="{top: 1}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
 				</pdf:column>
 			</pdf:multiColumn>
 
-			<pdf:text padding="{top: 2, right:0, bottom:0, left:0}">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</pdf:text>
+			<pdf:text padding="{top: 2}">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</pdf:text>
 		</pdf:page>
 	</pdf:document>
 

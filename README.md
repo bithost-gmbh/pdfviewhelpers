@@ -50,13 +50,15 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
                 <pdf:text color="#8C8C8C">Page {pdf:getPageNumberAlias()}</pdf:text>
             </pdf:column>
             <pdf:column>
-                <pdf:text alignment="right" color="#8C8C8C">EXT:pdfviewhelpers - Basic usage example</pdf:text>
+                <pdf:text alignment="right" color="#8C8C8C">
+                    EXT:pdfviewhelpers - Basic usage example
+                </pdf:text>
             </pdf:column>
         </pdf:multiColumn>
     </pdf:footer>
 
     <pdf:page>
-        <pdf:text posY="50" padding="{top:0, right:0, bottom:4, left:0}" color="#8C8C8C">
+        <pdf:text posY="50" padding="{bottom: 4}" color="#8C8C8C">
             Zurich, <f:format.date format="d.m.Y" >now</f:format.date>
         </pdf:text>
         <pdf:headline>Welcome to the extension pdfviewhelpers</pdf:headline>
@@ -75,11 +77,11 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
             </pdf:column>
             <pdf:column>
                 <pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg" />
-                <pdf:text padding="{top:1, right:0, bottom:0, left:0}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
+                <pdf:text padding="{top: 1}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
             </pdf:column>
         </pdf:multiColumn>
 
-        <pdf:text padding="{top: 2, right:0, bottom:0, left:0}">Lorem ipsum  [..]  sit amet.</pdf:text>
+        <pdf:text padding="{top: 2}">Lorem ipsum  [..]  sit amet.</pdf:text>
     </pdf:page>
 </pdf:document>
 ```

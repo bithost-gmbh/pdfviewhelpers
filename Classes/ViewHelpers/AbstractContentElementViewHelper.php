@@ -44,6 +44,8 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
      */
     public function initializeArguments()
     {
+        parent::initializeArguments();
+
         $this->registerArgument('posX', 'integer', '', false, null);
         $this->registerArgument('posY', 'integer', '', false, null);
         $this->registerArgument('width', 'integer', '', false, null);
@@ -57,6 +59,8 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
      */
     public function initialize()
     {
+        parent::initialize();
+
         if (!is_null($this->arguments['width'])) {
             $this->isValidWidth($this->arguments['width']);
         }

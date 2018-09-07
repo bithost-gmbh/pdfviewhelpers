@@ -69,6 +69,8 @@ class DocumentViewHelper extends AbstractPDFViewHelper
      */
     public function initializeArguments()
     {
+        parent::initializeArguments();
+        
         $this->registerArgument('title', 'string', '', false, $this->settings['document']['title']);
         $this->registerArgument('subject', 'string', '', false, $this->settings['document']['subject']);
         $this->registerArgument('author', 'string', '', false, $this->settings['document']['author']);
@@ -86,6 +88,8 @@ class DocumentViewHelper extends AbstractPDFViewHelper
      */
     public function initialize()
     {
+        parent::initialize();
+
         $this->arguments['outputDestination'] = $this->convertToTcpdfOutputDestination($this->arguments['outputDestination']);
 
         if (isset($GLOBALS['TSFE']->applicationData) && in_array($this->arguments['outputDestination'], $this->tcpdfOutputContentDestinations)) {

@@ -61,7 +61,9 @@ class LineViewHelper extends AbstractContentElementViewHelper
      */
     public function initialize()
     {
-        $this->arguments['style'] = is_array($this->arguments['style']) ? array_merge($this->settings['graphics']['line']['style'], $this->arguments['style']) :$this->settings['graphics']['line']['style'];
+        parent::initialize();
+
+        $this->arguments['style'] = is_array($this->arguments['style']) ? array_merge($this->settings['graphics']['line']['style'], $this->arguments['style']) : $this->settings['graphics']['line']['style'];
         $this->arguments['padding'] = is_array($this->arguments['padding']) ? array_merge($this->settings['graphics']['line']['padding'], $this->arguments['padding']) : $this->settings['graphics']['line']['padding'];
 
         $this->isValidPadding($this->arguments['padding']);
