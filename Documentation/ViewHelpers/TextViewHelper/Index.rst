@@ -30,5 +30,5 @@ Rendering text using the settings for text.
 		alignment="right"
 		paragraphSpacing="0"
 		autoHyphenation="1"
-		padding="{top:1, right:0, bottom:0, left:0}"
+		padding="{top: 1, right: 0, bottom: 0, left: 0}"
 		>Title</pdf:text>

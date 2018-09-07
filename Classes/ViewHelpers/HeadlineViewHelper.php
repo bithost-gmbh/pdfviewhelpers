@@ -28,6 +28,8 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
+
 /**
  * HeadlineViewHelper
  *
@@ -73,21 +75,22 @@ class HeadlineViewHelper extends AbstractTextViewHelper
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     public function initialize()
     {
         parent::initialize();
 
-        if (empty($this->arguments['padding'])) {
-            if (!empty($this->settings['headline']['padding'])) {
-                $this->arguments['padding'] = $this->settings['headline']['padding'];
-            } else {
-                $this->arguments['padding'] = $this->settings['generalText']['padding'];
-            }
-        }
+        $this->arguments['padding'] = array_merge($this->settings['generalText']['padding'], $this->settings['headline']['padding'], $this->arguments['padding']);
 
         if ($this->isValidPadding($this->arguments['padding'])) {
-            $this->getPDF()->setCellPaddings($this->arguments['padding']['left'], $this->arguments['padding']['top'], $this->arguments['padding']['right'], $this->arguments['padding']['bottom']);
+            $this->getPDF()->setCellPaddings(
+                $this->arguments['padding']['left'],
+                $this->arguments['padding']['top'],
+                $this->arguments['padding']['right'],
+                $this->arguments['padding']['bottom']
+            );
         }
     }
 }

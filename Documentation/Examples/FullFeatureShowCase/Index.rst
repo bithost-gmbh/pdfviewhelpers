@@ -220,12 +220,12 @@ Fluid Template
 
 			<pdf:multiColumn>
 				<pdf:column>
-					<pdf:text autoHyphenation="0" padding="{top:0, right:2, bottom:0, left:0}">
+					<pdf:text autoHyphenation="0" padding="{right: 2}">
 						ThisisalongtextWITHOUTautomatichyphenationbeingactivated.
 					</pdf:text>
 				</pdf:column>
 				<pdf:column>
-					<pdf:text autoHyphenation="1" padding="{top:0, right:0, bottom:0, left:2}">
+					<pdf:text autoHyphenation="1" padding="{left: 2}">
 						ThisisalongtextWITHautomatichyphenationbeingactivated.
 					</pdf:text>
 				</pdf:column>

@@ -5,6 +5,7 @@
 - Adds PageNumberAliasViewHelper and TotalNumberOfPagesAliasViewHelpers, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)
 - Adds LineViewHelper
 - Adds speaking settings
+- Adds partial overwriting of text padding, [#25](https://github.com/bithost-gmbh/pdfviewhelpers/issues/25)
 - Replaces EmptyFPDI and EmptyTCPDF by BasePDF
 - Removes example class BithostTCPDF
 - Fixes MultiColumnViewHelper columns not correctly initialized

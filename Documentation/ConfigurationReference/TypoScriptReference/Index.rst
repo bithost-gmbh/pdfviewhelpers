@@ -87,7 +87,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	headline.fontFamily                          :ref:`t3tsref:data-type-string`       *See generalText*
 	headline.fontSize                            :ref:`t3tsref:data-type-integer`      *See generalText*
 	headline.fontStyle                           :ref:`t3tsref:data-type-string`       *See generalText*
-	headline.padding                             Array                                 {top: 6, right: 0, bottom: 3, left: 0}
+	headline.padding                             Array                                 {top: 6, bottom: 3}
 	headline.alignment                           :ref:`t3tsref:data-type-string`       *See generalText*
 	headline.paragraphSpacing                    :ref:`t3tsref:data-type-integer`      *See generalText*
 	headline.autoHyphenation                     :ref:`t3tsref:data-type-boolean`      *See generalText*
@@ -97,7 +97,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	list.fontFamily                              :ref:`t3tsref:data-type-string`       *See generalText*
 	list.fontSize                                :ref:`t3tsref:data-type-integer`      *See generalText*
 	list.fontStyle                               :ref:`t3tsref:data-type-string`       *See generalText*
-	list.padding                                 Array                                 {top: 0, right: 0, bottom: 2, left: 1}
+	list.padding                                 Array                                 {bottom: 2, left: 1}
 	list.alignment                               :ref:`t3tsref:data-type-string`       left
 	list.bulletColor_                            :ref:`t3tsref:data-type-string`       #000
 	list.bulletImageSrc_                         :ref:`t3tsref:data-type-string`
