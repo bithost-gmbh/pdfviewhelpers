@@ -7,6 +7,7 @@
 - Adds speaking settings
 - Adds partial overwriting of text padding, [#25](https://github.com/bithost-gmbh/pdfviewhelpers/issues/25)
 - Adds width and padding to ColumnViewHelper
+- Adds xml namespaces and schema
 - Replaces EmptyFPDI and EmptyTCPDF by BasePDF
 - Removes example class BithostTCPDF
 - Fixes MultiColumnViewHelper columns not correctly initialized

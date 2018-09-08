@@ -22,7 +22,8 @@
 	},
 	"require-dev": {
 		"nimut/testing-framework": "^2.0 || ^3.0",
-		"smalot/pdfparser": "^0.12.0"
+		"smalot/pdfparser": "^0.12.0",
+		"typo3/fluid-schema-generator": "^2.1"
 	},
 	"autoload": {
 		"psr-4": {

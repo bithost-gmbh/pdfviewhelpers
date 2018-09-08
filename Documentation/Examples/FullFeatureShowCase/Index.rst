@@ -177,7 +177,12 @@ Fluid Template
 
 ::
 
-	{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+		  xmlns:pdf="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers"
+		  xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.0.xsd"
+		  data-namespace-typo3-fluid="true">
 
 	<pdf:document outputPath="overwritten_name.pdf">
 		<pdf:page>
@@ -241,10 +246,10 @@ Fluid Template
 					color="#333"
 					bulletSize="2"
 					bulletColor="#1F8A70"
-					fontStyle="I"
+					fontStyle="italic"
 					listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}" />
 		</pdf:page>
-		<pdf:page orientation="landscape">
+		<pdf:page orientation="landscape" format="A4">
 			<pdf:headline>Image in different sizes</pdf:headline>
 			<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Bithost.jpg" width="100" />
 			<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Bithost.jpg" width="70" />
@@ -295,6 +300,8 @@ Fluid Template
 			<pdf:text>This text will be rendered at position x={pdf:getPosX()} and y={pdf:getPosY()}</pdf:text>
 		</pdf:page>
 	</pdf:document>
+
+	</html>
 
 .. _fullfeatureshowcase_output:
 

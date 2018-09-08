@@ -57,9 +57,14 @@ Fluid Template
 
 ::
 
-	{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+		  xmlns:pdf="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers"
+		  xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.0.xsd"
+		  data-namespace-typo3-fluid="true">
 
-	<pdf:document>
+	<pdf:document outputDestination="inline" title="Bithost Example">
 		<pdf:header>
 			<pdf:multiColumn>
 				<pdf:column>
@@ -71,13 +76,13 @@ Fluid Template
 			</pdf:multiColumn>
 		</pdf:header>
 		<pdf:footer>
-			<pdf:graphics.line style="{color: '#AAA'}" padding="{top: 0, bottom: 2}" />
-			<pdf:text color="#AAA">Page {pdf:getPageNumberAlias()} of  {pdf:getTotalNumberOfPagesAlias()}</pdf:text>
+			<pdf:graphics.line style="{color: '#AAA'}" padding="{top: 0, bottom: 2}"/>
+			<pdf:text color="#AAA">Page {pdf:getPageNumberAlias()} of {pdf:getTotalNumberOfPagesAlias()}</pdf:text>
 		</pdf:footer>
 
 		<pdf:page margins="{top: 45, right: 15, bottom: 25, left: 15}">
 			<pdf:header scope="thisPage">
-				<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/HeaderAndFooter/logo.png" width="40" />
+				<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/HeaderAndFooter/logo.png" width="40"/>
 				<pdf:text color="#AAA" alignment="right" posY="10" paragraphSpacing="0">
 					Bithost GmbH
 					Milchbuckstrasse 83
@@ -107,13 +112,15 @@ Fluid Template
 				Page 3 - document wide header but page specific footer applied.
 			</pdf:text>
 
-			<pdf:pageBreak />
+			<pdf:pageBreak/>
 
 			<pdf:text>
 				Page 4 - Again document wide header and footer applied.
 			</pdf:text>
 		</pdf:page>
 	</pdf:document>
+
+	</html>
 
 
 .. _headerandfooter_output:
