@@ -64,6 +64,7 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
         $this->multiColumnContext['pageMargins'] = $this->getPDF()->getMargins();
         $this->multiColumnContext['pageWidthWithoutMargins'] = $this->multiColumnContext['pageWidth'] - $this->multiColumnContext['pageMargins']['right'] - $this->multiColumnContext['pageMargins']['left'];
         $this->multiColumnContext['columns'] = [];
+        $this->multiColumnContext['columnPadding'] = [];
         $this->multiColumnContext['numberOfColumns'] = 0;
         $this->multiColumnContext['posY'] = $this->getPDF()->GetY();
         $this->multiColumnContext['longestColumnPosY'] = 0;
@@ -72,14 +73,18 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
         $this->multiColumnContext['startingPage'] = $this->getPDF()->getPage();
 
         foreach ($this->childNodes as $childNode) {
-            if ($childNode instanceof \TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode && $childNode->getViewHelperClassName() === 'Bithost\Pdfviewhelpers\ViewHelpers\ColumnViewHelper'
+            if ($childNode instanceof \TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode
+                && $childNode->getViewHelperClassName() === 'Bithost\Pdfviewhelpers\ViewHelpers\ColumnViewHelper'
             ) {
                 $this->multiColumnContext['columns'][] = $childNode;
                 $this->multiColumnContext['numberOfColumns']++;
             }
         }
-        $this->multiColumnContext['columnWidth'] = $this->multiColumnContext['pageWidthWithoutMargins'] / $this->multiColumnContext['numberOfColumns'];
+
+        $this->multiColumnContext['defaultColumnWidth'] = $this->multiColumnContext['pageWidthWithoutMargins'] / $this->multiColumnContext['numberOfColumns'];
         $this->multiColumnContext['isInAColumn'] = true;
+
+        $this->setMultiColumnContext($this->multiColumnContext);
     }
 
     /**
@@ -89,22 +94,21 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
      */
     public function render()
     {
-        $this->setMultiColumnContext($this->multiColumnContext);
-
         /** @var ViewHelperNode $column */
         foreach ($this->multiColumnContext['columns'] as $column) {
-            $this->multiColumnContext = $this->getMultiColumnContext();
-
             $this->getPDF()->setPage($this->multiColumnContext['startingPage']);
             $this->getPDF()->SetY($this->multiColumnContext['posY']);
 
             $column->evaluate($this->renderingContext);
 
+            //get possible new multi column context
+            $this->multiColumnContext = $this->getMultiColumnContext();
+
             if ($this->multiColumnContext['longestColumnPosY'] < $this->getPDF()->GetY()) {
                 $this->multiColumnContext['longestColumnPosY'] = $this->getPDF()->GetY();
             }
 
-            $this->multiColumnContext['currentPosX'] += $this->multiColumnContext['columnWidth'];
+            $this->multiColumnContext['currentPosX'] += $this->multiColumnContext['columnWidth'] + $this->multiColumnContext['columnPadding']['right'];
             $this->setMultiColumnContext($this->multiColumnContext);
         }
 
@@ -123,30 +127,6 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
     public function setChildNodes(array $childNodes)
     {
         $this->childNodes = $childNodes;
-    }
-
-    /**
-     * @param array $multiColumnContext
-     *
-     * @return void
-     */
-    private function setMultiColumnContext(array $multiColumnContext)
-    {
-        $this->viewHelperVariableContainer->addOrUpdate('MultiColumnViewHelper', 'multiColumnContext', $multiColumnContext);
-    }
-
-    /**
-     * @return array $multiColumnContext
-     *
-     * @throws Exception
-     */
-    private function getMultiColumnContext()
-    {
-        if ($this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'multiColumnContext')) {
-            return $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'multiColumnContext');
-        } else {
-            throw new Exception('No multiColumnContext found! ERROR: 1363872784', 1363872784);
-        }
     }
 
     /**

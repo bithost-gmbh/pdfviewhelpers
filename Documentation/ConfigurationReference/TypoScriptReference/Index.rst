@@ -309,7 +309,7 @@ page.margins
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.page.margins =` Array
 
-An array of the margins for each page.
+An array of the margins for each page. The default unit is millimeters.
 
 .. _page.importPage:
 
@@ -417,7 +417,7 @@ generalText.padding
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.padding =`  Array
 
-An array of the padding for each text element.
+An array of the padding for each text element. The default unit is millimeters.
 
 .. _generalText.alignment:
 
@@ -490,7 +490,7 @@ graphics.line.padding
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.graphics.line.padding =` Array
 
-Defines the padding around a line.
+Defines the padding around a line. The default unit is millimeters.
 
 .. _graphics.line.style:
 

@@ -109,6 +109,8 @@ class ListViewHelper extends AbstractTextViewHelper
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     public function render()
     {
