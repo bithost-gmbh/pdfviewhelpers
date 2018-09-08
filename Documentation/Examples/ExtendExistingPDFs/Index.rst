@@ -53,17 +53,21 @@ Fluid Template
 
 ::
 
-	{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+		  xmlns:pdf="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers"
+		  xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.0.xsd"
+		  data-namespace-typo3-fluid="true">
 
 	<pdf:document sourceFile="EXT:pdfviewhelpers/Resources/Public/Examples/ExtendExistingPDFs/pdf_template.pdf">
 		<pdf:page importPage="1" margins="{top: 80, right: 20, bottom: 40, left: 20}">
 			<pdf:headline>Here is your header</pdf:headline>
 			<pdf:text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</pdf:text>
-			<pdf:html>
+			<pdf:html autoHyphenation="1">
 				<h1 style="font-weight: normal; font-size: 16px;">Here is the HTML header</h1>
-				<p>Lorem ipsum dolor sit amet, consetetur sadipscing
-					elitr, sed diam nonumy eirmod tempor invidunt ut
-					labore et dolore magna aliquyam erat, sed diam
+				<p>Lorem ipsum dolor sit amet, consetetur
+					sadipscingelitrseddiamnonumyeirmodtemporinviduntutlaboreetdoloremagnaaliquyameratseddiam
 					voluptua. At vero eos et dolores et ea rebum. Stet
 					clita kasd gubergren, no sea takimata sanctus est
 					Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
@@ -86,6 +90,8 @@ Fluid Template
 			</pdf:html>
 		</pdf:page>
 	</pdf:document>
+
+	</html>
 
 .. _extendexistingpdfs_output:
 

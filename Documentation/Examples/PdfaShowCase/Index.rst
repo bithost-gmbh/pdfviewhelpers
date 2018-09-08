@@ -209,12 +209,20 @@ Fluid Template
 
 ::
 
-   {namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
-   <pdf:document outputDestination="inline" outputPath="{fileTitle}" author="{docAuthor}" title="{docTitle}" creator="PDF View Helpers" keywords="{docKeywords}" subject="{docAbstract}">
-       <pdf:page autoPageBreak="0">
-           <pdf:headline trim="0" color="#333" fontSize="18" fontStyle="regular" alignment="left" >Lorem ipsum dolor sit amet</pdf:headline>
-           <pdf:text>
-               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et dolores et ea rebum.
-           </pdf:text>
-       </pdf:page>
-   </pdf:document>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+		  xmlns:pdf="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers"
+		  xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.0.xsd"
+		  data-namespace-typo3-fluid="true">
+
+	<pdf:document outputDestination="inline" outputPath="{fileTitle}" author="{docAuthor}" title="{docTitle}" creator="PDF View Helpers" keywords="{docKeywords}" subject="{docAbstract}">
+		<pdf:page autoPageBreak="0">
+			<pdf:headline trim="0" color="#333" fontSize="18" fontStyle="regular" alignment="left" >Lorem ipsum dolor sit amet</pdf:headline>
+			<pdf:text>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et dolores et ea rebum.
+			</pdf:text>
+		</pdf:page>
+	</pdf:document>
+
+	</html>
