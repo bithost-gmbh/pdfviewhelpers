@@ -57,3 +57,5 @@ plugin.tx_pdfviewhelpers.settings {
 		bulletColor = #BEDB39
 	}
 }
+
+module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers

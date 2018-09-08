@@ -86,6 +86,8 @@ TypoScript
 		}
 	}
 
+	module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers
+
 
 .. _fullfeatureshowcase_php:
 

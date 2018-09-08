@@ -49,6 +49,8 @@ TypoScript
 		}
 	}
 
+	module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers
+
 
 .. _headerandfooter_fluid:
 
