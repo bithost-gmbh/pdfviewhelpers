@@ -66,7 +66,7 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
         <pdf:headline>Some more information</pdf:headline>
 
         <pdf:multiColumn>
-            <pdf:column>
+            <pdf:column width="55%">
                 <pdf:text>
                     Lorem ipsum [..] voluptua:
                 </pdf:text>
@@ -75,7 +75,7 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
                     Lorem ipsum  [..] sit amet.
                 </pdf:text>
             </pdf:column>
-            <pdf:column>
+            <pdf:column width="45%" padding="{left: 2}">
                 <pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg" />
                 <pdf:text padding="{top: 1}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
             </pdf:column>

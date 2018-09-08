@@ -141,7 +141,7 @@ class BasePDF extends FPDI
      *
      * @return void
      */
-    public function basePdfHeader()
+    protected function basePdfHeader()
     {
     }
 
@@ -150,7 +150,7 @@ class BasePDF extends FPDI
      *
      * @return void
      */
-    public function basePdfFooter()
+    protected function basePdfFooter()
     {
     }
 
@@ -257,5 +257,16 @@ class BasePDF extends FPDI
     public function setIsAutoPageBreak($isAutoPageBreak)
     {
         $this->isAutoPageBreak = $isAutoPageBreak;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getInnerPageWidth()
+    {
+        $pageWidth = $this->getPageWidth();
+        $pageMargins = $this->getMargins();
+
+        return $pageWidth - $pageMargins['left'] - $pageMargins['right'];
     }
 }

@@ -28,6 +28,10 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use Bithost\Pdfviewhelpers\Utility\ValidationUtility;
+
 /**
  * ColumnViewHelper
  *
@@ -38,8 +42,62 @@ class ColumnViewHelper extends AbstractPDFViewHelper
     /**
      * @return void
      */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+
+        $this->registerArgument('width', 'string', '', false, null);
+        $this->registerArgument('padding', 'array', '', false, []);
+    }
+
+    /**
+     * @return void
+     *
+     * @throws Exception
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $multiColumnContext = $this->getMultiColumnContext();
+
+        $this->arguments['padding'] = array_merge(['top' => 0, 'right' => 0, 'bottom' => 0, 'left' => 0], $this->arguments['padding']);
+
+        ValidationUtility::validatePadding($this->arguments['padding']);
+
+        if (strlen($this->arguments['width'])) {
+            if (mb_substr($this->arguments['width'], -1) === '%') {
+                $stringPercentage = rtrim($this->arguments['width'], '%');
+                $invalidWidth = !is_numeric($stringPercentage);
+                $columnWidth = ((float) $stringPercentage / 100) * $multiColumnContext['pageWidthWithoutMargins'];
+            } else {
+                $columnWidth = $this->arguments['width'];
+                $invalidWidth = !is_numeric($columnWidth);
+            }
+
+            if ($invalidWidth) {
+                throw new ValidationException('Invalid column width "' . $this->arguments['width'] . '" provided. ERROR: 1536398597', 1536398597);
+            }
+
+            $multiColumnContext['columnWidth'] = $columnWidth;
+        } else {
+            $multiColumnContext['columnWidth'] = $multiColumnContext['defaultColumnWidth'];
+        }
+
+        $multiColumnContext['columnWidth'] = $multiColumnContext['columnWidth'] - $this->arguments['padding']['left'] - $this->arguments['padding']['right'];
+        $multiColumnContext['currentPosX'] = $multiColumnContext['currentPosX'] + $this->arguments['padding']['left'];
+        $multiColumnContext['columnPadding'] = $this->arguments['padding'];
+
+        $this->setMultiColumnContext($multiColumnContext);
+    }
+
+    /**
+     * @return void
+     */
     public function render()
     {
+        $this->getPDF()->SetY($this->getPDF()->GetY() + $this->arguments['padding']['top']);
         $this->renderChildren();
+        $this->getPDF()->SetY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
     }
 }

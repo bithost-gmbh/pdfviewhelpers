@@ -138,7 +138,7 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
     {
         $multiColumnContext = $this->getMultiColumnContext();
 
-        if ($multiColumnContext['isInAColumn']) {
+        if ($multiColumnContext !== null && $multiColumnContext['isInAColumn']) {
             $this->arguments['width'] = $multiColumnContext['columnWidth'];
             $this->arguments['posX'] = $multiColumnContext['currentPosX'];
         }
@@ -163,18 +163,6 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
             return 'imageSVG';
         } else {
             throw new ValidationException('Imagetype is not supported. ERROR: 1363778014', 1363778014);
-        }
-    }
-
-    /**
-     * @return array|bool $multiColumnContext
-     */
-    protected function getMultiColumnContext()
-    {
-        if ($this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'multiColumnContext')) {
-            return $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'multiColumnContext');
-        } else {
-            return false;
         }
     }
 

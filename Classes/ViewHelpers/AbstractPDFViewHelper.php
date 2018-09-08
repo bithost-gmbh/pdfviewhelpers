@@ -150,4 +150,28 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
 
         return $text;
     }
+
+    /**
+     * @param array $multiColumnContext
+     *
+     * @return void
+     */
+    protected function setMultiColumnContext(array $multiColumnContext)
+    {
+        $this->viewHelperVariableContainer->addOrUpdate('MultiColumnViewHelper', 'multiColumnContext', $multiColumnContext);
+    }
+
+    /**
+     * @return array $multiColumnContext
+     *
+     * @throws Exception
+     */
+    protected function getMultiColumnContext()
+    {
+        if ($this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'multiColumnContext')) {
+            return $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'multiColumnContext');
+        } else {
+            return null;
+        }
+    }
 }
