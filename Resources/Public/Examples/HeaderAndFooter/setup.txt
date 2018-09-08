@@ -32,3 +32,5 @@ plugin.tx_pdfviewhelpers.settings {
 		posY = -15
 	}
 }
+
+module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers

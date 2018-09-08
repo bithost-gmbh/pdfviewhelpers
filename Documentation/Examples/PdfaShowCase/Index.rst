@@ -41,47 +41,47 @@ Be sure to disable all header data, to ensure that all HTML header output is dis
 		10 {
 			file = EXT:pdfviewhelpers/Resources/Public/Examples/PdfaShowCase/Template.html
 			variables {
-               fileTitle = TEXT
-               fileTitle {
-                  field = title
-                  wrap = |.pdf
-               }
+				fileTitle = TEXT
+				fileTitle {
+					field = title
+					wrap = |.pdf
+				}
 
-               docTitle = TEXT
-               docTitle {
-                  field = title
-                  wrap = |
-               }
+				docTitle = TEXT
+				docTitle {
+					field = title
+					wrap = |
+				}
 
-               docAuthor = TEXT
-               docAuthor {
-                  field = author
-                  wrap = |
-               }
+				docAuthor = TEXT
+				docAuthor {
+					field = author
+					wrap = |
+				}
 
-               docDate = TEXT
-               docDate {
-                  field = starttime
-                  date = d.m.Y
-                  wrap = |
-               }
+				docDate = TEXT
+				docDate {
+					field = starttime
+					date = d.m.Y
+					wrap = |
+				}
 
-               docAbstract = TEXT
-               docAbstract {
-                  field = abstract
-                  wrap = |
-               }
+				docAbstract = TEXT
+				docAbstract {
+					field = abstract
+					wrap = |
+				}
 
-               docKeywords = TEXT
-               docKeywords {
-                  field = keywords
-                  wrap = |
-               }
-            }
+				docKeywords = TEXT
+				docKeywords {
+					field = keywords
+					wrap = |
+				}
+			}
 		}
 	}
 
-    plugin.tx_pdfviewhelpers.settings {
+	plugin.tx_pdfviewhelpers.settings {
 		config {
 			class = Bithost\Pdfviewhelpers\Model\PdfaShowCase
 			jpgQuality = 80
@@ -124,6 +124,8 @@ Be sure to disable all header data, to ensure that all HTML header output is dis
 			bulletColor = #555
 		}
 	}
+
+	module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers
 
 
 .. _pdfafeatureshowcase_php:

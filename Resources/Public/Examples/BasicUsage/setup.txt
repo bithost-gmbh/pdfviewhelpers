@@ -50,3 +50,5 @@ plugin.tx_pdfviewhelpers.settings {
 		}
 	}
 }
+
+module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers

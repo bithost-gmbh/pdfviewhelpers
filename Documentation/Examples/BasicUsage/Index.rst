@@ -70,6 +70,8 @@ TypoScript
 		}
 	}
 
+	module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers
+
 .. _basicusage_fluid:
 
 Fluid Template
