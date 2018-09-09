@@ -80,7 +80,10 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         }
 
         if ($this->arguments['autoHyphenation']) {
-            $this->arguments['text'] = $this->hyphenateText($this->arguments['text']);
+            $this->arguments['text'] = $this->hyphenationService->hyphenateText(
+                $this->arguments['text'],
+                $this->hyphenationService->getHyphenFilePath($this->settings['config']['hyphenFile'])
+            );
         }
 
         if ($this->validationService->validateColor($this->arguments['color'])) {

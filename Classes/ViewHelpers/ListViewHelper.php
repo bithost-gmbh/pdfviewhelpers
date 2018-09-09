@@ -136,7 +136,10 @@ class ListViewHelper extends AbstractTextViewHelper
             }
 
             if ($this->arguments['autoHyphenation']) {
-                $listElement = $this->hyphenateText($listElement);
+                $listElement = $this->hyphenationService->hyphenateText(
+                    $listElement,
+                    $this->hyphenationService->getHyphenFilePath($this->settings['config']['hyphenFile'])
+                );
             }
 
             $this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->convertToTcpdfAlignment($this->arguments['alignment']), false, 1, $textPosX, $currentPosY, true, 0, false, true, 0, 'T', false);
