@@ -30,7 +30,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
-use Bithost\Pdfviewhelpers\Utility\ValidationUtility;
+use Bithost\Pdfviewhelpers\Service\ValidationService;
 
 /**
  * ColumnViewHelper
@@ -63,7 +63,7 @@ class ColumnViewHelper extends AbstractPDFViewHelper
 
         $this->arguments['padding'] = array_merge(['top' => 0, 'right' => 0, 'bottom' => 0, 'left' => 0], $this->arguments['padding']);
 
-        ValidationUtility::validatePadding($this->arguments['padding']);
+        $this->validationService->validatePadding($this->arguments['padding']);
 
         if (strlen($this->arguments['width'])) {
             if (mb_substr($this->arguments['width'], -1) === '%') {
@@ -93,6 +93,8 @@ class ColumnViewHelper extends AbstractPDFViewHelper
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     public function render()
     {

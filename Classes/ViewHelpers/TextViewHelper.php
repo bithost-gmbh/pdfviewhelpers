@@ -65,7 +65,7 @@ class TextViewHelper extends AbstractTextViewHelper
         if (!empty($this->settings['text']['alignment'])) {
             $this->overrideArgument('alignment', 'string', '', false, $this->settings['text']['alignment']);
         }
-        if (!empty($this->settings['text']['paragraphSpacing'])) {
+        if (strlen($this->settings['text']['paragraphSpacing'])) {
             $this->overrideArgument('paragraphSpacing', 'float', '', false, $this->settings['text']['paragraphSpacing']);
         }
         if (strlen($this->settings['text']['autoHyphenation'])) {
@@ -84,7 +84,7 @@ class TextViewHelper extends AbstractTextViewHelper
 
         $this->arguments['padding'] = array_merge($this->settings['generalText']['padding'], $this->settings['text']['padding'], $this->arguments['padding']);
 
-        if ($this->isValidPadding($this->arguments['padding'])) {
+        if ($this->validationService->validatePadding($this->arguments['padding'])) {
             $this->getPDF()->setCellPaddings(
                 $this->arguments['padding']['left'],
                 $this->arguments['padding']['top'],

@@ -1,8 +1,8 @@
 <?php
 
-namespace Bithost\Pdfviewhelpers\Utility;
+namespace Bithost\Pdfviewhelpers\Tests\Unit;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -26,34 +26,16 @@ namespace Bithost\Pdfviewhelpers\Utility;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
-use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
- * ValidationUtility
+ * BaseFunctionalTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class ValidationUtility
+abstract class AbstractUnitTest extends UnitTestCase
 {
-    /**
-     * @param array $padding
-     *
-     * @return boolean
-     *
-     * @throws ValidationException
-     */
-    public static function validatePadding($padding)
-    {
-        if (count($padding) === 4
-            && isset($padding['top'], $padding['right'], $padding['bottom'], $padding['left'])
-            && is_numeric($padding['top']) && is_numeric($padding['right'])
-            && is_numeric($padding['bottom']) && is_numeric($padding['left'])
-        ) {
-            return true;
-        } else {
-            throw new ValidationException('Padding must be an Array with Elements: top:[int],right:[int],bottom:[int],left:[int] ERROR: 1363769351', 1363769351);
-        }
-    }
+
 }

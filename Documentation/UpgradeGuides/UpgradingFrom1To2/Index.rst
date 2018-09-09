@@ -20,3 +20,8 @@ Removed example class BithostTCPDF
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The example class ``BithostTCPDF`` has been removed without a replacement.
 Please extend ``BasePDF``, and see the :ref:`basic usage example <basicusage>` on how to render a similar header.
+
+Introduces ValidationService
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+All utility methods that start with ``isValid`` have been moved to a separate class ``ValidationService``.
+If you implemented custom ViewHelpers you have to change these method calls.
