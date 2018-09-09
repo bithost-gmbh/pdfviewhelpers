@@ -45,8 +45,8 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('trim', 'boolean', '', false, $this->settings['generalText']['trim']);
-        $this->registerArgument('removeDoubleWhitespace', 'boolean', '', false, $this->settings['generalText']['removeDoubleWhitespace']);
+        $this->registerArgument('trim', 'boolean', '', false, (boolean) $this->settings['generalText']['trim']);
+        $this->registerArgument('removeDoubleWhitespace', 'boolean', '', false, (boolean) $this->settings['generalText']['removeDoubleWhitespace']);
         $this->registerArgument('color', 'string', '', false, $this->settings['generalText']['color']);
         $this->registerArgument('fontFamily', 'string', '', false, $this->settings['generalText']['fontFamily']);
         $this->registerArgument('fontSize', 'integer', '', false, $this->settings['generalText']['fontSize']);
@@ -55,7 +55,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         $this->registerArgument('text', 'string', '', false, null);
         $this->registerArgument('alignment', 'string', 'Text Alignment. Possible values: "left", "center", "right", "justify". Defaults to "left"', false, $this->settings['generalText']['alignment']);
         $this->registerArgument('paragraphSpacing', 'float', 'Spacing after each paragraph. Defaults to 0', false, $this->settings['generalText']['paragraphSpacing']);
-        $this->registerArgument('autoHyphenation', 'boolean', '', false, $this->settings['generalText']['autoHyphenation']);
+        $this->registerArgument('autoHyphenation', 'boolean', '', false, (boolean) $this->settings['generalText']['autoHyphenation']);
     }
 
     /**

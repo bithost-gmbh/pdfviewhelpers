@@ -70,7 +70,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper
     public function initializeArguments()
     {
         parent::initializeArguments();
-        
+
         $this->registerArgument('title', 'string', '', false, $this->settings['document']['title']);
         $this->registerArgument('subject', 'string', '', false, $this->settings['document']['subject']);
         $this->registerArgument('author', 'string', '', false, $this->settings['document']['author']);
@@ -79,6 +79,10 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $this->registerArgument('outputDestination', 'string', '', false, $this->settings['document']['outputDestination']);
         $this->registerArgument('outputPath', 'string', '', false, $this->settings['document']['outputPath']);
         $this->registerArgument('sourceFile', 'string', '', false, $this->settings['document']['sourceFile']);
+        $this->registerArgument('unit', 'string', '', false, $this->settings['document']['unit']);
+        $this->registerArgument('unicode', 'boolean', '', false, (boolean) $this->settings['document']['unicode']);
+        $this->registerArgument('encoding', 'string', '', false, $this->settings['document']['encoding']);
+        $this->registerArgument('pdfa', 'boolean', '', false, (boolean) $this->settings['document']['pdfa']);
     }
 
     /**
@@ -98,7 +102,14 @@ class DocumentViewHelper extends AbstractPDFViewHelper
 
         if (!empty($this->settings['config']['class'])) {
             $this->setPDF(GeneralUtility::makeInstance(
-                $this->settings['config']['class']
+                $this->settings['config']['class'],
+                $this->settingsConversionService->convertOrientation($this->settings['page']['orientation']),
+                $this->arguments['unit'],
+                $this->settings['page']['format'],
+                $this->arguments['unicode'],
+                $this->arguments['encoding'],
+                false, //deprecated feature
+                $this->arguments['pdfa']
             ));
         }
 

@@ -71,6 +71,7 @@ plugin.tx_pdfviewhelpers.settings {
 		keywords = full, feature, show, case
 		outputDestination = I
 		outputPath = pdfa.pdf
+		pdfa = 1
 	}
 	page {
 		margin {

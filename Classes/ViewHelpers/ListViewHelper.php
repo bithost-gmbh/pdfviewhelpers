@@ -46,10 +46,10 @@ class ListViewHelper extends AbstractTextViewHelper
         parent::initializeArguments();
 
         if (strlen($this->settings['list']['trim'])) {
-            $this->overrideArgument('trim', 'boolean', '', false, (boolean)$this->settings['list']['trim']);
+            $this->overrideArgument('trim', 'boolean', '', false, (boolean) $this->settings['list']['trim']);
         }
         if (strlen($this->settings['list']['removeDoubleWhitespace'])) {
-            $this->overrideArgument('removeDoubleWhitespace', 'boolean', '', false, (boolean)$this->settings['list']['removeDoubleWhitespace']);
+            $this->overrideArgument('removeDoubleWhitespace', 'boolean', '', false, (boolean) $this->settings['list']['removeDoubleWhitespace']);
         }
         if (!empty($this->settings['list']['color'])) {
             $this->overrideArgument('color', 'string', '', false, $this->settings['list']['color']);
@@ -67,7 +67,7 @@ class ListViewHelper extends AbstractTextViewHelper
             $this->overrideArgument('alignment', 'string', '', false, $this->settings['list']['alignment']);
         }
         if (!empty($this->settings['list']['autoHyphenation'])) {
-            $this->overrideArgument('autoHyphenation', 'boolean', '', false, $this->settings['list']['autoHyphenation']);
+            $this->overrideArgument('autoHyphenation', 'boolean', '', false, (boolean) $this->settings['list']['autoHyphenation']);
         }
 
         $this->registerArgument('listElements', 'array', '', true, null);

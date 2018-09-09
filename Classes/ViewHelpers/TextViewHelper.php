@@ -45,10 +45,10 @@ class TextViewHelper extends AbstractTextViewHelper
         parent::initializeArguments();
 
         if (strlen($this->settings['text']['trim'])) {
-            $this->overrideArgument('trim', 'boolean', '', false, (boolean)$this->settings['text']['trim']);
+            $this->overrideArgument('trim', 'boolean', '', false, (boolean) $this->settings['text']['trim']);
         }
         if (strlen($this->settings['text']['removeDoubleWhitespace'])) {
-            $this->overrideArgument('removeDoubleWhitespace', 'boolean', '', false, (boolean)$this->settings['text']['removeDoubleWhitespace']);
+            $this->overrideArgument('removeDoubleWhitespace', 'boolean', '', false, (boolean) $this->settings['text']['removeDoubleWhitespace']);
         }
         if (!empty($this->settings['text']['color'])) {
             $this->overrideArgument('color', 'string', '', false, $this->settings['text']['color']);
@@ -69,7 +69,7 @@ class TextViewHelper extends AbstractTextViewHelper
             $this->overrideArgument('paragraphSpacing', 'float', '', false, $this->settings['text']['paragraphSpacing']);
         }
         if (strlen($this->settings['text']['autoHyphenation'])) {
-            $this->overrideArgument('autoHyphenation', 'boolean', '', false, $this->settings['text']['autoHyphenation']);
+            $this->overrideArgument('autoHyphenation', 'boolean', '', false, (boolean) $this->settings['text']['autoHyphenation']);
         }
     }
 

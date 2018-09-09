@@ -8,7 +8,7 @@
 
 .. _pdfashowcase:
 
-PDF/a Show Case
+PDF/A Show Case
 ======================
 
 
@@ -17,7 +17,7 @@ PDF/a Show Case
 Intro
 -----
 
-Its's possible to render the output as a valid PDF/a document.
+Its's possible to render the output as a valid PDF/A document.
 
 .. _pdfashowcase_typoscript:
 
@@ -25,6 +25,7 @@ TypoScript
 ----------
 
 Be sure to disable all header data, to ensure that all HTML header output is disabled. Some variables on page properties are used to fill the meta data.
+The most important setting is ``plugin.tx_pdfviewhelpers.settings.document.pdfa = 1`` to enable PDF/A mode.
 
 ::
 
@@ -102,6 +103,7 @@ Be sure to disable all header data, to ensure that all HTML header output is dis
 			keywords = full, feature, show, case
 			outputDestination = I
 			outputPath = pdfa.pdf
+			pdfa = 1
 		}
 		page {
 			margin {
@@ -126,81 +128,6 @@ Be sure to disable all header data, to ensure that all HTML header output is dis
 	}
 
 	module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers
-
-
-.. _pdfafeatureshowcase_php:
-
-PHP
----
-
-A custom PHP class is needed to override the TCPDF constructor, to be able to set the pdfa parameter to true.
-
-::
-
-   <?php
-   namespace Bithost\Pdfviewhelpers\Model;
-
-   /***
-    *
-    * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
-    *
-    *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
-    *           Esteban Marin <esteban.marin@bithost.ch>, Bithost GmbH
-    *
-    *  All rights reserved
-    *
-    *  This script is part of the TYPO3 project. The TYPO3 project is
-    *  free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 3 of the License, or
-    *  (at your option) any later version.
-    *
-    *  The GNU General Public License can be found at
-    *  http://www.gnu.org/copyleft/gpl.html.
-    *
-    *  This script is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU General Public License for more details.
-    *
-    *  This copyright notice MUST APPEAR in all copies of the script!
-    ***/
-
-   /**
-    * PdfaTCPDF, overrides constructor to set pdfa param as true
-    *
-    * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
-    */
-
-   class PdfaTCPDF extends BasePDF
-   {
-
-        /**
-        * @return void
-        */
-        public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $pdfa=true) {
-            // Set pdfa parameter to true
-            parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache, true);
-        }
-
-        /**
-        * @return void
-        */
-        public function Header()
-        {
-
-        }
-
-        /**
-        * @return void
-        */
-        public function Footer()
-        {
-
-        }
-   }
-
-
 
 .. _pdfashowcase_fluid:
 

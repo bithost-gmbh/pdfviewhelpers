@@ -58,7 +58,7 @@ Also ensure you have disabled all html header output:
 	pdfpage {
 		10 = FLUIDTEMPLATE
 		10 {
-			file = EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.html
+			file = EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Template.html
 		}
 		# ensure there is no other output apart from the pdf
 		# take a look at the generated pdf file (end!) in a text editor to verify there is no other output

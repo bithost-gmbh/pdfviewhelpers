@@ -34,6 +34,10 @@ plugin.tx_pdfviewhelpers.settings {
 		outputDestination = inline
 		outputPath = document.pdf
 		sourceFile =
+		unit = mm
+		unicode = 1
+		encoding = UTF-8
+		pdfa = 0
 	}
 	page {
 		autoPageBreak = 0
