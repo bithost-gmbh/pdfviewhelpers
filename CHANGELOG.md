@@ -4,12 +4,12 @@
 - Adds HeaderViewHelper and FooterViewHelper, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)
 - Adds PageNumberAliasViewHelper and TotalNumberOfPagesAliasViewHelpers, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)
 - Adds LineViewHelper
-- Adds speaking settings
+- Adds support for speaking settings
 - Adds partial overwriting of text padding, [#25](https://github.com/bithost-gmbh/pdfviewhelpers/issues/25)
 - Adds width and padding to ColumnViewHelper
 - Adds xml namespaces and schema
-- Refactors validation
 - Adds HyphenationService to cache and speed up hyphenation
+- Adds validation and settings conversion services
 - Replaces EmptyFPDI and EmptyTCPDF by BasePDF
 - Removes example class BithostTCPDF
 - Fixes MultiColumnViewHelper columns not correctly initialized

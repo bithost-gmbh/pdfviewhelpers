@@ -100,38 +100,6 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @param string $colorHex
-     *
-     * @return array
-     */
-    protected function convertHexToRGB($colorHex)
-    {
-        $colorHex = str_replace("#", "", $colorHex);
-
-        if (strlen($colorHex) == 3) {
-            $r = hexdec(substr($colorHex, 0, 1) . substr($colorHex, 0, 1));
-            $g = hexdec(substr($colorHex, 1, 1) . substr($colorHex, 1, 1));
-            $b = hexdec(substr($colorHex, 2, 1) . substr($colorHex, 2, 1));
-        } else {
-            $r = hexdec(substr($colorHex, 0, 2));
-            $g = hexdec(substr($colorHex, 2, 2));
-            $b = hexdec(substr($colorHex, 4, 2));
-        }
-
-        return ['R' => $r, 'G' => $g, 'B' => $b];
-    }
-
-    /**
-     * @param string $imageTypes
-     *
-     * @return array
-     */
-    protected function convertImageTypeStringToImageTypeArray($imageTypes)
-    {
-        return explode(',', str_replace(' ', '', strtolower($imageTypes)));
-    }
-
-    /**
      * @return void
      *
      * @throws Exception
@@ -143,58 +111,6 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
         if ($multiColumnContext !== null && $multiColumnContext['isInAColumn']) {
             $this->arguments['width'] = $multiColumnContext['columnWidth'];
             $this->arguments['posX'] = $multiColumnContext['currentPosX'];
-        }
-    }
-
-    /**
-     * @param string $extension
-     *
-     * @return string
-     *
-     * @throws ValidationException
-     */
-    protected function getImageRenderMode($extension)
-    {
-        $extension = strtolower($extension);
-
-        if (in_array($extension, $this->convertImageTypeStringToImageTypeArray($this->settings['config']['allowedImageTypes']['image']))) {
-            return 'image';
-        } elseif (in_array($extension, $this->convertImageTypeStringToImageTypeArray($this->settings['config']['allowedImageTypes']['imageEPS']))) {
-            return 'imageEPS';
-        } elseif (in_array($extension, $this->convertImageTypeStringToImageTypeArray($this->settings['config']['allowedImageTypes']['imageSVG']))) {
-            return 'imageSVG';
-        } else {
-            throw new ValidationException('Imagetype is not supported. ERROR: 1363778014', 1363778014);
-        }
-    }
-
-    /**
-     * Converts pdfviewhelper fontStyle syntax to TCPDF syntax. This function is necessary because TCPDF uses an empty
-     * string to represent "regular", but we can not do this because of the settings inheritance (empty means inherit).
-     *
-     * @param string $fontStyle
-     *
-     * @return string
-     *
-     * @throws Exception
-     */
-    public function convertToTcpdfFontStyle($fontStyle)
-    {
-        switch ($fontStyle) {
-            case 'bold':
-            case 'B':
-                return 'B';
-            case 'italic':
-            case 'I':
-                return 'I';
-            case 'underline':
-            case 'U':
-                return 'U';
-            case 'regular':
-            case 'R':
-                return '';
-            default:
-                throw new ValidationException('Invalid font style "' . $fontStyle . '" provided. ERROR: 1536238089', 1536238089);
         }
     }
 }

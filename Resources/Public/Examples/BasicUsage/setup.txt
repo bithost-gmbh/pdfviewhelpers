@@ -32,9 +32,6 @@ plugin.tx_pdfviewhelpers.settings {
 	footer {
 		posY = -15
 	}
-	text {
-		paragraphSpacing = 0
-	}
 	page {
 		margins {
 			top = 65

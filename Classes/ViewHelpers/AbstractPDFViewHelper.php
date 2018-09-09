@@ -30,6 +30,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Service\HyphenationService;
+use Bithost\Pdfviewhelpers\Service\SettingsConversionService;
 use Bithost\Pdfviewhelpers\Service\ValidationService;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -83,6 +84,11 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     protected $hyphenationService = null;
 
     /**
+     * @var SettingsConversionService
+     */
+    protected $settingsConversionService = null;
+
+    /**
      * @param ConfigurationManagerInterface $configurationManager
      */
     public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
@@ -107,6 +113,14 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     }
 
     /**
+     * @param SettingsConversionService $settingsConversionService
+     */
+    public function injectSettingsConversionService(SettingsConversionService $settingsConversionService)
+    {
+        $this->settingsConversionService = $settingsConversionService;
+    }
+
+    /**
      * @return void
      *
      * @throws Exception
@@ -118,6 +132,8 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
         if (!is_array($this->settings) || !isset($this->settings['staticTypoScriptSetupIncluded'])) {
             throw new Exception('No pdfviewhelpers settings found. Please make sure you have included the static TypoScript template. ERROR: 1470982083', 1470982083);
         }
+
+        $this->settingsConversionService->setSettings($this->settings);
     }
 
     /**

@@ -87,7 +87,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         }
 
         if ($this->validationService->validateColor($this->arguments['color'])) {
-            $this->arguments['color'] = $this->convertHexToRGB($this->arguments['color']);
+            $this->arguments['color'] = $this->settingsConversionService->convertHexToRGB($this->arguments['color']);
             $this->getPDF()->SetTextColor($this->arguments['color']['R'], $this->arguments['color']['G'], $this->arguments['color']['B']);
         }
 
@@ -96,7 +96,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         }
 
         if ($this->validationService->validateFontFamily($this->arguments['fontFamily'])) {
-            $this->getPDF()->SetFont($this->arguments['fontFamily'], $this->convertToTcpdfFontStyle($this->arguments['fontStyle']));
+            $this->getPDF()->SetFont($this->arguments['fontFamily'], $this->settingsConversionService->convertFontStyle($this->arguments['fontStyle']));
         }
     }
 
@@ -117,7 +117,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
                 $paragraph = trim($paragraph);
             }
 
-            $this->getPDF()->MultiCell($this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->convertToTcpdfAlignment($this->arguments['alignment']), false, 1, $this->arguments['posX'], $posY, true, 0, false, true, 0, 'T', false);
+            $this->getPDF()->MultiCell($this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->settingsConversionService->convertAlignment($this->arguments['alignment']), false, 1, $this->arguments['posX'], $posY, true, 0, false, true, 0, 'T', false);
 
             if ($this->validationService->validateParagraphSpacing($this->arguments['paragraphSpacing']) && $this->arguments['paragraphSpacing'] > 0
             ) {
@@ -125,33 +125,6 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
             }
 
             $posY = $this->getPDF()->GetY();
-        }
-    }
-
-    /**
-     * @param string $alignment
-     *
-     * @return string
-     *
-     * @throws Exception
-     */
-    protected function convertToTcpdfAlignment($alignment)
-    {
-        switch ($alignment) {
-            case 'left':
-            case 'L':
-                return 'L';
-            case 'center':
-            case 'C':
-                return 'C';
-            case 'right':
-            case 'R':
-                return 'R';
-            case 'justify':
-            case 'J':
-                return 'J';
-            default:
-                throw new ValidationException('Invalid alignment "' . $alignment . '" provided. ERROR: 1536237714', 1536237714);
         }
     }
 }
