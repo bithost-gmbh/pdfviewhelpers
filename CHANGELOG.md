@@ -10,9 +10,10 @@
 - Adds xml namespaces and schema
 - Adds HyphenationService to cache and speed up hyphenation
 - Adds validation and settings conversion services
-- Replaces EmptyFPDI and EmptyTCPDF by BasePDF
-- Removes example class BithostTCPDF
 - Fixes MultiColumnViewHelper columns not correctly initialized
+- Changes page.margins to page.margin
+- Removes classes EmptyFPDI, EmptyTCPDF and BithostTCPDF (replaced by BasePDF)
+- Enforces usage of BasePDF
 
 ## 1.6.0 - August 14, 2018
 - Adds support for TYPO3 9 LTS, [#59](https://github.com/bithost-gmbh/pdfviewhelpers/issues/59) (Thanks [@luberti](https://github.com/luberti))

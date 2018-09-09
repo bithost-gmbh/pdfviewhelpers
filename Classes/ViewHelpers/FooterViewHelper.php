@@ -68,11 +68,6 @@ class FooterViewHelper extends AbstractPDFViewHelper
      */
     public function render()
     {
-        if (!($this->getPDF() instanceof BasePDF)) {
-            throw new  Exception("Your PDF class must be an instance of Bithost\\Pdfviewhelpers\\Model\\BasePDF in order to support Header and Footer ViewHelper. ERROR: 1535952895", 1535952895);
-        }
-
-        /** @var BasePDF $pdf */
         $pdf = $this->getPDF();
         $arguments = $this->arguments;
         $renderChildrenClosure = $this->buildRenderChildrenClosure();

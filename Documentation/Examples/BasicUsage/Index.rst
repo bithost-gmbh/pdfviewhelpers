@@ -55,7 +55,7 @@ TypoScript
 			paragraphSpacing = 0
 		}
 		page {
-			margins {
+			margin {
 				top = 65
 				bottom = 25
 			}

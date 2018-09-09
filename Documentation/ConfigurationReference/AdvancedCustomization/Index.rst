@@ -9,7 +9,7 @@ Advanced Customization
 ----------------------
 
 To completely customize the PDF creation you have the options to provide your own PDF class or write your own ViewHelper.
-When providing your own PDF class it is recommend to always extend from ``Bithost\Pdfviewhelpers\Model\BasePDF`` in order to be able to use features like header and footer ViewHelpers.
+Your own PDF class is required to extend ``Bithost\Pdfviewhelpers\Model\BasePDF``.
 If you feel like your custom ViewHelper might be useful for everybody, feel free to create a pull request!
 
 Extend FPDI / TCPDF class

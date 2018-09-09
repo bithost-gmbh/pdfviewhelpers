@@ -104,7 +104,7 @@ Be sure to disable all header data, to ensure that all HTML header output is dis
 			outputPath = pdfa.pdf
 		}
 		page {
-			margins {
+			margin {
 				top = 20
 				right = 15
 				bottom = 20
@@ -166,15 +166,13 @@ A custom PHP class is needed to override the TCPDF constructor, to be able to se
     *  This copyright notice MUST APPEAR in all copies of the script!
     ***/
 
-   use Bithost\Pdfviewhelpers\Model\TCPDF;
-
    /**
     * PdfaTCPDF, overrides constructor to set pdfa param as true
     *
     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
     */
 
-   class PdfaTCPDF extends \TCPDF
+   class PdfaTCPDF extends BasePDF
    {
 
         /**

@@ -16,6 +16,10 @@ The classes ``EmptyFPDI`` and ``EmptyTCPDF`` have been replaced by ``BasePDF``. 
 classes you should replace them by ``Bithost\Pdfviewhelpers\Model\BasePDF``. The class ``BasePDF`` offers the same functionality as the other classes before
 while adding the possibility to use header and footer ViewHelpers.
 
+Provided class must inherit from BasePDF
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The PDF class you can provide in ``plugin.tx_pdfviewhelpers.settings.config.class`` is now required to inherit from ``Bithost\Pdfviewhelpers\Model\BasePDF``.
+
 Removed example class BithostTCPDF
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The example class ``BithostTCPDF`` has been removed without a replacement.
@@ -25,3 +29,8 @@ Introduces ValidationService
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 All utility methods that start with ``isValid`` have been moved to a separate class ``ValidationService``.
 If you implemented custom ViewHelpers you have to change these method calls.
+
+Renamed page.margins to page.margin
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The TypoScript setting ``plugin.tx_pdfviewhelpers.settings.page.margins`` has been renamed to ``plugin.tx_pdfviewhelpers.settings.page.margin``.
+Also the Fluid PageViewHelper attribute has been renamed from ``page.margins`` to ``page.margin``.

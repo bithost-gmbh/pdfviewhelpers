@@ -87,10 +87,6 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
      */
     public function initializeHeaderAndFooter()
     {
-        if (!($this->getPDF() instanceof BasePDF)) {
-            return;
-        }
-
         if ($this->viewHelperVariableContainer->get('DocumentViewHelper', 'pageNeedsHeader')) {
             $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pageNeedsHeader', false);
 
