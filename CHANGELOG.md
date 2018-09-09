@@ -11,6 +11,7 @@
 - Adds HyphenationService to cache and speed up hyphenation
 - Adds validation and settings conversion services
 - Adds PDF constructor arguments to DocumentViewHelper
+- Adds optional exit after PDF output
 - Fixes MultiColumnViewHelper columns not correctly initialized
 - Changes page.margins to page.margin
 - Removes classes EmptyFPDI, EmptyTCPDF and BithostTCPDF (replaced by BasePDF)

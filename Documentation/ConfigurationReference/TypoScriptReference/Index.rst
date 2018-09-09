@@ -41,6 +41,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	config.language_                             :ref:`t3tsref:data-type-string`       ger
 	config.hyphenFile_                           :ref:`t3tsref:data-type-string`       hyph-de-ch-1901.tex
 	config.disableCache_                         :ref:`t3tsref:data-type-boolean`      1
+	config.exitAfterPdfContentOutput_            :ref:`t3tsref:data-type-boolean`      0
 	config.jpgQuality_                           :ref:`t3tsref:data-type-integer`      100
 	config.sRGBMode_                             :ref:`t3tsref:data-type-boolean`      0
 	config.allowedImageTypes_                    Array                                 *See static TypoScript template*
@@ -163,6 +164,16 @@ config.disableCache
 :typoscript:`plugin.tx_pdfviewhelpers.settings.config.disableCache =` :ref:`t3tsref:data-type-boolean`
 
 Decides whether the TYPO3 frontend cache will be disabled or not.
+
+.. _config.exitAfterPdfContentOutput:
+
+config.exitAfterPdfContentOutput
+""""""""""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.config.exitAfterPdfContentOutput =` :ref:`t3tsref:data-type-boolean`
+
+Decides whether the PHP method ``exit`` is called after the PDF content has been sent to the browser.
+This might solve issues when additional content is echoed and appended to the PDF document. However it might also lead to other unexpected behaviour so be careful.
 
 .. _config.jpgQuality:
 
