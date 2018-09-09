@@ -96,14 +96,15 @@ class DocumentViewHelper extends AbstractPDFViewHelper
             $GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers']['pdfOutput'] = true;
         }
 
-        $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
-        $pdfClassName = empty($this->settings['config']['class']) ? 'TCPDF' : $this->settings['config']['class'];
+        if (!empty($this->settings['config']['class'])) {
+            $this->setPDF(GeneralUtility::makeInstance(
+                $this->settings['config']['class']
+            ));
+        }
 
-        //Load TCPDF language settings
-        require_once($extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->settings['config']['language'] . '.php');
-
-        //Set PDF and document properties
-        $this->setPDF(GeneralUtility::makeInstance($pdfClassName));
+        $this->loadTcpdfLanguageSettings();
+        $this->loadCustomFonts();
+        $this->loadSourceFile();
 
         $this->getPDF()->setSRGBmode($this->settings['config']['sRGBMode'] === '1');
         $this->getPDF()->setFontSubsetting($this->settings['config']['fonts']['subset'] === '1');
@@ -113,33 +114,6 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $this->getPDF()->SetAuthor($this->arguments['author']);
         $this->getPDF()->SetKeywords($this->arguments['keywords']);
         $this->getPDF()->SetCreator($this->arguments['creator']);
-
-        //Add custom fonts
-        foreach ($this->settings['config']['fonts']['addTTFFont'] as $ttfFontName => $ttfFont) {
-            $path = GeneralUtility::getFileAbsFileName($ttfFont['path']);
-            $type = isset($ttfFont['type']) ? $ttfFont['type'] : '';
-
-            $fontName = \TCPDF_FONTS::addTTFfont($path, $type);
-
-            if ($fontName === false) {
-                throw new Exception('Font "' . $ttfFontName . '" could not be added. ERROR: 1492808000', 1492808000);
-            }
-        }
-
-        //Add FPDI sourceFile if given
-        if (!empty($this->arguments['sourceFile'])) {
-            $sourceFilePath = GeneralUtility::getFileAbsFileName($this->arguments['sourceFile']);
-
-            if (!file_exists($sourceFilePath) || !is_readable($sourceFilePath)) {
-                throw new ValidationException('The provided source file "' . $sourceFilePath . '" does not exist or the file is not readable. ERROR: 1525452207', 1525452207);
-            }
-
-            if ($this->getPDF() instanceof FPDI) {
-                $this->getPDF()->setSourceFile($sourceFilePath);
-            } else {
-                throw new Exception('PDF object must be instance of FPDI to support option "sourceFile". ERROR: 1474144733', 1474144733);
-            }
-        }
 
         //Disables cache if set so and in frontend mode
         if ($GLOBALS['TSFE'] instanceof TypoScriptFrontendController && $this->settings['config']['disableCache']) {
@@ -151,6 +125,8 @@ class DocumentViewHelper extends AbstractPDFViewHelper
 
     /**
      * @return string
+     *
+     * @throws Exception
      */
     public function render()
     {
@@ -173,5 +149,59 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         }
 
         return in_array($this->arguments['outputDestination'], $this->tcpdfReturnContentDestinations) ? $output : '';
+    }
+
+    /**
+     * @return void
+     *
+     * @throws ValidationException
+     */
+    protected function loadTcpdfLanguageSettings()
+    {
+        $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
+        $languageFilePath = $extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->settings['config']['language'] . '.php';
+
+        if (!file_exists($languageFilePath) || !is_readable($languageFilePath)) {
+            throw new ValidationException('The provided language file "' . $languageFilePath . '" does not exist or the file is not readable. ERROR: 1536487362', 1536487362);
+        }
+
+        require_once($languageFilePath);
+    }
+
+    /**
+     * @return void
+     *
+     * @throws ValidationException
+     */
+    protected function loadCustomFonts()
+    {
+        foreach ($this->settings['config']['fonts']['addTTFFont'] as $ttfFontName => $ttfFont) {
+            $path = GeneralUtility::getFileAbsFileName($ttfFont['path']);
+            $type = isset($ttfFont['type']) ? $ttfFont['type'] : '';
+
+            $fontName = \TCPDF_FONTS::addTTFfont($path, $type);
+
+            if ($fontName === false) {
+                throw new ValidationException('Font "' . $ttfFontName . '" could not be added. ERROR: 1492808000', 1492808000);
+            }
+        }
+    }
+
+    /**
+     * @return void
+     *
+     * @throws Exception
+     */
+    protected function loadSourceFile()
+    {
+        if (!empty($this->arguments['sourceFile'])) {
+            $sourceFilePath = GeneralUtility::getFileAbsFileName($this->arguments['sourceFile']);
+
+            if (!file_exists($sourceFilePath) || !is_readable($sourceFilePath)) {
+                throw new ValidationException('The provided source file "' . $sourceFilePath . '" does not exist or the file is not readable. ERROR: 1525452207', 1525452207);
+            }
+
+            $this->getPDF()->setSourceFile($sourceFilePath);
+        }
     }
 }

@@ -33,7 +33,7 @@ plugin.tx_pdfviewhelpers.settings {
 		posY = -15
 	}
 	page {
-		margins {
+		margin {
 			top = 65
 			bottom = 25
 		}

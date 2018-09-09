@@ -36,7 +36,7 @@ TypoScript
 	plugin.tx_pdfviewhelpers.settings {
 		page {
 			autoPageBreak = 1
-			margins {
+			margin {
 				top = 25
 				bottom = 25
 			}
@@ -82,7 +82,7 @@ Fluid Template
 			<pdf:text color="#AAA">Page {pdf:getPageNumberAlias()} of {pdf:getTotalNumberOfPagesAlias()}</pdf:text>
 		</pdf:footer>
 
-		<pdf:page margins="{top: 45, right: 15, bottom: 25, left: 15}">
+		<pdf:page margin="{top: 45, right: 15, bottom: 25, left: 15}">
 			<pdf:header scope="thisPage">
 				<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/HeaderAndFooter/logo.png" width="40"/>
 				<pdf:text color="#AAA" alignment="right" posY="10" paragraphSpacing="0">

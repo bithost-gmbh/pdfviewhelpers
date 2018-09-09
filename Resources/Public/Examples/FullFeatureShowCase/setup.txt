@@ -37,7 +37,7 @@ plugin.tx_pdfviewhelpers.settings {
 		outputPath = fullfeatureshowcase.pdf
 	}
 	page {
-		margins {
+		margin {
 			top = 20
 			right = 15
 			bottom = 20

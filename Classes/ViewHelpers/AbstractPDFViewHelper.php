@@ -29,6 +29,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use Bithost\Pdfviewhelpers\Model\BasePDF;
 use Bithost\Pdfviewhelpers\Service\HyphenationService;
 use Bithost\Pdfviewhelpers\Service\SettingsConversionService;
 use Bithost\Pdfviewhelpers\Service\ValidationService;
@@ -137,13 +138,13 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param \TCPDF $pdf
+     * @param BasePDF $pdf
      *
      * @return void
      *
      * @throws Exception
      */
-    protected function setPDF(\TCPDF $pdf)
+    protected function setPDF(BasePDF $pdf)
     {
         if ($this instanceof DocumentViewHelper && !$this->viewHelperVariableContainer->exists('DocumentViewHelper', 'pdf')) {
             $this->viewHelperVariableContainer->add('DocumentViewHelper', 'pdf', $pdf);
@@ -154,7 +155,7 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @return \TCPDF
+     * @return BasePDF
      *
      * @throws Exception
      */

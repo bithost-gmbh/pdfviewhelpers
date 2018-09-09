@@ -20,7 +20,7 @@ plugin.tx_pdfviewhelpers.settings {
 	}
 	page {
 		autoPageBreak = 1
-		margins {
+		margin {
 			top = 25
 			bottom = 25
 		}

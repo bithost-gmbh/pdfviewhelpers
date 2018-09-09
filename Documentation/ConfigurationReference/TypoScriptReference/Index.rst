@@ -55,7 +55,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	document.outputPath_                         :ref:`t3tsref:data-type-string`       document.pdf
 	document.sourceFile_                         :ref:`t3tsref:data-type-string`
 	page.autoPageBreak_                          :ref:`t3tsref:data-type-boolean`      0
-	page.margins_                                Array                                 {top: 15, right: 15, bottom: 15, left: 15}
+	page.margin_                                Array                                 {top: 15, right: 15, bottom: 15, left: 15}
 	page.importPage_                             :ref:`t3tsref:data-type-integer`
 	page.orientation_                            :ref:`t3tsref:data-type-string`       portrait
 	page.format_                                 :ref:`t3tsref:data-type-string`       A4
@@ -122,13 +122,12 @@ Property details
 .. _config.class:
 
 config.class
-"""""""""""""""""
+""""""""""""
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.config.class =` :ref:`t3tsref:data-type-string`
 
 Decides which PHP class should be used as TCPDF object. You can easily provide your own class in order to render custom header and footers or to customize TCPDF in any way.
-If you provide your own class, please make sure to inherit from Bithost\\Pdfviewhelpers\\Model\\BasePDF in order make use of all the features of this extension.
-If this setting is left empty \\TCPDF is used as class.
+Your provided class must inherit from Bithost\\Pdfviewhelpers\\Model\\BasePDF.
 
 
 .. _config.language:
@@ -302,14 +301,14 @@ page.autoPageBreak
 
 Decides whether TCPDF uses auto page break or not. You can always add a new page by adding a new <pdf:page> tag to your template.
 
-.. _page.margins:
+.. _page.margin:
 
-page.margins
+page.margin
 """"""""""""
 
-:typoscript:`plugin.tx_pdfviewhelpers.settings.page.margins =` Array
+:typoscript:`plugin.tx_pdfviewhelpers.settings.page.margin =` Array
 
-An array of the margins for each page. The default unit is millimeters.
+An array of the margin for each page. The default unit is millimeters.
 
 .. _page.importPage:
 
@@ -390,7 +389,7 @@ generalText.fontFamily
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.fontFamily =`  :ref:`t3tsref:data-type-string`
 
-The font family being used. You can add your own fonts using your own TCPDF class.
+The font family being used. A list of available fonts and a configuration to add your own fonts is available in the chapter  :ref:`custom fonts<custom-fonts>`.
 
 .. _generalText.fontSize:
 

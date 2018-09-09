@@ -65,7 +65,7 @@ TypoScript
 			outputPath = fullfeatureshowcase.pdf
 		}
 		page {
-			margins {
+			margin {
 				top = 20
 				right = 15
 				bottom = 20
@@ -134,7 +134,7 @@ the behaviour of TCPDF in any way.
      *
      * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
      */
-    class FullFeatureShowCase extends \FPDI
+    class FullFeatureShowCase extends BasePDF
     {
         /**
          * @return void
