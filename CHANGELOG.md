@@ -9,6 +9,7 @@
 - Adds width and padding to ColumnViewHelper
 - Adds xml namespaces and schema
 - Refactors validation
+- Adds HyphenationService to cache and speed up hyphenation
 - Replaces EmptyFPDI and EmptyTCPDF by BasePDF
 - Removes example class BithostTCPDF
 - Fixes MultiColumnViewHelper columns not correctly initialized

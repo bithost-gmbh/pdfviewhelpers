@@ -28,6 +28,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -56,7 +57,7 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
     /**
      * @return void
      *
-     * @throws ValidationException if an invalid style sheet path is provided
+     * @throws Exception if an invalid style sheet path is provided
      */
     public function render()
     {
@@ -76,7 +77,10 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         }
 
         if ($this->arguments['autoHyphenation']) {
-            $html = $this->hyphenateText($html);
+            $html = $this->hyphenationService->hyphenateText(
+                $html,
+                $this->hyphenationService->getHyphenFilePath($this->settings['config']['hyphenFile'])
+            );
         }
 
         //reset settings to generalText

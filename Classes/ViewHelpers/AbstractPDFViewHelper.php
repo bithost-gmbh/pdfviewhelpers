@@ -29,9 +29,8 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
-use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use Bithost\Pdfviewhelpers\Service\HyphenationService;
 use Bithost\Pdfviewhelpers\Service\ValidationService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -79,6 +78,11 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     protected $validationService = null;
 
     /**
+     * @var HyphenationService
+     */
+    protected $hyphenationService = null;
+
+    /**
      * @param ConfigurationManagerInterface $configurationManager
      */
     public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
@@ -92,6 +96,14 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     public function injectValidationService(ValidationService $validationService)
     {
         $this->validationService = $validationService;
+    }
+
+    /**
+     * @param HyphenationService $hyphenationService
+     */
+    public function injectHyphenationService(HyphenationService $hyphenationService)
+    {
+        $this->hyphenationService = $hyphenationService;
     }
 
     /**
@@ -119,6 +131,7 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     {
         if ($this instanceof DocumentViewHelper && !$this->viewHelperVariableContainer->exists('DocumentViewHelper', 'pdf')) {
             $this->viewHelperVariableContainer->add('DocumentViewHelper', 'pdf', $pdf);
+            $this->hyphenationService->setPDF($pdf);
         } else {
             throw new Exception('The PDF Object has already been created, or the function setPDF() was not called from an instance of DocumentViewHelper. ERROR: 1363682312', 1363682312);
         }
@@ -150,26 +163,6 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
         } else {
             throw new Exception('The PDF Object has not yet been created, or the function removePDF() was not called from an instance of DocumentViewHelper. ERROR: 1526021339', 1526021339);
         }
-    }
-
-    /**
-     * @param string $text
-     *
-     * @return string
-     *
-     * @throws ValidationException
-     */
-    protected function hyphenateText($text)
-    {
-        $hyphenFilePath = GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Resources/Private/Hyphenation/' . $this->settings['config']['hyphenFile']);
-
-        if (!file_exists($hyphenFilePath) || !is_readable($hyphenFilePath)) {
-            throw new ValidationException('Path to hyphen file "' . $hyphenFilePath . '" does not exist or file is not readable. ERROR: 1525410458', 1525410458);
-        }
-
-        $text = $this->getPDF()->hyphenateText($text, $hyphenFilePath);
-
-        return $text;
     }
 
     /**
