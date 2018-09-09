@@ -6,6 +6,7 @@ plugin.tx_pdfviewhelpers.settings {
 		language = ger
 		hyphenFile = hyph-de-ch-1901.tex
 		disableCache = 1
+		exitAfterPdfContentOutput = 0
 		jpgQuality = 100
 		sRGBMode = 0
 		allowedImageTypes {

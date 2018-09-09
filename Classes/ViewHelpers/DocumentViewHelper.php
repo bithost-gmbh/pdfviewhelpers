@@ -157,6 +157,10 @@ class DocumentViewHelper extends AbstractPDFViewHelper
             ob_end_flush();
             ob_flush();
             flush();
+
+            if ($this->settings['config']['exitAfterPdfContentOutput'] === '1') {
+                exit;
+            }
         }
 
         return in_array($this->arguments['outputDestination'], $this->tcpdfReturnContentDestinations) ? $output : '';
