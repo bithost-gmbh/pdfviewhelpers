@@ -167,4 +167,21 @@ class ValidationService implements SingletonInterface
             throw new ValidationException('Height must be an integer. ERROR: 1363766372', 1363765372);
         }
     }
+
+
+    /**
+     * @param array $listElements
+     *
+     * @return boolean
+     *
+     * @throws ValidationException
+     */
+    public function validateListElements(array $listElements)
+    {
+        if (count($listElements) == count($listElements, COUNT_RECURSIVE)) {
+            return true;
+        } else {
+            throw new ValidationException('Only one dimensional arrays are allowed for the ListViewHelper. ERROR: 1363779014', 1363779014);
+        }
+    }
 }

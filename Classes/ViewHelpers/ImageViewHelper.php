@@ -53,7 +53,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
     /**
      * @return void
      *
-     * @throws ValidationException
+     * @throws Exception
      */
     public function render()
     {
@@ -75,7 +75,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
             throw new Exception("Invalid image src provided, must be either a string or implement FileInterface. ERROR: 1534185744", 1534185744);
         }
 
-        switch ($this->getImageRenderMode($extension)) {
+        switch ($this->settingsConversionService->convertImageExtensionToRenderMode($extension)) {
             case 'image':
                 $this->getPDF()->Image($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', '', '', false, 300, '', false, false, 0, false, false, true, false);
                 break;

@@ -91,19 +91,20 @@ class ListViewHelper extends AbstractTextViewHelper
             $this->getPDF()->setCellPaddings(0, 0, $this->arguments['padding']['right'], 0);
         }
 
-        $this->areValidListElements($this->arguments['listElements']);
+        $this->validationService->validateListElements($this->arguments['listElements']);
 
         if (!empty($this->arguments['bulletImageSrc'])) {
-            if (!($this->getImageRenderMode($this->arguments['bulletImageSrc']) === 'image')) {
-                throw new ValidationException('Imagetype not supported for List. ERROR: 1363771014', 1363771014);
+            if (!($this->settingsConversionService->convertImageExtensionToRenderMode($this->arguments['bulletImageSrc']) === 'image')) {
+                throw new ValidationException('Image type not supported for list. ERROR: 1363771014', 1363771014);
             }
         }
 
         if (empty($this->arguments['bulletColor'])) {
             $this->arguments['bulletColor'] = $this->settings['generalText']['color'];
         }
+
         if ($this->validationService->validateColor($this->arguments['bulletColor'])) {
-            $this->arguments['bulletColor'] = $this->convertHexToRGB($this->arguments['bulletColor']);
+            $this->arguments['bulletColor'] = $this->settingsConversionService->convertHexToRGB($this->arguments['bulletColor']);
         }
     }
 
@@ -142,27 +143,11 @@ class ListViewHelper extends AbstractTextViewHelper
                 );
             }
 
-            $this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->convertToTcpdfAlignment($this->arguments['alignment']), false, 1, $textPosX, $currentPosY, true, 0, false, true, 0, 'T', false);
+            $this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->settingsConversionService->convertAlignment($this->arguments['alignment']), false, 1, $textPosX, $currentPosY, true, 0, false, true, 0, 'T', false);
 
             $currentPosY += $this->getPDF()->getStringHeight($textWidth, $listElement);
         }
 
         $this->getPDF()->SetY($currentPosY + $this->arguments['padding']['bottom']);
-    }
-
-    /**
-     * @param array $listElements
-     *
-     * @return boolean
-     *
-     * @throws ValidationException
-     */
-    protected function areValidListElements(array $listElements)
-    {
-        if (count($listElements) == count($listElements, COUNT_RECURSIVE)) {
-            return true;
-        } else {
-            throw new ValidationException('Only one dimensional arrays are allowed for the ListViewHelper. ERROR: 1363779014', 1363779014);
-        }
     }
 }

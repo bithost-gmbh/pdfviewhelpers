@@ -67,7 +67,7 @@ class PageViewHelper extends AbstractPDFViewHelper
             $this->arguments['margins'] = $this->settings['page']['margins'];
         }
 
-        $this->arguments['orientation'] = $this->convertToTcpdfOrientation($this->arguments['orientation']);
+        $this->arguments['orientation'] = $this->settingsConversionService->convertOrientation($this->arguments['orientation']);
 
         $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'defaultHeaderFooterScope', BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
     }
@@ -128,27 +128,6 @@ class PageViewHelper extends AbstractPDFViewHelper
             //reset page header and footer
             $this->getPDF()->setHeaderClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
             $this->getPDF()->setFooterClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
-        }
-    }
-
-    /**
-     * @param string $orientation
-     *
-     * @return string
-     *
-     * @throws Exception
-     */
-    protected function convertToTcpdfOrientation($orientation)
-    {
-        switch ($orientation) {
-            case 'portrait':
-            case 'P':
-                return 'P';
-            case 'landscape':
-            case 'L':
-                return 'L';
-            default:
-                throw new ValidationException('Invalid page orientation "' . $orientation . '" provided. ERROR: 1536238253', 1536238253);
         }
     }
 }
