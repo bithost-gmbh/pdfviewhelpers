@@ -66,9 +66,9 @@ class LineViewHelper extends AbstractContentElementViewHelper
         $this->arguments['style'] = is_array($this->arguments['style']) ? array_merge($this->settings['graphics']['line']['style'], $this->arguments['style']) : $this->settings['graphics']['line']['style'];
         $this->arguments['padding'] = is_array($this->arguments['padding']) ? array_merge($this->settings['graphics']['line']['padding'], $this->arguments['padding']) : $this->settings['graphics']['line']['padding'];
 
-        $this->isValidPadding($this->arguments['padding']);
+        $this->validationService->validatePadding($this->arguments['padding']);
 
-        if ($this->isValidColor($this->arguments['style']['color'])) {
+        if ($this->validationService->validateColor($this->arguments['style']['color'])) {
             $this->arguments['style']['color'] = $this->convertHexToRGB($this->arguments['style']['color']);
         }
 

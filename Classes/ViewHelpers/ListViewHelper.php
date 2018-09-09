@@ -87,7 +87,7 @@ class ListViewHelper extends AbstractTextViewHelper
 
         $this->arguments['padding'] = array_merge($this->settings['generalText']['padding'], $this->settings['list']['padding'], $this->arguments['padding']);
 
-        if ($this->isValidPadding($this->arguments['padding'])) {
+        if ($this->validationService->validatePadding($this->arguments['padding'])) {
             $this->getPDF()->setCellPaddings(0, 0, $this->arguments['padding']['right'], 0);
         }
 
@@ -102,7 +102,7 @@ class ListViewHelper extends AbstractTextViewHelper
         if (empty($this->arguments['bulletColor'])) {
             $this->arguments['bulletColor'] = $this->settings['generalText']['color'];
         }
-        if ($this->isValidColor($this->arguments['bulletColor'])) {
+        if ($this->validationService->validateColor($this->arguments['bulletColor'])) {
             $this->arguments['bulletColor'] = $this->convertHexToRGB($this->arguments['bulletColor']);
         }
     }

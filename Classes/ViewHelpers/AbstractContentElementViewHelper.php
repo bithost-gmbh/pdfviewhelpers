@@ -62,11 +62,11 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
         parent::initialize();
 
         if (!is_null($this->arguments['width'])) {
-            $this->isValidWidth($this->arguments['width']);
+            $this->validationService->validateWidth($this->arguments['width']);
         }
 
         if (!is_null($this->arguments['height'])) {
-            $this->isValidHeight($this->arguments['height']);
+            $this->validationService->validateHeight($this->arguments['height']);
         }
 
         if (is_null($this->arguments['posX'])) {
@@ -133,6 +133,8 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     protected function initializeMultiColumnSupport()
     {
@@ -163,74 +165,6 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
             return 'imageSVG';
         } else {
             throw new ValidationException('Imagetype is not supported. ERROR: 1363778014', 1363778014);
-        }
-    }
-
-    /**
-     * @param string $colorHex
-     *
-     * @return boolean
-     *
-     * @throws ValidationException
-     */
-    protected function isValidColor($colorHex)
-    {
-        if (preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $colorHex)) {
-            return true;
-        } else {
-            throw new ValidationException('Your Color is invalid. Use #000 or #000000.', 1363765272);
-        }
-    }
-
-    /**
-     * @param string $width
-     *
-     * @return boolean
-     *
-     * @throws ValidationException
-     */
-    protected function isValidWidth($width)
-    {
-        if (is_numeric($width)) {
-            return true;
-        } else {
-            throw new ValidationException('Width must be an integer. ERROR: 1363765672', 1363765372);
-        }
-    }
-
-    /**
-     * @param string $height
-     *
-     * @return boolean
-     *
-     * @throws ValidationException
-     */
-    protected function isValidHeight($height)
-    {
-        if (is_numeric($height)) {
-            return true;
-        } else {
-            throw new ValidationException('Height must be an integer. ERROR: 1363766372', 1363765372);
-        }
-    }
-
-    /**
-     * @param array $padding
-     *
-     * @return boolean
-     *
-     * @throws ValidationException
-     */
-    protected function isValidPadding($padding)
-    {
-        if (count($padding) === 4
-            && isset($padding['top'], $padding['right'], $padding['bottom'], $padding['left'])
-            && is_numeric($padding['top']) && is_numeric($padding['right'])
-            && is_numeric($padding['bottom']) && is_numeric($padding['left'])
-        ) {
-            return true;
-        } else {
-            throw new ValidationException('Padding must be an Array with Elements: top:[int],right:[int],bottom:[int],left:[int] ERROR: 1363769351', 1363769351);
         }
     }
 

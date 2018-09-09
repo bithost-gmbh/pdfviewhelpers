@@ -65,7 +65,7 @@ class HeadlineViewHelper extends AbstractTextViewHelper
         if (!empty($this->settings['headline']['alignment'])) {
             $this->overrideArgument('alignment', 'string', '', false, $this->settings['headline']['alignment']);
         }
-        if (!empty($this->settings['headline']['paragraphSpacing'])) {
+        if (strlen($this->settings['headline']['paragraphSpacing'])) {
             $this->overrideArgument('paragraphSpacing', 'float', '', false, $this->settings['headline']['paragraphSpacing']);
         }
         if (strlen($this->settings['headline']['autoHyphenation'])) {
@@ -84,7 +84,7 @@ class HeadlineViewHelper extends AbstractTextViewHelper
 
         $this->arguments['padding'] = array_merge($this->settings['generalText']['padding'], $this->settings['headline']['padding'], $this->arguments['padding']);
 
-        if ($this->isValidPadding($this->arguments['padding'])) {
+        if ($this->validationService->validatePadding($this->arguments['padding'])) {
             $this->getPDF()->setCellPaddings(
                 $this->arguments['padding']['left'],
                 $this->arguments['padding']['top'],

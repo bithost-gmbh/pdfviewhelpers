@@ -30,8 +30,8 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use Bithost\Pdfviewhelpers\Service\ValidationService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -69,16 +69,39 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     protected $settings = [];
 
     /**
+     * @var ConfigurationManagerInterface
+     */
+    protected $configurationManager = null;
+
+    /**
+     * @var ValidationService
+     */
+    protected $validationService = null;
+
+    /**
+     * @param ConfigurationManagerInterface $configurationManager
+     */
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
+    {
+        $this->configurationManager = $configurationManager;
+    }
+
+    /**
+     * @param ValidationService $validationService
+     */
+    public function injectValidationService(ValidationService $validationService)
+    {
+        $this->validationService = $validationService;
+    }
+
+    /**
      * @return void
      *
      * @throws Exception
      */
     public function initializeObject()
     {
-        /** @var ConfigurationManagerInterface $configurationManager */
-        $configurationManager = $this->objectManager->get(ConfigurationManager::class);
-
-        $this->settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'Pdfviewhelpers', 'tx_pdfviewhelpers');
+        $this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'Pdfviewhelpers', 'tx_pdfviewhelpers');
 
         if (!is_array($this->settings) || !isset($this->settings['staticTypoScriptSetupIncluded'])) {
             throw new Exception('No pdfviewhelpers settings found. Please make sure you have included the static TypoScript template. ERROR: 1470982083', 1470982083);

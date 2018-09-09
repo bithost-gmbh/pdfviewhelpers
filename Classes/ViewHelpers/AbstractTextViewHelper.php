@@ -83,16 +83,16 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
             $this->arguments['text'] = $this->hyphenateText($this->arguments['text']);
         }
 
-        if ($this->isValidColor($this->arguments['color'])) {
+        if ($this->validationService->validateColor($this->arguments['color'])) {
             $this->arguments['color'] = $this->convertHexToRGB($this->arguments['color']);
             $this->getPDF()->SetTextColor($this->arguments['color']['R'], $this->arguments['color']['G'], $this->arguments['color']['B']);
         }
 
-        if ($this->isValidFontSize($this->arguments['fontSize'])) {
+        if ($this->validationService->validateFontSize($this->arguments['fontSize'])) {
             $this->getPDF()->SetFontSize($this->arguments['fontSize']);
         }
 
-        if ($this->isValidFontFamily($this->arguments['fontFamily'])) {
+        if ($this->validationService->validateFontFamily($this->arguments['fontFamily'])) {
             $this->getPDF()->SetFont($this->arguments['fontFamily'], $this->convertToTcpdfFontStyle($this->arguments['fontStyle']));
         }
     }
@@ -116,74 +116,12 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
 
             $this->getPDF()->MultiCell($this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->convertToTcpdfAlignment($this->arguments['alignment']), false, 1, $this->arguments['posX'], $posY, true, 0, false, true, 0, 'T', false);
 
-            if ($this->isValidParagraphSpacing($this->arguments['paragraphSpacing']) && $this->arguments['paragraphSpacing'] > 0
+            if ($this->validationService->validateParagraphSpacing($this->arguments['paragraphSpacing']) && $this->arguments['paragraphSpacing'] > 0
             ) {
                 $this->getPDF()->Ln((float)$this->arguments['paragraphSpacing'], false);
             }
 
             $posY = $this->getPDF()->GetY();
-        }
-    }
-
-    /**
-     * @param string $fontSize
-     *
-     * @return boolean
-     *
-     * @throws ValidationException
-     */
-    protected function isValidFontSize($fontSize)
-    {
-        if (is_numeric($fontSize)) {
-            return true;
-        } else {
-            throw new ValidationException('FontSize must be an integer. ERROR: 1363765372', 1363765372);
-        }
-    }
-
-    /**
-     * @param string $paragraphSpacing
-     *
-     * @return boolean
-     *
-     * @throws ValidationException
-     */
-    protected function isValidParagraphSpacing($paragraphSpacing)
-    {
-        if (is_numeric($paragraphSpacing)) {
-            return true;
-        } else {
-            throw new ValidationException('ParagraphSpacing must be an integer. ERROR: 1363765379', 1363765379);
-        }
-    }
-
-    /**
-     * Check fontFamily for compatibility with TCPDF naming conventions
-     *
-     * @param string $fontFamily
-     *
-     * @return boolean
-     *
-     * @throws ValidationException
-     */
-    protected function isValidFontFamily($fontFamily)
-    {
-        //TCPDF transformation START
-        $tcpdfFontFamilyName = strtolower($fontFamily);
-        $tcpdfFontFamilyName = preg_replace('/[^a-z0-9_]/', '', $tcpdfFontFamilyName);
-        $search = ['bold', 'oblique', 'italic', 'regular'];
-        $replace = ['b', 'i', 'i', ''];
-        $tcpdfFontFamilyName = str_replace($search, $replace, $tcpdfFontFamilyName);
-        if (empty($tcpdfFontFamilyName)) {
-            // set generic name
-            $tcpdfFontFamilyName = 'tcpdffont';
-        }
-        //TCPDF transformation END
-
-        if ($fontFamily === $tcpdfFontFamilyName) {
-            return true;
-        } else {
-            throw new ValidationException('Invalid fontFamily name "' . $fontFamily . '". Name must only contain letters "a-z0-9_" and none of the words "bold", "oblique", "italic" and "regular". ERROR: 1492809393', 1492809393);
         }
     }
 

@@ -28,6 +28,8 @@ before_script:
 script:
   - phpcs -n --standard=PSR2 Classes/
   - >
+    .Build/bin/phpunit --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/
+  - >
     export typo3DatabaseName="typo3";
     export typo3DatabaseHost="localhost";
     export typo3DatabaseUsername="root";
