@@ -54,8 +54,12 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	document.outputDestination_                  :ref:`t3tsref:data-type-string`       inline
 	document.outputPath_                         :ref:`t3tsref:data-type-string`       document.pdf
 	document.sourceFile_                         :ref:`t3tsref:data-type-string`
+	document.unit_                               :ref:`t3tsref:data-type-string`       mm
+	document.unicode_                            :ref:`t3tsref:data-type-boolean`      1
+	document.encoding_                           :ref:`t3tsref:data-type-string`       UTF-8
+	document.pdfa_                               :ref:`t3tsref:data-type-boolean`      0
 	page.autoPageBreak_                          :ref:`t3tsref:data-type-boolean`      0
-	page.margin_                                Array                                 {top: 15, right: 15, bottom: 15, left: 15}
+	page.margin_                                 Array                                 {top: 15, right: 15, bottom: 15, left: 15}
 	page.importPage_                             :ref:`t3tsref:data-type-integer`
 	page.orientation_                            :ref:`t3tsref:data-type-string`       portrait
 	page.format_                                 :ref:`t3tsref:data-type-string`       A4
@@ -291,6 +295,42 @@ document.sourceFile
 :typoscript:`plugin.tx_pdfviewhelpers.settings.document.sourceFile =` :ref:`t3tsref:data-type-string`
 
 The sourceFile is a the path to a PDF document you want to use as a template (see also page.importPage).
+
+.. _document.unit:
+
+document.unit
+"""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.document.unit =` :ref:`t3tsref:data-type-string`
+
+The measurement unit used. Possible values are ``pt``, ``mm``, ``cm`` and ``in``.
+
+.. _document.unicode:
+
+document.unicode
+""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.document.unicode =` :ref:`t3tsref:data-type-boolean`
+
+Determines whether the input text is unicode or not.
+
+.. _document.encoding:
+
+document.encoding
+"""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.document.encoding =` :ref:`t3tsref:data-type-string`
+
+Charset encoding (used only when converting back html entities).
+
+.. _document.pdfa:
+
+document.pdfa
+"""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.document.pdfa =` :ref:`t3tsref:data-type-boolean`
+
+Sets the document to PDF/A mode if true.
 
 .. _page.autoPageBreak:
 

@@ -45,10 +45,10 @@ class HeadlineViewHelper extends AbstractTextViewHelper
         parent::initializeArguments();
 
         if (strlen($this->settings['headline']['trim'])) {
-            $this->overrideArgument('trim', 'boolean', '', false, (boolean)$this->settings['headline']['trim']);
+            $this->overrideArgument('trim', 'boolean', '', false, (boolean) $this->settings['headline']['trim']);
         }
         if (strlen($this->settings['headline']['removeDoubleWhitespace'])) {
-            $this->overrideArgument('removeDoubleWhitespace', 'boolean', '', false, (boolean)$this->settings['headline']['removeDoubleWhitespace']);
+            $this->overrideArgument('removeDoubleWhitespace', 'boolean', '', false, (boolean) $this->settings['headline']['removeDoubleWhitespace']);
         }
         if (!empty($this->settings['headline']['color'])) {
             $this->overrideArgument('color', 'string', '', false, $this->settings['headline']['color']);
@@ -69,7 +69,7 @@ class HeadlineViewHelper extends AbstractTextViewHelper
             $this->overrideArgument('paragraphSpacing', 'float', '', false, $this->settings['headline']['paragraphSpacing']);
         }
         if (strlen($this->settings['headline']['autoHyphenation'])) {
-            $this->overrideArgument('autoHyphenation', 'boolean', '', false, $this->settings['headline']['autoHyphenation']);
+            $this->overrideArgument('autoHyphenation', 'boolean', '', false, (boolean) $this->settings['headline']['autoHyphenation']);
         }
     }
 
