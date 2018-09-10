@@ -63,6 +63,7 @@ class LineViewHelper extends AbstractContentElementViewHelper
     {
         parent::initialize();
 
+        $pageMargins = $this->getPDF()->getMargins();
         $this->arguments['style'] = is_array($this->arguments['style']) ? array_merge($this->settings['graphics']['line']['style'], $this->arguments['style']) : $this->settings['graphics']['line']['style'];
         $this->arguments['padding'] = is_array($this->arguments['padding']) ? array_merge($this->settings['graphics']['line']['padding'], $this->arguments['padding']) : $this->settings['graphics']['line']['padding'];
 
@@ -80,13 +81,13 @@ class LineViewHelper extends AbstractContentElementViewHelper
 
         // render horizontal line by default
         if ($this->arguments['fromX'] === null) {
-            $this->arguments['fromX'] = $this->getPDF()->GetX();
+            $this->arguments['fromX'] = $pageMargins['left'];
         }
         if ($this->arguments['fromY'] === null) {
             $this->arguments['fromY'] = $this->getPDF()->GetY();
         }
         if ($this->arguments['toX'] === null) {
-            $this->arguments['toX'] =  $this->getPDF()->getPageWidth() - $this->getPDF()->GetX();
+            $this->arguments['toX'] =  $this->getPDF()->getPageWidth() - $pageMargins['right'];
         }
         if ($this->arguments['toY'] === null) {
             $this->arguments['toY'] = $this->getPDF()->GetY();
