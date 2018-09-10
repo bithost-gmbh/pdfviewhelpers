@@ -28,7 +28,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Unit\Service;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Service\SettingsConversionService;
+use Bithost\Pdfviewhelpers\Service\ConversionService;
 use Bithost\Pdfviewhelpers\Tests\Unit\AbstractUnitTest;
 
 /**
@@ -39,7 +39,7 @@ use Bithost\Pdfviewhelpers\Tests\Unit\AbstractUnitTest;
 class SettingsConversionServiceTest extends AbstractUnitTest
 {
     /**
-     * @var SettingsConversionService
+     * @var ConversionService
      */
     protected $settingsConversionService;
 
@@ -48,7 +48,7 @@ class SettingsConversionServiceTest extends AbstractUnitTest
      */
     protected function setUp()
     {
-        $this->settingsConversionService = new SettingsConversionService();
+        $this->settingsConversionService = new ConversionService();
     }
 
     /**
@@ -76,7 +76,7 @@ class SettingsConversionServiceTest extends AbstractUnitTest
         ];
 
         foreach ($expectedConversions as $input => $expectedOutput) {
-            $this->assertEquals($expectedOutput, $this->settingsConversionService->convertOrientation($input));
+            $this->assertEquals($expectedOutput, $this->settingsConversionService->convertSpeakingOrientationToTcpdfOrientation($input));
         }
     }
 
@@ -87,7 +87,7 @@ class SettingsConversionServiceTest extends AbstractUnitTest
      */
     public function testInvalidOrientation()
     {
-        $this->settingsConversionService->convertOrientation('foobar');
+        $this->settingsConversionService->convertSpeakingOrientationToTcpdfOrientation('foobar');
     }
 
     /**
@@ -113,7 +113,7 @@ class SettingsConversionServiceTest extends AbstractUnitTest
         ];
 
         foreach ($expectedConversions as $input => $expectedOutput) {
-            $this->assertEquals($expectedOutput, $this->settingsConversionService->convertOutputDestination($input));
+            $this->assertEquals($expectedOutput, $this->settingsConversionService->convertSpeakingOutputDestinationToTcpdfOutputDestination($input));
         }
     }
 
@@ -124,7 +124,7 @@ class SettingsConversionServiceTest extends AbstractUnitTest
      */
     public function testInvalidOutputDestination()
     {
-        $this->settingsConversionService->convertOutputDestination('foobar');
+        $this->settingsConversionService->convertSpeakingOutputDestinationToTcpdfOutputDestination('foobar');
     }
 
     /**
@@ -144,7 +144,7 @@ class SettingsConversionServiceTest extends AbstractUnitTest
         ];
 
         foreach ($expectedConversions as $input => $expectedOutput) {
-            $this->assertEquals($expectedOutput, $this->settingsConversionService->convertFontStyle($input));
+            $this->assertEquals($expectedOutput, $this->settingsConversionService->convertSpeakingFontStyleToTcpdfFontStyle($input));
         }
     }
 
@@ -155,7 +155,7 @@ class SettingsConversionServiceTest extends AbstractUnitTest
      */
     public function testInvalidFontStyle()
     {
-        $this->settingsConversionService->convertFontStyle('foobar');
+        $this->settingsConversionService->convertSpeakingFontStyleToTcpdfFontStyle('foobar');
     }
 
     /**
@@ -175,7 +175,7 @@ class SettingsConversionServiceTest extends AbstractUnitTest
         ];
 
         foreach ($expectedConversions as $input => $expectedOutput) {
-            $this->assertEquals($expectedOutput, $this->settingsConversionService->convertAlignment($input));
+            $this->assertEquals($expectedOutput, $this->settingsConversionService->convertSpeakingAlignmentToTcpdfAlignment($input));
         }
     }
 
@@ -186,7 +186,7 @@ class SettingsConversionServiceTest extends AbstractUnitTest
      */
     public function testInvalidAlignment()
     {
-        $this->settingsConversionService->convertAlignment('foobar');
+        $this->settingsConversionService->convertSpeakingAlignmentToTcpdfAlignment('foobar');
     }
 
     /**

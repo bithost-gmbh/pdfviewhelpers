@@ -64,11 +64,15 @@
 
         <pdf:headline>Strangely styled list</pdf:headline>
         <pdf:list
-                color="#333"
+                padding="{left: 1.75}"
+                bulletSize="2.5"
+                bulletImageSrc="EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/bullet_image.png"
+                listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}" />
+        <pdf:list
                 bulletSize="2"
                 bulletColor="#1F8A70"
                 fontStyle="italic"
-                listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}" />
+                listElements="{0: 'Lorem ipsum', 1: 'dolor sit', 2: 'Lorem dipsum', 3: 'dolor sit amet'}" />
     </pdf:page>
     <pdf:page orientation="landscape" format="A4">
         <pdf:headline>Image in different sizes</pdf:headline>

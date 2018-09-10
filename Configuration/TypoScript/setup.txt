@@ -115,10 +115,10 @@ plugin.tx_pdfviewhelpers.settings {
 		autoHyphenation =
 		padding {
 			bottom = 2
-			left = 1
+			left = 1.5
 		}
 		bulletColor =
-		bulletImageSrc = 
+		bulletImageSrc =
 		bulletSize = 1.5
 	}
 	html {

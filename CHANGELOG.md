@@ -12,6 +12,7 @@
 - Adds validation and settings conversion services
 - Adds PDF constructor arguments to DocumentViewHelper
 - Adds optional exit after PDF output
+- Changes PHP requirement to minimum 5.6
 - Fixes MultiColumnViewHelper columns not correctly initialized
 - Changes page.margins to page.margin
 - Removes classes EmptyFPDI, EmptyTCPDF and BithostTCPDF (replaced by BasePDF)

@@ -86,7 +86,8 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
             </pdf:column>
         </pdf:multiColumn>
     
-        <pdf:text padding="{top: 2}">Lorem ipsum  [..]  sit amet.</pdf:text>
+        <pdf:text>Lorem ipsum  [..]  sit amet.</pdf:text>
+        <pdf:text>Lorem ipsum  [..]  sit amet.</pdf:text>
     </pdf:page>
 </pdf:document>
 

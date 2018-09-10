@@ -39,6 +39,13 @@ use Bithost\Pdfviewhelpers\Exception\ValidationException;
 abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
 {
     /**
+     * 1pt = 0.352778mm
+     *
+     * @var float
+     */
+    public static $POINT_TO_MM_FACTOR = 0.352778;
+
+    /**
      * @return void
      */
     public function initializeArguments()
@@ -87,7 +94,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         }
 
         if ($this->validationService->validateColor($this->arguments['color'])) {
-            $this->arguments['color'] = $this->settingsConversionService->convertHexToRGB($this->arguments['color']);
+            $this->arguments['color'] = $this->conversionService->convertHexToRGB($this->arguments['color']);
             $this->getPDF()->SetTextColor($this->arguments['color']['R'], $this->arguments['color']['G'], $this->arguments['color']['B']);
         }
 
@@ -96,7 +103,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         }
 
         if ($this->validationService->validateFontFamily($this->arguments['fontFamily'])) {
-            $this->getPDF()->SetFont($this->arguments['fontFamily'], $this->settingsConversionService->convertFontStyle($this->arguments['fontStyle']));
+            $this->getPDF()->SetFont($this->arguments['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($this->arguments['fontStyle']));
         }
     }
 
@@ -117,7 +124,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
                 $paragraph = trim($paragraph);
             }
 
-            $this->getPDF()->MultiCell($this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->settingsConversionService->convertAlignment($this->arguments['alignment']), false, 1, $this->arguments['posX'], $posY, true, 0, false, true, 0, 'T', false);
+            $this->getPDF()->MultiCell($this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), false, 1, $this->arguments['posX'], $posY, true, 0, false, true, 0, 'T', false);
 
             if ($this->validationService->validateParagraphSpacing($this->arguments['paragraphSpacing']) && $this->arguments['paragraphSpacing'] > 0
             ) {

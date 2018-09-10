@@ -70,7 +70,7 @@ class LineViewHelper extends AbstractContentElementViewHelper
         $this->validationService->validatePadding($this->arguments['padding']);
 
         if ($this->validationService->validateColor($this->arguments['style']['color'])) {
-            $this->arguments['style']['color'] = $this->settingsConversionService->convertHexToRGB($this->arguments['style']['color']);
+            $this->arguments['style']['color'] = $this->conversionService->convertHexToRGB($this->arguments['style']['color']);
         }
 
         if (is_numeric($this->arguments['style']['width'])) {

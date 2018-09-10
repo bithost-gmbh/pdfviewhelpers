@@ -102,7 +102,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	list.fontFamily                              :ref:`t3tsref:data-type-string`       *See generalText*
 	list.fontSize                                :ref:`t3tsref:data-type-integer`      *See generalText*
 	list.fontStyle                               :ref:`t3tsref:data-type-string`       *See generalText*
-	list.padding                                 Array                                 {bottom: 2, left: 1}
+	list.padding                                 Array                                 {bottom: 2, left: 1.5}
 	list.alignment                               :ref:`t3tsref:data-type-string`       left
 	list.bulletColor_                            :ref:`t3tsref:data-type-string`       #000
 	list.bulletImageSrc_                         :ref:`t3tsref:data-type-string`
