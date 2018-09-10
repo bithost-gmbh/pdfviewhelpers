@@ -97,8 +97,6 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
 
     /**
      * @return void
-     *
-     * @throws Exception
      */
     protected function initializeMultiColumnSupport()
     {

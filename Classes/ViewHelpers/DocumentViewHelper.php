@@ -33,7 +33,6 @@ use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Model\BasePDF;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use FPDI;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**

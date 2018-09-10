@@ -194,8 +194,6 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
 
     /**
      * @return array $multiColumnContext
-     *
-     * @throws Exception
      */
     protected function getMultiColumnContext()
     {

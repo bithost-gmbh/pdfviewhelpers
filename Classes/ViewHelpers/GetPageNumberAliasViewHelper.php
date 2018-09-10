@@ -28,6 +28,8 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
+
 /**
  * GetPageNumberAliasViewHelper
  *
@@ -37,6 +39,8 @@ class GetPageNumberAliasViewHelper extends AbstractPDFViewHelper
 {
     /**
      * @return string
+     *
+     * @throws Exception
      */
     public function render()
     {
