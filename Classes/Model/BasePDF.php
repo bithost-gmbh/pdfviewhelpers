@@ -122,7 +122,11 @@ class BasePDF extends FPDI
      */
     public function renderHeader()
     {
+        $graphicVars = $this->getGraphicVars();
+
         parent::setHeader();
+
+        $this->setGraphicVars($graphicVars);
     }
 
     /**
@@ -133,7 +137,11 @@ class BasePDF extends FPDI
      */
     public function renderFooter()
     {
+        $graphicVars = $this->getGraphicVars();
+
         parent::setFooter();
+
+        $this->setGraphicVars($graphicVars);
     }
 
     /**
