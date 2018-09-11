@@ -69,6 +69,7 @@ abstract class AbstractFunctionalTest extends FunctionalTestCase
 
         $this->importDataSet($this->getFixturePath('pages.xml'));
         $this->setUpPage();
+        $this->setUpBackendUserFromFixture(1);
     }
 
     /**

@@ -227,17 +227,27 @@ class ConversionService implements SingletonInterface
      */
     public function convertFileSrcToFileObject($src)
     {
+        $file = null;
+        $previousException = null;
+        $previousExceptionMessage = '';
+
         if ($src instanceof FileInterface) {
-            return $src;
+            $file = $src;
         } else {
-            $file = $this->resourceFactory->retrieveFileOrFolderObject($src);
-
-            if (!($file instanceof FileInterface)) {
-                throw new Exception("Invalid file src provided, must be either a uid, combined identifier, path/filename or implement FileInterface. ERROR: 1536560752", 1536560752);
+            try {
+                $file = $this->resourceFactory->retrieveFileOrFolderObject($src);
+            } catch (\Exception $e) {
+                //invalid file provided
+                $previousException = $e;
+                $previousExceptionMessage = ' ' . $e->getMessage();
             }
-
-            return $file;
         }
+
+        if (!($file instanceof FileInterface)) {
+            throw new ValidationException("Invalid file src provided, must be either a uid, combined identifier, path/filename or implement FileInterface." . $previousExceptionMessage . " ERROR: 1536560752", 1536560752, $previousException);
+        }
+
+        return $file;
     }
 
     /**
