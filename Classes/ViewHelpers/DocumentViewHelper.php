@@ -33,7 +33,6 @@ use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Model\BasePDF;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use FPDI;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -94,7 +93,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper
     {
         parent::initialize();
 
-        $this->arguments['outputDestination'] = $this->settingsConversionService->convertOutputDestination($this->arguments['outputDestination']);
+        $this->arguments['outputDestination'] = $this->conversionService->convertSpeakingOutputDestinationToTcpdfOutputDestination($this->arguments['outputDestination']);
 
         if (isset($GLOBALS['TSFE']->applicationData) && in_array($this->arguments['outputDestination'], $this->tcpdfOutputContentDestinations)) {
             $GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers']['pdfOutput'] = true;
@@ -103,7 +102,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         if (!empty($this->settings['config']['class'])) {
             $this->setPDF(GeneralUtility::makeInstance(
                 $this->settings['config']['class'],
-                $this->settingsConversionService->convertOrientation($this->settings['page']['orientation']),
+                $this->conversionService->convertSpeakingOrientationToTcpdfOrientation($this->settings['page']['orientation']),
                 $this->arguments['unit'],
                 $this->settings['page']['format'],
                 $this->arguments['unicode'],

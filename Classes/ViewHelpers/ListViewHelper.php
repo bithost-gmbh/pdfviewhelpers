@@ -72,7 +72,7 @@ class ListViewHelper extends AbstractTextViewHelper
 
         $this->registerArgument('listElements', 'array', '', true, null);
         $this->registerArgument('bulletColor', 'string', '', false, $this->settings['list']['bulletColor']);
-        $this->registerArgument('bulletImageSrc', 'string', '', false, $this->settings['list']['bulletImage']);
+        $this->registerArgument('bulletImageSrc', 'string', '', false, $this->settings['list']['bulletImageSrc']);
         $this->registerArgument('bulletSize', 'integer', '', false, $this->settings['list']['bulletSize']);
     }
 
@@ -94,7 +94,9 @@ class ListViewHelper extends AbstractTextViewHelper
         $this->validationService->validateListElements($this->arguments['listElements']);
 
         if (!empty($this->arguments['bulletImageSrc'])) {
-            if (!($this->settingsConversionService->convertImageExtensionToRenderMode($this->arguments['bulletImageSrc']) === 'image')) {
+            $bulletImageFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['bulletImageSrc']);
+
+            if (!($this->conversionService->convertImageExtensionToRenderMode($bulletImageFile->getExtension()) === 'image')) {
                 throw new ValidationException('Image type not supported for list. ERROR: 1363771014', 1363771014);
             }
         }
@@ -104,7 +106,7 @@ class ListViewHelper extends AbstractTextViewHelper
         }
 
         if ($this->validationService->validateColor($this->arguments['bulletColor'])) {
-            $this->arguments['bulletColor'] = $this->settingsConversionService->convertHexToRGB($this->arguments['bulletColor']);
+            $this->arguments['bulletColor'] = $this->conversionService->convertHexToRGB($this->arguments['bulletColor']);
         }
     }
 
@@ -120,20 +122,24 @@ class ListViewHelper extends AbstractTextViewHelper
         //indent of the bullet from the left page border
         $bulletPosX = $this->arguments['posX'] + $this->arguments['padding']['left'];
         //helps to center the bullet vertically
-        $relativBulletPosY = $this->getPDF()->getFontSize() / 1.6 - $this->arguments['bulletSize'] / 2;
-        $pageMargins = $this->getPDF()->getMargins();
+        $relativBulletPosY = ($this->getPDF()->getCellHeight($this->arguments['fontSize']) * AbstractTextViewHelper::$POINT_TO_MM_FACTOR - $this->arguments['bulletSize']) / 2;
         //indent of the Text from the left page border
-        $textPosX = $this->arguments['padding']['left'] + 2 * $this->arguments['bulletSize'] + $this->arguments['posX'];
+        $textPosX = $this->arguments['padding']['left'] * 2 + $this->arguments['bulletSize'] + $this->arguments['posX'];
         //width of the entire element minus the indent for the bullet
         $textWidth = $this->arguments['width'] - $this->arguments['padding']['left'] - 2 * $this->arguments['bulletSize'];
         //posY of the line that's being printed
         $currentPosY = $this->arguments['posY'] + $this->arguments['padding']['top'];
 
+        if (!empty($this->arguments['bulletImageSrc'])) {
+            $bulletImageFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['bulletImageSrc']);
+            $bulletImageFileContent = '@' . $bulletImageFile->getContents();
+        }
+
         foreach ($this->arguments['listElements'] as $listElement) {
             if (empty($this->arguments['bulletImageSrc'])) {
                 $this->getPDF()->Rect($bulletPosX, $currentPosY + $relativBulletPosY, $this->arguments['bulletSize'], $this->arguments['bulletSize'], 'F', null, [$this->arguments['bulletColor']['R'], $this->arguments['bulletColor']['G'], $this->arguments['bulletColor']['B']]);
             } else {
-                $this->getPDF()->Image($this->arguments['bulletImageSrc'], $bulletPosX, $currentPosY + $relativBulletPosY, $this->arguments['bulletSize'], null, '', '', '', false, 300, '', false, false, 0, false, false, true, false);
+                $this->getPDF()->Image($bulletImageFileContent, $bulletPosX, $currentPosY + $relativBulletPosY, $this->arguments['bulletSize'], null, '', '', '', false, 300, '', false, false, 0, false, false, true, false);
             }
 
             if ($this->arguments['autoHyphenation']) {
@@ -143,7 +149,7 @@ class ListViewHelper extends AbstractTextViewHelper
                 );
             }
 
-            $this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->settingsConversionService->convertAlignment($this->arguments['alignment']), false, 1, $textPosX, $currentPosY, true, 0, false, true, 0, 'T', false);
+            $this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), false, 1, $textPosX, $currentPosY, true, 0, false, true, 0, 'T', false);
 
             $currentPosY += $this->getPDF()->getStringHeight($textWidth, $listElement);
         }

@@ -63,17 +63,13 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
     {
         $html = $this->renderChildren();
         $htmlStyle = '';
-        $color = $this->settingsConversionService->convertHexToRGB($this->settings['generalText']['color']);
+        $color = $this->conversionService->convertHexToRGB($this->settings['generalText']['color']);
         $padding = $this->settings['generalText']['padding'];
 
         if (!empty($this->arguments['styleSheet'])) {
-            $styleSheetPath = GeneralUtility::getFileAbsFileName($this->arguments['styleSheet']);
+            $styleSheetFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['styleSheet']);
 
-            if (!file_exists($styleSheetPath) || !is_readable($styleSheetPath)) {
-                throw new ValidationException('Path to style sheet "' . $styleSheetPath . '" does not exist or file is not readable. ERROR: 1492706529', 1492706529);
-            }
-
-            $htmlStyle = '<style>' . file_get_contents($styleSheetPath) . '</style>';
+            $htmlStyle = '<style>' . $styleSheetFile->getContents() . '</style>';
         }
 
         if ($this->arguments['autoHyphenation']) {
@@ -86,7 +82,7 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         //reset settings to generalText
         $this->getPDF()->SetTextColor($color['R'], $color['G'], $color['B']);
         $this->getPDF()->SetFontSize($this->settings['generalText']['fontSize']);
-        $this->getPDF()->SetFont($this->settings['generalText']['fontFamily'], $this->settingsConversionService->convertFontStyle($this->settings['generalText']['fontStyle']));
+        $this->getPDF()->SetFont($this->settings['generalText']['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($this->settings['generalText']['fontStyle']));
         $this->getPDF()->setCellPaddings($padding['left'], $padding['top'], $padding['right'], $padding['bottom']);
 
         $this->getPDF()->writeHTML($htmlStyle . $html, true, false, true, false, '');

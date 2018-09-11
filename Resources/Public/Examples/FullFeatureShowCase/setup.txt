@@ -52,9 +52,12 @@ plugin.tx_pdfviewhelpers.settings {
 		fontStyle = bold
 	}
 	list {
-		color = #1F8A70
-		fontStyle = italic
+		color = #000
+		fontStyle = bold
 		bulletColor = #BEDB39
+		padding {
+			left = 2
+		}
 	}
 }
 

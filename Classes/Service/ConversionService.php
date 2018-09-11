@@ -30,19 +30,34 @@ namespace Bithost\Pdfviewhelpers\Service;
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use TYPO3\CMS\Core\Resource\FileInterface;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
- * SettingsConversionService
+ * ConversionService
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class SettingsConversionService implements SingletonInterface
+class ConversionService implements SingletonInterface
 {
     /**
      * @var array
      */
     protected $settings = null;
+
+    /**
+     * @var ResourceFactory
+     */
+    protected $resourceFactory = null;
+
+    /**
+     * @param ResourceFactory $resourceFactory
+     */
+    public function injectResourceFactory(ResourceFactory $resourceFactory)
+    {
+        $this->resourceFactory = $resourceFactory;
+    }
 
     /**
      * @param string $colorHex
@@ -73,7 +88,7 @@ class SettingsConversionService implements SingletonInterface
      *
      * @throws ValidationException
      */
-    public function convertOrientation($orientation)
+    public function convertSpeakingOrientationToTcpdfOrientation($orientation)
     {
         switch ($orientation) {
             case 'portrait':
@@ -94,7 +109,7 @@ class SettingsConversionService implements SingletonInterface
      *
      * @throws ValidationException
      */
-    public function convertOutputDestination($outputDestination)
+    public function convertSpeakingOutputDestinationToTcpdfOutputDestination($outputDestination)
     {
         switch ($outputDestination) {
             case 'inline':
@@ -133,7 +148,7 @@ class SettingsConversionService implements SingletonInterface
      *
      * @throws ValidationException
      */
-    public function convertFontStyle($fontStyle)
+    public function convertSpeakingFontStyleToTcpdfFontStyle($fontStyle)
     {
         switch ($fontStyle) {
             case 'bold':
@@ -160,7 +175,7 @@ class SettingsConversionService implements SingletonInterface
      *
      * @throws ValidationException
      */
-    public function convertAlignment($alignment)
+    public function convertSpeakingAlignmentToTcpdfAlignment($alignment)
     {
         switch ($alignment) {
             case 'left':
@@ -201,6 +216,38 @@ class SettingsConversionService implements SingletonInterface
         } else {
             throw new ValidationException('Image type is not supported. ERROR: 1363778014', 1363778014);
         }
+    }
+
+    /**
+     * @param mixed $src
+     *
+     * @return FileInterface
+     *
+     * @throws Exception
+     */
+    public function convertFileSrcToFileObject($src)
+    {
+        $file = null;
+        $previousException = null;
+        $previousExceptionMessage = '';
+
+        if ($src instanceof FileInterface) {
+            $file = $src;
+        } else {
+            try {
+                $file = $this->resourceFactory->retrieveFileOrFolderObject($src);
+            } catch (\Exception $e) {
+                //invalid file provided
+                $previousException = $e;
+                $previousExceptionMessage = ' ' . $e->getMessage();
+            }
+        }
+
+        if (!($file instanceof FileInterface)) {
+            throw new ValidationException("Invalid file src provided, must be either a uid, combined identifier, path/filename or implement FileInterface." . $previousExceptionMessage . " ERROR: 1536560752", 1536560752, $previousException);
+        }
+
+        return $file;
     }
 
     /**
