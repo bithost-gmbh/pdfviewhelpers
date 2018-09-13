@@ -126,11 +126,10 @@ class ListViewHelper extends AbstractTextViewHelper
             $elementEndPage = $this->getPDF()->getPage();
             $elementEndY = $this->getPDF()->getY();
 
-            $pageHeightInPoints = $this->getPDF()->getPageHeight($elementStartPage) ;
-            $pageHeightInMM = $pageHeightInPoints * AbstractTextViewHelper::$POINT_TO_MM_FACTOR;
+            $scaledPageHeight = $this->getPDF()->getScaledPageHeight();
             $breakMargin = $this->getPDF()->getBreakMargin($elementStartPage);
 
-            if ($elementStartY + $oneLineTextHeight >= $pageHeightInMM  - $breakMargin) {
+            if ($elementStartY + $oneLineTextHeight >= $scaledPageHeight  - $breakMargin) {
                 //A page break occurred on the first line
                 $elementStartY = $this->getPDF()->getMargins()['top'];
             } else {
