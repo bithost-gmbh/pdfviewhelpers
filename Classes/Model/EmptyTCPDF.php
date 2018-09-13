@@ -1,6 +1,6 @@
 <?php
 namespace Bithost\Pdfviewhelpers\Model;
 
-class EmptyTCPDF extends BasePDF {
-
+class EmptyTCPDF extends BasePDF
+{
 }
