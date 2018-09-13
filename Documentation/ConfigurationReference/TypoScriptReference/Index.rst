@@ -34,93 +34,94 @@ Properties in plugin.tx_pdfviewhelpers.settings
 
 .. container:: ts-properties
 
-	============================================ ===================================== ==========================================
-	Property                                     Data type                             Default
-	============================================ ===================================== ==========================================
-	config.class_                                :ref:`t3tsref:data-type-string`       Bithost\\Pdfviewhelpers\\Model\\BasePDF
-	config.language_                             :ref:`t3tsref:data-type-string`       ger
-	config.hyphenFile_                           :ref:`t3tsref:data-type-string`       hyph-de-ch-1901.tex
-	config.disableCache_                         :ref:`t3tsref:data-type-boolean`      1
-	config.exitAfterPdfContentOutput_            :ref:`t3tsref:data-type-boolean`      0
-	config.jpgQuality_                           :ref:`t3tsref:data-type-integer`      100
-	config.sRGBMode_                             :ref:`t3tsref:data-type-boolean`      0
-	config.allowedImageTypes_                    Array                                 *See static TypoScript template*
-	config.fonts.subset_                         :ref:`t3tsref:data-type-boolean`      1
-	config.fonts.addTTFFont_                     Array                                 *See static TypoScript template*
-	document.title_                              :ref:`t3tsref:data-type-string`
-	document.subject_                            :ref:`t3tsref:data-type-string`
-	document.author_                             :ref:`t3tsref:data-type-string`
-	document.keywords_                           :ref:`t3tsref:data-type-string`
-	document.creator_                            :ref:`t3tsref:data-type-string`       TYPO3 EXT:pdfviewhelpers
-	document.outputDestination_                  :ref:`t3tsref:data-type-string`       inline
-	document.outputPath_                         :ref:`t3tsref:data-type-string`       document.pdf
-	document.sourceFile_                         :ref:`t3tsref:data-type-string`
-	document.unit_                               :ref:`t3tsref:data-type-string`       mm
-	document.unicode_                            :ref:`t3tsref:data-type-boolean`      1
-	document.encoding_                           :ref:`t3tsref:data-type-string`       UTF-8
-	document.pdfa_                               :ref:`t3tsref:data-type-boolean`      0
-	page.autoPageBreak_                          :ref:`t3tsref:data-type-boolean`      0
-	page.margin_                                 Array                                 {top: 15, right: 15, bottom: 15, left: 15}
-	page.importPage_                             :ref:`t3tsref:data-type-integer`
-	page.orientation_                            :ref:`t3tsref:data-type-string`       portrait
-	page.format_                                 :ref:`t3tsref:data-type-string`       A4
-	header.posY_                                 :ref:`t3tsref:data-type-integer`      5
-	footer.posY_                                 :ref:`t3tsref:data-type-integer`      -10
-	generalText.trim_                            :ref:`t3tsref:data-type-boolean`      1
-	generalText.removeDoubleWhitespace_          :ref:`t3tsref:data-type-boolean`      1
-	generalText.color_                           :ref:`t3tsref:data-type-string`       #000
-	generalText.fontFamily_                      :ref:`t3tsref:data-type-string`       helvetica
-	generalText.fontSize_                        :ref:`t3tsref:data-type-integer`      11
-	generalText.fontStyle_                       :ref:`t3tsref:data-type-string`       regular
-	generalText.lineHeight_                      :ref:`t3tsref:data-type-float`        1.25
-	generalText.characterSpacing_                :ref:`t3tsref:data-type-float`        0
-	generalText.padding_                         Array                                 {top: 0, right: 0, bottom: 0, left: 0}
-	generalText.alignment_                       :ref:`t3tsref:data-type-string`       left
-	generalText.paragraphSpacing_                :ref:`t3tsref:data-type-integer`      2
-	generalText.autoHyphenation_                 :ref:`t3tsref:data-type-boolean`      0
-	text.trim                                    :ref:`t3tsref:data-type-boolean`      *See generalText*
-	text.removeDoubleWhitespace                  :ref:`t3tsref:data-type-boolean`      *See generalText*
-	text.color.                                  :ref:`t3tsref:data-type-string`       *See generalText*
-	text.fontFamily                              :ref:`t3tsref:data-type-string`       *See generalText*
-	text.fontSize                                :ref:`t3tsref:data-type-integer`      *See generalText*
-	text.fontStyle                               :ref:`t3tsref:data-type-string`       *See generalText*
-	text.lineHeight_                             :ref:`t3tsref:data-type-float`        *See generalText*
-	text.characterSpacing_                       :ref:`t3tsref:data-type-float`        *See generalText*
-	text.padding                                 Array                                 *See generalText*
-	text.alignment                               :ref:`t3tsref:data-type-string`       *See generalText*
-	text.paragraphSpacing                        :ref:`t3tsref:data-type-integer`      *See generalText*
-	text.autoHyphenation                         :ref:`t3tsref:data-type-boolean`      *See generalText*
-	headline.trim                                :ref:`t3tsref:data-type-boolean`      *See generalText*
-	headline.removeDoubleWhitespace              :ref:`t3tsref:data-type-boolean`      *See generalText*
-	headline.color                               :ref:`t3tsref:data-type-string`       *See generalText*
-	headline.fontFamily                          :ref:`t3tsref:data-type-string`       *See generalText*
-	headline.fontSize                            :ref:`t3tsref:data-type-integer`      *See generalText*
-	headline.fontStyle                           :ref:`t3tsref:data-type-string`       *See generalText*
-	headline.lineHeight_                         :ref:`t3tsref:data-type-float`        *See generalText*
-	headline.characterSpacing_                   :ref:`t3tsref:data-type-float`        *See generalText*
-	headline.padding                             Array                                 {top: 6, bottom: 3}
-	headline.alignment                           :ref:`t3tsref:data-type-string`       *See generalText*
-	headline.paragraphSpacing                    :ref:`t3tsref:data-type-integer`      *See generalText*
-	headline.autoHyphenation                     :ref:`t3tsref:data-type-boolean`      *See generalText*
-	list.trim                                    :ref:`t3tsref:data-type-boolean`      *See generalText*
-	list.removeDoubleWhitespace                  :ref:`t3tsref:data-type-boolean`      *See generalText*
-	list.color                                   :ref:`t3tsref:data-type-string`       *See generalText*
-	list.fontFamily                              :ref:`t3tsref:data-type-string`       *See generalText*
-	list.fontSize                                :ref:`t3tsref:data-type-integer`      *See generalText*
-	list.fontStyle                               :ref:`t3tsref:data-type-string`       *See generalText*
-	list.lineHeight_                             :ref:`t3tsref:data-type-float`        *See generalText*
-	list.characterSpacing_                       :ref:`t3tsref:data-type-float`        *See generalText*
-	list.padding                                 Array                                 {bottom: 2, left: 1.5}
-	list.alignment                               :ref:`t3tsref:data-type-string`       left
-	list.bulletColor_                            :ref:`t3tsref:data-type-string`       #000
-	list.bulletImageSrc_                         :ref:`t3tsref:data-type-string`
-	list.bulletSize_                             :ref:`t3tsref:data-type-float`        1.5
-	list.autoHyphenation                         :ref:`t3tsref:data-type-boolean`      *See generalText*
-	html.autoHyphenation                         :ref:`t3tsref:data-type-boolean`      *See generalText*
-	html.styleSheet_                             :ref:`t3tsref:data-type-string`
-	graphics.line.padding_                       Array                                 {top: 4, right: 0, bottom: 5, left: 0}
-	graphics.line.style_                         Array                                 {width: 0.25, color: #000}
-	============================================ ===================================== ==========================================
+	============================================== ===================================== ==========================================
+	Property                                       Data type                             Default
+	============================================== ===================================== ==========================================
+	config.class_                                  :ref:`t3tsref:data-type-string`       Bithost\\Pdfviewhelpers\\Model\\BasePDF
+	config.language_                               :ref:`t3tsref:data-type-string`       ger
+	config.hyphenFile_                             :ref:`t3tsref:data-type-string`       hyph-de-ch-1901.tex
+	config.disableCache_                           :ref:`t3tsref:data-type-boolean`      1
+	config.exitAfterPdfContentOutput_              :ref:`t3tsref:data-type-boolean`      0
+	config.jpgQuality_                             :ref:`t3tsref:data-type-integer`      100
+	config.sRGBMode_                               :ref:`t3tsref:data-type-boolean`      0
+	config.allowedImageTypes_                      Array                                 *See static TypoScript template*
+	config.fonts.subset_                           :ref:`t3tsref:data-type-boolean`      1
+	config.fonts.addTTFFont_                       Array                                 *See static TypoScript template*
+	document.title_                                :ref:`t3tsref:data-type-string`
+	document.subject_                              :ref:`t3tsref:data-type-string`
+	document.author_                               :ref:`t3tsref:data-type-string`
+	document.keywords_                             :ref:`t3tsref:data-type-string`
+	document.creator_                              :ref:`t3tsref:data-type-string`       TYPO3 EXT:pdfviewhelpers
+	document.outputDestination_                    :ref:`t3tsref:data-type-string`       inline
+	document.outputPath_                           :ref:`t3tsref:data-type-string`       document.pdf
+	document.sourceFile_                           :ref:`t3tsref:data-type-string`
+	document.unit_                                 :ref:`t3tsref:data-type-string`       mm
+	document.unicode_                              :ref:`t3tsref:data-type-boolean`      1
+	document.encoding_                             :ref:`t3tsref:data-type-string`       UTF-8
+	document.pdfa_                                 :ref:`t3tsref:data-type-boolean`      0
+	page.autoPageBreak_                            :ref:`t3tsref:data-type-boolean`      0
+	page.margin_                                   Array                                 {top: 15, right: 15, bottom: 15, left: 15}
+	page.importPage_                               :ref:`t3tsref:data-type-integer`
+	page.orientation_                              :ref:`t3tsref:data-type-string`       portrait
+	page.format_                                   :ref:`t3tsref:data-type-string`       A4
+	header.posY_                                   :ref:`t3tsref:data-type-integer`      5
+	footer.posY_                                   :ref:`t3tsref:data-type-integer`      -10
+	avoidPageBreakInside.breakIfImpossibleToAvoid_ :ref:`t3tsref:data-type-boolean`      0
+	generalText.trim_                              :ref:`t3tsref:data-type-boolean`      1
+	generalText.removeDoubleWhitespace_            :ref:`t3tsref:data-type-boolean`      1
+	generalText.color_                             :ref:`t3tsref:data-type-string`       #000
+	generalText.fontFamily_                        :ref:`t3tsref:data-type-string`       helvetica
+	generalText.fontSize_                          :ref:`t3tsref:data-type-integer`      11
+	generalText.fontStyle_                         :ref:`t3tsref:data-type-string`       regular
+	generalText.lineHeight_                        :ref:`t3tsref:data-type-float`        1.25
+	generalText.characterSpacing_                  :ref:`t3tsref:data-type-float`        0
+	generalText.padding_                           Array                                 {top: 0, right: 0, bottom: 0, left: 0}
+	generalText.alignment_                         :ref:`t3tsref:data-type-string`       left
+	generalText.paragraphSpacing_                  :ref:`t3tsref:data-type-integer`      2
+	generalText.autoHyphenation_                   :ref:`t3tsref:data-type-boolean`      0
+	text.trim                                      :ref:`t3tsref:data-type-boolean`      *See generalText*
+	text.removeDoubleWhitespace                    :ref:`t3tsref:data-type-boolean`      *See generalText*
+	text.color.                                    :ref:`t3tsref:data-type-string`       *See generalText*
+	text.fontFamily                                :ref:`t3tsref:data-type-string`       *See generalText*
+	text.fontSize                                  :ref:`t3tsref:data-type-integer`      *See generalText*
+	text.fontStyle                                 :ref:`t3tsref:data-type-string`       *See generalText*
+	text.lineHeight_                               :ref:`t3tsref:data-type-float`        *See generalText*
+	text.characterSpacing_                         :ref:`t3tsref:data-type-float`        *See generalText*
+	text.padding                                   Array                                 *See generalText*
+	text.alignment                                 :ref:`t3tsref:data-type-string`       *See generalText*
+	text.paragraphSpacing                          :ref:`t3tsref:data-type-integer`      *See generalText*
+	text.autoHyphenation                           :ref:`t3tsref:data-type-boolean`      *See generalText*
+	headline.trim                                  :ref:`t3tsref:data-type-boolean`      *See generalText*
+	headline.removeDoubleWhitespace                :ref:`t3tsref:data-type-boolean`      *See generalText*
+	headline.color                                 :ref:`t3tsref:data-type-string`       *See generalText*
+	headline.fontFamily                            :ref:`t3tsref:data-type-string`       *See generalText*
+	headline.fontSize                              :ref:`t3tsref:data-type-integer`      *See generalText*
+	headline.fontStyle                             :ref:`t3tsref:data-type-string`       *See generalText*
+	headline.lineHeight_                           :ref:`t3tsref:data-type-float`        *See generalText*
+	headline.characterSpacing_                     :ref:`t3tsref:data-type-float`        *See generalText*
+	headline.padding                               Array                                 {top: 6, bottom: 3}
+	headline.alignment                             :ref:`t3tsref:data-type-string`       *See generalText*
+	headline.paragraphSpacing                      :ref:`t3tsref:data-type-integer`      *See generalText*
+	headline.autoHyphenation                       :ref:`t3tsref:data-type-boolean`      *See generalText*
+	list.trim                                      :ref:`t3tsref:data-type-boolean`      *See generalText*
+	list.removeDoubleWhitespace                    :ref:`t3tsref:data-type-boolean`      *See generalText*
+	list.color                                     :ref:`t3tsref:data-type-string`       *See generalText*
+	list.fontFamily                                :ref:`t3tsref:data-type-string`       *See generalText*
+	list.fontSize                                  :ref:`t3tsref:data-type-integer`      *See generalText*
+	list.fontStyle                                 :ref:`t3tsref:data-type-string`       *See generalText*
+	list.lineHeight_                               :ref:`t3tsref:data-type-float`        *See generalText*
+	list.characterSpacing_                         :ref:`t3tsref:data-type-float`        *See generalText*
+	list.padding                                   Array                                 {bottom: 2, left: 1.5}
+	list.alignment                                 :ref:`t3tsref:data-type-string`       left
+	list.bulletColor_                              :ref:`t3tsref:data-type-string`       #000
+	list.bulletImageSrc_                           :ref:`t3tsref:data-type-string`
+	list.bulletSize_                               :ref:`t3tsref:data-type-float`        1.5
+	list.autoHyphenation                           :ref:`t3tsref:data-type-boolean`      *See generalText*
+	html.autoHyphenation                           :ref:`t3tsref:data-type-boolean`      *See generalText*
+	html.styleSheet_                               :ref:`t3tsref:data-type-string`
+	graphics.line.padding_                         Array                                 {top: 4, right: 0, bottom: 5, left: 0}
+	graphics.line.style_                           Array                                 {width: 0.25, color: #000}
+	============================================== ===================================== ==========================================
 
 
 Property details
@@ -413,6 +414,15 @@ footer.posY
 :typoscript:`plugin.tx_pdfviewhelpers.settings.footer.posY =` :ref:`t3tsref:data-type-integer`
 
 Defines the footer position relative to the top of the page. You can use negative numbers to place the footer relative to the bottom of the page.
+
+.. _avoidPageBreakInside.breakIfImpossibleToAvoid:
+
+avoidPageBreakInside.breakIfImpossibleToAvoid
+"""""""""""""""""""""""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.avoidPageBreakInside.breakIfImpossibleToAvoid =` :ref:`t3tsref:data-type-boolean`
+
+If set to true this ViewHelper inserts a page break even if the content does not fit on one page, meaning a page break is unavoidable.
 
 .. _generalText.trim:
 

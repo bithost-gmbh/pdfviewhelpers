@@ -32,7 +32,7 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * PageViewHelperTest
+ * DocumentViewHelperTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */

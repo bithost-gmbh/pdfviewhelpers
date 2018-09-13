@@ -1,0 +1,11 @@
+{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
+
+<pdf:document outputDestination="S">
+    <pdf:page autoPageBreak="1">
+        <pdf:text>{text1}</pdf:text>
+
+        <pdf:avoidPageBreakInside breakIfImpossibleToAvoid="{breakIfImpossibleToAvoid}">
+            <pdf:text>{text2}</pdf:text>
+        </pdf:avoidPageBreakInside>
+    </pdf:page>
+</pdf:document>

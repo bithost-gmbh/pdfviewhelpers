@@ -110,6 +110,8 @@ class DocumentViewHelper extends AbstractPDFViewHelper
                 false, //deprecated feature
                 $this->arguments['pdfa']
             ));
+        } else {
+            throw new ValidationException('TypoScript value "settings.config.class" must be set! ERROR: 1536837206', 1536837206);
         }
 
         $this->loadTcpdfLanguageSettings();

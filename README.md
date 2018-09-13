@@ -16,8 +16,10 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
 - ViewHelper to render images (supporting FAL)
 - ViewHelpers to repeatedly render header and footer
 - ViewHelper to render HTML / rich-text content
+- ViewHelper to avoid page breaks inside
 - ViewHelpers to create a multi column layout
 - Load existing PDF documents as template
+- Define and apply different text styles easily
 - Fully customizable by writing your own ViewHelpers
 - Rich inheritance based TypoScript settings
 - Supported output destinations: string, inline, download and file
