@@ -9,7 +9,7 @@ AvoidPageBreakInsideViewHelper
 ------------------------------
 
 This ViewHelper may wrap any composition of other ViewHelpers. It tries its best to avoid a page break within its children elements.
-Note that this ViewHelper needs to render its children multiple times to determine whether a page break is needed or not.
+Note that this ViewHelper needs to render its children two times to determine whether a page break is needed or not.
 This has a negative impact on the performance as well as might create other undesired side effects.
 
 ::

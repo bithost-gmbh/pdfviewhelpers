@@ -93,7 +93,7 @@ class ListViewHelper extends AbstractTextViewHelper
         //indent of the bullet from the left page border
         $bulletPosX = $this->arguments['posX'] + $this->arguments['padding']['left'];
         //helps to center the bullet vertically
-        $relativBulletPosY = ($this->getPDF()->getCellHeight($this->arguments['fontSize']) * AbstractTextViewHelper::$POINT_TO_MM_FACTOR - $this->arguments['bulletSize']) / 2;
+        $relativBulletPosY = ($this->getPDF()->getCellHeight($this->arguments['fontSize']) / $this->getPDF()->getScaleFactor() - $this->arguments['bulletSize']) / 2;
         //indent of the Text from the left page border
         $textPosX = $this->arguments['padding']['left'] * 2 + $this->arguments['bulletSize'] + $this->arguments['posX'];
         //width of the entire element minus the indent for the bullet
@@ -126,11 +126,10 @@ class ListViewHelper extends AbstractTextViewHelper
             $elementEndPage = $this->getPDF()->getPage();
             $elementEndY = $this->getPDF()->getY();
 
-            $pageHeightInPoints = $this->getPDF()->getPageHeight($elementStartPage) ;
-            $pageHeightInMM = $pageHeightInPoints * AbstractTextViewHelper::$POINT_TO_MM_FACTOR;
+            $scaledPageHeight = $this->getPDF()->getScaledPageHeight();
             $breakMargin = $this->getPDF()->getBreakMargin($elementStartPage);
 
-            if ($elementStartY + $oneLineTextHeight >= $pageHeightInMM  - $breakMargin) {
+            if ($elementStartY + $oneLineTextHeight >= $scaledPageHeight  - $breakMargin) {
                 //A page break occurred on the first line
                 $elementStartY = $this->getPDF()->getMargins()['top'];
             } else {

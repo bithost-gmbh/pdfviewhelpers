@@ -295,6 +295,30 @@ class BasePDF extends FPDI
     }
 
     /**
+     * @return float
+     */
+    public function getScaledInnerPageHeight()
+    {
+        $margins = $this->getMargins();
+
+        return $this->getScaledPageHeight() - $margins['top'] - $margins['bottom'];
+    }
+
+    /**
+     * @param integer $page
+     *
+     * @return float;
+     */
+    public function getScaledPageHeight($page = null)
+    {
+        if ($page === null) {
+            $page = $this->getPage();
+        }
+
+        return $this->getPageHeight($page) / $this->getScaleFactor();
+    }
+
+    /**
      * @return string
      */
     public function getCurrentPageOrientation()

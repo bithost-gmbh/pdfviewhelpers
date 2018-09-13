@@ -39,13 +39,6 @@ use Bithost\Pdfviewhelpers\Exception\ValidationException;
 abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
 {
     /**
-     * 1pt = 0.352778mm
-     *
-     * @var float
-     */
-    public static $POINT_TO_MM_FACTOR = 0.352778;
-
-    /**
      * @var array
      */
     protected $mergeProperties = [

@@ -74,18 +74,16 @@ class AvoidPageBreakInsideViewHelper extends AbstractPDFViewHelper
                 $realPDF->AddPage();
             } else if ($pageStep === 1) {
                 //only break if the content fits on the next page
-                $shadowPDF = $this->prepareShadowPdf($realPDF);
-                $startPage = $shadowPDF->getPage();
+                $firstPageChildrenHeight = $realPDF->getScaledPageHeight($startPage) - $realPDF->GetY() - $realPDF->getBreakMargin($startPage);
+                $secondPageChildrenHeight = $shadowPDF->GetY() - $realPDF->getMargins()['top'];
+                $totalChildrenHeight = $firstPageChildrenHeight + $secondPageChildrenHeight;
+                $innerPageHeight = $realPDF->getScaledInnerPageHeight();
 
-                $this->setPDF($shadowPDF);
-
-                $this->renderChildren();
-
-                $endPage = $shadowPDF->getPage();
-
-                if ($startPage === $endPage) {
+                if ($totalChildrenHeight < $innerPageHeight) {
                     $realPDF->AddPage();
                 }
+            } else {
+                //Content is longer than one page, do not add page break
             }
         }
 
