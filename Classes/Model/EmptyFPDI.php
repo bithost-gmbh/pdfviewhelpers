@@ -2,5 +2,6 @@
 
 namespace Bithost\Pdfviewhelpers\Model;
 
-class EmptyFPDI extends BasePDF {
+class EmptyFPDI extends BasePDF
+{
 }
