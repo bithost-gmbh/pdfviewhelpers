@@ -45,31 +45,6 @@ class ListViewHelper extends AbstractTextViewHelper
     {
         parent::initializeArguments();
 
-        if (strlen($this->settings['list']['trim'])) {
-            $this->overrideArgument('trim', 'boolean', '', false, (boolean) $this->settings['list']['trim']);
-        }
-        if (strlen($this->settings['list']['removeDoubleWhitespace'])) {
-            $this->overrideArgument('removeDoubleWhitespace', 'boolean', '', false, (boolean) $this->settings['list']['removeDoubleWhitespace']);
-        }
-        if (!empty($this->settings['list']['color'])) {
-            $this->overrideArgument('color', 'string', '', false, $this->settings['list']['color']);
-        }
-        if (!empty($this->settings['list']['fontFamily'])) {
-            $this->overrideArgument('fontFamily', 'string', '', false, $this->settings['list']['fontFamily']);
-        }
-        if (!empty($this->settings['list']['fontSize'])) {
-            $this->overrideArgument('fontSize', 'integer', '', false, $this->settings['list']['fontSize']);
-        }
-        if (!empty($this->settings['list']['fontStyle'])) {
-            $this->overrideArgument('fontStyle', 'string', '', false, $this->settings['list']['fontStyle']);
-        }
-        if (!empty($this->settings['list']['alignment'])) {
-            $this->overrideArgument('alignment', 'string', '', false, $this->settings['list']['alignment']);
-        }
-        if (!empty($this->settings['list']['autoHyphenation'])) {
-            $this->overrideArgument('autoHyphenation', 'boolean', '', false, (boolean) $this->settings['list']['autoHyphenation']);
-        }
-
         $this->registerArgument('listElements', 'array', '', true, null);
         $this->registerArgument('bulletColor', 'string', '', false, $this->settings['list']['bulletColor']);
         $this->registerArgument('bulletImageSrc', 'string', '', false, $this->settings['list']['bulletImageSrc']);
@@ -84,12 +59,6 @@ class ListViewHelper extends AbstractTextViewHelper
     public function initialize()
     {
         parent::initialize();
-
-        $this->arguments['padding'] = array_merge($this->settings['generalText']['padding'], $this->settings['list']['padding'], $this->arguments['padding']);
-
-        if ($this->validationService->validatePadding($this->arguments['padding'])) {
-            $this->getPDF()->setCellPaddings(0, 0, $this->arguments['padding']['right'], 0);
-        }
 
         $this->validationService->validateListElements($this->arguments['listElements']);
 
@@ -136,12 +105,6 @@ class ListViewHelper extends AbstractTextViewHelper
         }
 
         foreach ($this->arguments['listElements'] as $listElement) {
-            if (empty($this->arguments['bulletImageSrc'])) {
-                $this->getPDF()->Rect($bulletPosX, $currentPosY + $relativBulletPosY, $this->arguments['bulletSize'], $this->arguments['bulletSize'], 'F', null, [$this->arguments['bulletColor']['R'], $this->arguments['bulletColor']['G'], $this->arguments['bulletColor']['B']]);
-            } else {
-                $this->getPDF()->Image($bulletImageFileContent, $bulletPosX, $currentPosY + $relativBulletPosY, $this->arguments['bulletSize'], null, '', '', '', false, 300, '', false, false, 0, false, false, true, false);
-            }
-
             if ($this->arguments['autoHyphenation']) {
                 $listElement = $this->hyphenationService->hyphenateText(
                     $listElement,
@@ -151,9 +114,23 @@ class ListViewHelper extends AbstractTextViewHelper
 
             $this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), false, 1, $textPosX, $currentPosY, true, 0, false, true, 0, 'T', false);
 
+            if (empty($this->arguments['bulletImageSrc'])) {
+                $this->getPDF()->Rect($bulletPosX, $currentPosY + $relativBulletPosY, $this->arguments['bulletSize'], $this->arguments['bulletSize'], 'F', null, [$this->arguments['bulletColor']['R'], $this->arguments['bulletColor']['G'], $this->arguments['bulletColor']['B']]);
+            } else {
+                $this->getPDF()->Image($bulletImageFileContent, $bulletPosX, $currentPosY + $relativBulletPosY, $this->arguments['bulletSize'], null, '', '', '', false, 300, '', false, false, 0, false, false, true, false);
+            }
+
             $currentPosY += $this->getPDF()->getStringHeight($textWidth, $listElement);
         }
 
         $this->getPDF()->SetY($currentPosY + $this->arguments['padding']['bottom']);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getSettingsKey()
+    {
+        return 'list';
     }
 }

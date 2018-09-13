@@ -164,10 +164,9 @@ class ValidationService implements SingletonInterface
         if (is_numeric($height) && $height >= 0) {
             return true;
         } else {
-            throw new ValidationException('Height must be an integer. ERROR: 1363766372', 1363765372);
+            throw new ValidationException('Height must be a positive integer. ERROR: 1363766372', 1363765372);
         }
     }
-
 
     /**
      * @param array $listElements
@@ -182,6 +181,38 @@ class ValidationService implements SingletonInterface
             return true;
         } else {
             throw new ValidationException('Only one dimensional arrays are allowed for the ListViewHelper. ERROR: 1363779014', 1363779014);
+        }
+    }
+
+    /**
+     * @param string $lineHeight
+     *
+     * @return boolean
+     *
+     * @throws ValidationException
+     */
+    public function validateLineHeight($lineHeight)
+    {
+        if (is_numeric($lineHeight) && $lineHeight >= 0) {
+            return true;
+        } else {
+            throw new ValidationException('Line height must be a positive integer. ERROR: 1536704503', 1536704503);
+        }
+    }
+
+    /**
+     * @param string $characterSpacing
+     *
+     * @return boolean
+     *
+     * @throws ValidationException
+     */
+    public function validateCharacterSpacing($characterSpacing)
+    {
+        if (is_numeric($characterSpacing) && $characterSpacing >= 0) {
+            return true;
+        } else {
+            throw new ValidationException('Character spacing must be a positive integer. ERROR: 1536704547', 1536704547);
         }
     }
 }

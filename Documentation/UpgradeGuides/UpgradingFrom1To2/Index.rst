@@ -34,3 +34,7 @@ Renamed page.margins to page.margin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The TypoScript setting ``plugin.tx_pdfviewhelpers.settings.page.margins`` has been renamed to ``plugin.tx_pdfviewhelpers.settings.page.margin``.
 Also the Fluid PageViewHelper attribute has been renamed from ``page.margins`` to ``page.margin``.
+
+Changed default value of page.autoPageBreak
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The option ``plugin.tx_pdfviewhelpers.settings.page.autoPageBreak`` is now enabled by default.
