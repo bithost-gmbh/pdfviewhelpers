@@ -77,6 +77,8 @@ class ListViewHelper extends AbstractTextViewHelper
         if ($this->validationService->validateColor($this->arguments['bulletColor'])) {
             $this->arguments['bulletColor'] = $this->conversionService->convertHexToRGB($this->arguments['bulletColor']);
         }
+
+        $this->getPDF()->setCellPaddings(0, 0, 0, 0);
     }
 
     /**
@@ -96,13 +98,17 @@ class ListViewHelper extends AbstractTextViewHelper
         $textPosX = $this->arguments['padding']['left'] * 2 + $this->arguments['bulletSize'] + $this->arguments['posX'];
         //width of the entire element minus the indent for the bullet
         $textWidth = $this->arguments['width'] - $this->arguments['padding']['left'] - 2 * $this->arguments['bulletSize'];
-        //posY of the line that's being printed
-        $currentPosY = $this->arguments['posY'] + $this->arguments['padding']['top'];
+
+        //Update y respecting padding
+        $this->getPDF()->SetY($this->arguments['posY'] + $this->arguments['padding']['top']);
 
         if (!empty($this->arguments['bulletImageSrc'])) {
             $bulletImageFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['bulletImageSrc']);
             $bulletImageFileContent = '@' . $bulletImageFile->getContents();
         }
+
+        //The height of a single text line
+        $oneLineTextHeight = $this->getPDF()->getStringHeight($textWidth, '.');
 
         foreach ($this->arguments['listElements'] as $listElement) {
             if ($this->arguments['autoHyphenation']) {
@@ -112,18 +118,37 @@ class ListViewHelper extends AbstractTextViewHelper
                 );
             }
 
-            $this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), false, 1, $textPosX, $currentPosY, true, 0, false, true, 0, 'T', false);
+            $elementStartPage = $this->getPDF()->getPage();
+            $elementStartY = $this->getPDF()->getY();
 
-            if (empty($this->arguments['bulletImageSrc'])) {
-                $this->getPDF()->Rect($bulletPosX, $currentPosY + $relativBulletPosY, $this->arguments['bulletSize'], $this->arguments['bulletSize'], 'F', null, [$this->arguments['bulletColor']['R'], $this->arguments['bulletColor']['G'], $this->arguments['bulletColor']['B']]);
+            $this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), false, 1, $textPosX, null, true, 0, false, true, 0, 'T', false);
+
+            $elementEndPage = $this->getPDF()->getPage();
+            $elementEndY = $this->getPDF()->getY();
+
+            $pageHeightInPoints = $this->getPDF()->getPageHeight($elementStartPage) ;
+            $pageHeightInMM = $pageHeightInPoints * AbstractTextViewHelper::$POINT_TO_MM_FACTOR;
+            $breakMargin = $this->getPDF()->getBreakMargin($elementStartPage);
+
+            if ($elementStartY + $oneLineTextHeight >= $pageHeightInMM  - $breakMargin) {
+                //A page break occurred on the first line
+                $elementStartY = $this->getPDF()->getMargins()['top'];
             } else {
-                $this->getPDF()->Image($bulletImageFileContent, $bulletPosX, $currentPosY + $relativBulletPosY, $this->arguments['bulletSize'], null, '', '', '', false, 300, '', false, false, 0, false, false, true, false);
+                //No page on first line break, reset to start page
+                $this->getPDF()->setPage($elementStartPage);
             }
 
-            $currentPosY += $this->getPDF()->getStringHeight($textWidth, $listElement);
+            if (empty($this->arguments['bulletImageSrc'])) {
+                $this->getPDF()->Rect($bulletPosX, $elementStartY + $relativBulletPosY, $this->arguments['bulletSize'], $this->arguments['bulletSize'], 'F', null, [$this->arguments['bulletColor']['R'], $this->arguments['bulletColor']['G'], $this->arguments['bulletColor']['B']]);
+            } else {
+                $this->getPDF()->Image($bulletImageFileContent, $bulletPosX, $elementStartY + $relativBulletPosY, $this->arguments['bulletSize'], null, '', '', '', false, 300, '', false, false, 0, false, false, true, false);
+            }
+
+            $this->getPDF()->setPage($elementEndPage);
+            $this->getPDF()->setY($elementEndY);
         }
 
-        $this->getPDF()->SetY($currentPosY + $this->arguments['padding']['bottom']);
+        $this->getPDF()->SetY($elementEndY + $this->arguments['padding']['bottom']);
     }
 
     /**
