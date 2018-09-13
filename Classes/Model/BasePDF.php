@@ -276,7 +276,7 @@ class BasePDF extends FPDI
      * @param string $format
      * @param string $orientation
      */
-    public function setPageFormat($format, $orientation='P')
+    public function setPageFormat($format, $orientation = 'P')
     {
         $this->currentPageFormat = $format;
 
