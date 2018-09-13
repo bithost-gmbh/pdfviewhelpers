@@ -18,6 +18,7 @@ For detailed information about the ViewHelper attributes please refer to the Con
 	PageViewHelper/Index
 	PageBreakViewHelper/Index
 	HeaderAndFooterViewHelper/Index
+	AvoidPageBreakInsideViewHelper/Index
 	MultiColumnViewHelper/Index
 	TextViewHelper/Index
 	HeadlineViewHelper/Index

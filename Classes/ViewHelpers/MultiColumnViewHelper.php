@@ -63,6 +63,7 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
         $multiColumnContext['columnPadding'] = [];
         $multiColumnContext['numberOfColumns'] = 0;
         $multiColumnContext['posY'] = $this->getPDF()->GetY();
+        $multiColumnContext['longestColumnPage'] = 0;
         $multiColumnContext['longestColumnPosY'] = 0;
         $multiColumnContext['posX'] = $this->getPDF()->GetX();
         $multiColumnContext['currentPosX'] = $this->getPDF()->GetX();
@@ -102,14 +103,18 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
             //get possible new multi column context
             $multiColumnContext = $this->getCurrentMultiColumnContext();
 
-            if ($multiColumnContext['longestColumnPosY'] < $this->getPDF()->GetY()) {
+            if ($multiColumnContext['longestColumnPage'] < $this->getPDF()->getPage() ||
+                ($multiColumnContext['longestColumnPage'] === $this->getPDF()->getPage() &&  $multiColumnContext['longestColumnPosY'] < $this->getPDF()->GetY())
+            ) {
                 $multiColumnContext['longestColumnPosY'] = $this->getPDF()->GetY();
+                $multiColumnContext['longestColumnPage'] = $this->getPDF()->getPage();
             }
 
             $multiColumnContext['currentPosX'] += $multiColumnContext['columnWidth'] + $multiColumnContext['columnPadding']['right'];
             $this->setCurrentMultiColumnContext($multiColumnContext);
         }
 
+        $this->getPDF()->setPage($multiColumnContext['longestColumnPage']);
         $this->getPDF()->SetY($multiColumnContext['longestColumnPosY']);
         $this->getPDF()->SetX($multiColumnContext['posX']);
 

@@ -66,7 +66,7 @@ class BasePDF extends FPDI
     /**
      * @var string
      */
-    protected $pageHeaderScope = null;
+    protected $pageHeaderScope = '';
 
     /**
      * Document wide FooterViewHelper
@@ -92,7 +92,12 @@ class BasePDF extends FPDI
     /**
      * @var string
      */
-    protected $pageFooterScope = null;
+    protected $pageFooterScope = '';
+
+    /**
+     * @var string
+     */
+    protected $currentPageFormat = '';
 
     const SCOPE_THIS_PAGE = 'thisPage';
     const SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS = 'thisPageIncludingPageBreaks';
@@ -268,6 +273,17 @@ class BasePDF extends FPDI
     }
 
     /**
+     * @param string $format
+     * @param string $orientation
+     */
+    public function setPageFormat($format, $orientation = 'P')
+    {
+        $this->currentPageFormat = $format;
+
+        parent::setPageFormat($format, $orientation);
+    }
+
+    /**
      * @return integer
      */
     public function getInnerPageWidth()
@@ -276,5 +292,29 @@ class BasePDF extends FPDI
         $pageMargins = $this->getMargins();
 
         return $pageWidth - $pageMargins['left'] - $pageMargins['right'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrentPageOrientation()
+    {
+        return $this->CurOrientation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrentPageFormat()
+    {
+        return $this->currentPageFormat;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPdfUnit()
+    {
+        return $this->pdfunit;
     }
 }

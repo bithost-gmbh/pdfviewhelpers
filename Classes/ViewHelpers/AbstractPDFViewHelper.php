@@ -147,12 +147,8 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
      */
     protected function setPDF(BasePDF $pdf)
     {
-        if ($this instanceof DocumentViewHelper && !$this->viewHelperVariableContainer->exists('DocumentViewHelper', 'pdf')) {
-            $this->viewHelperVariableContainer->add('DocumentViewHelper', 'pdf', $pdf);
-            $this->hyphenationService->setPDF($pdf);
-        } else {
-            throw new Exception('The PDF Object has already been created, or the function setPDF() was not called from an instance of DocumentViewHelper. ERROR: 1363682312', 1363682312);
-        }
+        $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pdf', $pdf);
+        $this->hyphenationService->setPDF($pdf);
     }
 
     /**
