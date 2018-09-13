@@ -71,12 +71,16 @@ class FooterViewHelper extends AbstractPDFViewHelper
         $pdf = $this->getPDF();
         $arguments = $this->arguments;
         $renderChildrenClosure = $this->buildRenderChildrenClosure();
-        $footerClosure = function () use ($pdf, $arguments, $renderChildrenClosure) {
+        $footerViewHelper = $this;
+        $footerClosure = function () use ($pdf, $arguments, $renderChildrenClosure, $footerViewHelper) {
+            $footerViewHelper->pushMultiColumnContext([]);
+
             if ($arguments['posY']) {
                 $pdf->SetY($arguments['posY']);
             }
 
             $renderChildrenClosure();
+            $footerViewHelper->popMultiColumnContext();
         };
 
         $pdf->setFooterClosure($footerClosure, $arguments['scope']);
