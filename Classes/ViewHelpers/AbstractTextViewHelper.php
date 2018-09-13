@@ -65,6 +65,11 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
     ];
 
     /**
+     * @return string
+     */
+    abstract protected function getSettingsKey();
+
+    /**
      * @return void
      */
     public function initializeArguments()
@@ -176,11 +181,6 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
     }
 
     /**
-     * @return string
-     */
-    protected abstract function getSettingsKey();
-
-    /**
      * @param array $default
      * @param array $overwrite
      *
@@ -192,7 +192,8 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
 
         foreach ($this->mergeProperties as $mergeProperty) {
             if (isset($overwrite[$mergeProperty])
-                && (!empty($overwrite[$mergeProperty]) || mb_strlen($overwrite[$mergeProperty]))
+                && $overwrite[$mergeProperty] !== null
+                && (!is_string($overwrite[$mergeProperty]) || mb_strlen($overwrite[$mergeProperty]))
             ) {
                 if (is_array($overwrite[$mergeProperty])) {
                     $mergedArray[$mergeProperty] = array_merge($mergedArray[$mergeProperty], $overwrite[$mergeProperty]);
