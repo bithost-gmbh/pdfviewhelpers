@@ -71,12 +71,16 @@ class HeaderViewHelper extends AbstractPDFViewHelper
         $pdf = $this->getPDF();
         $arguments = $this->arguments;
         $renderChildrenClosure = $this->buildRenderChildrenClosure();
-        $headerClosure = function () use ($pdf, $arguments, $renderChildrenClosure) {
+        $headerViewHelper = $this;
+        $headerClosure = function () use ($pdf, $arguments, $renderChildrenClosure, $headerViewHelper) {
+            $headerViewHelper->pushMultiColumnContext([]);
+
             if ($arguments['posY']) {
                 $pdf->SetY($arguments['posY']);
             }
 
             $renderChildrenClosure();
+            $headerViewHelper->popMultiColumnContext();
         };
 
         $pdf->setHeaderClosure($headerClosure, $arguments['scope']);

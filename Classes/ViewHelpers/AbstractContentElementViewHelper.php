@@ -97,10 +97,12 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     protected function initializeMultiColumnSupport()
     {
-        $multiColumnContext = $this->getMultiColumnContext();
+        $multiColumnContext = $this->getCurrentMultiColumnContext();
 
         if ($multiColumnContext !== null && $multiColumnContext['isInAColumn']) {
             $this->arguments['width'] = $multiColumnContext['columnWidth'];

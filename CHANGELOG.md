@@ -14,6 +14,7 @@
 - Adds optional exit after PDF output
 - Adds lineHeight and characterSpacing option to text
 - Adds text types to easily apply different styles
+- Adds multi column context stack to avoid header and footer context interference
 - Changes PHP requirement to minimum 5.6
 - Changes default value of `page.autoPageBreak` to `1`
 - Fixes MultiColumnViewHelper columns not correctly initialized

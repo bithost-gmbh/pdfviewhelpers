@@ -30,6 +30,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Model\BasePDF;
+use Bithost\Pdfviewhelpers\MultiColumn\ContextStack;
 use Bithost\Pdfviewhelpers\Service\HyphenationService;
 use Bithost\Pdfviewhelpers\Service\ConversionService;
 use Bithost\Pdfviewhelpers\Service\ValidationService;
@@ -187,20 +188,54 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
      *
      * @return void
      */
-    protected function setMultiColumnContext(array $multiColumnContext)
+    protected function pushMultiColumnContext(array $multiColumnContext)
     {
-        $this->viewHelperVariableContainer->addOrUpdate('MultiColumnViewHelper', 'multiColumnContext', $multiColumnContext);
+        if (!$this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'contextStack')) {
+            $contextStack = new ContextStack();
+            $contextStack->push($multiColumnContext);
+
+            $this->viewHelperVariableContainer->add('MultiColumnViewHelper', 'contextStack', $contextStack);
+        } else {
+            $contextStack = $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'contextStack');
+
+            $contextStack->push($multiColumnContext);
+        }
     }
 
     /**
      * @return array $multiColumnContext
      */
-    protected function getMultiColumnContext()
+    protected function popMultiColumnContext()
     {
-        if ($this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'multiColumnContext')) {
-            return $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'multiColumnContext');
+        if ($this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'contextStack')) {
+            $contextStack = $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'contextStack');
+
+            return $contextStack->pop();
         } else {
             return null;
         }
+    }
+
+    /**
+     * @return array $multiColumnContext
+     */
+    protected function getCurrentMultiColumnContext()
+    {
+        if ($this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'contextStack')) {
+            $contextStack = $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'contextStack');
+
+            return $contextStack->top();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param array $multiColumnContext
+     */
+    protected function setCurrentMultiColumnContext($multiColumnContext)
+    {
+        $this->popMultiColumnContext();
+        $this->pushMultiColumnContext($multiColumnContext);
     }
 }
