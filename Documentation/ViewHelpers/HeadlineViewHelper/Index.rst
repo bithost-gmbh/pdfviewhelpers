@@ -9,6 +9,7 @@ HeadlineViewHelper
 ------------------
 
 Rendering text using the settings for headlines.
+It is possible to easily define different default styles and apply them using the ``type`` attribute, see chapter :ref:`Text Types <text-types>`.
 
 **Basic Usage**
 ::
@@ -26,6 +27,8 @@ Rendering text using the settings for headlines.
 		fontFamily="arial"
 		fontSize="22"
 		fontStyle="bold"
+		lineHeight="1.5"
+		characterSpacing="0.2"
 		alignment="right"
 		paragraphSpacing="0"
 		autoHyphenation="1"

@@ -46,23 +46,45 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
     public static $POINT_TO_MM_FACTOR = 0.352778;
 
     /**
+     * @var array
+     */
+    protected $mergeProperties = [
+        'trim',
+        'removeDoubleWhitespace',
+        'color',
+        'fontFamily',
+        'fontSize',
+        'fontStyle',
+        'padding',
+        'text',
+        'alignment',
+        'paragraphSpacing',
+        'autoHyphenation',
+        'lineHeight',
+        'characterSpacing',
+    ];
+
+    /**
      * @return void
      */
     public function initializeArguments()
     {
         parent::initializeArguments();
 
-        $this->registerArgument('trim', 'boolean', '', false, (boolean) $this->settings['generalText']['trim']);
-        $this->registerArgument('removeDoubleWhitespace', 'boolean', '', false, (boolean) $this->settings['generalText']['removeDoubleWhitespace']);
-        $this->registerArgument('color', 'string', '', false, $this->settings['generalText']['color']);
-        $this->registerArgument('fontFamily', 'string', '', false, $this->settings['generalText']['fontFamily']);
-        $this->registerArgument('fontSize', 'integer', '', false, $this->settings['generalText']['fontSize']);
-        $this->registerArgument('fontStyle', 'string', '', false, $this->settings['generalText']['fontStyle']);
+        $this->registerArgument('trim', 'boolean', '', false, null);
+        $this->registerArgument('removeDoubleWhitespace', 'boolean', '', false, null);
+        $this->registerArgument('color', 'string', '', false, null);
+        $this->registerArgument('fontFamily', 'string', '', false, null);
+        $this->registerArgument('fontSize', 'integer', '', false, null);
+        $this->registerArgument('fontStyle', 'string', '', false, null);
+        $this->registerArgument('lineHeight', 'float', '', false, null);
+        $this->registerArgument('characterSpacing', 'float', '', false, null);
         $this->registerArgument('padding', 'array', '', false, []);
         $this->registerArgument('text', 'string', '', false, null);
-        $this->registerArgument('alignment', 'string', 'Text Alignment. Possible values: "left", "center", "right", "justify". Defaults to "left"', false, $this->settings['generalText']['alignment']);
-        $this->registerArgument('paragraphSpacing', 'float', 'Spacing after each paragraph. Defaults to 0', false, $this->settings['generalText']['paragraphSpacing']);
-        $this->registerArgument('autoHyphenation', 'boolean', '', false, (boolean) $this->settings['generalText']['autoHyphenation']);
+        $this->registerArgument('alignment', 'string', '', false, null);
+        $this->registerArgument('paragraphSpacing', 'float', '', false, null);
+        $this->registerArgument('autoHyphenation', 'boolean', '', false, null);
+        $this->registerArgument('type', 'string', '', false, null);
     }
 
     /**
@@ -73,6 +95,8 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
     public function initialize()
     {
         parent::initialize();
+
+        $this->mergeSettingsAndArguments();
 
         if (empty($this->arguments['text'])) {
             $this->arguments['text'] = $this->renderChildren();
@@ -105,6 +129,23 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         if ($this->validationService->validateFontFamily($this->arguments['fontFamily'])) {
             $this->getPDF()->SetFont($this->arguments['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($this->arguments['fontStyle']));
         }
+
+        if ($this->validationService->validateLineHeight($this->arguments['lineHeight'])) {
+            $this->getPDF()->setCellHeightRatio($this->arguments['lineHeight']);
+        }
+
+        if ($this->validationService->validateCharacterSpacing($this->arguments['characterSpacing'])) {
+            $this->getPDF()->setFontSpacing($this->arguments['characterSpacing']);
+        }
+
+        if ($this->validationService->validatePadding($this->arguments['padding'])) {
+            $this->getPDF()->setCellPaddings(
+                $this->arguments['padding']['left'],
+                $this->arguments['padding']['top'],
+                $this->arguments['padding']['right'],
+                $this->arguments['padding']['bottom']
+            );
+        }
     }
 
     /**
@@ -126,12 +167,77 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
 
             $this->getPDF()->MultiCell($this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), false, 1, $this->arguments['posX'], $posY, true, 0, false, true, 0, 'T', false);
 
-            if ($this->validationService->validateParagraphSpacing($this->arguments['paragraphSpacing']) && $this->arguments['paragraphSpacing'] > 0
-            ) {
+            if ($this->validationService->validateParagraphSpacing($this->arguments['paragraphSpacing']) && $this->arguments['paragraphSpacing'] > 0) {
                 $this->getPDF()->Ln((float)$this->arguments['paragraphSpacing'], false);
             }
 
             $posY = $this->getPDF()->GetY();
+        }
+    }
+
+    /**
+     * @return string
+     */
+    protected abstract function getSettingsKey();
+
+    /**
+     * @param array $default
+     * @param array $overwrite
+     *
+     * @return array
+     */
+    protected function mergeSettingsArrays(array $default, array $overwrite)
+    {
+        $mergedArray = $default;
+
+        foreach ($this->mergeProperties as $mergeProperty) {
+            if (isset($overwrite[$mergeProperty])
+                && (!empty($overwrite[$mergeProperty]) || mb_strlen($overwrite[$mergeProperty]))
+            ) {
+                if (is_array($overwrite[$mergeProperty])) {
+                    $mergedArray[$mergeProperty] = array_merge($mergedArray[$mergeProperty], $overwrite[$mergeProperty]);
+                } else {
+                    $mergedArray[$mergeProperty] = $overwrite[$mergeProperty];
+                }
+            }
+        }
+
+        return $mergedArray;
+    }
+
+    /**
+     * Merges settings with the following priority (higher priority overwrites lower priority):
+     *
+     * 0. generalText
+     * 1. text|headline|list
+     * 2. types[generalText|text|headline|list]
+     * 3. arguments
+     *
+     * @return void
+     *
+     * @throws ValidationException
+     */
+    protected function mergeSettingsAndArguments()
+    {
+        $settingsKey = $this->getSettingsKey();
+        $mergedSettings = $this->mergeSettingsArrays($this->settings['generalText'], $this->settings[$settingsKey]);
+
+        if (isset($this->arguments['type'])) {
+            $type = $this->arguments['type'];
+
+            if (isset($this->settings[$settingsKey]['types'][$type])) {
+                $mergedSettings = $this->mergeSettingsArrays($mergedSettings, $this->settings[$settingsKey]['types'][$type]);
+            } else if (isset($this->settings['generalText']['types'][$type])) {
+                $mergedSettings = $this->mergeSettingsArrays($mergedSettings, $this->settings['generalText']['types'][$type]);
+            } else {
+                throw new ValidationException('Unknown text style type "' . $this->arguments['type'] . '" used. ERROR: 1536704610', 1536704610);
+            }
+        }
+
+        $mergedSettings = $this->mergeSettingsArrays($mergedSettings, $this->arguments);
+
+        foreach ($mergedSettings as $key => $setting) {
+            $this->arguments[$key] = $setting;
         }
     }
 }

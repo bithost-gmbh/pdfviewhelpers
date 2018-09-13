@@ -41,7 +41,7 @@ plugin.tx_pdfviewhelpers.settings {
 		pdfa = 0
 	}
 	page {
-		autoPageBreak = 0
+		autoPageBreak = 1
 		margin {
 			top = 15
 			right = 15
@@ -65,6 +65,8 @@ plugin.tx_pdfviewhelpers.settings {
 		fontFamily = helvetica
 		fontSize = 11
 		fontStyle = regular
+		lineHeight = 1.25
+		characterSpacing = 0
 		alignment = left
 		paragraphSpacing = 2
 		autoHyphenation = 0
@@ -74,6 +76,9 @@ plugin.tx_pdfviewhelpers.settings {
 			bottom = 0
 			left = 0
 		}
+		types {
+
+		}
 	}
 	text {
 		trim =
@@ -82,10 +87,15 @@ plugin.tx_pdfviewhelpers.settings {
 		fontFamily =
 		fontSize =
 		fontStyle =
+		lineHeight =
+		characterSpacing =
 		alignment =
 		paragraphSpacing =
 		autoHyphenation =
 		padding {
+
+		}
+		types {
 
 		}
 	}
@@ -96,13 +106,18 @@ plugin.tx_pdfviewhelpers.settings {
 		fontFamily = 
 		fontSize = 16
 		fontStyle =
+		lineHeight =
+		characterSpacing =
 		alignment =
 		paragraphSpacing = 0
 		autoHyphenation =
 		padding {
 			top = 6
 			bottom = 3
-		}	
+		}
+		types {
+
+		}
 	}
 	list {
 		trim =
@@ -111,6 +126,8 @@ plugin.tx_pdfviewhelpers.settings {
 		fontFamily =
 		fontSize =
 		fontStyle =
+		lineHeight =
+		characterSpacing =
 		alignment = left
 		autoHyphenation =
 		padding {
@@ -120,6 +137,9 @@ plugin.tx_pdfviewhelpers.settings {
 		bulletColor =
 		bulletImageSrc =
 		bulletSize = 1.5
+		types {
+
+		}
 	}
 	html {
 		autoHyphenation =

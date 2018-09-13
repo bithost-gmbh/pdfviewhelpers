@@ -21,9 +21,10 @@ Target group: **Developers**
 
 	Installation/Index
 	TypoScriptReference/Index
-	CustomFonts/Index
 	HeaderAndFooter/Index
+	TextTypes/Index
 	ExtendExistingPDFs/Index
+	CustomFonts/Index
 	AdvancedCustomization/Index
 	Caching/Index
 
