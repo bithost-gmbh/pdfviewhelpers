@@ -43,35 +43,40 @@ class ContextStack
     /**
      * @return int
      */
-    public function size() {
+    public function size()
+    {
         return count($this->stack);
     }
 
     /**
      * @return array
      */
-    public function top() {
+    public function top()
+    {
         return end($this->stack);
     }
 
     /**
      * @param array $context
      */
-    public function push(array $context) {
+    public function push(array $context)
+    {
         array_push($this->stack, $context);
     }
 
     /**
      * @return array
      */
-    public function pop() {
+    public function pop()
+    {
         return array_pop($this->stack);
     }
 
     /**
      * @return bool
      */
-    public function isEmpty() {
+    public function isEmpty()
+    {
         return empty($this->stack);
     }
 }
