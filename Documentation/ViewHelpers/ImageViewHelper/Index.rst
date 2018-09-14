@@ -13,5 +13,5 @@ This ViewHelper renders an image given as src. As src argument you may provide a
 ::
 
 	<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Example/Bithost.jpg" width="200" />
-	<pdf:image src="{file}" />
+	<pdf:image src="{file}" width="50%" />
 	<pdf:image src="{fileReference}" />

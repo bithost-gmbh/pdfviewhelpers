@@ -48,7 +48,7 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
 
         $this->registerArgument('posX', 'integer', '', false, null);
         $this->registerArgument('posY', 'integer', '', false, null);
-        $this->registerArgument('width', 'integer', '', false, null);
+        $this->registerArgument('width', 'string', '', false, null);
         $this->registerArgument('height', 'integer', '', false, null);
     }
 
@@ -105,8 +105,16 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
         $multiColumnContext = $this->getCurrentMultiColumnContext();
 
         if ($multiColumnContext !== null && $multiColumnContext['isInAColumn']) {
-            $this->arguments['width'] = $multiColumnContext['columnWidth'];
+            if ($this->arguments['width'] === null) {
+                $this->arguments['width'] =  $multiColumnContext['columnWidth'];
+            } else {
+                $convertedWidth = $this->conversionService->convertSpeakingWidthToTcpdfWidth($this->arguments['width'], $multiColumnContext['columnWidth']);
+                $this->arguments['width'] = min($convertedWidth, $multiColumnContext['columnWidth']);
+            }
+
             $this->arguments['posX'] = $multiColumnContext['currentPosX'];
+        } elseif ($this->arguments['width'] !== null) {
+            $this->arguments['width'] = $this->conversionService->convertSpeakingWidthToTcpdfWidth($this->arguments['width'], $this->getPDF()->getInnerPageWidth());
         }
     }
 }

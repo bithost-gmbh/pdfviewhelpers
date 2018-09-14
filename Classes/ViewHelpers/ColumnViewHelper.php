@@ -66,20 +66,9 @@ class ColumnViewHelper extends AbstractPDFViewHelper
         $this->validationService->validatePadding($this->arguments['padding']);
 
         if (strlen($this->arguments['width'])) {
-            if (mb_substr($this->arguments['width'], -1) === '%') {
-                $stringPercentage = rtrim($this->arguments['width'], '%');
-                $invalidWidth = !is_numeric($stringPercentage);
-                $columnWidth = ((float) $stringPercentage / 100) * $multiColumnContext['pageWidthWithoutMargins'];
-            } else {
-                $columnWidth = $this->arguments['width'];
-                $invalidWidth = !is_numeric($columnWidth);
+            if ($this->validationService->validateWidth($this->arguments['width'])) {
+                $multiColumnContext['columnWidth'] = $this->conversionService->convertSpeakingWidthToTcpdfWidth($this->arguments['width'], $multiColumnContext['pageWidthWithoutMargins']);
             }
-
-            if ($invalidWidth) {
-                throw new ValidationException('Invalid column width "' . $this->arguments['width'] . '" provided. ERROR: 1536398597', 1536398597);
-            }
-
-            $multiColumnContext['columnWidth'] = $columnWidth;
         } else {
             $multiColumnContext['columnWidth'] = $multiColumnContext['defaultColumnWidth'];
         }

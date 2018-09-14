@@ -196,6 +196,32 @@ class ConversionService implements SingletonInterface
     }
 
     /**
+     * @param string $width
+     * @param integer $fullWidth
+     *
+     * @return float
+     *
+     * @throws ValidationException
+     */
+    public function convertSpeakingWidthToTcpdfWidth($width, $fullWidth)
+    {
+        if (mb_substr($width, -1) === '%') {
+            $stringPercentage = rtrim($width, '%');
+            $invalidWidth = !is_numeric($stringPercentage);
+            $columnWidth = ((float) $stringPercentage / 100) * $fullWidth;
+        } else {
+            $columnWidth = $width;
+            $invalidWidth = !is_numeric($columnWidth);
+        }
+
+        if ($invalidWidth) {
+            throw new ValidationException('Invalid width "' . $width . '" provided. ERROR: 1536398597', 1536398597);
+        }
+
+        return (float) $columnWidth;
+    }
+
+    /**
      * @param string $extension
      *
      * @return string

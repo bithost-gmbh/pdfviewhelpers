@@ -62,7 +62,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
 
         switch ($this->conversionService->convertImageExtensionToRenderMode($extension)) {
             case 'image':
-                $this->getPDF()->Image($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', '', '', false, 300, '', false, false, 0, false, false, true, false);
+                $this->getPDF()->Image($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], $extension, '', '', false, 300, '', false, false, 0, true, false, true, false);
                 break;
             case 'imageEPS':
                 $this->getPDF()->ImageEps($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', true, '', '', 0, true, false);

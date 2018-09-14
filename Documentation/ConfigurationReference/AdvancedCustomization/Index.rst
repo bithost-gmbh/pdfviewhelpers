@@ -12,8 +12,8 @@ To completely customize the PDF creation you have the options to provide your ow
 Your own PDF class is required to extend ``Bithost\Pdfviewhelpers\Model\BasePDF``.
 If you feel like your custom ViewHelper might be useful for everybody, feel free to create a pull request!
 
-Extend FPDI / TCPDF class
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Extend BasePDF class
+^^^^^^^^^^^^^^^^^^^^
 You can provide your own PDF class in order to customize its behaviour as you want. This is for instance needed if you want to change constructor arguments or
 you want to render header and footer without the ViewHelpers provided.
 
@@ -117,7 +117,7 @@ Create your own ViewHelper
 When writing your own ViewHelper you have the options to extend ``AbstractContentElementViewHelper`` or ``AbstractPDFViewHelper``. If your ViewHelper
 will add some content to the PDF, you should extend ``AbstractContentElementViewHelper`` in order to inherit its position properties and allow the
 header and footer ViewHelpers to work properly.
-If your ViewHelper does not add content (e.g. GetPosXViewHelper or PageBreakViewHelper) you can directly extend ``AbstractPDFViewHelper``.
+If your ViewHelper does not add content (e.g. ``GetPosXViewHelper`` or ``PageBreakViewHelper``) you can directly extend ``AbstractPDFViewHelper``.
 
 Within your ViewHelper you have full access to the public API of TCPDF using ``$this->getPDF()``. Please see the TCPDF examples in order to see what
 you can do with it: https://tcpdf.org/examples/

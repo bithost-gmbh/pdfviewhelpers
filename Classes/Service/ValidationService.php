@@ -83,7 +83,7 @@ class ValidationService implements SingletonInterface
      */
     public function validateWidth($width)
     {
-        if (is_numeric($width) && $width >= 0) {
+        if (is_numeric($width) && $width >= 0 || mb_substr($width, -1) === '%') {
             return true;
         } else {
             throw new ValidationException('Width must be a floating point value. ERROR: 1363765672', 1363765372);
