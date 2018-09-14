@@ -62,6 +62,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	page.autoPageBreak_                            :ref:`t3tsref:data-type-boolean`      0
 	page.margin_                                   Array                                 {top: 15, right: 15, bottom: 15, left: 15}
 	page.importPage_                               :ref:`t3tsref:data-type-integer`
+	page.importPageOnAutomaticPageBreak_           :ref:`t3tsref:data-type-boolean`      1
 	page.orientation_                              :ref:`t3tsref:data-type-string`       portrait
 	page.format_                                   :ref:`t3tsref:data-type-string`       A4
 	header.posY_                                   :ref:`t3tsref:data-type-integer`      5
@@ -378,6 +379,15 @@ page.importPage
 :typoscript:`plugin.tx_pdfviewhelpers.settings.page.importPage =` :ref:`t3tsref:data-type-integer`
 
 Specifies which page should be used as template for the current page. Must be used together with document.sourceFile.
+
+.. _page.importPageOnAutomaticPageBreak:
+
+page.importPageOnAutomaticPageBreak
+"""""""""""""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.page.importPageOnAutomaticPageBreak =` :ref:`t3tsref:data-type-boolean`
+
+Determines whether a PDF template that is used on a page is also rendered when an automatic page break occurs.
 
 .. _page.orientation:
 

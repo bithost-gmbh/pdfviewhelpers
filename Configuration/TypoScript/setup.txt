@@ -49,6 +49,7 @@ plugin.tx_pdfviewhelpers.settings {
 			left = 15
 		}
 		importPage =
+		importPageOnAutomaticPageBreak = 1
 		orientation = portrait
 		format = A4
 	}
