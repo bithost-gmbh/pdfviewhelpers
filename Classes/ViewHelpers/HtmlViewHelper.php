@@ -75,7 +75,7 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         if ($this->arguments['autoHyphenation']) {
             $html = $this->hyphenationService->hyphenateText(
                 $html,
-                $this->hyphenationService->getHyphenFilePath($this->settings['config']['hyphenFile'])
+                $this->hyphenationService->getHyphenFilePath($this->getHyphenFileName())
             );
         }
 

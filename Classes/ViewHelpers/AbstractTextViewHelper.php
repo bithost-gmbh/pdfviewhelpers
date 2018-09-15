@@ -111,7 +111,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         if ($this->arguments['autoHyphenation']) {
             $this->arguments['text'] = $this->hyphenationService->hyphenateText(
                 $this->arguments['text'],
-                $this->hyphenationService->getHyphenFilePath($this->settings['config']['hyphenFile'])
+                $this->hyphenationService->getHyphenFilePath($this->getHyphenFileName())
             );
         }
 

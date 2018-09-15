@@ -29,6 +29,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Model\BasePDF;
 use Bithost\Pdfviewhelpers\MultiColumn\ContextStack;
 use Bithost\Pdfviewhelpers\Service\HyphenationService;
@@ -233,5 +234,19 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     {
         $this->popMultiColumnContext();
         $this->pushMultiColumnContext($multiColumnContext);
+    }
+
+    /**
+     * @return string
+     *
+     * @throws ValidationException
+     */
+    protected function getHyphenFileName()
+    {
+        if ($this->viewHelperVariableContainer->exists('DocumentViewHelper', 'hyphenFile')) {
+            return $this->viewHelperVariableContainer->get('DocumentViewHelper', 'hyphenFile');
+        } else {
+            throw new ValidationException('No hyphenFile configured, make sure to configure a hyphenFile for the DocumentViewHelper. ERROR: 1536993844', 1536993844);
+        }
     }
 }

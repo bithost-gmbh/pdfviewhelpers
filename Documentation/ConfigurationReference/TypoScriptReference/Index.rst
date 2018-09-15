@@ -38,8 +38,6 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	Property                                       Data type                             Default
 	============================================== ===================================== ==========================================
 	config.class_                                  :ref:`t3tsref:data-type-string`       Bithost\\Pdfviewhelpers\\Model\\BasePDF
-	config.language_                               :ref:`t3tsref:data-type-string`       ger
-	config.hyphenFile_                             :ref:`t3tsref:data-type-string`       hyph-de-ch-1901.tex
 	config.disableCache_                           :ref:`t3tsref:data-type-boolean`      1
 	config.exitAfterPdfContentOutput_              :ref:`t3tsref:data-type-boolean`      0
 	config.jpgQuality_                             :ref:`t3tsref:data-type-integer`      100
@@ -59,6 +57,8 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	document.unicode_                              :ref:`t3tsref:data-type-boolean`      1
 	document.encoding_                             :ref:`t3tsref:data-type-string`       UTF-8
 	document.pdfa_                                 :ref:`t3tsref:data-type-boolean`      0
+	document.language_                             :ref:`t3tsref:data-type-string`       ger
+	document.hyphenFile_                           :ref:`t3tsref:data-type-string`       hyph-de-ch-1901.tex
 	page.autoPageBreak_                            :ref:`t3tsref:data-type-boolean`      0
 	page.margin_                                   Array                                 {top: 15, right: 15, bottom: 15, left: 15}
 	page.importPage_                               :ref:`t3tsref:data-type-integer`
@@ -145,28 +145,6 @@ config.class
 
 Decides which PHP class should be used as TCPDF object. You can easily provide your own class in order to render custom header and footers or to customize TCPDF in any way.
 Your provided class must inherit from Bithost\\Pdfviewhelpers\\Model\\BasePDF.
-
-
-.. _config.language:
-
-config.language
-"""""""""""""""
-
-:typoscript:`plugin.tx_pdfviewhelpers.settings.config.language =` :ref:`t3tsref:data-type-string`
-
-Decides which language settings are used from TCPDF. All possible language codes can be found in **Resources/Private/tcpdf/examples/lang/**.
-
-.. _config.hyphenFile:
-
-config.hyphenFile
-"""""""""""""""""
-
-:typoscript:`plugin.tx_pdfviewhelpers.settings.config.hyphenFile =` :ref:`t3tsref:data-type-string`
-
-The name of the hyphen file used for the automatic hyphenation. This needs to be set according to the language of your document.
-All possible values can be found in the directory "pdfviewhelpers/Resources/Private/Hyphenation/"
-
-Example values are: hyph-de-1996.tex, hyph-en-gb.tex, hyph-nl.tex, hyph-fr.tex
 
 .. _config.disableCache:
 
@@ -307,8 +285,8 @@ document.outputPath
 :typoscript:`plugin.tx_pdfviewhelpers.settings.document.outputPath =` :ref:`t3tsref:data-type-string`
 
 The TCPDF output path of the document. If you are saving the file to filesystem this is a relative path from the
-webroot directory e.g. *fileadmin/pdfviewhelpers/projectXY.pdf*.
-If you are sending it inline or as file download it is simply the name of the document e.g. *projectXY.pdf*.
+webroot directory e.g. ``fileadmin/pdfviewhelpers/projectXY.pdf``.
+If you are sending it inline or as file download it is simply the name of the document e.g. ``projectXY.pdf``.
 
 .. _document.sourceFile:
 
@@ -355,6 +333,27 @@ document.pdfa
 
 Sets the document to PDF/A mode if true.
 
+.. _document.language:
+
+document.language
+"""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.document.language =` :ref:`t3tsref:data-type-string`
+
+Decides which language settings are used from TCPDF. All possible language codes can be found in ``Resources/Private/tcpdf/examples/lang/``.
+
+.. _document.hyphenFile:
+
+document.hyphenFile
+"""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.document.hyphenFile =` :ref:`t3tsref:data-type-string`
+
+The name of the hyphen file used for the automatic hyphenation. This needs to be set according to the language of your document.
+All possible values can be found in the directory ``pdfviewhelpers/Resources/Private/Hyphenation/``.
+
+Example values are: ``hyph-de-1996.tex``, ``hyph-en-gb.tex``, ``hyph-nl.tex``, ``hyph-fr.tex``
+
 .. _page.autoPageBreak:
 
 page.autoPageBreak
@@ -362,7 +361,7 @@ page.autoPageBreak
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.page.autoPageBreak =` :ref:`t3tsref:data-type-boolean`
 
-Decides whether TCPDF uses auto page break or not. You can always add a new page by adding a new <pdf:page> tag to your template.
+Decides whether TCPDF uses auto page break or not. You can always add a new page by adding a new ``<pdf:page>`` tag to your template.
 
 .. _page.margin:
 
@@ -407,7 +406,7 @@ page.format
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.page.format =` :ref:`t3tsref:data-type-string`
 
-Defines the format of the current page. Possible values are e.g. A0 - A12, to see all possible values you have to check \TCPDF_STATIC::$page_formats
+Defines the format of the current page. Possible values are e.g. ``A0`` - ``A12``, to see all possible values you have to check ``\TCPDF_STATIC::$page_formats``
 
 .. _header.posY:
 
@@ -461,7 +460,7 @@ generalText.color
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.color =`  :ref:`t3tsref:data-type-string`
 
-The text color as hex value, possible syntax are: #000 or #000000
+The text color as hex value, possible syntax are: ``#000`` or ``#000000``
 
 .. _generalText.fontFamily:
 
@@ -552,7 +551,7 @@ list.bulletColor
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.list.bulletColor =` :ref:`t3tsref:data-type-string`
 
-The color of the bullet used as hex value, possible syntax are: #000 or #000000
+The color of the bullet used as hex value, possible syntax are: ``#000`` or ``#000000``
 
 .. _list.bulletImageSrc:
 

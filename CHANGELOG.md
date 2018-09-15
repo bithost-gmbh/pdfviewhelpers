@@ -18,6 +18,7 @@
 - Adds AvoidPageBreakInsideViewHelper
 - Adds support for percentage width
 - Adds padding, link and alignment to ImageViewHelper
+- Moves language and hyphenFile settings to DocumentViewHelper, [#39](https://github.com/bithost-gmbh/pdfviewhelpers/issues/39)
 - Changes PHP requirement to minimum 5.6
 - Changes default value of `page.autoPageBreak` to `1`
 - Fixes MultiColumnViewHelper columns not correctly initialized
