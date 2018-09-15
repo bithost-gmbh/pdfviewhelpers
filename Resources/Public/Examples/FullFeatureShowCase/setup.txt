@@ -36,20 +36,55 @@ plugin.tx_pdfviewhelpers.settings {
 		outputDestination = inline
 		outputPath = fullfeatureshowcase.pdf
 	}
+	header {
+		posY = 10
+	}
 	page {
 		margin {
-			top = 20
+			top = 25
 			right = 15
-			bottom = 20
+			bottom = 25
 			left = 15
 		}
 	}
 	generalText {
 		color = #555
 	}
+	text {
+		types {
+			header {
+				color = #8C8C8C
+			}
+			quote {
+				fontStyle = italic
+				alignment = center
+				padding {
+					top = 10
+					right = 50
+					bottom = 10
+					left = 50
+				}
+			}
+		}
+	}
 	headline {
 		fontFamily = courier
 		fontStyle = bold
+		types {
+			h1 {
+				fontSize = 28
+				color = #ff642c
+			}
+			h2 {
+				fontSize = 22
+				color = #ff642c
+			}
+			h3 {
+				fontSize = 14
+				fontFamily = helvetica
+				fontStyle = bold
+			}
+		}
 	}
 	list {
 		color = #000
