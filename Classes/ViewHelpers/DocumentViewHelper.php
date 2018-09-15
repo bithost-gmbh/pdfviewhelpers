@@ -82,6 +82,8 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $this->registerArgument('unicode', 'boolean', '', false, (boolean) $this->settings['document']['unicode']);
         $this->registerArgument('encoding', 'string', '', false, $this->settings['document']['encoding']);
         $this->registerArgument('pdfa', 'boolean', '', false, (boolean) $this->settings['document']['pdfa']);
+        $this->registerArgument('language', 'string', '', false, $this->settings['document']['language']);
+        $this->registerArgument('hyphenFile', 'string', '', false, $this->settings['document']['hyphenFile']);
     }
 
     /**
@@ -132,6 +134,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper
             $GLOBALS['TSFE']->set_no_cache();
         }
 
+        $this->viewHelperVariableContainer->add('DocumentViewHelper', 'hyphenFile', $this->arguments['hyphenFile']);
         $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'defaultHeaderFooterScope', BasePDF::SCOPE_DOCUMENT);
     }
 
@@ -175,7 +178,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper
     protected function loadTcpdfLanguageSettings()
     {
         $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
-        $languageFilePath = $extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->settings['config']['language'] . '.php';
+        $languageFilePath = $extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->arguments['language'] . '.php';
 
         if (!file_exists($languageFilePath) || !is_readable($languageFilePath)) {
             throw new ValidationException('The provided language file "' . $languageFilePath . '" does not exist or the file is not readable. ERROR: 1536487362', 1536487362);

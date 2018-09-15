@@ -114,7 +114,7 @@ class ListViewHelper extends AbstractTextViewHelper
             if ($this->arguments['autoHyphenation']) {
                 $listElement = $this->hyphenationService->hyphenateText(
                     $listElement,
-                    $this->hyphenationService->getHyphenFilePath($this->settings['config']['hyphenFile'])
+                    $this->hyphenationService->getHyphenFilePath($this->getHyphenFileName())
                 );
             }
 

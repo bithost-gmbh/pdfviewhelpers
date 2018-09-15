@@ -3,8 +3,6 @@ plugin.tx_pdfviewhelpers.settings {
 	staticTypoScriptSetupIncluded = 1
 	config {
 		class = Bithost\Pdfviewhelpers\Model\BasePDF
-		language = ger
-		hyphenFile = hyph-de-ch-1901.tex
 		disableCache = 1
 		exitAfterPdfContentOutput = 0
 		jpgQuality = 100
@@ -39,6 +37,8 @@ plugin.tx_pdfviewhelpers.settings {
 		unicode = 1
 		encoding = UTF-8
 		pdfa = 0
+		language = ger
+		hyphenFile = hyph-de-ch-1901.tex
 	}
 	page {
 		autoPageBreak = 1
@@ -49,6 +49,7 @@ plugin.tx_pdfviewhelpers.settings {
 			left = 15
 		}
 		importPage =
+		importPageOnAutomaticPageBreak = 1
 		orientation = portrait
 		format = A4
 	}
@@ -142,6 +143,15 @@ plugin.tx_pdfviewhelpers.settings {
 		bulletSize = 1.5
 		types {
 
+		}
+	}
+	image {
+		alignment = left
+		padding {
+			top = 0
+			right = 0
+			bottom = 2
+			left = 0
 		}
 	}
 	html {

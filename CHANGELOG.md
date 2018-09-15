@@ -16,11 +16,14 @@
 - Adds text types to easily apply different styles
 - Adds multi column context stack to avoid header and footer context interference
 - Adds AvoidPageBreakInsideViewHelper
+- Adds support for percentage width
+- Adds padding, link and alignment to ImageViewHelper
+- Moves language and hyphenFile settings to DocumentViewHelper, [#39](https://github.com/bithost-gmbh/pdfviewhelpers/issues/39)
 - Changes PHP requirement to minimum 5.6
 - Changes default value of `page.autoPageBreak` to `1`
 - Fixes MultiColumnViewHelper columns not correctly initialized
 - Changes page.margins to page.margin
-- Removes classes EmptyFPDI, EmptyTCPDF and BithostTCPDF (replaced by BasePDF)
+- Replaces classes EmptyFPDI, EmptyTCPDF by BasePDF, Removes class BithostTCPDF
 - Enforces usage of BasePDF
 
 ## 1.6.0 - August 14, 2018
