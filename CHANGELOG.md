@@ -17,6 +17,7 @@
 - Adds multi column context stack to avoid header and footer context interference
 - Adds AvoidPageBreakInsideViewHelper
 - Adds support for percentage width
+- Adds padding, link and alignment to ImageViewHelper
 - Changes PHP requirement to minimum 5.6
 - Changes default value of `page.autoPageBreak` to `1`
 - Fixes MultiColumnViewHelper columns not correctly initialized

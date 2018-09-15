@@ -145,6 +145,15 @@ plugin.tx_pdfviewhelpers.settings {
 
 		}
 	}
+	image {
+		alignment = left
+		padding {
+			top = 0
+			right = 0
+			bottom = 2
+			left = 0
+		}
+	}
 	html {
 		autoHyphenation =
 		styleSheet =

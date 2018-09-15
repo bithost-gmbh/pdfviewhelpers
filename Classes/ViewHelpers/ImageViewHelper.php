@@ -45,6 +45,22 @@ class ImageViewHelper extends AbstractContentElementViewHelper
         parent::initializeArguments();
 
         $this->registerArgument('src', 'mixed', '', true, null);
+        $this->registerArgument('link', 'string', '', false, null);
+        $this->registerArgument('alignment', 'string', '', false, $this->settings['image']['alignment']);
+        $this->registerArgument('padding', 'array', '', false, []);
+    }
+
+    /**
+     * @return void
+     *
+     * @throws Exception
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->arguments['alignment'] = $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']);
+        $this->arguments['padding'] = array_merge($this->settings['image']['padding'], $this->arguments['padding']);
     }
 
     /**
@@ -60,18 +76,77 @@ class ImageViewHelper extends AbstractContentElementViewHelper
         $src = '@' . $imageFile->getContents();
         $extension = $imageFile->getExtension();
 
+        $multiColumnContext = $this->getCurrentMultiColumnContext();
+        $isInAColumn = is_array($multiColumnContext) && $multiColumnContext['isInAColumn'];
+        $backupMargins = $this->getPDF()->getMargins();
+        $this->arguments['posY'] += $this->arguments['padding']['top'];
+
+        if ($isInAColumn) {
+            $marginLeft = $this->arguments['posX'] + $this->arguments['padding']['left'];
+            $marginRight =  $this->getPDF()->getPageWidth() - $marginLeft - $multiColumnContext['columnWidth'] + $this->arguments['padding']['right'];
+        } else {
+            $marginLeft = $this->arguments['posX'] + $this->arguments['padding']['left'];
+            $marginRight = $backupMargins['right'] + $this->arguments['padding']['right'];
+        }
+
+        $this->getPDF()->SetMargins($marginLeft, $backupMargins['top'], $marginRight);
+
         switch ($this->conversionService->convertImageExtensionToRenderMode($extension)) {
             case 'image':
-                $this->getPDF()->Image($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], $extension, '', '', false, 300, '', false, false, 0, true, false, true, false);
+                $this->getPDF()->Image(
+                    $src,
+                    $this->arguments['posX'],
+                    $this->arguments['posY'],
+                    $this->arguments['width'],
+                    $this->arguments['height'],
+                    $extension,
+                    $this->arguments['link'],
+                    '',
+                    false,
+                    300,
+                    $this->arguments['alignment'],
+                    false,
+                    false,
+                    0,
+                    true,
+                    false,
+                    true,
+                    false
+                );
                 break;
             case 'imageEPS':
-                $this->getPDF()->ImageEps($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', true, '', '', 0, true, false);
+                $this->getPDF()->ImageEps(
+                    $src,
+                    $this->arguments['posX'],
+                    $this->arguments['posY'],
+                    $this->arguments['width'],
+                    $this->arguments['height'],
+                    $this->arguments['link'],
+                    true,
+                    '',
+                    $this->arguments['alignment'],
+                    0,
+                    true,
+                    false
+                );
                 break;
             case 'imageSVG':
-                $this->getPDF()->ImageSVG($src, $this->arguments['posX'], $this->arguments['posY'], $this->arguments['width'], $this->arguments['height'], '', '', '', 0, true);
+                $this->getPDF()->ImageSVG(
+                    $src,
+                    $this->arguments['posX'],
+                    $this->arguments['posY'],
+                    $this->arguments['width'],
+                    $this->arguments['height'],
+                    $this->arguments['link'],
+                    '',
+                    $this->arguments['alignment'],
+                    0,
+                    true
+                );
                 break;
         }
 
-        $this->getPDF()->SetY($this->getPDF()->getImageRBY());
+        $this->getPDF()->SetMargins($backupMargins['left'], $backupMargins['top'], $backupMargins['right']);
+        $this->getPDF()->SetY($this->getPDF()->getImageRBY() + $this->arguments['padding']['bottom']);
     }
 }

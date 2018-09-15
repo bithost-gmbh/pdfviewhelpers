@@ -118,6 +118,8 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	list.bulletImageSrc_                           :ref:`t3tsref:data-type-string`
 	list.bulletSize_                               :ref:`t3tsref:data-type-float`        1.5
 	list.autoHyphenation                           :ref:`t3tsref:data-type-boolean`      *See generalText*
+	image.alignment_                               :ref:`t3tsref:data-type-string`       left
+	image.padding_                                 Array                                 {bottom: 2}
 	html.autoHyphenation                           :ref:`t3tsref:data-type-boolean`      *See generalText*
 	html.styleSheet_                               :ref:`t3tsref:data-type-string`
 	graphics.line.padding_                         Array                                 {top: 4, right: 0, bottom: 5, left: 0}
@@ -569,6 +571,24 @@ list.bulletSize
 :typoscript:`plugin.tx_pdfviewhelpers.settings.list.bulletSize =` :ref:`t3tsref:data-type-float`
 
 The size of the bullet as floating point value.
+
+.. _image.alignment:
+
+image.alignment
+"""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.image.alignment =` :ref:`t3tsref:data-type-string`
+
+Possible values are: ``L`` / ``left``, ``C`` / ``center``, ``R`` / ``right``
+
+.. _image.padding:
+
+image.padding
+"""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.image.padding =` Array
+
+The padding around the image.
 
 .. _html.styleSheet:
 
