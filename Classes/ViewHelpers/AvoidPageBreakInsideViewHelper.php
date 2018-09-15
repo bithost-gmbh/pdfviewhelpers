@@ -62,8 +62,8 @@ class AvoidPageBreakInsideViewHelper extends AbstractPDFViewHelper
 
         $shadowPDF->SetY($realPDF->GetY());
         $this->setPDF($shadowPDF);
-
         $this->renderChildren();
+        $this->setPDF($realPDF);
 
         $endPage = $shadowPDF->getPage();
         $pageStep = $endPage - $startPage;
@@ -87,7 +87,6 @@ class AvoidPageBreakInsideViewHelper extends AbstractPDFViewHelper
             }
         }
 
-        $this->setPDF($realPDF);
         $this->renderChildren();
     }
 
