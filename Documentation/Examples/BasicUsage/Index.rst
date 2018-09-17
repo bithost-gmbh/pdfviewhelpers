@@ -101,15 +101,9 @@ Fluid Template
 			</pdf:text>
 		</pdf:header>
 		<pdf:footer>
-			<pdf:graphics.line style="{color: '#8C8C8C'}" />
-			<pdf:multiColumn>
-				<pdf:column>
-					<pdf:text color="#8C8C8C">Page {pdf:getPageNumberAlias()}</pdf:text>
-				</pdf:column>
-				<pdf:column>
-					<pdf:text alignment="right" color="#8C8C8C">EXT:pdfviewhelpers - Basic usage example</pdf:text>
-				</pdf:column>
-			</pdf:multiColumn>
+			<pdf:graphics.line style="{color: '#8C8C8C'}"/>
+			<pdf:text color="#8C8C8C">Page {pdf:getPageNumberAlias()}</pdf:text>
+			<pdf:text alignment="right" color="#8C8C8C" posY="-13.5">EXT:pdfviewhelpers - Basic usage example</pdf:text>
 		</pdf:footer>
 
 		<pdf:page>

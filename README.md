@@ -21,9 +21,10 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
 - Load existing PDF documents as template
 - Define and apply different text styles easily
 - Fully customizable by writing your own ViewHelpers
-- Rich inheritance based TypoScript settings
 - Supported output destinations: string, inline, download and file
 - Usable both in frontend and backend
+- Rich inheritance based TypoScript settings
+- Rich API [documentation](https://docs.typo3.org/typo3cms/extensions/pdfviewhelpers/) with lots of examples
 
 ## Example
 
@@ -52,16 +53,8 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
     </pdf:header>
     <pdf:footer>
         <pdf:graphics.line style="{color: '#8C8C8C'}" />
-        <pdf:multiColumn>
-            <pdf:column>
-                <pdf:text color="#8C8C8C">Page {pdf:getPageNumberAlias()}</pdf:text>
-            </pdf:column>
-            <pdf:column>
-                <pdf:text alignment="right" color="#8C8C8C">
-                    EXT:pdfviewhelpers - Basic usage example
-                </pdf:text>
-            </pdf:column>
-        </pdf:multiColumn>
+        <pdf:text color="#8C8C8C">Page {pdf:getPageNumberAlias()}</pdf:text>
+        <pdf:text alignment="right" color="#8C8C8C" posY="-13.5">EXT:pdfviewhelpers - Basic usage example</pdf:text>
     </pdf:footer>
     
     <pdf:page>
