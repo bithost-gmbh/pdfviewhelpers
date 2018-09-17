@@ -28,7 +28,7 @@ namespace Bithost\Pdfviewhelpers\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***/
 
-use FPDI;
+use setasign\Fpdi\Tcpdf\Fpdi;
 use Closure;
 
 //Autoload class TCPDF in order for fpdi_bridge to be able to correctly determine its parent class
@@ -39,7 +39,7 @@ class_exists('TCPDF', true);
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class BasePDF extends FPDI
+class BasePDF extends Fpdi
 {
     /**
      * Indicating whether the current page is using a template.
