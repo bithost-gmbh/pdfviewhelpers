@@ -18,6 +18,8 @@
 - Adds AvoidPageBreakInsideViewHelper
 - Adds support for percentage width
 - Adds padding, link and alignment to ImageViewHelper
+- Updates TCPDF to version 6.2.22
+- Updates FPDI to version 2.1.0
 - Moves language and hyphenFile settings to DocumentViewHelper, [#39](https://github.com/bithost-gmbh/pdfviewhelpers/issues/39)
 - Changes PHP requirement to minimum 5.6
 - Changes default value of `page.autoPageBreak` to `1`

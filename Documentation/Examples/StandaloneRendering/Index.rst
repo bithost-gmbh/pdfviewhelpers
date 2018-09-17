@@ -32,8 +32,8 @@ PHP
 
 .. _standalonerendering_fluidreturnstring:
 
-Fluid Template - return String
-------------------------------
+Fluid Template - return PDF as String
+-------------------------------------
 
 ::
 
@@ -46,10 +46,26 @@ Fluid Template - return String
 	</pdf:document>
 
 
+.. _standalonerendering_fluidreturnemail:
+
+Fluid Template - return PDF as base64 mime multi-part email attachment (RFC 2045)
+---------------------------------------------------------------------------------
+
+::
+
+	{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
+
+	<pdf:document outputDestination="email">
+		<pdf:page>
+			<pdf:text>Your content</pdf:text>
+		</pdf:page>
+	</pdf:document>
+
+
 .. _standalonerendering_fluidsavefile:
 
-Fluid Template - save file
---------------------------
+Fluid Template - save PDF to file
+---------------------------------
 
 ::
 
