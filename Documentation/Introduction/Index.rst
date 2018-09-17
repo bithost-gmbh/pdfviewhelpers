@@ -37,6 +37,7 @@ Key features
 - Load existing PDF documents as template
 - Define and apply different text styles easily
 - Fully customizable by writing your own ViewHelpers
-- Rich inheritance based TypoScript settings
 - Supported output destinations: string, inline, download and file
 - Usable both in frontend and backend
+- Rich inheritance based TypoScript settings
+- Rich API documentation with lots of examples
