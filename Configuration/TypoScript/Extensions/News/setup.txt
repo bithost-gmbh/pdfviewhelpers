@@ -1,0 +1,98 @@
+[globalVar = TSFE:type = 28032013]
+	config {
+		disableAllHeaderCode = 1
+		xhtml_cleaning = none
+		admPanel = 0
+		debug = 0
+		disablePrefixComment = 1
+		linkVars >
+	}
+
+	pageNewsPDF = PAGE
+	pageNewsPDF {
+		typeNum = 28032013
+		10 < tt_content.list.20.news_pi1
+		10 {
+			switchableControllerActions {
+				News {
+					1 = detail
+				}
+			}
+		}
+	}
+
+	plugin.tx_news {
+		view {
+			templateRootPaths >
+			templateRootPaths {
+				0 = EXT:pdfviewhelpers/Resources/Private/Templates/Extensions/News/Templates/
+			}
+		}
+	}
+
+	plugin.tx_pdfviewhelpers.settings {
+		page {
+			margin {
+				top = 20
+				right = 25
+				bottom = 20
+				left = 25
+			}
+		}
+		header {
+			posY = 10
+		}
+		footer {
+			posY = -15
+		}
+		generalText {
+			lineHeight = 1.5
+		}
+		text {
+			padding {
+				bottom = 2
+			}
+			types {
+				teaser {
+					fontStyle = bold
+				}
+				author-date {
+					color = #888
+				}
+				media-description {
+					color = #888
+					paragraphSpacing = 0
+					padding {
+						top = 1
+						bottom = 0
+					}
+				}
+				footer {
+					color = #888
+				}
+			}
+		}
+		headline {
+			types {
+				title {
+					lineHeight = 1.2
+					fontSize = 24
+					padding {
+						top = 0
+						bottom = 6
+					}
+				}
+			}
+		}
+		image {
+			padding {
+				bottom = 0
+			}
+		}
+		html {
+			styleSheet = EXT:pdfviewhelpers/Resources/Private/Css/Extensions/News/styles.css
+		}
+	}
+
+	module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers
+[global]

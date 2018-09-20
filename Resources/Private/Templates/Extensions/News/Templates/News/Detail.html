@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	  xmlns:pdf="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers"
+	  xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.0.xsd"
+	  data-namespace-typo3-fluid="true">
+
+<pdf:document outputDestination="inline" outputPath="{newsItem.pathSegment}.pdf" title="{newsItem.title}" keywords="{newsItem.keywords}" author="{newsItem.author}">
+	<pdf:footer>
+		<pdf:text type="footer">{pdf:getPageNumberAlias()}</pdf:text>
+	</pdf:footer>
+
+	<pdf:page>
+		<pdf:headline type="title">{newsItem.title}</pdf:headline>
+
+		<pdf:text type="author-date">
+			<f:format.date format="{f:translate(key:'dateFormat')}">{newsItem.datetime}</f:format.date><f:if condition="{newsItem.author}"> | <f:translate key="author_simple" /> {newsItem.author}</f:if>
+		</pdf:text>
+
+		<f:if condition="{newsItem.teaser}">
+			<pdf:text type="teaser">{newsItem.teaser}</pdf:text>
+		</f:if>
+
+		<f:alias map="{mediaElement: newsItem.mediaPreviews.0}">
+			<f:if condition="{mediaElement.originalResource.type} == 2">
+				<pdf:avoidPageBreakInside>
+					<pdf:image src="{mediaElement.originalResource}" link="{f:uri.page(pageUid: mediaElement.link)}" />
+
+					<f:if condition="{mediaElement.description}">
+						<pdf:text type="media-description">{mediaElement.description}</pdf:text>
+					</f:if>
+					<pdf:lineBreak height="4" />
+				</pdf:avoidPageBreakInside>
+			</f:if>
+		</f:alias>
+
+		<pdf:html>
+			<f:format.html>{newsItem.bodytext}</f:format.html>
+		</pdf:html>
+	</pdf:page>
+</pdf:document>
+
+</html>
