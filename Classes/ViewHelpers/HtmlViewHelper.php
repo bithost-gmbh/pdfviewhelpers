@@ -83,7 +83,9 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         $this->getPDF()->SetTextColor($color['R'], $color['G'], $color['B']);
         $this->getPDF()->SetFontSize($this->settings['generalText']['fontSize']);
         $this->getPDF()->SetFont($this->settings['generalText']['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($this->settings['generalText']['fontStyle']));
-        $this->getPDF()->setCellPaddings($padding['left'], $padding['top'], $padding['right'], $padding['bottom']);
+        $this->getPDF()->setCellPaddings(0, 0, 0, 0); //reset padding to avoid errors on nested tags
+        $this->getPDF()->setCellHeightRatio($this->settings['generalText']['lineHeight']);
+        $this->getPDF()->setFontSpacing($this->settings['generalText']['characterSpacing']);
 
         $this->getPDF()->writeHTML($htmlStyle . $html, true, false, true, false, '');
     }

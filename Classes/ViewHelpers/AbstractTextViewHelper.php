@@ -139,9 +139,9 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         if ($this->validationService->validatePadding($this->arguments['padding'])) {
             $this->getPDF()->setCellPaddings(
                 $this->arguments['padding']['left'],
-                $this->arguments['padding']['top'],
+                0,
                 $this->arguments['padding']['right'],
-                $this->arguments['padding']['bottom']
+                0
             );
         }
     }
@@ -156,7 +156,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         $this->initializeMultiColumnSupport();
 
         $paragraphs = explode("\n", str_replace("\r\n", "\n", $this->arguments['text']));
-        $posY = $this->arguments['posY'];
+        $posY = $this->arguments['posY'] + $this->arguments['padding']['top'];
 
         foreach ($paragraphs as $paragraph) {
             if ($this->arguments['trim']) {
@@ -174,6 +174,8 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
 
             $posY = $this->getPDF()->GetY();
         }
+
+        $this->getPDF()->SetY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
     }
 
     /**
