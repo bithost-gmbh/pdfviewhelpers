@@ -2,6 +2,7 @@
 [![TYPO3](https://img.shields.io/badge/TYPO3-8%20LTS-orange.svg)](https://typo3.org/)
 [![TYPO3](https://img.shields.io/badge/TYPO3-9%20LTS-orange.svg)](https://typo3.org/)
 [![Build Status](https://travis-ci.org/bithost-gmbh/pdfviewhelpers.svg?branch=master)](https://travis-ci.org/bithost-gmbh/pdfviewhelpers)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGTVWHW8TP8Q4)
 
 # TYPO3 CMS Extension pdfviewhelpers
 
@@ -25,6 +26,30 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
 - Usable both in frontend and backend
 - Rich inheritance based TypoScript settings
 - Rich API [documentation](https://docs.typo3.org/typo3cms/extensions/pdfviewhelpers/) with lots of examples
+
+## Support Development
+With the extension `pdfviewhelpers` we try to take the pain out of creating PDF documents. 
+We aim at providing the best service possible by constantly improving the extension and responding fast to bug reports.
+We do this fully free of cost, mostly because we love to code and share. We are still human however, we like food, shelter and beer.
+So if you feel like this extension was useful to you and saved you some precious time, please consider making a donation to support its maintenance and further development. 
+
+[![PayPal](https://www.paypalobjects.com/en_US/CH/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGTVWHW8TP8Q4)
+
+## Links
+
+**Bug Tracker:** https://github.com/bithost-gmbh/pdfviewhelpers/issues
+
+**Git Repository:** https://github.com/bithost-gmbh/pdfviewhelpers
+
+**TER:** https://typo3.org/extensions/repository/view/pdfviewhelpers
+
+**Packagist:** https://packagist.org/packages/bithost-gmbh/pdfviewhelpers
+
+**Full Documentation:** https://docs.typo3.org/typo3cms/extensions/pdfviewhelpers
+
+**Sponsoring:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGTVWHW8TP8Q4)
+
+**Contact:** [@maechler](https://github.com/maechler), [@macjohnny](https://github.com/macjohnny), https://www.bithost.ch/kontakt/
 
 ## Example
 
@@ -93,29 +118,3 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
 ### PDF Output
 
 ![Example PDF output](Resources/Public/Examples/BasicUsage/output.png)
-
-## Bug Tracker
-
-https://github.com/bithost-gmbh/pdfviewhelpers/issues
-
-## Git Repository
-
-https://github.com/bithost-gmbh/pdfviewhelpers
-
-## TER 
-
-https://typo3.org/extensions/repository/view/pdfviewhelpers
-
-## Packagist 
-
-https://packagist.org/packages/bithost-gmbh/pdfviewhelpers
-
-## Full Documentation
-
-https://docs.typo3.org/typo3cms/extensions/pdfviewhelpers
-
-## Contact
-
-* [@maechler](https://github.com/maechler) 
-* [@macjohnny](https://github.com/macjohnny)
-* https://www.bithost.ch/kontakt/
