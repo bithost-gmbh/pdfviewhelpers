@@ -107,7 +107,7 @@ plugin.tx_pdfviewhelpers.settings {
 		trim =
 		removeDoubleWhitespace =
 		color =
-		fontFamily = 
+		fontFamily =
 		fontSize = 16
 		fontStyle =
 		lineHeight =

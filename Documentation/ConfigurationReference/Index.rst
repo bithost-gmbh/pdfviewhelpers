@@ -27,6 +27,7 @@ Target group: **Developers**
 	CustomFonts/Index
 	AdvancedCustomization/Index
 	Caching/Index
+	ExtNews/Index
 
 
 

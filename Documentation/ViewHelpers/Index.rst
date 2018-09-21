@@ -25,6 +25,7 @@ For detailed information about the ViewHelper attributes please refer to the Con
 	ListViewHelper/Index
 	HtmlViewHelper/Index
 	ImageViewHelper/Index
+	LineBreakViewHelper/Index
 	GraphicsLineViewHelper/Index
 	GetPageNumberViewHelper/Index
 	GetPosViewHelper/Index
