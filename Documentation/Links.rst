@@ -23,5 +23,8 @@ Links
 :Packagist:
 	https://packagist.org/packages/bithost-gmbh/pdfviewhelpers
 
+:Sponsoring:
+	`PayPal <https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGTVWHW8TP8Q4>`__
+
 :Contact:
 	`@maechler @macjohnny <https://www.bithost.ch/kontakt/>`__
