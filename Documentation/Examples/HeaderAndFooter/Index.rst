@@ -135,19 +135,25 @@ PDF Output
    :align: left
    :alt: Header and Footer example output
 
+|
+
 .. figure:: _assets/output_2.png
    :width: 600px
    :align: left
    :alt: Header and Footer example output
+
+|
 
 .. figure:: _assets/output_3.png
    :width: 600px
    :align: left
    :alt: Header and Footer example output
 
+|
+
 .. figure:: _assets/output_4.png
    :width: 600px
    :align: left
    :alt: Header and Footer example output
 
-   Rendered PDF document
+|
