@@ -54,7 +54,7 @@ class ValidationService implements SingletonInterface
         ) {
             return true;
         } else {
-            throw new ValidationException('Padding must be an Array with Elements: top:[int],right:[int],bottom:[int],left:[int] ERROR: 1363769351', 1363769351);
+            throw new ValidationException('Invalid padding "' . var_export($padding, true) . '", must be an array with elements: top:[int],right:[int],bottom:[int],left:[int] ERROR: 1363769351', 1363769351);
         }
     }
 
@@ -70,7 +70,7 @@ class ValidationService implements SingletonInterface
         if (preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $colorHex)) {
             return true;
         } else {
-            throw new ValidationException('Your color syntax is invalid, support syntax are #000 or #000000.', 1363765272);
+            throw new ValidationException('Invalid color syntax "' . $colorHex . '", must follow syntax #000 or #000000.', 1363765272);
         }
     }
 
@@ -86,7 +86,7 @@ class ValidationService implements SingletonInterface
         if (is_numeric($width) && $width >= 0 || mb_substr($width, -1) === '%') {
             return true;
         } else {
-            throw new ValidationException('Width must be a floating point value. ERROR: 1363765672', 1363765372);
+            throw new ValidationException('Invalid width "' . $width . '" provided, must be a floating point or percentage value. ERROR: 1363765672', 1363765372);
         }
     }
 
@@ -102,7 +102,7 @@ class ValidationService implements SingletonInterface
         if (is_numeric($fontSize) && $fontSize >= 0) {
             return true;
         } else {
-            throw new ValidationException('FontSize must be a floating point value. ERROR: 1363765372', 1363765372);
+            throw new ValidationException('Invalid fontSize "' . $fontSize . '" provided, must be a floating point value. ERROR: 1363765372', 1363765372);
         }
     }
 
@@ -148,7 +148,7 @@ class ValidationService implements SingletonInterface
         if (is_numeric($paragraphSpacing) && $paragraphSpacing >= 0) {
             return true;
         } else {
-            throw new ValidationException('ParagraphSpacing must be an integer. ERROR: 1363765379', 1363765379);
+            throw new ValidationException('Invalid paragraphSpacing "' . $paragraphSpacing . '" provided, must be a float value. ERROR: 1363765379', 1363765379);
         }
     }
 
@@ -164,7 +164,7 @@ class ValidationService implements SingletonInterface
         if (is_numeric($height) && $height >= 0) {
             return true;
         } else {
-            throw new ValidationException('Height must be a positive integer. ERROR: 1363766372', 1363765372);
+            throw new ValidationException('Invalid height "' . $height . '" provided, must be a positive float value. ERROR: 1363766372', 1363765372);
         }
     }
 
@@ -196,7 +196,7 @@ class ValidationService implements SingletonInterface
         if (is_numeric($lineHeight) && $lineHeight >= 0) {
             return true;
         } else {
-            throw new ValidationException('Line height must be a positive integer. ERROR: 1536704503', 1536704503);
+            throw new ValidationException('Invalid lineHeight "' . $lineHeight .'" provided, must be a positive float value. ERROR: 1536704503', 1536704503);
         }
     }
 
@@ -212,7 +212,7 @@ class ValidationService implements SingletonInterface
         if (is_numeric($characterSpacing) && $characterSpacing >= 0) {
             return true;
         } else {
-            throw new ValidationException('Character spacing must be a positive integer. ERROR: 1536704547', 1536704547);
+            throw new ValidationException('Invalid characterSpacing "' . $characterSpacing . '" provided, must be a positive float value. ERROR: 1536704547', 1536704547);
         }
     }
 }
