@@ -78,7 +78,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
 
         $multiColumnContext = $this->getCurrentMultiColumnContext();
         $isInAColumn = is_array($multiColumnContext) && $multiColumnContext['isInAColumn'];
-        $backupMargins = $this->getPDF()->getMargins();
+        $initialMargins = $this->getPDF()->getMargins();
         $this->arguments['posY'] += $this->arguments['padding']['top'];
 
         if ($isInAColumn) {
@@ -86,10 +86,10 @@ class ImageViewHelper extends AbstractContentElementViewHelper
             $marginRight =  $this->getPDF()->getPageWidth() - $marginLeft - $multiColumnContext['columnWidth'] + $this->arguments['padding']['right'];
         } else {
             $marginLeft = $this->arguments['posX'] + $this->arguments['padding']['left'];
-            $marginRight = $backupMargins['right'] + $this->arguments['padding']['right'];
+            $marginRight = $initialMargins['right'] + $this->arguments['padding']['right'];
         }
 
-        $this->getPDF()->SetMargins($marginLeft, $backupMargins['top'], $marginRight);
+        $this->getPDF()->SetMargins($marginLeft, $initialMargins['top'], $marginRight);
 
         switch ($this->conversionService->convertImageExtensionToRenderMode($extension)) {
             case 'image':
@@ -146,7 +146,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
                 break;
         }
 
-        $this->getPDF()->SetMargins($backupMargins['left'], $backupMargins['top'], $backupMargins['right']);
+        $this->getPDF()->SetMargins($initialMargins['left'], $initialMargins['top'], $initialMargins['right']);
         $this->getPDF()->SetY($this->getPDF()->getImageRBY() + $this->arguments['padding']['bottom']);
     }
 }

@@ -103,4 +103,4 @@ PDF Output
    :align: left
    :alt: Extend Existing PDFs Example
 
-   Rendered PDF document
+|

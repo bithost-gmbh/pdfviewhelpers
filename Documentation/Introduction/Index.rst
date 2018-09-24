@@ -35,8 +35,9 @@ Key features
 - ViewHelper to avoid page breaks inside
 - ViewHelpers to create a multi column layout
 - Load existing PDF documents as template
-- Define and apply different text styles easily
+- Define and apply different text types easily
 - Fully customizable by writing your own ViewHelpers
+- Supports batch creation of PDFs
 - Supported output destinations: string, inline, download and file
 - Usable both in frontend and backend
 - Rich inheritance based TypoScript settings

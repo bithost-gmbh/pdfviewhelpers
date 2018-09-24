@@ -48,10 +48,29 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
 
         $this->registerArgument('autoHyphenation', 'boolean', '', false, (boolean) $this->settings['generalText']['autoHyphenation']);
         $this->registerArgument('styleSheet', 'string', '', false, $this->settings['html']['styleSheet']);
+        $this->registerArgument('padding', 'array', '', false, null);
 
         if (strlen($this->settings['html']['autoHyphenation'])) {
             $this->overrideArgument('autoHyphenation', 'boolean', '', false, (boolean) $this->settings['html']['autoHyphenation']);
         }
+    }
+
+    /**
+     * @throws Exception
+     *
+     * @return void
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        if (is_array($this->arguments['padding'])) {
+            $this->arguments['padding'] = array_merge($this->settings['html']['padding'], $this->arguments['padding']);
+        } else {
+            $this->arguments['padding'] = $this->settings['html']['padding'];
+        }
+
+        $this->validationService->validatePadding($this->arguments['padding']);
     }
 
     /**
@@ -64,7 +83,19 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         $html = $this->renderChildren();
         $htmlStyle = '';
         $color = $this->conversionService->convertHexToRGB($this->settings['generalText']['color']);
-        $padding = $this->settings['generalText']['padding'];
+
+        $this->initializeMultiColumnSupport();
+
+        $initialMargins = $this->getPDF()->getMargins();
+        $marginLeft = $this->arguments['posX'] + $this->arguments['padding']['left'];
+
+        if (is_null($this->arguments['width'])) {
+            $marginRight = $initialMargins['right'] + $this->arguments['padding']['right'];
+        } else {
+            $marginRight = $this->getPDF()->getPageWidth() - $marginLeft - $this->arguments['width'] + $this->arguments['padding']['right'];
+        }
+
+        $this->getPDF()->SetMargins($marginLeft, $initialMargins['top'], $marginRight);
 
         if (!empty($this->arguments['styleSheet'])) {
             $styleSheetFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['styleSheet']);
@@ -87,6 +118,11 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         $this->getPDF()->setCellHeightRatio($this->settings['generalText']['lineHeight']);
         $this->getPDF()->setFontSpacing($this->settings['generalText']['characterSpacing']);
 
+        $this->getPDF()->SetY($this->arguments['posY'] + $this->arguments['padding']['top']);
+
         $this->getPDF()->writeHTML($htmlStyle . $html, true, false, true, false, '');
+
+        $this->getPDF()->SetY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
+        $this->getPDF()->SetMargins($initialMargins['left'], $initialMargins['top'], $initialMargins['right']);
     }
 }

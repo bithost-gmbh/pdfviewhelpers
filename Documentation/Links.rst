@@ -23,6 +23,9 @@ Links
 :Packagist:
 	https://packagist.org/packages/bithost-gmbh/pdfviewhelpers
 
+:Changelog:
+	https://github.com/bithost-gmbh/pdfviewhelpers/blob/master/CHANGELOG.md
+
 :Sponsoring:
 	`PayPal <https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGTVWHW8TP8Q4>`__
 

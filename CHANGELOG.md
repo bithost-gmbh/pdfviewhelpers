@@ -20,7 +20,8 @@
 - Adds padding, link and alignment to ImageViewHelper
 - Adds template for EXT:news
 - Adds LineBreakViewHelper
-- Updates TCPDF to version 6.2.22
+- Adds padding and multi column support to HtmlViewHelper
+- Updates TCPDF to version 6.2.25
 - Updates FPDI to version 2.1.0
 - Moves language and hyphenFile settings to DocumentViewHelper, [#39](https://github.com/bithost-gmbh/pdfviewhelpers/issues/39)
 - Changes PHP requirement to minimum 5.6

@@ -394,24 +394,32 @@ PDF Output
    :align: left
    :alt: Full Feature Show Case rendered PDF
 
+|
+
 .. figure:: _assets/output_2.png
    :width: 500px
    :align: left
    :alt: Full Feature Show Case rendered PDF
+
+|
 
 .. figure:: _assets/output_3.png
    :width: 700px
    :align: left
    :alt: Full Feature Show Case rendered PDF
 
+|
+
 .. figure:: _assets/output_4.png
    :width: 500px
    :align: left
    :alt: Full Feature Show Case rendered PDF
+
+|
 
 .. figure:: _assets/output_5.png
    :width: 500px
    :align: left
    :alt: Full Feature Show Case rendered PDF
 
-   Rendered PDF document
+|

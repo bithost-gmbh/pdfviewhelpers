@@ -148,6 +148,6 @@ PDF Output
 .. figure:: _assets/output.png
    :width: 600px
    :align: left
-   :alt: Bithost Example
+   :alt: Basic Usage Example
 
-   Rendered PDF document
+|
