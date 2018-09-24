@@ -122,6 +122,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	image.padding_                                 Array                                 {bottom: 2}
 	html.autoHyphenation                           :ref:`t3tsref:data-type-boolean`      *See generalText*
 	html.styleSheet_                               :ref:`t3tsref:data-type-string`
+	html.padding_                                  Array                                 {top: 0, right: 0, bottom: 2, left: 0}
 	graphics.line.padding_                         Array                                 {top: 4, right: 0, bottom: 5, left: 0}
 	graphics.line.style_                           Array                                 {width: 0.25, color: #000}
 	============================================== ===================================== ==========================================
@@ -597,6 +598,15 @@ html.styleSheet
 :typoscript:`plugin.tx_pdfviewhelpers.settings.html.styleSheet =` :ref:`t3tsref:data-type-string`
 
 The path to a style sheet being used in the HtmlViewHelper. The can be provided relative to the webroot directory, e.g. "fileadmin/pdf_style.css".
+
+.. _html.padding:
+
+html.padding
+""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.html.padding =` Array
+
+The padding around the html element.
 
 .. _graphics.line.padding:
 

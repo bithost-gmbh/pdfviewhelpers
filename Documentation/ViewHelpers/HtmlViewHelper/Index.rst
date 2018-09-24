@@ -22,7 +22,7 @@ It is possible to include a css style tag and also inline styles. This ViewHelpe
 **Advanced Usage**
 ::
 
-	<pdf:html styleSheet="fileadmin/template/pdf_styles.css" autoHyphenation="1">
+	<pdf:html styleSheet="fileadmin/template/pdf_styles.css" autoHyphenation="1" padding="{bottom: 5}">
 		<style>
 			h1 {
 				color: #ff642c;
