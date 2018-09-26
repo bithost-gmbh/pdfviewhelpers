@@ -8,14 +8,116 @@
 Advanced Customization
 ----------------------
 
-To completely customize the PDF creation you have the options to provide your own PDF class or write your own ViewHelper.
-Your own PDF class is required to extend ``Bithost\Pdfviewhelpers\Model\BasePDF``.
+To completely customize the PDF creation you have the options to write your own ViewHelper or provide your own PDF class.
 If you feel like your custom ViewHelper might be useful for everybody, feel free to create a pull request!
+
+Create your own ViewHelper
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Creating your own ViewHelper might be necessary if you need access to a TCPDF method that is not yet available through the implemented ViewHelpers
+or if you have a complex layout to realise.
+
+When writing your own ViewHelper you have the options to extend ``AbstractContentElementViewHelper`` or ``AbstractPDFViewHelper``. If your ViewHelper
+will add some content to the PDF (e.g. ``TextViewHelper`` or ``LineViewHelper``), you should extend ``AbstractContentElementViewHelper``
+in order to inherit its position properties and allow the header and footer ViewHelpers to work properly.
+If your ViewHelper does not add content (e.g. ``GetPosXViewHelper`` or ``PageBreakViewHelper``) you can directly extend ``AbstractPDFViewHelper``.
+
+Within your ViewHelper you have full access to the public API of TCPDF using ``$this->getPDF()``. Please see the TCPDF examples in order to see what
+you can do with it: https://tcpdf.org/examples/
+
+The following example shows a ViewHelper that could be used to render a TCPDF barcode.
+
+*PHP*
+
+::
+
+    <?php
+
+    namespace Vendor\YourExtension\ViewHelpers;
+
+    /***
+     *
+     * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
+     *
+     *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
+     *           Esteban Marin <esteban.marin@bithost.ch>, Bithost GmbH
+     *
+     *  All rights reserved
+     *
+     *  This script is part of the TYPO3 project. The TYPO3 project is
+     *  free software; you can redistribute it and/or modify
+     *  it under the terms of the GNU General Public License as published by
+     *  the Free Software Foundation; either version 3 of the License, or
+     *  (at your option) any later version.
+     *
+     *  The GNU General Public License can be found at
+     *  http://www.gnu.org/copyleft/gpl.html.
+     *
+     *  This script is distributed in the hope that it will be useful,
+     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     *  GNU General Public License for more details.
+     *
+     *  This copyright notice MUST APPEAR in all copies of the script!
+     ***/
+
+    use Bithost\Pdfviewhelpers\ViewHelpers\AbstractContentElementViewHelper;
+
+    /**
+     * BarcodeViewHelper
+     *
+     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
+     */
+    class BarcodeViewHelper extends AbstractContentElementViewHelper {
+        /**
+         * @param string $title
+         *
+         * @return void
+         */
+        public function render($title)
+        {
+            $style = [
+                'position' => '',
+                'align' => 'C',
+                'stretch' => FALSE,
+                'fitwidth' => TRUE,
+                'cellfitalign' => '',
+                'border' => TRUE,
+                'hpadding' => 'auto',
+                'vpadding' => 'auto',
+                'fgcolor' => [0,0,0],
+                'bgcolor' => FALSE,
+                'text' => TRUE,
+                'font' => 'helvetica',
+                'fontsize' => 8,
+                'stretchtext' => 4
+            ];
+
+            $this->getPDF()->SetFontSize(12);
+            $this->getPDF()->Cell(0, 0, $title, 0, 1);
+
+            $this->getPDF()->write1DBarcode('CODE 39', 'C39', '', '', '', 18, 0.4, $style, 'N');
+        }
+    }
+
+*Fluid*
+
+::
+
+	{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
+	{namespace you=Vendor\YourExtension\ViewHelpers}
+
+	<pdf:document>
+		<pdf:page>
+			<you:barcode title="Some Title" />
+		</pdf:page>
+	</pdf:document>
+
 
 Extend BasePDF class
 ^^^^^^^^^^^^^^^^^^^^
-You can provide your own PDF class in order to customize its behaviour as you want. This is for instance needed if you want to change constructor arguments or
-you want to render header and footer without the ViewHelpers provided.
+You can provide your own PDF class in the TypoScript settings in order to customize its behaviour as you want.
+Your own PDF class is required to extend ``Bithost\Pdfviewhelpers\Model\BasePDF``.
 
 *TypoScript*
 
@@ -109,101 +211,3 @@ you want to render header and footer without the ViewHelpers provided.
             $this->Cell($this->w - 15, 10, 'Page '.$this->getAliasNumPage() . ' of '.$this->getAliasNbPages(), 0, false, 'C', 0, '', 1, false, 'T', 'M');
         }
     }
-
-
-Create your own ViewHelper
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-When writing your own ViewHelper you have the options to extend ``AbstractContentElementViewHelper`` or ``AbstractPDFViewHelper``. If your ViewHelper
-will add some content to the PDF, you should extend ``AbstractContentElementViewHelper`` in order to inherit its position properties and allow the
-header and footer ViewHelpers to work properly.
-If your ViewHelper does not add content (e.g. ``GetPosXViewHelper`` or ``PageBreakViewHelper``) you can directly extend ``AbstractPDFViewHelper``.
-
-Within your ViewHelper you have full access to the public API of TCPDF using ``$this->getPDF()``. Please see the TCPDF examples in order to see what
-you can do with it: https://tcpdf.org/examples/
-
-*PHP*
-
-::
-
-    <?php
-
-    namespace Vendor\YourExtension\ViewHelpers;
-
-    /***
-     *
-     * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
-     *
-     *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
-     *           Esteban Marin <esteban.marin@bithost.ch>, Bithost GmbH
-     *
-     *  All rights reserved
-     *
-     *  This script is part of the TYPO3 project. The TYPO3 project is
-     *  free software; you can redistribute it and/or modify
-     *  it under the terms of the GNU General Public License as published by
-     *  the Free Software Foundation; either version 3 of the License, or
-     *  (at your option) any later version.
-     *
-     *  The GNU General Public License can be found at
-     *  http://www.gnu.org/copyleft/gpl.html.
-     *
-     *  This script is distributed in the hope that it will be useful,
-     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *  GNU General Public License for more details.
-     *
-     *  This copyright notice MUST APPEAR in all copies of the script!
-     ***/
-
-    use Bithost\Pdfviewhelpers\ViewHelpers\AbstractContentElementViewHelper;
-
-    /**
-     * BarcodeViewHelper
-     *
-     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
-     */
-    class BarcodeViewHelper extends AbstractContentElementViewHelper {
-        /**
-         * @param string $title
-         *
-         * @return void
-         */
-        public function render($title)
-        {
-            $style = [
-                'position' => '',
-                'align' => 'C',
-                'stretch' => FALSE,
-                'fitwidth' => TRUE,
-                'cellfitalign' => '',
-                'border' => TRUE,
-                'hpadding' => 'auto',
-                'vpadding' => 'auto',
-                'fgcolor' => [0,0,0],
-                'bgcolor' => FALSE,
-                'text' => TRUE,
-                'font' => 'helvetica',
-                'fontsize' => 8,
-                'stretchtext' => 4
-            ];
-
-            $this->getPDF()->SetFontSize(12);
-            $this->getPDF()->Cell(0, 0, $title, 0, 1);
-
-            $this->getPDF()->write1DBarcode('CODE 39', 'C39', '', '', '', 18, 0.4, $style, 'N');
-        }
-    }
-
-*Fluid*
-
-::
-
-	{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
-	{namespace you=Vendor\YourExtension\ViewHelpers}
-
-	<pdf:document>
-		<pdf:page>
-			<you:barcode title="Some Title" />
-		</pdf:page>
-	</pdf:document>

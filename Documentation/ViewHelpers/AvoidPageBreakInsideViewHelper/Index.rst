@@ -16,23 +16,21 @@ This has a negative impact on the performance as well as might create other unde
 
 	<pdf:document>
 		<pdf:page>
+			<pdf:headline>Welcome to the extension pdfviewhelpers</pdf:headline>
+			<pdf:text>Lorem ipsum.</pdf:text>
 
 			<pdf:avoidPageBreakInside>
-
-				<pdf:headline>Welcome to the extension pdfviewhelpers</pdf:headline>
 				<pdf:headline>Some more information</pdf:headline>
 				<pdf:multiColumn>
 					<pdf:column>
 						<pdf:text>Lorem ipsum.</pdf:text>
-						</pdf:column>
+					</pdf:column>
 					<pdf:column>
 						<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg"/>
 						<pdf:text padding="{top: 1}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
 					</pdf:column>
 				</pdf:multiColumn>
-
 			</pdf:avoidPageBreakInside>
-
 		</pdf:page>
 	</pdf:document>
 
