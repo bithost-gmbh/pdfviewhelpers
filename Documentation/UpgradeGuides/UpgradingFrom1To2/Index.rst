@@ -41,6 +41,5 @@ The option ``plugin.tx_pdfviewhelpers.settings.page.autoPageBreak`` is now enabl
 
 Moved settings from config to document
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The settings ``plugin.tx_pdfviewhelpers.settings.config.language`` and ``plugin.tx_pdfviewhelpers.settings.config.hyphenFile`` have been moved to
- ``plugin.tx_pdfviewhelpers.settings.document.language`` and ``plugin.tx_pdfviewhelpers.settings.document.hyphenFile``. That allows to set this
-values in the Fluid template and thus allows to create documents of different languages in a batch process.
+The settings ``plugin.tx_pdfviewhelpers.settings.config.language`` and ``plugin.tx_pdfviewhelpers.settings.config.hyphenFile`` have been moved to ``plugin.tx_pdfviewhelpers.settings.document.language``
+and ``plugin.tx_pdfviewhelpers.settings.document.hyphenFile``. That allows to set this values in the Fluid template and thus allows to create documents of different languages in a batch process.

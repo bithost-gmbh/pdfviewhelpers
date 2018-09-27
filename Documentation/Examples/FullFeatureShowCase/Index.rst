@@ -17,7 +17,7 @@ Full Feature Show Case
 Intro
 -----
 
-This example is showing some of the features of the extension pdfviewhelpers including typography, custom fonts, lists, images, html, layout and settings inheritance.
+This example is showing some of the features of the extension pdfviewhelpers including typography, custom fonts, header and footer, lists, images, html, layout and settings inheritance.
 
 .. _fullfeatureshowcase_typoscript:
 
@@ -132,9 +132,6 @@ TypoScript
 
 PHP
 ---
-
-A custom PHP class is needed if you want to add header and footer to all the pages or if you want to customize
-the behaviour of TCPDF in any way.
 
 ::
 

@@ -26,6 +26,7 @@ PHP
 
 	$standaloneView->setFormat('html');
 	$standaloneView->setTemplatePathAndFilename($templatePath);
+	$standaloneView->assignMultiple(['someVariable' => 'someValue']);
 
 	$pdf = $standaloneView->render(); //return pdf as string, or simply save to file system
 
@@ -41,7 +42,7 @@ Fluid Template - return PDF as String
 
 	<pdf:document outputDestination="string">
 		<pdf:page>
-			<pdf:text>Your content</pdf:text>
+			<pdf:text>Your content - {someVariable}</pdf:text>
 		</pdf:page>
 	</pdf:document>
 
@@ -57,7 +58,7 @@ Fluid Template - return PDF as base64 mime multi-part email attachment (RFC 2045
 
 	<pdf:document outputDestination="email">
 		<pdf:page>
-			<pdf:text>Your content</pdf:text>
+			<pdf:text>Your content - {someVariable}</pdf:text>
 		</pdf:page>
 	</pdf:document>
 
@@ -73,6 +74,6 @@ Fluid Template - save PDF to file
 
 	<pdf:document outputDestination="file" outputPath="fileadmin/document.pdf">
 		<pdf:page>
-			<pdf:text>Your content</pdf:text>
+			<pdf:text>Your content - {someVariable}</pdf:text>
 		</pdf:page>
 	</pdf:document>

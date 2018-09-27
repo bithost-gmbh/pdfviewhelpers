@@ -133,7 +133,7 @@ class ListViewHelper extends AbstractTextViewHelper
                 //A page break occurred on the first line
                 $elementStartY = $this->getPDF()->getMargins()['top'];
             } else {
-                //No page on first line break, reset to start page
+                //No page break on first line, reset to start page
                 $this->getPDF()->setPage($elementStartPage);
             }
 

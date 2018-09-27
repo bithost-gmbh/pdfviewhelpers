@@ -29,14 +29,14 @@ namespace Bithost\Pdfviewhelpers\Model;
  ***/
 
 /**
- * PdfaTCPDF, overrides constructor to set pdfa param as true
+ * PdfaShowCase, overrides constructor to set pdfa param as true
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
 class PdfaShowCase extends BasePDF
 {
     /**
-     * @return void
+     * @inheritdoc
      */
     public function __construct($orientation = 'P', $unit = 'mm', $format = 'A4', $unicode = true, $encoding = 'UTF-8', $diskcache = false, $pdfa = true)
     {

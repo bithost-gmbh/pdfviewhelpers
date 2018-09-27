@@ -29,7 +29,6 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
-use Bithost\Pdfviewhelpers\Model\BasePDF;
 
 /**
  * FooterViewHelper
@@ -73,7 +72,7 @@ class FooterViewHelper extends AbstractPDFViewHelper
         $renderChildrenClosure = $this->buildRenderChildrenClosure();
         $footerViewHelper = $this;
         $footerClosure = function () use ($pdf, $arguments, $renderChildrenClosure, $footerViewHelper) {
-            $footerViewHelper->pushMultiColumnContext([]);
+            $footerViewHelper->pushMultiColumnContext([]); // avoid interference of page and footer multi column context
 
             if ($arguments['posY']) {
                 $pdf->SetY($arguments['posY']);

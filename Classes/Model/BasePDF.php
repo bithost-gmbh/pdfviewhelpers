@@ -31,9 +31,6 @@ namespace Bithost\Pdfviewhelpers\Model;
 use setasign\Fpdi\Tcpdf\Fpdi;
 use Closure;
 
-//Autoload class TCPDF in order for fpdi_bridge to be able to correctly determine its parent class
-class_exists('TCPDF', true);
-
 /**
  * BasePDF
  *
@@ -104,7 +101,7 @@ class BasePDF extends Fpdi
     const SCOPE_DOCUMENT = 'document';
 
     /**
-     * @return void
+     * @inheritdoc
      */
     protected function setHeader()
     {
@@ -112,7 +109,7 @@ class BasePDF extends Fpdi
     }
 
     /**
-     * @return void
+     * @inheritdoc
      */
     protected function setFooter()
     {
@@ -168,7 +165,7 @@ class BasePDF extends Fpdi
     }
 
     /**
-     * @return void
+     * @inheritdoc
      */
     public function Header() // phpcs:ignore
     {
@@ -182,7 +179,7 @@ class BasePDF extends Fpdi
     }
 
     /**
-     * @return void
+     * @inheritdoc
      */
     public function Footer() // phpcs:ignore
     {
@@ -196,9 +193,7 @@ class BasePDF extends Fpdi
     }
 
     /**
-     * Fixes importPage not working with autoPageBreak=1, see https://github.com/bithost-gmbh/pdfviewhelpers/issues/41
-     *
-     * @return void
+     * @inheritdoc
      */
     public function AddPage($orientation = '', $format = '', $rotationOrKeepmargins = false, $tocpage = false) // phpcs:ignore
     {
@@ -273,8 +268,7 @@ class BasePDF extends Fpdi
     }
 
     /**
-     * @param string $format
-     * @param string $orientation
+     * @inheritdoc
      */
     public function setPageFormat($format, $orientation = 'P')
     {

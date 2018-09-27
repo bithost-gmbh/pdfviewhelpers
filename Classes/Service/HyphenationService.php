@@ -47,6 +47,8 @@ class HyphenationService implements SingletonInterface
     protected $pdf;
 
     /**
+     * Used to cache loading of hyphen patterns
+     *
      * @var array
      */
     protected $hyphenPatterns = [];

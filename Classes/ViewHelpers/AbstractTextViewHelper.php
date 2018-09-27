@@ -163,10 +163,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
                 $paragraph = trim($paragraph);
             }
 
-            //SetY explicitly and do not use $y attribute of MultiCell in order to allow negative y values
-            //see https://github.com/tecnickcom/TCPDF/pull/95
-            $this->getPDF()->SetY($posY);
-            $this->getPDF()->MultiCell($this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), false, 1, $this->arguments['posX'], null, true, 0, false, true, 0, 'T', false);
+            $this->getPDF()->MultiCell($this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), false, 1, $this->arguments['posX'], $posY, true, 0, false, true, 0, 'T', false);
 
             if ($this->validationService->validateParagraphSpacing($this->arguments['paragraphSpacing']) && $this->arguments['paragraphSpacing'] > 0) {
                 $this->getPDF()->Ln((float)$this->arguments['paragraphSpacing'], false);

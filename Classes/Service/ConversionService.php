@@ -139,9 +139,6 @@ class ConversionService implements SingletonInterface
     }
 
     /**
-     * Converts pdfviewhelper fontStyle syntax to TCPDF syntax. This function is necessary because TCPDF uses an empty
-     * string to represent "regular", but we can not do this because of the settings inheritance (empty means inherit).
-     *
      * @param string $fontStyle
      *
      * @return string
@@ -196,8 +193,8 @@ class ConversionService implements SingletonInterface
     }
 
     /**
-     * @param string $width
-     * @param integer $fullWidth
+     * @param string $width A simple integer (e.g. 100) or percentage value (e.g. 50%)
+     * @param integer $fullWidth The width that is considered to be 100%
      *
      * @return float
      *
@@ -289,7 +286,7 @@ class ConversionService implements SingletonInterface
      *
      * @throws Exception
      */
-    public function getSettings()
+    protected function getSettings()
     {
         if (is_array($this->settings)) {
             return $this->settings;
