@@ -36,14 +36,14 @@ namespace Bithost\Pdfviewhelpers\Model;
 class FullFeatureShowCase extends BasePDF
 {
     /**
-     * @return void
+     * @inheritdoc
      */
     public function basePdfHeader()
     {
     }
 
     /**
-     * @return void
+     * @inheritdoc
      */
     public function basePdfFooter()
     {

@@ -143,8 +143,6 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
      * @param BasePDF $pdf
      *
      * @return void
-     *
-     * @throws Exception
      */
     protected function setPDF(BasePDF $pdf)
     {

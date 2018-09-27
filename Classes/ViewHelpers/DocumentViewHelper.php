@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Model\BasePDF;
+use setasign\Fpdi\PdfParser\PdfParserException;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -220,7 +221,11 @@ class DocumentViewHelper extends AbstractPDFViewHelper
                 throw new ValidationException('The provided source file "' . $sourceFilePath . '" does not exist or the file is not readable. ERROR: 1525452207', 1525452207);
             }
 
-            $this->getPDF()->setSourceFile($sourceFilePath);
+            try {
+                $this->getPDF()->setSourceFile($sourceFilePath);
+            } catch (PdfParserException $e) {
+                throw new Exception('Could not set source file. ' . $e->getMessage() . ' ERROR: 1538067316', 1538067316, $e);
+            }
         }
     }
 }

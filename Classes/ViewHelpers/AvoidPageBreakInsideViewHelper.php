@@ -79,7 +79,7 @@ class AvoidPageBreakInsideViewHelper extends AbstractPDFViewHelper
                 $totalChildrenHeight = $firstPageChildrenHeight + $secondPageChildrenHeight;
                 $innerPageHeight = $realPDF->getScaledInnerPageHeight();
 
-                if ($totalChildrenHeight < $innerPageHeight) {
+                if ($totalChildrenHeight <= $innerPageHeight) {
                     $realPDF->AddPage();
                 }
             } else {

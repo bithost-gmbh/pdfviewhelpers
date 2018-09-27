@@ -29,8 +29,6 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
-use Bithost\Pdfviewhelpers\Exception\ValidationException;
-use Bithost\Pdfviewhelpers\Model\BasePDF;
 
 /**
  * AbstractContentElementViewHelper
@@ -85,7 +83,7 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
      *
      * @throws Exception
      */
-    public function initializeHeaderAndFooter()
+    protected function initializeHeaderAndFooter()
     {
         if ($this->viewHelperVariableContainer->get('DocumentViewHelper', 'pageNeedsHeader')) {
             $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pageNeedsHeader', false);

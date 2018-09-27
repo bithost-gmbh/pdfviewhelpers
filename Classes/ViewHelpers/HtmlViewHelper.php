@@ -29,8 +29,6 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
-use Bithost\Pdfviewhelpers\Exception\ValidationException;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * HtmlViewHelper

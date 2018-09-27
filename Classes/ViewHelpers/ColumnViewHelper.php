@@ -29,8 +29,6 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
-use Bithost\Pdfviewhelpers\Exception\ValidationException;
-use Bithost\Pdfviewhelpers\Service\ValidationService;
 
 /**
  * ColumnViewHelper
@@ -60,7 +58,6 @@ class ColumnViewHelper extends AbstractPDFViewHelper
         parent::initialize();
 
         $multiColumnContext = $this->getCurrentMultiColumnContext();
-
         $this->arguments['padding'] = array_merge(['top' => 0, 'right' => 0, 'bottom' => 0, 'left' => 0], $this->arguments['padding']);
 
         $this->validationService->validatePadding($this->arguments['padding']);

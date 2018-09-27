@@ -79,7 +79,11 @@ class PageViewHelper extends AbstractPDFViewHelper
         $hasImportedPage = !empty($this->arguments['importPage']);
 
         if ($hasImportedPage) {
-            $templateId = $this->getPDF()->importPage($this->arguments['importPage']);
+            try {
+                $templateId = $this->getPDF()->importPage($this->arguments['importPage']);
+            } catch (\Exception $e) {
+                throw new Exception('Could not import page. ' . $e->getMessage() . ' ERROR: 1538067206 ', 1538067206, $e);
+            }
         }
 
         $this->getPDF()->setIsAutoPageBreak(false);
