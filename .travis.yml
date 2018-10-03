@@ -11,9 +11,8 @@ matrix:
       env: TYPO3_VERSION=^7
     - php: 7.1
       env: TYPO3_VERSION=^8
-# newest TYPO3 build can currently not be installed without errors, https://forge.typo3.org/issues/85552
-#    - php: 7.2
-#      env: TYPO3_VERSION=^9
+    - php: 7.2
+      env: TYPO3_VERSION=^9
 
 before_install:
   - composer self-update
