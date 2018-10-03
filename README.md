@@ -38,21 +38,16 @@ So if you feel like this extension was useful to you and saved you and your busi
 
 ## Links
 
-**Bug Tracker:** https://github.com/bithost-gmbh/pdfviewhelpers/issues
-
-**Git Repository:** https://github.com/bithost-gmbh/pdfviewhelpers
-
-**TER:** https://typo3.org/extensions/repository/view/pdfviewhelpers
-
-**Packagist:** https://packagist.org/packages/bithost-gmbh/pdfviewhelpers
-
-**Full Documentation:** https://docs.typo3.org/typo3cms/extensions/pdfviewhelpers
-
-**Changelog:** https://github.com/bithost-gmbh/pdfviewhelpers/blob/master/CHANGELOG.md
-
-**Sponsoring:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGTVWHW8TP8Q4)
-
-**Contact:** [@maechler](https://github.com/maechler), [@macjohnny](https://github.com/macjohnny), https://www.bithost.ch/kontakt/
+| Topic              | Link                                                                                                                  |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Bug Tracker        | https://github.com/bithost-gmbh/pdfviewhelpers/issues                                                                 |
+| Git Repository     | https://github.com/bithost-gmbh/pdfviewhelpers                                                                        |
+| TER                | https://typo3.org/extensions/repository/view/pdfviewhelpers                                                           |
+| Packagist          | https://packagist.org/packages/bithost-gmbh/pdfviewhelpers                                                            |
+| Full Documentation | https://docs.typo3.org/typo3cms/extensions/pdfviewhelpers                                                             |
+| Changelog          | https://github.com/bithost-gmbh/pdfviewhelpers/blob/master/CHANGELOG.md                                               |
+| Sponsoring         | [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGTVWHW8TP8Q4)                          |
+| Contact            | [@maechler](https://github.com/maechler), [@macjohnny](https://github.com/macjohnny), https://www.bithost.ch/kontakt/ |
 
 ## Example
 
