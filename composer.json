@@ -22,8 +22,7 @@
 	},
 	"require-dev": {
 		"nimut/testing-framework": "^2.0 || ^3.0",
-		"smalot/pdfparser": "^0.12.0",
-		"doctrine/lexer": "^1.0"
+		"smalot/pdfparser": "^0.12.0"
 	},
 	"autoload": {
 		"psr-4": {
