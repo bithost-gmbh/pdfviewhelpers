@@ -138,7 +138,7 @@ class ValidationServiceTest extends AbstractUnitTest
 
         foreach ($invalidColors as $color) {
             try {
-                $this->validationService->validatePadding($color);
+                $this->validationService->validateColor($color);
                 $this->fail();
             } catch (Exception $e) {
                 $this->assertInstanceOf(ValidationException::class, $e);
