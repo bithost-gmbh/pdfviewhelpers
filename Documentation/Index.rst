@@ -58,4 +58,6 @@ PDF ViewHelpers
 	ViewHelpers/Index
 	Examples/Index
 	Troubleshooting/Index
+	UpgradeGuides/Index
+	Sponsoring
 	Links

@@ -2,7 +2,7 @@ pdfpage = PAGE
 pdfpage {
 	10 = FLUIDTEMPLATE
 	10 {
-		file = EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.html
+		file = EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Template.html
 	}
 	# ensure there is no other output apart from the pdf
 	# take a look at the generated pdf file (end!) in a text editor to verify there is no other output
@@ -16,7 +16,6 @@ pdfpage {
 
 plugin.tx_pdfviewhelpers.settings {
 	config {
-		class = Bithost\Pdfviewhelpers\Model\BithostTCPDF
 		language = eng
 	}
 	document {
@@ -27,4 +26,26 @@ plugin.tx_pdfviewhelpers.settings {
 		creator = TYPO3 pdfviewhelpers
 		outputPath = bithost_example.pdf
 	}
+	header {
+		posY = 15
+	}
+	footer {
+		posY = -15
+	}
+	page {
+		margin {
+			top = 65
+			bottom = 25
+		}
+	}
+	graphics {
+		line {
+			padding {
+				top = 0
+				bottom = 1.5
+			}
+		}
+	}
 }
+
+module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers

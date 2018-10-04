@@ -36,63 +36,10 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 class TextViewHelper extends AbstractTextViewHelper
 {
     /**
-     * @return void
+     * @return string
      */
-    public function initializeArguments()
+    protected function getSettingsKey()
     {
-        parent::initializeArguments();
-
-        if (strlen($this->settings['text']['trim'])) {
-            $this->overrideArgument('trim', 'boolean', '', false, (boolean)$this->settings['text']['trim']);
-        }
-        if (strlen($this->settings['text']['removeDoubleWhitespace'])) {
-            $this->overrideArgument('removeDoubleWhitespace', 'boolean', '', false, (boolean)$this->settings['text']['removeDoubleWhitespace']);
-        }
-        if (!empty($this->settings['text']['color'])) {
-            $this->overrideArgument('color', 'string', '', false, $this->settings['text']['color']);
-        }
-        if (!empty($this->settings['text']['fontFamily'])) {
-            $this->overrideArgument('fontFamily', 'string', '', false, $this->settings['text']['fontFamily']);
-        }
-        if (!empty($this->settings['text']['fontSize'])) {
-            $this->overrideArgument('fontSize', 'integer', '', false, $this->settings['text']['fontSize']);
-        }
-        if (!empty($this->settings['text']['fontStyle'])) {
-            $this->overrideArgument('fontStyle', 'string', '', false, $this->settings['text']['fontStyle']);
-        }
-        if (!empty($this->settings['text']['alignment'])) {
-            $this->overrideArgument('alignment', 'string', '', false, $this->settings['text']['alignment']);
-        }
-        if (!empty($this->settings['text']['paragraphSpacing'])) {
-            $this->overrideArgument('paragraphSpacing', 'float', '', false, $this->settings['text']['paragraphSpacing']);
-        }
-        if (strlen($this->settings['text']['autoHyphenation'])) {
-            $this->overrideArgument('autoHyphenation', 'boolean', '', false, $this->settings['text']['autoHyphenation']);
-        }
-    }
-
-    /**
-     * @return void
-     */
-    public function initialize()
-    {
-        parent::initialize();
-
-        if (!is_array($this->arguments['padding'])) {
-            if (!empty($this->settings['text']['padding'])) {
-                $this->arguments['padding'] = $this->settings['text']['padding'];
-            } else {
-                $this->arguments['padding'] = $this->settings['generalText']['padding'];
-            }
-        }
-
-        if ($this->isValidPadding($this->arguments['padding'])) {
-            $this->getPDF()->setCellPaddings(
-                $this->arguments['padding']['left'],
-                $this->arguments['padding']['top'],
-                $this->arguments['padding']['right'],
-                $this->arguments['padding']['bottom']
-            );
-        }
+        return 'text';
     }
 }

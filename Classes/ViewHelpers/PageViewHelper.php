@@ -29,8 +29,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
-use Bithost\Pdfviewhelpers\Model\EmptyFPDI;
-use FPDI;
+use Bithost\Pdfviewhelpers\Model\BasePDF;
 
 /**
  * PageViewHelper
@@ -44,24 +43,29 @@ class PageViewHelper extends AbstractPDFViewHelper
      */
     public function initializeArguments()
     {
+        parent::initializeArguments();
+
         $this->registerArgument('autoPageBreak', 'boolean', '', false, $this->settings['page']['autoPageBreak']);
-        $this->registerArgument('margins', 'array', '', false, null);
+        $this->registerArgument('margin', 'array', '', false, []);
         $this->registerArgument('importPage', 'integer', '', false, $this->settings['page']['importPage']);
+        $this->registerArgument('importPageOnAutomaticPageBreak', 'boolean', '', false, $this->settings['page']['importPageOnAutomaticPageBreak']);
         $this->registerArgument('orientation', 'string', '', false, $this->settings['page']['orientation']);
         $this->registerArgument('format', 'string', '', false, $this->settings['page']['format']);
     }
 
     /**
      * @return void
+     *
+     * @throws Exception
      */
     public function initialize()
     {
-        if (is_null($this->arguments['margins'])) {
-            $this->arguments['margins'] = $this->settings['page']['margins'];
-        }
+        parent::initialize();
 
-        $this->getPDF()->SetMargins($this->arguments['margins']['left'], $this->arguments['margins']['top'], $this->arguments['margins']['right']);
-        $this->getPDF()->SetAutoPageBreak($this->arguments['autoPageBreak'], $this->arguments['margins']['bottom']);
+        $this->arguments['margin'] = array_merge($this->settings['page']['margin'], $this->arguments['margin']);
+        $this->arguments['orientation'] = $this->conversionService->convertSpeakingOrientationToTcpdfOrientation($this->arguments['orientation']);
+
+        $this->setDefaultHeaderFooterScope(BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
     }
 
     /**
@@ -74,18 +78,18 @@ class PageViewHelper extends AbstractPDFViewHelper
         $templateId = -1;
         $hasImportedPage = !empty($this->arguments['importPage']);
 
-        //reset import template on this page in order to avoid duplicate usage
-        if ($this->getPDF() instanceof EmptyFPDI) {
-            $this->getPDF()->setImportTemplateOnThisPage(false);
-        }
-
         if ($hasImportedPage) {
-            if ($this->getPDF() instanceof FPDI) {
+            try {
                 $templateId = $this->getPDF()->importPage($this->arguments['importPage']);
-            } else {
-                throw new Exception('PDF object must be instance of FPDI to support option "sourceFile". ERROR: 1474144733', 1474144733);
+            } catch (\Exception $e) {
+                throw new Exception('Could not import page. ' . $e->getMessage() . ' ERROR: 1538067206 ', 1538067206, $e);
             }
         }
+
+        $this->getPDF()->setIsAutoPageBreak(false);
+        $this->getPDF()->setImportTemplateOnThisPage(false);
+        $this->getPDF()->SetMargins($this->arguments['margin']['left'], $this->arguments['margin']['top'], $this->arguments['margin']['right']);
+        $this->getPDF()->SetAutoPageBreak($this->arguments['autoPageBreak'], $this->arguments['margin']['bottom']);
 
         $this->getPDF()->AddPage($this->arguments['orientation'], $this->arguments['format']);
 
@@ -93,11 +97,47 @@ class PageViewHelper extends AbstractPDFViewHelper
             $this->getPDF()->useTemplate($templateId);
         }
 
-        //set whether to import the template on an automatic page break or not
-        if ($this->getPDF() instanceof EmptyFPDI) {
-            $this->getPDF()->setImportTemplateOnThisPage($hasImportedPage);
-        }
+        $this->setPageNeedsHeader(true);
+        $this->getPDF()->setIsAutoPageBreak(true);
+        $this->getPDF()->setImportTemplateOnThisPage($hasImportedPage && $this->arguments['importPageOnAutomaticPageBreak']);
 
         $this->renderChildren();
+
+        if ($this->pageNeedsHeader()) {
+            //no auto page break occurred, we still need to set the header
+            $this->setPageNeedsHeader(false);
+
+            $this->getPDF()->renderHeader();
+            $this->getPDF()->renderFooter();
+        }
+
+        //reset default header and footer scope to document and reset header and footer closures
+        $this->setDefaultHeaderFooterScope(BasePDF::SCOPE_DOCUMENT);
+        $this->getPDF()->setHeaderClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
+        $this->getPDF()->setFooterClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
+    }
+
+    /**
+     * @param string $scope
+     */
+    protected function setDefaultHeaderFooterScope($scope)
+    {
+        $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'defaultHeaderFooterScope', $scope);
+    }
+
+    /**
+     * @param boolean $needsHeader
+     */
+    protected function setPageNeedsHeader($needsHeader)
+    {
+        $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pageNeedsHeader', $needsHeader);
+    }
+
+    /**
+     * @return boolean
+     */
+    protected function pageNeedsHeader()
+    {
+        return $this->viewHelperVariableContainer->get('DocumentViewHelper', 'pageNeedsHeader');
     }
 }

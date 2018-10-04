@@ -21,7 +21,7 @@ TypoScript
 	pdfpage {
 		10 = FLUIDTEMPLATE
 		10 {
-			file = EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.html
+			file = EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Template.html
 		}
 		# ensure there is no other output apart from the pdf
 		# take a look at the generated pdf file (end!) in a text editor to verify there is no other output
@@ -35,7 +35,6 @@ TypoScript
 
 	plugin.tx_pdfviewhelpers.settings {
 		config {
-			class = Bithost\Pdfviewhelpers\Model\BithostTCPDF
 			language = eng
 		}
 		document {
@@ -46,81 +45,32 @@ TypoScript
 			creator = TYPO3 pdfviewhelpers
 			outputPath = bithost_example.pdf
 		}
+		header {
+			posY = 15
+		}
+		footer {
+			posY = -15
+		}
+		text {
+			paragraphSpacing = 0
+		}
+		page {
+			margin {
+				top = 65
+				bottom = 25
+			}
+		}
+		graphics {
+			line {
+				padding {
+					top = 0
+					bottom = 1.5
+				}
+			}
+		}
 	}
 
-.. _basicusage_php:
-
-PHP
----
-
-A custom PHP class is needed if you want to add header and footer to all the pages or if you want to customize
-the behaviour of TCPDF in any way.
-
-::
-
-    <?php
-
-    namespace Bithost\Pdfviewhelpers\Model;
-
-    /***
-     *
-     * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
-     *
-     *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
-     *           Esteban Marin <esteban.marin@bithost.ch>, Bithost GmbH
-     *
-     *  All rights reserved
-     *
-     *  This script is part of the TYPO3 project. The TYPO3 project is
-     *  free software; you can redistribute it and/or modify
-     *  it under the terms of the GNU General Public License as published by
-     *  the Free Software Foundation; either version 3 of the License, or
-     *  (at your option) any later version.
-     *
-     *  The GNU General Public License can be found at
-     *  http://www.gnu.org/copyleft/gpl.html.
-     *
-     *  This script is distributed in the hope that it will be useful,
-     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *  GNU General Public License for more details.
-     *
-     *  This copyright notice MUST APPEAR in all copies of the script!
-     ***/
-
-    use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-
-    /**
-     * BithostTCPDF
-     *
-     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
-     */
-    class BithostTCPDF extends \TCPDF
-    {
-        /**
-         * @return void
-         */
-        public function Header()
-        {
-            $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
-            $address = "Bithost GmbH \nMilchubckstrasse 83 \nCH-8057 Zürich \n\nhallo@bithost.ch \n044 585 28 20 \n\nwww.bithost.ch";
-
-            $this->SetTextColor(140, 140, 140);
-            $this->SetFontSize(11);
-
-            $this->Image($extPath . 'Resources/Public/Examples/BasicUsage/logo.png', 15, 15, 56, 24, '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, FALSE, FALSE);
-            $this->MultiCell(null, null, $address, 0, 'R', FALSE, 1, 0, 45, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);
-        }
-
-        /**
-         * @return void
-         */
-        public function Footer()
-        {
-
-        }
-    }
-
+	module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers
 
 .. _basicusage_fluid:
 
@@ -129,11 +79,35 @@ Fluid Template
 
 ::
 
-	{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+		xmlns:pdf="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers"
+		xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.0.xsd"
+		data-namespace-typo3-fluid="true">
 
-	<pdf:document outputDestination="I" title="Bithost Example">
+	<pdf:document outputDestination="inline" title="Bithost Example">
+		<pdf:header>
+			<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/logo.png" width="40"/>
+			<pdf:text alignment="right" color="#8C8C8C" paragraphSpacing="0" posY="15">
+				Bithost GmbH
+				Milchbuckstrasse 83
+				CH-8057 Zürich
+
+				hallo@bithost.ch
+				044 585 28 20
+
+				www.bithost.ch
+			</pdf:text>
+		</pdf:header>
+		<pdf:footer>
+			<pdf:graphics.line style="{color: '#8C8C8C'}"/>
+			<pdf:text color="#8C8C8C">Page {pdf:getPageNumberAlias()}</pdf:text>
+			<pdf:text alignment="right" color="#8C8C8C" posY="-13.5">EXT:pdfviewhelpers - Basic usage example</pdf:text>
+		</pdf:footer>
+
 		<pdf:page>
-			<pdf:text padding="{top:65, right:0, bottom:4, left:0}" color="#8C8C8C">
+			<pdf:text posY="50" padding="{bottom: 4}" color="#8C8C8C">
 				Zurich, <f:format.date format="d.m.Y" >now</f:format.date>
 			</pdf:text>
 			<pdf:headline>Welcome to the extension pdfviewhelpers</pdf:headline>
@@ -144,7 +118,7 @@ Fluid Template
 			<pdf:headline>Some more information</pdf:headline>
 
 			<pdf:multiColumn>
-				<pdf:column>
+				<pdf:column width="55%">
 					<pdf:text>
 						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua:
 					</pdf:text>
@@ -153,15 +127,17 @@ Fluid Template
 						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren est Lorem ipsum dolor sit amet.
 					</pdf:text>
 				</pdf:column>
-				<pdf:column>
-					<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg" width="200" />
-					<pdf:text padding="{top:1, right:0, bottom:0, left:0}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
+				<pdf:column width="45%" padding="{left: 2}">
+					<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg" />
+					<pdf:text padding="{top: 1}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
 				</pdf:column>
 			</pdf:multiColumn>
 
-			<pdf:text padding="{top: 2, right:0, bottom:0, left:0}">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</pdf:text>
+			<pdf:text padding="{top: 2}">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</pdf:text>
 		</pdf:page>
 	</pdf:document>
+
+	</html>
 
 
 .. _basicusage_output:
@@ -172,6 +148,6 @@ PDF Output
 .. figure:: _assets/output.png
    :width: 600px
    :align: left
-   :alt: Bithost Example
+   :alt: Basic Usage Example
 
-   Rendered PDF document
+|

@@ -30,9 +30,12 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Bithost\Pdfviewhelpers\Model\BasePDF;
+use Bithost\Pdfviewhelpers\MultiColumn\ContextStack;
+use Bithost\Pdfviewhelpers\Service\HyphenationService;
+use Bithost\Pdfviewhelpers\Service\ConversionService;
+use Bithost\Pdfviewhelpers\Service\ValidationService;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -69,40 +72,86 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     protected $settings = [];
 
     /**
-     * AbstractPDFViewHelper Constructor
+     * @var ConfigurationManagerInterface
      */
-    public function __construct()
+    protected $configurationManager = null;
+
+    /**
+     * @var ValidationService
+     */
+    protected $validationService = null;
+
+    /**
+     * @var HyphenationService
+     */
+    protected $hyphenationService = null;
+
+    /**
+     * @var ConversionService
+     */
+    protected $conversionService = null;
+
+    /**
+     * @param ConfigurationManagerInterface $configurationManager
+     */
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
     {
-        /** @var ObjectManager $objectManager */
-        $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        /** @var ConfigurationManagerInterface $configurationManager */
-        $configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
-
-        $this->settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'Pdfviewhelpers', 'tx_pdfviewhelpers');
-
-        if (!is_array($this->settings)) {
-            throw new Exception('No pdfviewhelpers settings found. Please make sure you have included the static TypoScript template. ERROR: 1470982083', 1470982083);
-        }
+        $this->configurationManager = $configurationManager;
     }
 
     /**
-     * @param \TCPDF $pdf
-     *
+     * @param ValidationService $validationService
+     */
+    public function injectValidationService(ValidationService $validationService)
+    {
+        $this->validationService = $validationService;
+    }
+
+    /**
+     * @param HyphenationService $hyphenationService
+     */
+    public function injectHyphenationService(HyphenationService $hyphenationService)
+    {
+        $this->hyphenationService = $hyphenationService;
+    }
+
+    /**
+     * @param ConversionService $conversionService
+     */
+    public function injectConversionService(ConversionService $conversionService)
+    {
+        $this->conversionService = $conversionService;
+    }
+
+    /**
      * @return void
      *
      * @throws Exception
      */
-    protected function setPDF(\TCPDF $pdf)
+    public function initializeObject()
     {
-        if ($this instanceof DocumentViewHelper && !$this->viewHelperVariableContainer->exists('DocumentViewHelper', 'pdf')) {
-            $this->viewHelperVariableContainer->add('DocumentViewHelper', 'pdf', $pdf);
-        } else {
-            throw new Exception('The PDF Object has already been created, or the function setPDF() was not called from an instance of DocumentViewHelper. ERROR: 1363682312', 1363682312);
+        $this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'Pdfviewhelpers', 'tx_pdfviewhelpers');
+
+        if (!is_array($this->settings) || !isset($this->settings['staticTypoScriptSetupIncluded'])) {
+            throw new Exception('No pdfviewhelpers settings found. Please make sure you have included the static TypoScript template. ERROR: 1470982083', 1470982083);
         }
+
+        $this->conversionService->setSettings($this->settings);
     }
 
     /**
-     * @return \TCPDF
+     * @param BasePDF $pdf
+     *
+     * @return void
+     */
+    protected function setPDF(BasePDF $pdf)
+    {
+        $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pdf', $pdf);
+        $this->hyphenationService->setPDF($pdf);
+    }
+
+    /**
+     * @return BasePDF
      *
      * @throws Exception
      */
@@ -130,22 +179,72 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param string $text
+     * @param array $multiColumnContext
      *
+     * @return void
+     */
+    protected function pushMultiColumnContext(array $multiColumnContext)
+    {
+        if (!$this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'contextStack')) {
+            $contextStack = new ContextStack();
+            $contextStack->push($multiColumnContext);
+
+            $this->viewHelperVariableContainer->add('MultiColumnViewHelper', 'contextStack', $contextStack);
+        } else {
+            $contextStack = $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'contextStack');
+
+            $contextStack->push($multiColumnContext);
+        }
+    }
+
+    /**
+     * @return array $multiColumnContext
+     */
+    protected function popMultiColumnContext()
+    {
+        if ($this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'contextStack')) {
+            $contextStack = $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'contextStack');
+
+            return $contextStack->pop();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @return array $multiColumnContext
+     */
+    protected function getCurrentMultiColumnContext()
+    {
+        if ($this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'contextStack')) {
+            $contextStack = $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'contextStack');
+
+            return $contextStack->top();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param array $multiColumnContext
+     */
+    protected function setCurrentMultiColumnContext($multiColumnContext)
+    {
+        $this->popMultiColumnContext();
+        $this->pushMultiColumnContext($multiColumnContext);
+    }
+
+    /**
      * @return string
      *
      * @throws ValidationException
      */
-    protected function hyphenateText($text)
+    protected function getHyphenFileName()
     {
-        $hyphenFilePath = GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Resources/Private/Hyphenation/' . $this->settings['config']['hyphenFile']);
-
-        if (!file_exists($hyphenFilePath) || !is_readable($hyphenFilePath)) {
-            throw new ValidationException('Path to hyphen file "' . $hyphenFilePath . '" does not exist or file is not readable. ERROR: 1525410458', 1525410458);
+        if ($this->viewHelperVariableContainer->exists('DocumentViewHelper', 'hyphenFile')) {
+            return $this->viewHelperVariableContainer->get('DocumentViewHelper', 'hyphenFile');
+        } else {
+            throw new ValidationException('No hyphenFile configured, make sure to configure a hyphenFile for the DocumentViewHelper. ERROR: 1536993844', 1536993844);
         }
-
-        $text = $this->getPDF()->hyphenateText($text, $hyphenFilePath);
-
-        return $text;
     }
 }

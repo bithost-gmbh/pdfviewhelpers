@@ -1,5 +1,36 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.0.0 - October 4, 2018
+- Adds HeaderViewHelper and FooterViewHelper, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)
+- Adds PageNumberAliasViewHelper and TotalNumberOfPagesAliasViewHelpers, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)
+- Adds LineViewHelper
+- Adds support for speaking settings
+- Adds partial overwriting of text padding, [#25](https://github.com/bithost-gmbh/pdfviewhelpers/issues/25)
+- Adds width and padding to ColumnViewHelper
+- Adds xml namespaces and schema
+- Adds HyphenationService to cache and speed up hyphenation
+- Adds validation and settings conversion services
+- Adds PDF constructor arguments to DocumentViewHelper
+- Adds optional exit after PDF output
+- Adds lineHeight and characterSpacing option to text
+- Adds text types to easily apply different styles
+- Adds multi column context stack to avoid header and footer context interference
+- Adds AvoidPageBreakInsideViewHelper
+- Adds support for percentage width
+- Adds padding, link and alignment to ImageViewHelper
+- Adds template for EXT:news, [#75](https://github.com/bithost-gmbh/pdfviewhelpers/issues/75)
+- Adds LineBreakViewHelper
+- Adds padding and multi column support to HtmlViewHelper
+- Updates TCPDF to version 6.2.25
+- Updates FPDI to version 2.1.0
+- Moves language and hyphenFile settings to DocumentViewHelper, [#39](https://github.com/bithost-gmbh/pdfviewhelpers/issues/39)
+- Changes PHP requirement to minimum 5.6
+- Changes default value of `page.autoPageBreak` to `1`
+- Fixes MultiColumnViewHelper columns not correctly initialized
+- Changes page.margins to page.margin
+- Replaces classes EmptyFPDI, EmptyTCPDF by BasePDF, Removes class BithostTCPDF
+- Enforces usage of BasePDF
+
 ## 1.6.0 - August 14, 2018
 - Adds support for TYPO3 9 LTS, [#59](https://github.com/bithost-gmbh/pdfviewhelpers/issues/59) (Thanks [@luberti](https://github.com/luberti))
 - Drops support for TYPO3 6 LTS

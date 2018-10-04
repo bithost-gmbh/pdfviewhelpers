@@ -26,7 +26,12 @@ generating the document.
 		subject="Welcome message"
 		author="Bithost GmbH"
 		keywords="example, test"
-		outputDestination="I"
-		outputPath="example.pdf">
+		outputDestination="inline"
+		outputPath="example.pdf"
+		sourceFile="EXT:pdfviewhelpers/Resources/Public/Examples/ExtendExistingPDFs/pdf_template.pdf"
+		unit="cm"
+		unicode="1"
+		encoding="UTF-8"
+		pdfa="1">
 		[..]
 	</pdf:document>

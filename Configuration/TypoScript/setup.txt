@@ -1,9 +1,10 @@
 plugin.tx_pdfviewhelpers.settings {
+	# this is just setting to determine whether the static TypoScript setup has been included or not
+	staticTypoScriptSetupIncluded = 1
 	config {
-		class = Bithost\Pdfviewhelpers\Model\EmptyFPDI
-		language = ger
-		hyphenFile = hyph-de-ch-1901.tex
+		class = Bithost\Pdfviewhelpers\Model\BasePDF
 		disableCache = 1
+		exitAfterPdfContentOutput = 0
 		jpgQuality = 100
 		sRGBMode = 0
 		allowedImageTypes {
@@ -29,21 +30,37 @@ plugin.tx_pdfviewhelpers.settings {
 		author =
 		keywords =
 		creator = TYPO3 EXT:pdfviewhelpers
-		outputDestination = I
+		outputDestination = inline
 		outputPath = document.pdf
 		sourceFile =
+		unit = mm
+		unicode = 1
+		encoding = UTF-8
+		pdfa = 0
+		language = ger
+		hyphenFile = hyph-de-ch-1901.tex
 	}
 	page {
-		autoPageBreak = 0
-		margins {
+		autoPageBreak = 1
+		margin {
 			top = 15
 			right = 15
 			bottom = 15
 			left = 15
 		}
 		importPage =
-		orientation = P
+		importPageOnAutomaticPageBreak = 1
+		orientation = portrait
 		format = A4
+	}
+	header {
+		posY = 5
+	}
+	footer {
+		posY = -10
+	}
+	avoidPageBreakInside {
+		breakIfImpossibleToAvoid = 0
 	}
 	generalText {
 		trim = 1
@@ -51,8 +68,10 @@ plugin.tx_pdfviewhelpers.settings {
 		color = #000
 		fontFamily = helvetica
 		fontSize = 11
-		fontStyle = R
-		alignment = L
+		fontStyle = regular
+		lineHeight = 1.25
+		characterSpacing = 0
+		alignment = left
 		paragraphSpacing = 2
 		autoHyphenation = 0
 		padding {
@@ -60,6 +79,9 @@ plugin.tx_pdfviewhelpers.settings {
 			right = 0
 			bottom = 0
 			left = 0
+		}
+		types {
+
 		}
 	}
 	text {
@@ -69,10 +91,15 @@ plugin.tx_pdfviewhelpers.settings {
 		fontFamily =
 		fontSize =
 		fontStyle =
+		lineHeight =
+		characterSpacing =
 		alignment =
 		paragraphSpacing =
 		autoHyphenation =
 		padding {
+
+		}
+		types {
 
 		}
 	}
@@ -80,18 +107,21 @@ plugin.tx_pdfviewhelpers.settings {
 		trim =
 		removeDoubleWhitespace =
 		color =
-		fontFamily = 
+		fontFamily =
 		fontSize = 16
 		fontStyle =
+		lineHeight =
+		characterSpacing =
 		alignment =
 		paragraphSpacing = 0
 		autoHyphenation =
 		padding {
 			top = 6
-			right = 0
 			bottom = 3
-			left = 0
-		}	
+		}
+		types {
+
+		}
 	}
 	list {
 		trim =
@@ -100,21 +130,53 @@ plugin.tx_pdfviewhelpers.settings {
 		fontFamily =
 		fontSize =
 		fontStyle =
-		alignment = L
+		lineHeight =
+		characterSpacing =
+		alignment = left
 		autoHyphenation =
+		padding {
+			bottom = 2
+			left = 1.5
+		}
+		bulletColor =
+		bulletImageSrc =
+		bulletSize = 1.5
+		types {
+
+		}
+	}
+	image {
+		alignment = left
 		padding {
 			top = 0
 			right = 0
 			bottom = 2
-			left = 1
+			left = 0
 		}
-		bulletColor =
-		bulletImageSrc = 
-		bulletSize = 1.5
 	}
 	html {
 		autoHyphenation =
 		styleSheet =
+		padding {
+			top = 0
+			right = 0
+			bottom = 2
+			left = 0
+		}
+	}
+	graphics {
+		line {
+			padding {
+				top = 4
+				right = 0
+				bottom = 5
+				left = 0
+			}
+			style {
+				width = 0.25
+				color = #000
+			}
+		}
 	}
 }
 

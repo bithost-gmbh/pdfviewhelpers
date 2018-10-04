@@ -28,6 +28,8 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
+
 /**
  * ColumnViewHelper
  *
@@ -38,8 +40,52 @@ class ColumnViewHelper extends AbstractPDFViewHelper
     /**
      * @return void
      */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+
+        $this->registerArgument('width', 'string', '', false, null);
+        $this->registerArgument('padding', 'array', '', false, []);
+    }
+
+    /**
+     * @return void
+     *
+     * @throws Exception
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $multiColumnContext = $this->getCurrentMultiColumnContext();
+        $this->arguments['padding'] = array_merge(['top' => 0, 'right' => 0, 'bottom' => 0, 'left' => 0], $this->arguments['padding']);
+
+        $this->validationService->validatePadding($this->arguments['padding']);
+
+        if (strlen($this->arguments['width'])) {
+            if ($this->validationService->validateWidth($this->arguments['width'])) {
+                $multiColumnContext['columnWidth'] = $this->conversionService->convertSpeakingWidthToTcpdfWidth($this->arguments['width'], $multiColumnContext['pageWidthWithoutMargins']);
+            }
+        } else {
+            $multiColumnContext['columnWidth'] = $multiColumnContext['defaultColumnWidth'];
+        }
+
+        $multiColumnContext['columnWidth'] = $multiColumnContext['columnWidth'] - $this->arguments['padding']['left'] - $this->arguments['padding']['right'];
+        $multiColumnContext['currentPosX'] = $multiColumnContext['currentPosX'] + $this->arguments['padding']['left'];
+        $multiColumnContext['columnPadding'] = $this->arguments['padding'];
+
+        $this->setCurrentMultiColumnContext($multiColumnContext);
+    }
+
+    /**
+     * @return void
+     *
+     * @throws Exception
+     */
     public function render()
     {
+        $this->getPDF()->SetY($this->getPDF()->GetY() + $this->arguments['padding']['top']);
         $this->renderChildren();
+        $this->getPDF()->SetY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
     }
 }

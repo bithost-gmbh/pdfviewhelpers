@@ -28,8 +28,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Exception\ValidationException;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Bithost\Pdfviewhelpers\Exception\Exception;
 
 /**
  * HtmlViewHelper
@@ -45,46 +44,83 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('autoHyphenation', 'boolean', '', false, $this->settings['generalText']['autoHyphenation']);
+        $this->registerArgument('autoHyphenation', 'boolean', '', false, (boolean) $this->settings['generalText']['autoHyphenation']);
         $this->registerArgument('styleSheet', 'string', '', false, $this->settings['html']['styleSheet']);
+        $this->registerArgument('padding', 'array', '', false, null);
 
         if (strlen($this->settings['html']['autoHyphenation'])) {
-            $this->overrideArgument('autoHyphenation', 'boolean', '', false, $this->settings['html']['autoHyphenation']);
+            $this->overrideArgument('autoHyphenation', 'boolean', '', false, (boolean) $this->settings['html']['autoHyphenation']);
         }
+    }
+
+    /**
+     * @throws Exception
+     *
+     * @return void
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        if (is_array($this->arguments['padding'])) {
+            $this->arguments['padding'] = array_merge($this->settings['html']['padding'], $this->arguments['padding']);
+        } else {
+            $this->arguments['padding'] = $this->settings['html']['padding'];
+        }
+
+        $this->validationService->validatePadding($this->arguments['padding']);
     }
 
     /**
      * @return void
      *
-     * @throws ValidationException if an invalid style sheet path is provided
+     * @throws Exception if an invalid style sheet path is provided
      */
     public function render()
     {
         $html = $this->renderChildren();
         $htmlStyle = '';
-        $color = $this->convertHexToRGB($this->settings['generalText']['color']);
-        $padding = $this->settings['generalText']['padding'];
+        $color = $this->conversionService->convertHexToRGB($this->settings['generalText']['color']);
+
+        $this->initializeMultiColumnSupport();
+
+        $initialMargins = $this->getPDF()->getMargins();
+        $marginLeft = $this->arguments['posX'] + $this->arguments['padding']['left'];
+
+        if (is_null($this->arguments['width'])) {
+            $marginRight = $initialMargins['right'] + $this->arguments['padding']['right'];
+        } else {
+            $marginRight = $this->getPDF()->getPageWidth() - $marginLeft - $this->arguments['width'] + $this->arguments['padding']['right'];
+        }
+
+        $this->getPDF()->SetMargins($marginLeft, $initialMargins['top'], $marginRight);
 
         if (!empty($this->arguments['styleSheet'])) {
-            $styleSheetPath = GeneralUtility::getFileAbsFileName($this->arguments['styleSheet']);
+            $styleSheetFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['styleSheet']);
 
-            if (!file_exists($styleSheetPath) || !is_readable($styleSheetPath)) {
-                throw new ValidationException('Path to style sheet "' . $styleSheetPath . '" does not exist or file is not readable. ERROR: 1492706529', 1492706529);
-            }
-
-            $htmlStyle = '<style>' . file_get_contents($styleSheetPath) . '</style>';
+            $htmlStyle = '<style>' . $styleSheetFile->getContents() . '</style>';
         }
 
         if ($this->arguments['autoHyphenation']) {
-            $html = $this->hyphenateText($html);
+            $html = $this->hyphenationService->hyphenateText(
+                $html,
+                $this->hyphenationService->getHyphenFilePath($this->getHyphenFileName())
+            );
         }
 
         //reset settings to generalText
         $this->getPDF()->SetTextColor($color['R'], $color['G'], $color['B']);
         $this->getPDF()->SetFontSize($this->settings['generalText']['fontSize']);
-        $this->getPDF()->SetFont($this->settings['generalText']['fontFamily'], AbstractTextViewHelper::convertToTcpdfFontStyle($this->settings['generalText']['fontStyle']));
-        $this->getPDF()->setCellPaddings($padding['left'], $padding['top'], $padding['right'], $padding['bottom']);
+        $this->getPDF()->SetFont($this->settings['generalText']['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($this->settings['generalText']['fontStyle']));
+        $this->getPDF()->setCellPaddings(0, 0, 0, 0); //reset padding to avoid errors on nested tags
+        $this->getPDF()->setCellHeightRatio($this->settings['generalText']['lineHeight']);
+        $this->getPDF()->setFontSpacing($this->settings['generalText']['characterSpacing']);
+
+        $this->getPDF()->SetY($this->arguments['posY'] + $this->arguments['padding']['top']);
 
         $this->getPDF()->writeHTML($htmlStyle . $html, true, false, true, false, '');
+
+        $this->getPDF()->SetY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
+        $this->getPDF()->SetMargins($initialMargins['left'], $initialMargins['top'], $initialMargins['right']);
     }
 }

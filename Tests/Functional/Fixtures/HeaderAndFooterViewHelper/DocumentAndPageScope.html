@@ -1,0 +1,23 @@
+{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
+
+<pdf:document outputDestination="S">
+    <pdf:header>
+        <pdf:text>DocumentHeader</pdf:text>
+    </pdf:header>
+    <pdf:footer>
+        <pdf:text>DocumentFooter</pdf:text>
+    </pdf:footer>
+    <pdf:page autoPageBreak="{autoPageBreak}">
+        <pdf:header scope="thisPage">
+            <pdf:text>FirstPageHeader</pdf:text>
+        </pdf:header>
+        <pdf:footer>
+            <pdf:text>FirstPageFooter</pdf:text>
+        </pdf:footer>
+
+        <pdf:text>{text}</pdf:text>
+    </pdf:page>
+    <pdf:page>
+        <pdf:text>Lorem ipsum</pdf:text>
+    </pdf:page>
+</pdf:document>

@@ -52,6 +52,13 @@ abstract class AbstractFunctionalTest extends FunctionalTestCase
     protected $coreExtensionsToLoad = ['extbase', 'fluid'];
 
     /**
+     * 150 words 890 characters
+     *
+     * @var string
+     */
+    protected $loremIpsumText = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+
+    /**
      * Setup TYPO3 environment
      *
      * @return void
@@ -62,6 +69,7 @@ abstract class AbstractFunctionalTest extends FunctionalTestCase
 
         $this->importDataSet($this->getFixturePath('pages.xml'));
         $this->setUpPage();
+        $this->setUpBackendUserFromFixture(1);
     }
 
     /**
@@ -135,5 +143,22 @@ abstract class AbstractFunctionalTest extends FunctionalTestCase
         $parser = new Parser();
 
         return $parser->parseContent($content);
+    }
+
+    /**
+     * @param integer $duplicates
+     *
+     * @return string
+     */
+    protected function getLongLoremIpsumText($duplicates)
+    {
+        $longLoremIpsumText = '';
+        $duplicates = max($duplicates, 0);
+
+        for ($i=0; $i < $duplicates; $i++) {
+            $longLoremIpsumText .= $this->loremIpsumText;
+        }
+
+        return $longLoremIpsumText;
     }
 }

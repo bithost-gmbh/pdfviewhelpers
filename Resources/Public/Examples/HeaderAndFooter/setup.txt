@@ -1,0 +1,36 @@
+pdfpage = PAGE
+pdfpage {
+	10 = FLUIDTEMPLATE
+	10 {
+		file = EXT:pdfviewhelpers/Resources/Public/Examples/HeaderAndFooter/Template.html
+	}
+	# ensure there is no other output apart from the pdf
+	# take a look at the generated pdf file (end!) in a text editor to verify there is no other output
+	# like warnings, error messages or html code
+	config {
+		disableAllHeaderCode = 1
+		xhtml_cleaning = 0
+		admPanel = 0
+	}
+}
+
+plugin.tx_pdfviewhelpers.settings {
+	config {
+		class = Bithost\Pdfviewhelpers\Model\BasePDF
+	}
+	page {
+		autoPageBreak = 1
+		margin {
+			top = 25
+			bottom = 25
+		}
+	}
+	header {
+		posY = 10
+	}
+	footer {
+		posY = -15
+	}
+}
+
+module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers

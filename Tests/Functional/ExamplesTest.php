@@ -29,7 +29,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  * * */
 
 /**
- * PageViewHelperTest
+ * ExamplesTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
@@ -44,14 +44,25 @@ class ExamplesTest extends AbstractFunctionalTest
 
         $output = $this->renderFluidTemplate($this->getFixturePath('Examples/FullFeatureShowCase.html'));
         $pdf = $this->parseContent($output);
-        $text = $pdf->getText();
+        $pages = $pdf->getPages();
 
-        $this->assertEquals(3, count($pdf->getPages()));
-        $this->assertContains('hallo@bithost.ch - www.bithost.ch', $text);
-        $this->assertContains('Full Feature Show Case', $text);
-        $this->assertContains('Application Development', $text);
-        $this->assertContains('HTML content being styled externally', $text);
-        $this->assertContains('A Link to click', $text);
+        $this->assertEquals(5, count($pages));
+
+        $this->assertContains('hallo@bithost.ch - www.bithost.ch', $pages[0]->getText());
+        $this->assertContains('Full Feature Show Case', $pages[0]->getText());
+
+        $this->assertContains('hallo@bithost.ch - www.bithost.ch', $pages[1]->getText());
+        $this->assertContains('Application Development', $pages[1]->getText());
+        $this->assertContains('This is a h1 headline', $pages[1]->getText());
+
+        $this->assertContains('Only this page will have a different header', $pages[2]->getText());
+
+        $this->assertContains('hallo@bithost.ch - www.bithost.ch', $pages[3]->getText());
+        $this->assertContains('HTML content being styled externally', $pages[3]->getText());
+        $this->assertContains('A Link to click', $pages[3]->getText());
+        $this->assertContains('We are on page 4 of 5 pages.', $pages[3]->getText());
+
+        $this->assertContains('Avoid page break inside', $pages[4]->getText());
 
         //do not assert file equality, because the files generated on the server are not equal to the local files
         //comparing hashes of two locally generated files works however

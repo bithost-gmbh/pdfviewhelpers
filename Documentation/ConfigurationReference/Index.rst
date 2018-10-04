@@ -11,7 +11,7 @@
 Configuration Reference
 =======================
 
-Technical information: Installation, Reference of TypoScript options and how to extend it.
+Technical information: Installation, TypoScript Reference, Caching as well as advanced customization.
 
 Target group: **Developers**
 
@@ -21,10 +21,13 @@ Target group: **Developers**
 
 	Installation/Index
 	TypoScriptReference/Index
-	CustomFonts/Index
+	HeaderAndFooter/Index
+	TextTypes/Index
 	ExtendExistingPDFs/Index
+	CustomFonts/Index
 	AdvancedCustomization/Index
 	Caching/Index
+	ExtNews/Index
 
 
 

@@ -29,23 +29,12 @@ namespace Bithost\Pdfviewhelpers\Model;
  ***/
 
 /**
- * EmptyTCPDF, Needed because TCPDF adds a line to the header by default
+ * EmptyTCPDF
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
+ *
+ * @deprecated Use BasePDF instead
  */
-class EmptyTCPDF extends \TCPDF
+class EmptyTCPDF extends BasePDF
 {
-    /**
-     * @return void
-     */
-    public function Header() // phpcs:ignore
-    {
-    }
-
-    /**
-     * @return void
-     */
-    public function Footer() // phpcs:ignore
-    {
-    }
 }

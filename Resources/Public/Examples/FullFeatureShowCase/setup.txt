@@ -33,27 +33,67 @@ plugin.tx_pdfviewhelpers.settings {
 		title = Full Feature Show Case Title
 		subject = No Subject
 		keywords = full, feature, show, case
-		outputDestination = I
+		outputDestination = inline
 		outputPath = fullfeatureshowcase.pdf
 	}
+	header {
+		posY = 10
+	}
 	page {
-		margins {
-			top = 20
+		margin {
+			top = 25
 			right = 15
-			bottom = 20
+			bottom = 25
 			left = 15
 		}
 	}
 	generalText {
 		color = #555
 	}
+	text {
+		types {
+			header {
+				color = #8C8C8C
+			}
+			quote {
+				fontStyle = italic
+				alignment = center
+				padding {
+					top = 10
+					right = 50
+					bottom = 10
+					left = 50
+				}
+			}
+		}
+	}
 	headline {
 		fontFamily = courier
-		fontStyle = B
+		fontStyle = bold
+		types {
+			h1 {
+				fontSize = 28
+				color = #ff642c
+			}
+			h2 {
+				fontSize = 22
+				color = #ff642c
+			}
+			h3 {
+				fontSize = 14
+				fontFamily = helvetica
+				fontStyle = bold
+			}
+		}
 	}
 	list {
-		color = #1F8A70
-		fontStyle = I
+		color = #000
+		fontStyle = bold
 		bulletColor = #BEDB39
+		padding {
+			left = 2
+		}
 	}
 }
+
+module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers

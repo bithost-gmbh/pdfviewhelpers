@@ -36,58 +36,10 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 class HeadlineViewHelper extends AbstractTextViewHelper
 {
     /**
-     * @return void
+     * @return string
      */
-    public function initializeArguments()
+    protected function getSettingsKey()
     {
-        parent::initializeArguments();
-
-        if (strlen($this->settings['headline']['trim'])) {
-            $this->overrideArgument('trim', 'boolean', '', false, (boolean)$this->settings['headline']['trim']);
-        }
-        if (strlen($this->settings['headline']['removeDoubleWhitespace'])) {
-            $this->overrideArgument('removeDoubleWhitespace', 'boolean', '', false, (boolean)$this->settings['headline']['removeDoubleWhitespace']);
-        }
-        if (!empty($this->settings['headline']['color'])) {
-            $this->overrideArgument('color', 'string', '', false, $this->settings['headline']['color']);
-        }
-        if (!empty($this->settings['headline']['fontFamily'])) {
-            $this->overrideArgument('fontFamily', 'string', '', false, $this->settings['headline']['fontFamily']);
-        }
-        if (!empty($this->settings['headline']['fontSize'])) {
-            $this->overrideArgument('fontSize', 'integer', '', false, $this->settings['headline']['fontSize']);
-        }
-        if (!empty($this->settings['headline']['fontStyle'])) {
-            $this->overrideArgument('fontStyle', 'string', '', false, $this->settings['headline']['fontStyle']);
-        }
-        if (!empty($this->settings['headline']['alignment'])) {
-            $this->overrideArgument('alignment', 'string', '', false, $this->settings['headline']['alignment']);
-        }
-        if (!empty($this->settings['headline']['paragraphSpacing'])) {
-            $this->overrideArgument('paragraphSpacing', 'float', '', false, $this->settings['headline']['paragraphSpacing']);
-        }
-        if (strlen($this->settings['headline']['autoHyphenation'])) {
-            $this->overrideArgument('autoHyphenation', 'boolean', '', false, $this->settings['headline']['autoHyphenation']);
-        }
-    }
-
-    /**
-     * @return void
-     */
-    public function initialize()
-    {
-        parent::initialize();
-
-        if (empty($this->arguments['padding'])) {
-            if (!empty($this->settings['headline']['padding'])) {
-                $this->arguments['padding'] = $this->settings['headline']['padding'];
-            } else {
-                $this->arguments['padding'] = $this->settings['generalText']['padding'];
-            }
-        }
-
-        if ($this->isValidPadding($this->arguments['padding'])) {
-            $this->getPDF()->setCellPaddings($this->arguments['padding']['left'], $this->arguments['padding']['top'], $this->arguments['padding']['right'], $this->arguments['padding']['bottom']);
-        }
+        return 'headline';
     }
 }

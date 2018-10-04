@@ -71,9 +71,10 @@ plugin.tx_pdfviewhelpers.settings {
 		keywords = full, feature, show, case
 		outputDestination = I
 		outputPath = pdfa.pdf
+		pdfa = 1
 	}
 	page {
-		margins {
+		margin {
 			top = 20
 			right = 15
 			bottom = 20
@@ -93,3 +94,5 @@ plugin.tx_pdfviewhelpers.settings {
 		bulletColor = #555
 	}
 }
+
+module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers
