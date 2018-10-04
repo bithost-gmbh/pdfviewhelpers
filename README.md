@@ -115,4 +115,4 @@ So if you feel like this extension was useful to you and saved you and your busi
 
 ### PDF Output
 
-![Example PDF output](Resources/Public/Examples/BasicUsage/output.png)
+![Example PDF output](Documentation/Examples/BasicUsage/_assets/output.png)
