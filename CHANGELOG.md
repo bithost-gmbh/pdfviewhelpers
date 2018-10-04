@@ -1,6 +1,6 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 2.0.0 - Not yet released
+## 2.0.0 - October 4, 2018
 - Adds HeaderViewHelper and FooterViewHelper, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)
 - Adds PageNumberAliasViewHelper and TotalNumberOfPagesAliasViewHelpers, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)
 - Adds LineViewHelper
@@ -18,7 +18,7 @@
 - Adds AvoidPageBreakInsideViewHelper
 - Adds support for percentage width
 - Adds padding, link and alignment to ImageViewHelper
-- Adds template for EXT:news
+- Adds template for EXT:news, [#75](https://github.com/bithost-gmbh/pdfviewhelpers/issues/75)
 - Adds LineBreakViewHelper
 - Adds padding and multi column support to HtmlViewHelper
 - Updates TCPDF to version 6.2.25
