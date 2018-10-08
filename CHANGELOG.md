@@ -21,13 +21,14 @@
 - Adds template for EXT:news, [#75](https://github.com/bithost-gmbh/pdfviewhelpers/issues/75)
 - Adds LineBreakViewHelper
 - Adds padding and multi column support to HtmlViewHelper
-- Updates TCPDF to version 6.2.25
-- Updates FPDI to version 2.1.0
+- Updates TCPDF to version `6.2.25`
+- Updates FPDI to version `2.1.0`
 - Moves language and hyphenFile settings to DocumentViewHelper, [#39](https://github.com/bithost-gmbh/pdfviewhelpers/issues/39)
-- Changes PHP requirement to minimum 5.6
+- Changes PHP requirement to minimum `5.6`
 - Changes default value of `page.autoPageBreak` to `1`
 - Fixes MultiColumnViewHelper columns not correctly initialized
-- Changes page.margins to page.margin
+- Fixes ListViewHelper not working correctly with page breaks
+- Changes `page.margins` to `page.margin`
 - Replaces classes EmptyFPDI, EmptyTCPDF by BasePDF, Removes class BithostTCPDF
 - Enforces usage of BasePDF
 
@@ -37,14 +38,14 @@
 - Adds support for FAL images, [#52](https://github.com/bithost-gmbh/pdfviewhelpers/issues/52)
 
 ## 1.5.2 - July 2, 2018
-- Changes PHP requirement to minimum 5.4, [#56](https://github.com/bithost-gmbh/pdfviewhelpers/issues/56)
+- Changes PHP requirement to minimum `5.4`, [#56](https://github.com/bithost-gmbh/pdfviewhelpers/issues/56)
 - Changes code style to PSR-2, [#23](https://github.com/bithost-gmbh/pdfviewhelpers/issues/23)
 - Adds functional tests, [#21](https://github.com/bithost-gmbh/pdfviewhelpers/issues/21)
 
 ## 1.5.1 - May 17, 2018
 - Fixes not able to create multiple PDF documents per request
 - Updates documentation
-- Fixes PHP 5.4 compatibility error
+- Fixes PHP `5.4` compatibility error
 - Moves ExtensionManagementUtility::addStaticFile to Overrides/sys_template.php, [#45](https://github.com/bithost-gmbh/pdfviewhelpers/issues/45)
 - Fixes outputDestination E and S not really working, [#47](https://github.com/bithost-gmbh/pdfviewhelpers/issues/47)
 - Disables ViewHelper output escaping, [#46](https://github.com/bithost-gmbh/pdfviewhelpers/issues/46)
@@ -58,8 +59,8 @@
 
 ## 1.4.0 - April 10, 2018
 - Fixes posX and posY not working, [#37](https://github.com/bithost-gmbh/pdfviewhelpers/issues/37) (Thanks [@PeterSchuhmann](https://github.com/PeterSchuhmann))
-- Updates TCPDF to version 6.2.17
-- Updates FPDI to version 1.6.2
+- Updates TCPDF to version `6.2.17`
+- Updates FPDI to version `1.6.2`
 - Improves PdfaShowCase example
 - Adds option sRGBMode to config, [#38](https://github.com/bithost-gmbh/pdfviewhelpers/issues/38)
 - Adds GetPosXViewHelper and GetPosYViewHelper, [#40](https://github.com/bithost-gmbh/pdfviewhelpers/issues/40)
@@ -75,7 +76,7 @@
 - Updates documentation
 
 ## 1.3.2 - Oktober 30, 2017
-- Fixes Warning in TCPDF on PHP 7.1.x, [#28](https://github.com/bithost-gmbh/pdfviewhelpers/issues/28) (Thanks [@koritnik](https://github.com/koritnik))
+- Fixes Warning in TCPDF on PHP `7.1.x`, [#28](https://github.com/bithost-gmbh/pdfviewhelpers/issues/28) (Thanks [@koritnik](https://github.com/koritnik))
 
 ## 1.3.1 - September 16, 2017
 - Removes default font type in order for TCPDF to auto detect type
