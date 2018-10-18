@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.0.1 - October 18, 2018
+- Fixes a PDF 1.7 compliance issue, [#97](https://github.com/bithost-gmbh/pdfviewhelpers/issues/97)
+- Updates documentation
+
 ## 2.0.0 - October 4, 2018
 - Adds HeaderViewHelper and FooterViewHelper, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)
 - Adds PageNumberAliasViewHelper and TotalNumberOfPagesAliasViewHelpers, [#31](https://github.com/bithost-gmbh/pdfviewhelpers/issues/31)

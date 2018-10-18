@@ -89,7 +89,6 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
             $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pageNeedsHeader', false);
 
             $this->getPDF()->renderHeader();
-            $this->getPDF()->renderFooter();
         }
     }
 
