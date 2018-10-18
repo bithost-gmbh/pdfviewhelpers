@@ -105,20 +105,24 @@ class BasePDF extends Fpdi
      */
     protected function setHeader()
     {
-        //disable TCPDF default behaviour in order to be able to overwrite header and footer on page level
+        //disable TCPDF default behaviour in order to be able to overwrite header on page level
     }
 
     /**
      * @inheritdoc
      */
-    protected function setFooter()
+    public function endPage($tocpage = false)
     {
-        //disable TCPDF default behaviour in order to be able to overwrite header and footer on page level
+        parent::endPage($tocpage);
+
+        if ($this->pageFooterScope === self::SCOPE_THIS_PAGE) {
+            $this->pageFooterClosure = null; //remove page footer closure as it should only be used once
+        }
     }
 
     /**
      * Custom method to call setHeader to render header after the children of a PageViewHelper are rendered.
-     * This allows to overwrite header within a PageViewHelper.
+     * This allows to overwrite the header within a PageViewHelper.
      *
      * @return void
      */
@@ -127,23 +131,8 @@ class BasePDF extends Fpdi
         $graphicVars = $this->getGraphicVars();
 
         parent::setHeader();
-
         $this->setGraphicVars($graphicVars);
-    }
-
-    /**
-     * Custom method to call setFooter to render footer after the children of a PageViewHelper are rendered.
-     * This allows to overwrite footer within a PageViewHelper.
-     *
-     * @return void
-     */
-    public function renderFooter()
-    {
-        $graphicVars = $this->getGraphicVars();
-
-        parent::setFooter();
-
-        $this->setGraphicVars($graphicVars);
+        $this->setPageMark();
     }
 
     /**
@@ -204,12 +193,7 @@ class BasePDF extends Fpdi
                 $this->pageHeaderClosure = null; //remove page header closure as it should only be used once
             }
 
-            if ($this->pageFooterScope === self::SCOPE_THIS_PAGE) {
-                $this->pageFooterClosure = null; //remove page footer closure as it should only be used once
-            }
-
             $this->renderHeader();
-            $this->renderFooter();
         }
 
         if ($this->importTemplateOnThisPage && $this->tpl !== 0) {

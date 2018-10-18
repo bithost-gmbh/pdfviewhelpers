@@ -99,22 +99,20 @@ class PageViewHelper extends AbstractPDFViewHelper
 
         $this->setPageNeedsHeader(true);
         $this->getPDF()->setIsAutoPageBreak(true);
+        $this->getPDF()->setHeaderClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
+        $this->getPDF()->setFooterClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
         $this->getPDF()->setImportTemplateOnThisPage($hasImportedPage && $this->arguments['importPageOnAutomaticPageBreak']);
 
         $this->renderChildren();
 
         if ($this->pageNeedsHeader()) {
-            //no auto page break occurred, we still need to set the header
+            //no auto page break occurred or no element was rendered, we still need to set the header
             $this->setPageNeedsHeader(false);
-
             $this->getPDF()->renderHeader();
-            $this->getPDF()->renderFooter();
         }
 
-        //reset default header and footer scope to document and reset header and footer closures
+        //reset default header and footer scope to document
         $this->setDefaultHeaderFooterScope(BasePDF::SCOPE_DOCUMENT);
-        $this->getPDF()->setHeaderClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
-        $this->getPDF()->setFooterClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
     }
 
     /**
