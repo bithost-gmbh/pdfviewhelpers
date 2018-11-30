@@ -96,6 +96,11 @@ class BasePDF extends Fpdi
      */
     protected $currentPageFormat = '';
 
+    /**
+     * @var int
+     */
+    protected $currentTemplateId = 0;
+
     const SCOPE_THIS_PAGE = 'thisPage';
     const SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS = 'thisPageIncludingPageBreaks';
     const SCOPE_DOCUMENT = 'document';
@@ -196,9 +201,14 @@ class BasePDF extends Fpdi
             $this->renderHeader();
         }
 
-        if ($this->importTemplateOnThisPage && $this->tpl !== 0) {
-            $this->useTemplate($this->tpl);
+        if ($this->importTemplateOnThisPage && $this->currentTemplateId) {
+            $this->useTemplate($this->currentTemplateId);
         }
+    }
+
+    public function setCurrentTemplateId($templateId)
+    {
+        $this->currentTemplateId = $templateId;
     }
 
     /**
