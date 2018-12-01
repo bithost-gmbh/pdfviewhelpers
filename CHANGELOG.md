@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.0.2 - December 1, 2018
+- Fixes import page on automatic page break not working, [#99](https://github.com/bithost-gmbh/pdfviewhelpers/issues/99) (Thanks [@liayn](https://github.com/liayn))
+- Updates documentation
+
 ## 2.0.1 - October 18, 2018
 - Fixes a PDF 1.7 compliance issue, [#97](https://github.com/bithost-gmbh/pdfviewhelpers/issues/97)
 - Updates documentation
