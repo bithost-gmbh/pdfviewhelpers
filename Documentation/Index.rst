@@ -59,5 +59,5 @@ PDF ViewHelpers
 	Examples/Index
 	Troubleshooting/Index
 	UpgradeGuides/Index
-	Sponsoring
+	Donate
 	Links

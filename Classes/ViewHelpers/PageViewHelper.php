@@ -75,12 +75,12 @@ class PageViewHelper extends AbstractPDFViewHelper
      */
     public function render()
     {
-        $templateId = -1;
+        $template = '';
         $hasImportedPage = !empty($this->arguments['importPage']);
 
         if ($hasImportedPage) {
             try {
-                $templateId = $this->getPDF()->importPage($this->arguments['importPage']);
+                $template = $this->getPDF()->importPage($this->arguments['importPage']);
             } catch (\Exception $e) {
                 throw new Exception('Could not import page. ' . $e->getMessage() . ' ERROR: 1538067206 ', 1538067206, $e);
             }
@@ -94,7 +94,7 @@ class PageViewHelper extends AbstractPDFViewHelper
         $this->getPDF()->AddPage($this->arguments['orientation'], $this->arguments['format']);
 
         if ($hasImportedPage) {
-            $this->getPDF()->useTemplate($templateId);
+            $this->getPDF()->useTemplate($template);
         }
 
         $this->setPageNeedsHeader(true);
