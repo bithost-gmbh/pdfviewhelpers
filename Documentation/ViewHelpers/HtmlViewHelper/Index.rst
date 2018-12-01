@@ -8,7 +8,7 @@
 HtmlViewHelper
 --------------
 
-Rendering any html content using TCPDF's method writeHTML. The default text settings are those from generalText.
+Rendering any html content using TCPDF's method ``writeHTML``. The default text settings are those from generalText.
 It is possible to include a css style tag and also inline styles. This ViewHelper is especially useful for rendering Rich Text.
 
 **Basic Usage**

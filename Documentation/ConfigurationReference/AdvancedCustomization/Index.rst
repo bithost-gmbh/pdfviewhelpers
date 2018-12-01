@@ -71,10 +71,12 @@ The following example shows a ViewHelper that could be used to render a TCPDF ba
     class BarcodeViewHelper extends AbstractContentElementViewHelper {
         /**
          * @param string $title
+         * @param string $code
+         * @param string $type
          *
          * @return void
          */
-        public function render($title)
+        public function render($title, $code, $type)
         {
             $style = [
                 'position' => '',
@@ -96,7 +98,7 @@ The following example shows a ViewHelper that could be used to render a TCPDF ba
             $this->getPDF()->SetFontSize(12);
             $this->getPDF()->Cell(0, 0, $title, 0, 1);
 
-            $this->getPDF()->write1DBarcode('CODE 39', 'C39', '', '', '', 18, 0.4, $style, 'N');
+            $this->getPDF()->write1DBarcode($code, $type, '', '', '', 18, 0.4, $style, 'N');
         }
     }
 

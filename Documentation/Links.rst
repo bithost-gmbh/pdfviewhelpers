@@ -26,7 +26,7 @@ Links
 :Changelog:
 	https://github.com/bithost-gmbh/pdfviewhelpers/blob/master/CHANGELOG.md
 
-:Sponsoring:
+:Donate:
 	`PayPal <https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGTVWHW8TP8Q4>`__
 
 :Contact:
