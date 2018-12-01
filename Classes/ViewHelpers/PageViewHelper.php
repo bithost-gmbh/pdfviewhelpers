@@ -94,6 +94,7 @@ class PageViewHelper extends AbstractPDFViewHelper
         $this->getPDF()->AddPage($this->arguments['orientation'], $this->arguments['format']);
 
         if ($hasImportedPage) {
+            $this->getPDF()->setCurrentTemplateId($templateId);
             $this->getPDF()->useTemplate($templateId);
         }
 
