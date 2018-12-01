@@ -97,9 +97,9 @@ class BasePDF extends Fpdi
     protected $currentPageFormat = '';
 
     /**
-     * @var int
+     * @var string
      */
-    protected $currentTemplateId = 0;
+    protected $currentTemplate = '';
 
     const SCOPE_THIS_PAGE = 'thisPage';
     const SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS = 'thisPageIncludingPageBreaks';
@@ -201,14 +201,21 @@ class BasePDF extends Fpdi
             $this->renderHeader();
         }
 
-        if ($this->importTemplateOnThisPage && $this->currentTemplateId) {
-            $this->useTemplate($this->currentTemplateId);
+        if ($this->importTemplateOnThisPage && $this->currentTemplate !== '') {
+            $this->useTemplate($this->currentTemplate);
         }
     }
 
-    public function setCurrentTemplateId($templateId)
+    /**
+     * Overwrite useTemplate in order to save currentTemplate that can be used on automatic page breaks
+     *
+     * @inheritdoc
+     */
+    public function useTemplate($template, $x = 0, $y = 0, $width = null, $height = null, $adjustPageSize = false)
     {
-        $this->currentTemplateId = $templateId;
+        $this->currentTemplate = $template;
+
+        parent::useTemplate($template, $x, $y, $width, $height, $adjustPageSize);
     }
 
     /**
