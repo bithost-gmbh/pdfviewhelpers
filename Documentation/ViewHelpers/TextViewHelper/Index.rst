@@ -33,6 +33,7 @@ It is possible to easily define different default styles and apply them using th
 		alignment="right"
 		paragraphSpacing="0"
 		autoHyphenation="1"
+		paragraphLF="1"
 		padding="{top: 1, right: 0, bottom: 0, left: 0}"
 		width="80%"
 		>Title</pdf:text>
