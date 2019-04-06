@@ -31,6 +31,7 @@ It is possible to easily define different default styles and apply them using th
 		characterSpacing="0.2"
 		alignment="right"
 		paragraphSpacing="0"
+		paragraphLineFeed="1"
 		autoHyphenation="1"
 		padding="{top: 1, right: 0, bottom: 0, left: 0}"
 		width="100"

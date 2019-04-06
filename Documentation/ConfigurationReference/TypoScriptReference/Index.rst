@@ -79,6 +79,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	generalText.padding_                           Array                                 {top: 0, right: 0, bottom: 0, left: 0}
 	generalText.alignment_                         :ref:`t3tsref:data-type-string`       left
 	generalText.paragraphSpacing_                  :ref:`t3tsref:data-type-integer`      2
+	generalText.paragraphLineFeed_                 :ref:`t3tsref:data-type-boolean`      0
 	generalText.autoHyphenation_                   :ref:`t3tsref:data-type-boolean`      0
 	text.trim                                      :ref:`t3tsref:data-type-boolean`      *See generalText*
 	text.removeDoubleWhitespace                    :ref:`t3tsref:data-type-boolean`      *See generalText*
@@ -91,6 +92,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	text.padding                                   Array                                 *See generalText*
 	text.alignment                                 :ref:`t3tsref:data-type-string`       *See generalText*
 	text.paragraphSpacing                          :ref:`t3tsref:data-type-integer`      *See generalText*
+	text.paragraphLineFeed                         :ref:`t3tsref:data-type-boolean`      *See generalText*
 	text.autoHyphenation                           :ref:`t3tsref:data-type-boolean`      *See generalText*
 	headline.trim                                  :ref:`t3tsref:data-type-boolean`      *See generalText*
 	headline.removeDoubleWhitespace                :ref:`t3tsref:data-type-boolean`      *See generalText*
@@ -103,6 +105,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	headline.padding                               Array                                 {top: 6, bottom: 3}
 	headline.alignment                             :ref:`t3tsref:data-type-string`       *See generalText*
 	headline.paragraphSpacing                      :ref:`t3tsref:data-type-integer`      *See generalText*
+	headline.paragraphLineFeed                     :ref:`t3tsref:data-type-boolean`      *See generalText*
 	headline.autoHyphenation                       :ref:`t3tsref:data-type-boolean`      *See generalText*
 	list.trim                                      :ref:`t3tsref:data-type-boolean`      *See generalText*
 	list.removeDoubleWhitespace                    :ref:`t3tsref:data-type-boolean`      *See generalText*
@@ -534,6 +537,15 @@ generalText.paragraphSpacing
 :typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.paragraphSpacing =` :ref:`t3tsref:data-type-integer`
 
 Defines the spacing of paragraphs separated by new lines.
+
+.. _generalText.paragraphLineFeed:
+
+generalText.paragraphLineFeed
+""""""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.paragraphLineFeed =` :ref:`t3tsref:data-type-boolean`
+
+Add new lines char after each paragraph (in justified text keeps left align the last line of each paragraph).
 
 .. _generalText.autoHyphenation:
 

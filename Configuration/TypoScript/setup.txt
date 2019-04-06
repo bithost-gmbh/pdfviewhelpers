@@ -73,6 +73,7 @@ plugin.tx_pdfviewhelpers.settings {
 		characterSpacing = 0
 		alignment = left
 		paragraphSpacing = 2
+		paragraphLineFeed = 0
 		autoHyphenation = 0
 		padding {
 			top = 0
@@ -95,6 +96,7 @@ plugin.tx_pdfviewhelpers.settings {
 		characterSpacing =
 		alignment =
 		paragraphSpacing =
+		paragraphLineFeed =
 		autoHyphenation =
 		padding {
 
@@ -114,6 +116,7 @@ plugin.tx_pdfviewhelpers.settings {
 		characterSpacing =
 		alignment =
 		paragraphSpacing = 0
+		paragraphLineFeed =
 		autoHyphenation =
 		padding {
 			top = 6
@@ -132,6 +135,7 @@ plugin.tx_pdfviewhelpers.settings {
 		fontStyle =
 		lineHeight =
 		characterSpacing =
+		paragraphLineFeed =
 		alignment = left
 		autoHyphenation =
 		padding {
