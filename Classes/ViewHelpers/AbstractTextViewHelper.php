@@ -52,6 +52,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         'text',
         'alignment',
         'paragraphSpacing',
+        'paragraphLineFeed',
         'autoHyphenation',
         'lineHeight',
         'characterSpacing',
@@ -82,6 +83,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         $this->registerArgument('alignment', 'string', '', false, null);
         $this->registerArgument('paragraphSpacing', 'float', '', false, null);
         $this->registerArgument('autoHyphenation', 'boolean', '', false, null);
+        $this->registerArgument('paragraphLineFeed', 'boolean', '', false, null);
         $this->registerArgument('type', 'string', '', false, null);
     }
 
@@ -161,6 +163,10 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         foreach ($paragraphs as $paragraph) {
             if ($this->arguments['trim']) {
                 $paragraph = trim($paragraph);
+            }
+
+            if ($this->arguments['paragraphLineFeed']) {
+                $paragraph .= "\n";
             }
 
             $this->getPDF()->MultiCell($this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), false, 1, $this->arguments['posX'], $posY, true, 0, false, true, 0, 'T', false);
