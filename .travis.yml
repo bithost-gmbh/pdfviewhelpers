@@ -10,7 +10,7 @@ matrix:
     - php: 7.0
       env: TYPO3_VERSION=^7
     - php: 7.1
-      env: TYPO3_VERSION=^8
+      env: TYPO3_VERSION=^8 COVERAGE="YES"
     - php: 7.2
       env: TYPO3_VERSION=^9
 
@@ -27,11 +27,13 @@ before_script:
 script:
   - phpcs -n --standard=PSR2 Classes/
   - >
-    .Build/bin/phpunit --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/
+    if [[ "$COVERAGE" == "YES" ]]; then  .Build/bin/phpunit --whitelist Classes/ --coverage-clover=build/logs/clover.xml --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/; else .Build/bin/phpunit --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/; fi
   - >
     export typo3DatabaseName="typo3";
     export typo3DatabaseHost="localhost";
     export typo3DatabaseUsername="root";
     export typo3DatabasePassword="";
-    .Build/bin/phpunit --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml Tests/Functional
+    if [[ "$COVERAGE" == "YES" ]]; then  .Build/bin/phpunit --whitelist Classes/ --coverage-clover=build/logs/clover.xml --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml Tests/Functional; else .Build/bin/phpunit --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml Tests/Functional; fi
 
+after_script:
+  - if [[ "$COVERAGE" == "YES" ]]; then .Build/bin/php-coveralls -v; fi
