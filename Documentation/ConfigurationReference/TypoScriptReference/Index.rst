@@ -123,6 +123,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	list.autoHyphenation                           :ref:`t3tsref:data-type-boolean`      *See generalText*
 	image.alignment_                               :ref:`t3tsref:data-type-string`       left
 	image.padding_                                 Array                                 {bottom: 2}
+	image.processingInstructions_                  Array                                 {}
 	html.autoHyphenation                           :ref:`t3tsref:data-type-boolean`      *See generalText*
 	html.styleSheet_                               :ref:`t3tsref:data-type-string`
 	html.padding_                                  Array                                 {top: 0, right: 0, bottom: 2, left: 0}
@@ -601,6 +602,29 @@ image.padding
 :typoscript:`plugin.tx_pdfviewhelpers.settings.image.padding =` Array
 
 The padding around the image.
+
+.. _image.processingInstructions:
+
+image.processingInstructions
+""""""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.image.processingInstructions =` Array
+
+An array of processing instructions that is passed to the method ``ImageService->applyProcessingInstructions``. A possible configuration looks like this:
+
+::
+
+	processingInstructions {
+		width =
+		height =
+		maxHeight =
+		minWidth =
+		maxWidth = 200
+		minHeight =
+		crop =
+		cropVariant =
+	}
+
 
 .. _html.styleSheet:
 

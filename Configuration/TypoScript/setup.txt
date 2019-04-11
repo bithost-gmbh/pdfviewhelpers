@@ -157,6 +157,16 @@ plugin.tx_pdfviewhelpers.settings {
 			bottom = 2
 			left = 0
 		}
+		processingInstructions {
+#			width =
+#			height =
+#			maxWidth =
+#			maxHeight =
+#			minWidth =
+#			minHeight =
+#			crop =
+#			cropVariant =
+		}
 	}
 	html {
 		autoHyphenation =
