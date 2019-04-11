@@ -29,6 +29,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use TYPO3\CMS\Extbase\Service\ImageService;
 
 /**
  * ImageViewHelper
@@ -37,6 +38,19 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
  */
 class ImageViewHelper extends AbstractContentElementViewHelper
 {
+    /**
+     * @var ImageService
+     */
+    protected $imageService;
+
+    /**
+     * @param ImageService $imageService
+     */
+    public function injectImageService(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
+
     /**
      * @return void
      */
@@ -48,6 +62,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
         $this->registerArgument('link', 'string', '', false, null);
         $this->registerArgument('alignment', 'string', '', false, $this->settings['image']['alignment']);
         $this->registerArgument('padding', 'array', '', false, []);
+        $this->registerArgument('processingInstructions', 'array', '', false, $this->settings['image']['processingInstructions']);
     }
 
     /**
@@ -73,8 +88,14 @@ class ImageViewHelper extends AbstractContentElementViewHelper
         $this->initializeMultiColumnSupport();
 
         $imageFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['src']);
-        $src = '@' . $imageFile->getContents();
-        $extension = $imageFile->getExtension();
+        $processedImage = $imageFile;
+
+        if (!empty($this->arguments['processingInstructions'])) {
+            $processedImage = $this->imageService->applyProcessingInstructions($imageFile, $this->arguments['processingInstructions']);
+        }
+
+        $src = '@' . $processedImage->getContents();
+        $extension = $processedImage->getExtension();
 
         $multiColumnContext = $this->getCurrentMultiColumnContext();
         $isInAColumn = is_array($multiColumnContext) && $multiColumnContext['isInAColumn'];
