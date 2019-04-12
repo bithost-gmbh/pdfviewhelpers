@@ -3,6 +3,7 @@
 ## 2.1.0 - Not yet released
 - Adds paragraph line feed to textual ViewHelpers, [#107](https://github.com/bithost-gmbh/pdfviewhelpers/issues/107) (Thanks [@emmemme](https://github.com/emmemme))
 - Adds image processing to ImageViewHelper
+- Updates documentation
 
 ## 2.0.2 - December 1, 2018
 - Fixes import page on automatic page break not working, [#99](https://github.com/bithost-gmbh/pdfviewhelpers/issues/99) (Thanks [@liayn](https://github.com/liayn))
