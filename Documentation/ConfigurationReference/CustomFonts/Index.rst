@@ -43,3 +43,9 @@ TCPDF fonts
 """""""""""
 
 TCPDF comes already with the following fonts installed: ``courier``, ``helvetica``, ``symbol``, ``times`` and ``zapfdingbats``
+
+
+Limitations
+"""""""""""
+
+TCPDF does not support ``OpenType`` fonts with CFF data. If your font can not be added, please try to convert it to ``TTF``, there are a couple of free online converters available.
