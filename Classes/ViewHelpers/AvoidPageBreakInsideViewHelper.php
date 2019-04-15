@@ -46,7 +46,7 @@ class AvoidPageBreakInsideViewHelper extends AbstractPDFViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('breakIfImpossibleToAvoid', 'boolean', '', false, $this->settings['avoidPageBreakInside']['breakIfImpossibleToAvoid']);
+        $this->registerArgument('breakIfImpossibleToAvoid', 'boolean', 'If true a line break is inserted even if a page break is not avoidable.', false, $this->settings['avoidPageBreakInside']['breakIfImpossibleToAvoid']);
     }
 
     /**

@@ -58,11 +58,11 @@ class ImageViewHelper extends AbstractContentElementViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('src', 'mixed', '', true, null);
-        $this->registerArgument('link', 'string', '', false, null);
-        $this->registerArgument('alignment', 'string', '', false, $this->settings['image']['alignment']);
-        $this->registerArgument('padding', 'array', '', false, []);
-        $this->registerArgument('processingInstructions', 'array', '', false, $this->settings['image']['processingInstructions']);
+        $this->registerArgument('src', 'mixed', 'The source of the image, can be a TYPO3 path, a File or FileReference object.', true, null);
+        $this->registerArgument('link', 'string', 'The link added to the image.', false, null);
+        $this->registerArgument('alignment', 'string', 'The alignment of the image if it does not fill up the full width.', false, $this->settings['image']['alignment']);
+        $this->registerArgument('padding', 'array', 'The image padding given as array.', false, []);
+        $this->registerArgument('processingInstructions', 'array', 'The processing instructions applied to the image.', false, $this->settings['image']['processingInstructions']);
     }
 
     /**

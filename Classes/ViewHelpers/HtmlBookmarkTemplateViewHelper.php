@@ -42,8 +42,8 @@ class HtmlBookmarkTemplateViewHelper extends AbstractPDFViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('level', 'integer', '', false, $this->settings['htmlBookmarkTemplate']['level']);
-        $this->registerArgument('sanitizeWhitespace', 'boolean', '', false, $this->settings['htmlBookmarkTemplate']['sanitizeWhitespace']);
+        $this->registerArgument('level', 'integer', 'The table of content level this HTML template applies to.', false, $this->settings['htmlBookmarkTemplate']['level']);
+        $this->registerArgument('sanitizeWhitespace', 'boolean', 'If true the input will be trimmed and whitespaces between HTML tags will be removed.', false, $this->settings['htmlBookmarkTemplate']['sanitizeWhitespace']);
     }
 
     /**

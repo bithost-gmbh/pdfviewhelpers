@@ -44,16 +44,16 @@ class TableOfContentViewHelper extends AbstractPDFViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('page', 'integer', '', false, $this->settings['tableOfContent']['page']);
-        $this->registerArgument('numbersFont', 'string', '', false, $this->settings['tableOfContent']['numbersFont']);
-        $this->registerArgument('filter', 'string', '', false, $this->settings['tableOfContent']['filter']);
-        $this->registerArgument('name', 'string', '', false, $this->settings['tableOfContent']['name']);
-        $this->registerArgument('htmlMode', 'boolean', '', false, $this->settings['tableOfContent']['htmlMode']);
-        $this->registerArgument('fontFamily', 'string', '', false, $this->settings['tableOfContent']['fontFamily']);
-        $this->registerArgument('fontSize', 'integer', '', false, $this->settings['tableOfContent']['fontSize']);
-        $this->registerArgument('lineHeight', 'float', '', false, $this->settings['tableOfContent']['lineHeight']);
-        $this->registerArgument('characterSpacing', 'float', '', false, $this->settings['tableOfContent']['characterSpacing']);
-        $this->registerArgument('padding', 'array', '', false, []);
+        $this->registerArgument('page', 'integer', 'Indicates at what place in the document the table of content will be rendered.', false, $this->settings['tableOfContent']['page']);
+        $this->registerArgument('numbersFont', 'string', 'The font used to render the numbers. Note that a monospaced font must be used in order to guarantee correct alignment.', false, $this->settings['tableOfContent']['numbersFont']);
+        $this->registerArgument('filter', 'string', 'The filter used to fill up the space between the entry title and the page number.', false, $this->settings['tableOfContent']['filter']);
+        $this->registerArgument('name', 'string', 'The name used for the table of content bookmark.', false, $this->settings['tableOfContent']['name']);
+        $this->registerArgument('htmlMode', 'boolean', 'If true HTML mode is used.', false, $this->settings['tableOfContent']['htmlMode']);
+        $this->registerArgument('fontFamily', 'string', 'The font family for the entries.', false, $this->settings['tableOfContent']['fontFamily']);
+        $this->registerArgument('fontSize', 'integer', 'The font size for the entries.', false, $this->settings['tableOfContent']['fontSize']);
+        $this->registerArgument('lineHeight', 'float', 'The line height for the entries.', false, $this->settings['tableOfContent']['lineHeight']);
+        $this->registerArgument('characterSpacing', 'float', 'The character spacing for the entries.', false, $this->settings['tableOfContent']['characterSpacing']);
+        $this->registerArgument('padding', 'array', 'The padding for the entries.', false, []);
     }
 
     public function initialize()

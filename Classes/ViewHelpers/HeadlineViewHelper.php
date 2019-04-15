@@ -53,8 +53,8 @@ class HeadlineViewHelper extends AbstractTextViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('addToTableOfContent', 'boolean', '', false, $this->settings['headline']['addToTableOfContent']);
-        $this->registerArgument('tableOfContentLevel', 'integer', '', false, $this->settings['headline']['tableOfContentLevel']);
+        $this->registerArgument('addToTableOfContent', 'boolean', 'If true this headline is added to the table of content.', false, $this->settings['headline']['addToTableOfContent']);
+        $this->registerArgument('tableOfContentLevel', 'integer', 'The level this headline is added to in the table of content.', false, $this->settings['headline']['tableOfContentLevel']);
     }
 
     /**

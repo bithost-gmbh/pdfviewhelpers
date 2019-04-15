@@ -44,7 +44,7 @@ class GetPosXViewHelper extends AbstractPDFViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('absolute', 'boolean', '', false, false);
+        $this->registerArgument('absolute', 'boolean', 'If true absolute value is returned.', false, false);
     }
 
     /**

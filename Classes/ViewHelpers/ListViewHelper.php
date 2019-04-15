@@ -45,10 +45,10 @@ class ListViewHelper extends AbstractTextViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('listElements', 'array', '', true, null);
-        $this->registerArgument('bulletColor', 'string', '', false, $this->settings['list']['bulletColor']);
-        $this->registerArgument('bulletImageSrc', 'string', '', false, $this->settings['list']['bulletImageSrc']);
-        $this->registerArgument('bulletSize', 'integer', '', false, $this->settings['list']['bulletSize']);
+        $this->registerArgument('listElements', 'array', 'A one dimensional array of list elements.', true, null);
+        $this->registerArgument('bulletColor', 'string', 'The color of the bullet.', false, $this->settings['list']['bulletColor']);
+        $this->registerArgument('bulletImageSrc', 'string', 'An image to be used alternatively to the square bullet.', false, $this->settings['list']['bulletImageSrc']);
+        $this->registerArgument('bulletSize', 'integer', 'The size of the bullet.', false, $this->settings['list']['bulletSize']);
     }
 
     /**

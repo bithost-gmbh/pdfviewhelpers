@@ -45,10 +45,10 @@ class BookmarkViewHelper extends AbstractPDFViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('text', 'string', '', false, '');
-        $this->registerArgument('level', 'integer', '', false, $this->settings['bookmark']['level']);
-        $this->registerArgument('fontStyle', 'string', '', false, $this->settings['bookmark']['fontStyle']);
-        $this->registerArgument('color', 'string', '', false, $this->settings['bookmark']['color']);
+        $this->registerArgument('text', 'string', 'The text of the bookmark.', false, '');
+        $this->registerArgument('level', 'integer', 'The level of the table of content the bookmark is added to.', false, $this->settings['bookmark']['level']);
+        $this->registerArgument('fontStyle', 'string', 'The font style of this bookmark.', false, $this->settings['bookmark']['fontStyle']);
+        $this->registerArgument('color', 'string', 'The color of this bookmark.', false, $this->settings['bookmark']['color']);
     }
 
     /**

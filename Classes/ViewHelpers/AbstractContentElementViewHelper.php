@@ -44,10 +44,10 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('posX', 'float', '', false, null);
-        $this->registerArgument('posY', 'float', '', false, null);
-        $this->registerArgument('width', 'string', '', false, null);
-        $this->registerArgument('height', 'float', '', false, null);
+        $this->registerArgument('posX', 'float', 'Absolute posX of the element on the current page.', false, null);
+        $this->registerArgument('posY', 'float', 'Absolute posY of the element on the current page.', false, null);
+        $this->registerArgument('width', 'string', 'Width of the current element in the set unit.', false, null);
+        $this->registerArgument('height', 'float', 'Height of the current element in the set unit.', false, null);
     }
 
     /**

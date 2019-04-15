@@ -44,8 +44,8 @@ class ColumnViewHelper extends AbstractPDFViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('width', 'string', '', false, null);
-        $this->registerArgument('padding', 'array', '', false, []);
+        $this->registerArgument('width', 'string', 'The width of this column in the current unit or percentage.', false, null);
+        $this->registerArgument('padding', 'array', 'The padding of this column given as array.', false, []);
     }
 
     /**

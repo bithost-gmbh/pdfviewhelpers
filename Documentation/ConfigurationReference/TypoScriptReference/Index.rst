@@ -137,6 +137,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	tableOfContent.numbersFont_                    :ref:`t3tsref:data-type-string`
 	tableOfContent.filter_                         :ref:`t3tsref:data-type-string`       .
 	tableOfContent.name_                           :ref:`t3tsref:data-type-string`
+	tableOfContent.htmlMode_                       :ref:`t3tsref:data-type-boolean`      0
 	tableOfContent.fontFamily_                     :ref:`t3tsref:data-type-string`
 	tableOfContent.fontSize_                       :ref:`t3tsref:data-type-float`
 	tableOfContent.lineHeight_                     :ref:`t3tsref:data-type-float`
@@ -751,6 +752,15 @@ tableOfContent.name
 :typoscript:`plugin.tx_pdfviewhelpers.settings.tableOfContent.name =` :ref:`t3tsref:data-type-string`
 
 The name used for the table of content bookmark.
+
+.. _tableOfContent.htmlMode:
+
+tableOfContent.htmlMode
+"""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.tableOfContent.htmlMode =` :ref:`t3tsref:data-type-boolean`
+
+If true the table of content is rendered in HTML mode.
 
 .. _tableOfContent.fontFamily:
 

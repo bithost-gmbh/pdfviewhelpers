@@ -201,6 +201,7 @@ plugin.tx_pdfviewhelpers.settings {
 		numbersFont =
 		filter = .
 		name =
+		htmlMode = 0
 		fontFamily =
 		fontSize =
 		lineHeight =
