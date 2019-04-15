@@ -119,6 +119,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	list.fontStyle                                 :ref:`t3tsref:data-type-string`       *See generalText*
 	list.lineHeight                                :ref:`t3tsref:data-type-float`        *See generalText*
 	list.characterSpacing                          :ref:`t3tsref:data-type-float`        *See generalText*
+	list.paragraphLineFeed                         :ref:`t3tsref:data-type-boolean`      *See generalText*
 	list.padding                                   Array                                 {bottom: 2, left: 1.5}
 	list.alignment                                 :ref:`t3tsref:data-type-string`       left
 	list.bulletColor_                              :ref:`t3tsref:data-type-string`       #000

@@ -121,6 +121,10 @@ class ListViewHelper extends AbstractTextViewHelper
             $elementStartPage = $this->getPDF()->getPage();
             $elementStartY = $this->getPDF()->getY();
 
+            if ($this->arguments['paragraphLineFeed']) {
+                $listElement .= "\n";
+            }
+
             $this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), false, 1, $textPosX, null, true, 0, false, true, 0, 'T', false);
 
             $elementEndPage = $this->getPDF()->getPage();
