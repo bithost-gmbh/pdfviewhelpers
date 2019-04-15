@@ -65,6 +65,8 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	page.importPageOnAutomaticPageBreak_           :ref:`t3tsref:data-type-boolean`      1
 	page.orientation_                              :ref:`t3tsref:data-type-string`       portrait
 	page.format_                                   :ref:`t3tsref:data-type-string`       A4
+	page.keepMargins_                              :ref:`t3tsref:data-type-boolean`      0
+	page.tableOfContentPage_                       :ref:`t3tsref:data-type-boolean`      0
 	header.posY_                                   :ref:`t3tsref:data-type-integer`      5
 	footer.posY_                                   :ref:`t3tsref:data-type-integer`      -10
 	avoidPageBreakInside.breakIfImpossibleToAvoid_ :ref:`t3tsref:data-type-boolean`      0
@@ -107,6 +109,8 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	headline.paragraphSpacing                      :ref:`t3tsref:data-type-integer`      *See generalText*
 	headline.paragraphLineFeed                     :ref:`t3tsref:data-type-boolean`      *See generalText*
 	headline.autoHyphenation                       :ref:`t3tsref:data-type-boolean`      *See generalText*
+	headline.addToTableOfContent                   :ref:`t3tsref:data-type-boolean`      1
+	headline.tableOfContentLevel                   :ref:`t3tsref:data-type-integer`      0
 	list.trim                                      :ref:`t3tsref:data-type-boolean`      *See generalText*
 	list.removeDoubleWhitespace                    :ref:`t3tsref:data-type-boolean`      *See generalText*
 	list.color                                     :ref:`t3tsref:data-type-string`       *See generalText*
@@ -129,6 +133,20 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	html.padding_                                  Array                                 {top: 0, right: 0, bottom: 2, left: 0}
 	graphics.line.padding_                         Array                                 {top: 4, right: 0, bottom: 5, left: 0}
 	graphics.line.style_                           Array                                 {width: 0.25, color: #000}
+	tableOfContent.page_                           :ref:`t3tsref:data-type-integer`      1
+	tableOfContent.numbersFont_                    :ref:`t3tsref:data-type-string`
+	tableOfContent.filter_                         :ref:`t3tsref:data-type-string`       .
+	tableOfContent.name_                           :ref:`t3tsref:data-type-string`
+	tableOfContent.fontFamily_                     :ref:`t3tsref:data-type-string`
+	tableOfContent.fontSize_                       :ref:`t3tsref:data-type-float`
+	tableOfContent.lineHeight_                     :ref:`t3tsref:data-type-float`
+	tableOfContent.characterSpacing_               :ref:`t3tsref:data-type-float`
+	tableOfContent.padding_                        Array                                 {bottom: 2}
+	htmlBookmarkTemplate.level_                    :ref:`t3tsref:data-type-integer`      0
+	htmlBookmarkTemplate.sanitizeWhitespace_       :ref:`t3tsref:data-type-boolean`      1
+	bookmark.level_                                :ref:`t3tsref:data-type-integer`      0
+	bookmark.fontStyle_                            :ref:`t3tsref:data-type-string`
+	bookmark.color_                                :ref:`t3tsref:data-type-string`
 	============================================== ===================================== ==========================================
 
 
@@ -411,7 +429,25 @@ page.format
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.page.format =` :ref:`t3tsref:data-type-string`
 
-Defines the format of the current page. Possible values are e.g. ``A0`` - ``A12``, to see all possible values you have to check ``\TCPDF_STATIC::$page_formats``
+Defines the format of the current page. Possible values are e.g. ``A0`` - ``A12``, to see all possible values you have to check ``\TCPDF_STATIC::$page_formats``.
+
+.. _page.keepMargins:
+
+page.keepMargins
+""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.page.keepMargins =` :ref:`t3tsref:data-type-string`
+
+If true overwrites the default page margins with the current margins.
+
+.. _page.tableOfContentPage:
+
+page.tableOfContentPage
+"""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.page.tableOfContentPage =` :ref:`t3tsref:data-type-string`
+
+If true the page will be rendered as a table of content page, e.g. it can be moved to the front.
 
 .. _header.posY:
 
@@ -558,6 +594,24 @@ generalText.autoHyphenation
 A boolean value indicating whether to use TCPDF's automatic hyphenation or not. You can also add soft hyphens yourself to your text with "&shy;".
 If you use automatic hyphenation please make sure that you configure "config.hyphenFile" to match your language.
 
+.. _headline.addToTableOfContent:
+
+headline.addToTableOfContent
+""""""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.addToTableOfContent =` :ref:`t3tsref:data-type-boolean`
+
+If true the headline will be added to the table of content.
+
+.. _headline.tableOfContentLevel:
+
+headline.tableOfContentLevel
+""""""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.tableOfContentLevel =` :ref:`t3tsref:data-type-integer`
+
+Indicating the level of the headline in the table of content. Starting from ``0`` as top level, ``1`` for second, ``2`` for third level and so on.
+
 .. _list.bulletColor:
 
 list.bulletColor
@@ -661,3 +715,129 @@ graphics.line.style
 :typoscript:`plugin.tx_pdfviewhelpers.settings.graphics.line.style =` Array
 
 An array defining line styles, please see the https://tcpdf.org/examples/example_012/ for all possible values.
+
+.. _tableOfContent.page:
+
+tableOfContent.page
+"""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.tableOfContent.page =` :ref:`t3tsref:data-type-integer`
+
+Indicates at what place in the document the table of content will be rendered.
+
+.. _tableOfContent.numbersFont:
+
+tableOfContent.numbersFont
+""""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.tableOfContent.numbersFont =` :ref:`t3tsref:data-type-string`
+
+The font used to render the numbers. Note that a monospaced font must be used in order to guarantee correct alignment.
+
+.. _tableOfContent.filter:
+
+tableOfContent.filter
+"""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.tableOfContent.filter =` :ref:`t3tsref:data-type-string`
+
+The filter used to fill up the space between the entry title and the page number.
+
+.. _tableOfContent.name:
+
+tableOfContent.name
+"""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.tableOfContent.name =` :ref:`t3tsref:data-type-string`
+
+The name used for the table of content bookmark.
+
+.. _tableOfContent.fontFamily:
+
+tableOfContent.fontFamily
+"""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.tableOfContent.fontFamily =` :ref:`t3tsref:data-type-string`
+
+The ``fontFamily`` for the entries. Also see *See generalText*.
+
+.. _tableOfContent.fontSize:
+
+tableOfContent.fontSize
+"""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.tableOfContent.fontSize =` :ref:`t3tsref:data-type-float`
+
+The ``fontSize`` of the top most level. Also see *See generalText*.
+
+.. _tableOfContent.lineHeight:
+
+tableOfContent.lineHeight
+"""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.tableOfContent.lineHeight =` :ref:`t3tsref:data-type-float`
+
+The ``lineHeight`` used for the table content entries. Also see *See generalText*.
+
+.. _tableOfContent.characterSpacing:
+
+tableOfContent.characterSpacing
+"""""""""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.tableOfContent.characterSpacing =` :ref:`t3tsref:data-type-float`
+
+The ``characterSpacing`` used for the table content entries. Also see *See generalText*.
+
+.. _tableOfContent.padding:
+
+tableOfContent.padding
+""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.tableOfContent.padding =` Array
+
+The cell ``padding`` used for the table content entries.
+
+.. _htmlBookmarkTemplate.level:
+
+htmlBookmarkTemplate.level
+""""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.htmlBookmarkTemplate.level =` :ref:`t3tsref:data-type-integer`
+
+The bookmark entry level to which the HTML template should apply.
+
+.. _htmlBookmarkTemplate.sanitizeWhitespace:
+
+htmlBookmarkTemplate.sanitizeWhitespace
+"""""""""""""""""""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.htmlBookmarkTemplate.sanitizeWhitespace =` :ref:`t3tsref:data-type-boolean`
+
+If true the input will be trimmed and whitespaces between HTML tags will be removed.
+
+.. _bookmark.level:
+
+bookmark.level
+""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.bookmark.level =` :ref:`t3tsref:data-type-boolean`
+
+The table of content level for the bookmark.
+
+.. _bookmark.fontStyle:
+
+bookmark.fontStyle
+""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.bookmark.fontStyle =` :ref:`t3tsref:data-type-boolean`
+
+The ``fontStyle`` this individual bookmark. Also see *See generalText*.
+
+.. _bookmark.color:
+
+bookmark.color
+""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.bookmark.fontStyle =` :ref:`t3tsref:data-type-boolean`
+
+The ``fontStyle`` this individual bookmark. Also see *See generalText*.

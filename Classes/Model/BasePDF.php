@@ -189,9 +189,9 @@ class BasePDF extends Fpdi
     /**
      * @inheritdoc
      */
-    public function AddPage($orientation = '', $format = '', $rotationOrKeepmargins = false, $tocpage = false) // phpcs:ignore
+    public function AddPage($orientation = '', $format = '', $keepmargins = false, $tocpage = false) // phpcs:ignore
     {
-        parent::AddPage($orientation, $format, $rotationOrKeepmargins, $tocpage);
+        parent::AddPage($orientation, $format, $keepmargins, $tocpage);
 
         if ($this->isAutoPageBreak) {
             if ($this->pageHeaderScope === self::SCOPE_THIS_PAGE) {

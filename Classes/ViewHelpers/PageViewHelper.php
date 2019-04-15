@@ -51,6 +51,8 @@ class PageViewHelper extends AbstractPDFViewHelper
         $this->registerArgument('importPageOnAutomaticPageBreak', 'boolean', '', false, $this->settings['page']['importPageOnAutomaticPageBreak']);
         $this->registerArgument('orientation', 'string', '', false, $this->settings['page']['orientation']);
         $this->registerArgument('format', 'string', '', false, $this->settings['page']['format']);
+        $this->registerArgument('keepMargins', 'boolean', '', false, $this->settings['page']['keepMargins']);
+        $this->registerArgument('tableOfContentPage', 'boolean', '', false, $this->settings['page']['tableOfContentPage']);
     }
 
     /**
@@ -91,7 +93,7 @@ class PageViewHelper extends AbstractPDFViewHelper
         $this->getPDF()->SetMargins($this->arguments['margin']['left'], $this->arguments['margin']['top'], $this->arguments['margin']['right']);
         $this->getPDF()->SetAutoPageBreak($this->arguments['autoPageBreak'], $this->arguments['margin']['bottom']);
 
-        $this->getPDF()->AddPage($this->arguments['orientation'], $this->arguments['format']);
+        $this->getPDF()->AddPage($this->arguments['orientation'], $this->arguments['format'], $this->arguments['keepMargins'], $this->arguments['tableOfContentPage']);
 
         if ($hasImportedPage) {
             $this->getPDF()->useTemplate($template);
@@ -109,6 +111,10 @@ class PageViewHelper extends AbstractPDFViewHelper
             //no auto page break occurred or no element was rendered, we still need to set the header
             $this->setPageNeedsHeader(false);
             $this->getPDF()->renderHeader();
+        }
+
+        if ($this->arguments['tableOfContentPage']) {
+            $this->getPDF()->endTOCPage();
         }
 
         //reset default header and footer scope to document

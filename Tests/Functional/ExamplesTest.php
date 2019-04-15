@@ -118,4 +118,52 @@ class ExamplesTest extends AbstractFunctionalTest
         //$actualHash = sha1($output);
         //$this->assertEquals($expectedHash, $actualHash);
     }
+
+    /**
+     * @test
+     */
+    public function testTableOfContent()
+    {
+        $this->setUpPage([$this->getFixturePath('Examples/TableOfContent.txt')]);
+
+        $output = $this->renderFluidTemplate($this->getFixturePath('Examples/TableOfContent.html'));
+        $pdf = $this->parseContent($output);
+        $pages = $pdf->getPages();
+
+        $this->assertCount(5, $pages);
+
+        $this->assertContains('HTML Table of content', $pages[0]->getText());
+        $this->assertContains('html-table-of-content-header', $pages[0]->getText());
+        $this->assertContains('html-table-of-content-footer', $pages[0]->getText());
+        $this->assertContains('LEVEL 0: Headline page 1', $pages[0]->getText());
+        $this->assertContains('LEVEL 0: Headline page 2', $pages[0]->getText());
+        $this->assertContains('LEVEL 1: Headline page 2, level 1', $pages[0]->getText());
+        $this->assertContains('LEVEL 0: Adding custom styled bookmark for a text', $pages[0]->getText());
+        $this->assertContains('LEVEL 0: Adding custom styled ADVANCED bookmark for a text', $pages[0]->getText());
+        $this->assertNotContains('Headline not in table of content', $pages[0]->getText());
+
+        $this->assertContains('Regular table of content', $pages[1]->getText());
+        $this->assertContains('regular-table-of-content-header', $pages[1]->getText());
+        $this->assertContains('regular-table-of-content-footer', $pages[1]->getText());
+        $this->assertContains('Headline page 1', $pages[1]->getText());
+        $this->assertContains('Headline page 2', $pages[1]->getText());
+        $this->assertContains('Headline page 2, level 1', $pages[1]->getText());
+        $this->assertContains('Adding custom styled bookmark for a text', $pages[1]->getText());
+        $this->assertContains('Adding custom styled ADVANCED bookmark for a text', $pages[1]->getText());
+        $this->assertNotContains('LEVEL 0', $pages[1]->getText());
+        $this->assertNotContains('LEVEL 1', $pages[1]->getText());
+        $this->assertNotContains('Headline not in table of content', $pages[1]->getText());
+
+        $this->assertContains('Headline page 1', $pages[2]->getText());
+        $this->assertContains('General Header', $pages[2]->getText());
+        $this->assertContains('General Footer', $pages[2]->getText());
+
+        $this->assertContains('Headline page 2', $pages[3]->getText());
+        $this->assertContains('Headline page 2, level 1', $pages[3]->getText());
+        $this->assertContains('Headline page 2, level 2', $pages[3]->getText());
+
+        $this->assertContains('Headline not in table of content', $pages[4]->getText());
+        $this->assertContains('Here is some text', $pages[4]->getText());
+        $this->assertContains('Headline not in table of content', $pages[4]->getText());
+    }
 }

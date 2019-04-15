@@ -160,6 +160,9 @@ class ConversionService implements SingletonInterface
             case 'regular':
             case 'R':
                 return '';
+            case 'bold-italic':
+            case 'BI':
+                return 'BI';
             default:
                 throw new ValidationException('Invalid font style "' . $fontStyle . '" provided. ERROR: 1536238089', 1536238089);
         }

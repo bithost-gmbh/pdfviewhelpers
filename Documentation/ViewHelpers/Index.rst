@@ -29,3 +29,5 @@ For detailed information about the ViewHelper attributes please refer to the Con
 	GraphicsLineViewHelper/Index
 	GetPageNumberViewHelper/Index
 	GetPosViewHelper/Index
+	TableOfContentViewHelper/Index
+	BookmarkViewHelper/Index

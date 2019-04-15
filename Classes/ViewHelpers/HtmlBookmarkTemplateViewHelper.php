@@ -28,24 +28,13 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Exception\Exception;
-
 /**
- * HeadlineViewHelper
+ * HtmlBookmarkTemplateViewHelper
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class HeadlineViewHelper extends AbstractTextViewHelper
+class HtmlBookmarkTemplateViewHelper extends AbstractPDFViewHelper
 {
-    /**
-     * @return string
-     */
-    protected function getSettingsKey()
-    {
-        return 'headline';
-    }
-
-
     /**
      * @return void
      */
@@ -53,28 +42,25 @@ class HeadlineViewHelper extends AbstractTextViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('addToTableOfContent', 'boolean', '', false, $this->settings['headline']['addToTableOfContent']);
-        $this->registerArgument('tableOfContentLevel', 'integer', '', false, $this->settings['headline']['tableOfContentLevel']);
+        $this->registerArgument('level', 'integer', '', false, $this->settings['htmlBookmarkTemplate']['level']);
+        $this->registerArgument('sanitizeWhitespace', 'boolean', '', false, $this->settings['htmlBookmarkTemplate']['sanitizeWhitespace']);
     }
 
     /**
      * @return void
-     *
-     * @throws Exception
      */
-    public function initialize()
+    public function render()
     {
-        parent::initialize();
+        $bookmarkTemplates = $this->viewHelperVariableContainer->get('TableOfContentViewHelper', 'bookmarkTemplates');
+        $template = $this->renderChildren();
 
-        if ($this->arguments['addToTableOfContent']) {
-            $this->getPDF()->Bookmark(
-                $this->arguments['text'],
-                $this->arguments['tableOfContentLevel'],
-                -1,
-                '',
-                '',
-                $this->arguments['color']
-            );
+        if ($this->arguments['sanitizeWhitespace']) {
+            $template = trim($template);
+            $template = preg_replace('/(\>)\s*(\<)/m', '$1$2', $template);
         }
+
+        $bookmarkTemplates[$this->arguments['level']] = $template;
+
+        $this->viewHelperVariableContainer->addOrUpdate('TableOfContentViewHelper', 'bookmarkTemplates', $bookmarkTemplates);
     }
 }

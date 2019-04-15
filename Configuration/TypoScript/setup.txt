@@ -52,6 +52,8 @@ plugin.tx_pdfviewhelpers.settings {
 		importPageOnAutomaticPageBreak = 1
 		orientation = portrait
 		format = A4
+		keepMargins = 0
+		tableOfContentPage = 0
 	}
 	header {
 		posY = 5
@@ -118,6 +120,8 @@ plugin.tx_pdfviewhelpers.settings {
 		paragraphSpacing = 0
 		paragraphLineFeed =
 		autoHyphenation =
+		addToTableOfContent = 1
+		tableOfContentLevel = 0
 		padding {
 			top = 6
 			bottom = 3
@@ -191,6 +195,31 @@ plugin.tx_pdfviewhelpers.settings {
 				color = #000
 			}
 		}
+	}
+	tableOfContent {
+		page = 1
+		numbersFont =
+		filter = .
+		name =
+		fontFamily =
+		fontSize =
+		lineHeight =
+		characterSpacing =
+		padding {
+			top = 0
+			right = 0
+			bottom = 2
+			left = 0
+		}
+	}
+	htmlBookmarkTemplate {
+		level = 0
+		sanitizeWhitespace = 1
+	}
+	bookmark {
+		level = 0
+		fontStyle =
+		color =
 	}
 }
 
