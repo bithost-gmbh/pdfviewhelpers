@@ -69,3 +69,24 @@ Also ensure you have disabled all html header output:
 			admPanel = 0
 		}
 	}
+
+
+pdfviewhelpers can not be installed via TER
+"""""""""""""""""""""""""""""""""""""""""""
+
+The extension ``pdfviewhelpers`` is quite big compared to other extensions, as it ships with the entire ``TCPDF`` in order to be easily installable via TER.
+The size ``EXT:pdfviewhelpers`` might be an issue if your ``memory_limit`` or ``max_execution_time`` is quite low, try increasing these values.
+
+*PHP*
+
+::
+
+	ini_set('max_execution_time', 300);
+	ini_set('memory_limit', '512M');
+
+*php.ini*
+
+::
+
+	max_execution_time = 300
+	memory_limit = 512M
