@@ -71,20 +71,20 @@ class DocumentViewHelper extends AbstractPDFViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('title', 'string', '', false, $this->settings['document']['title']);
-        $this->registerArgument('subject', 'string', '', false, $this->settings['document']['subject']);
-        $this->registerArgument('author', 'string', '', false, $this->settings['document']['author']);
-        $this->registerArgument('keywords', 'string', '', false, $this->settings['document']['keywords']);
-        $this->registerArgument('creator', 'string', '', false, $this->settings['document']['creator']);
-        $this->registerArgument('outputDestination', 'string', '', false, $this->settings['document']['outputDestination']);
-        $this->registerArgument('outputPath', 'string', '', false, $this->settings['document']['outputPath']);
-        $this->registerArgument('sourceFile', 'string', '', false, $this->settings['document']['sourceFile']);
-        $this->registerArgument('unit', 'string', '', false, $this->settings['document']['unit']);
-        $this->registerArgument('unicode', 'boolean', '', false, (boolean) $this->settings['document']['unicode']);
-        $this->registerArgument('encoding', 'string', '', false, $this->settings['document']['encoding']);
-        $this->registerArgument('pdfa', 'boolean', '', false, (boolean) $this->settings['document']['pdfa']);
-        $this->registerArgument('language', 'string', '', false, $this->settings['document']['language']);
-        $this->registerArgument('hyphenFile', 'string', '', false, $this->settings['document']['hyphenFile']);
+        $this->registerArgument('title', 'string', 'The title of the document.', false, $this->settings['document']['title']);
+        $this->registerArgument('subject', 'string', 'The subject of the document.', false, $this->settings['document']['subject']);
+        $this->registerArgument('author', 'string', 'The author of the document.', false, $this->settings['document']['author']);
+        $this->registerArgument('keywords', 'string', 'Keywords describing the document.', false, $this->settings['document']['keywords']);
+        $this->registerArgument('creator', 'string', 'The creator of the document.', false, $this->settings['document']['creator']);
+        $this->registerArgument('outputDestination', 'string', 'The output destination of the document: inline, download, file, file-inline, file-download, email or string', false, $this->settings['document']['outputDestination']);
+        $this->registerArgument('outputPath', 'string', 'The name or path of the saved document.', false, $this->settings['document']['outputPath']);
+        $this->registerArgument('sourceFile', 'string', 'The path to the source file for templates to be applied to this document.', false, $this->settings['document']['sourceFile']);
+        $this->registerArgument('unit', 'string', 'The default unit of measure.', false, $this->settings['document']['unit']);
+        $this->registerArgument('unicode', 'boolean', 'If true unicode is used.', false, (boolean) $this->settings['document']['unicode']);
+        $this->registerArgument('encoding', 'string', 'The encoding of the document.', false, $this->settings['document']['encoding']);
+        $this->registerArgument('pdfa', 'boolean', 'If true PDF/A mode is enabled.', false, (boolean) $this->settings['document']['pdfa']);
+        $this->registerArgument('language', 'string', 'The language of the document.', false, $this->settings['document']['language']);
+        $this->registerArgument('hyphenFile', 'string', 'The hyphen file to be used for the automatic hyphenation.', false, $this->settings['document']['hyphenFile']);
     }
 
     /**

@@ -18,6 +18,7 @@ Be aware that the static TypoScript template must be included for the examples t
 	BasicUsage/Index
 	HeaderAndFooter/Index
 	ExtendExistingPDFs/Index
+	TableOfContent/Index
 	FullFeatureShowCase/Index
 	PdfaShowCase/Index
 	StandaloneRendering/Index

@@ -15,11 +15,12 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
 ## Key features
 
 - ViewHelpers to render text and lists
-- ViewHelper to render images (supporting FAL)
+- ViewHelper to render images (supporting FAL and image processing)
 - ViewHelpers to repeatedly render header and footer
 - ViewHelper to render HTML / rich-text content
 - ViewHelper to avoid page breaks inside
 - ViewHelpers to create a multi column layout
+- ViewHelpers to create a table of content
 - Load existing PDF documents as template
 - Define and apply different text types easily
 - Fully customizable by writing your own ViewHelpers
@@ -58,7 +59,7 @@ So if you feel like this extension was useful to you and saved you and your busi
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:pdf="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers"
-      xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.0.xsd"
+      xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.1.xsd"
       data-namespace-typo3-fluid="true">
     
 <pdf:document outputDestination="inline" title="Bithost Example">

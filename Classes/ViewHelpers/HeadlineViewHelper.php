@@ -28,6 +28,8 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
+
 /**
  * HeadlineViewHelper
  *
@@ -41,5 +43,38 @@ class HeadlineViewHelper extends AbstractTextViewHelper
     protected function getSettingsKey()
     {
         return 'headline';
+    }
+
+
+    /**
+     * @return void
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+
+        $this->registerArgument('addToTableOfContent', 'boolean', 'If true this headline is added to the table of content.', false, $this->settings['headline']['addToTableOfContent']);
+        $this->registerArgument('tableOfContentLevel', 'integer', 'The level this headline is added to in the table of content.', false, $this->settings['headline']['tableOfContentLevel']);
+    }
+
+    /**
+     * @return void
+     *
+     * @throws Exception
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        if ($this->arguments['addToTableOfContent']) {
+            $this->getPDF()->Bookmark(
+                $this->arguments['text'],
+                $this->arguments['tableOfContentLevel'],
+                -1,
+                '',
+                '',
+                $this->arguments['color']
+            );
+        }
     }
 }

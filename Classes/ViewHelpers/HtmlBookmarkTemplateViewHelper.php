@@ -28,14 +28,12 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Exception\Exception;
-
 /**
- * LineBreakViewHelper
+ * HtmlBookmarkTemplateViewHelper
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
  */
-class LineBreakViewHelper extends AbstractPDFViewHelper
+class HtmlBookmarkTemplateViewHelper extends AbstractPDFViewHelper
 {
     /**
      * @return void
@@ -44,16 +42,25 @@ class LineBreakViewHelper extends AbstractPDFViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('height', 'integer', 'The height of the line break in the default unit.', true, null);
+        $this->registerArgument('level', 'integer', 'The table of content level this HTML template applies to.', false, $this->settings['htmlBookmarkTemplate']['level']);
+        $this->registerArgument('sanitizeWhitespace', 'boolean', 'If true the input will be trimmed and whitespaces between HTML tags will be removed.', false, $this->settings['htmlBookmarkTemplate']['sanitizeWhitespace']);
     }
 
     /**
      * @return void
-     *
-     * @throws Exception
      */
     public function render()
     {
-        $this->getPDF()->Ln($this->arguments['height']);
+        $bookmarkTemplates = $this->viewHelperVariableContainer->get('TableOfContentViewHelper', 'bookmarkTemplates');
+        $template = $this->renderChildren();
+
+        if ($this->arguments['sanitizeWhitespace']) {
+            $template = trim($template);
+            $template = preg_replace('/(\>)\s*(\<)/m', '$1$2', $template);
+        }
+
+        $bookmarkTemplates[$this->arguments['level']] = $template;
+
+        $this->viewHelperVariableContainer->addOrUpdate('TableOfContentViewHelper', 'bookmarkTemplates', $bookmarkTemplates);
     }
 }
