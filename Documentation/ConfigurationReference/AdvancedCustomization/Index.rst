@@ -95,7 +95,7 @@ The following example shows a ViewHelper that could be used to render a TCPDF ba
                 'stretchtext' => 4
             ];
 
-            $this->getPDF()->SetFontSize(12);
+            $this->getPDF()->SetFontSize($this->settings['generalText']['fontSize']);
             $this->getPDF()->Cell(0, 0, $title, 0, 1);
 
             $this->getPDF()->write1DBarcode($code, $type, '', '', '', 18, 0.4, $style, 'N');
@@ -111,7 +111,7 @@ The following example shows a ViewHelper that could be used to render a TCPDF ba
 
 	<pdf:document>
 		<pdf:page>
-			<you:barcode title="Some Title" />
+			<you:barcode title="Some Title" code="CODE 39" type="C39" />
 		</pdf:page>
 	</pdf:document>
 
