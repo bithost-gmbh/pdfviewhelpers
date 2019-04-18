@@ -1,6 +1,6 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 2.1.0 - Not yet released
+## 2.1.0 - April 18, 2019
 - Adds paragraph line feed to textual ViewHelpers, [#107](https://github.com/bithost-gmbh/pdfviewhelpers/issues/107) (Thanks [@emmemme](https://github.com/emmemme))
 - Adds image processing to ImageViewHelper, [#104](https://github.com/bithost-gmbh/pdfviewhelpers/issues/104)
 - Adds table of content ViewHelpers, [#103](https://github.com/bithost-gmbh/pdfviewhelpers/issues/103)
