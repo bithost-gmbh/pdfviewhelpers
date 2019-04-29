@@ -28,6 +28,8 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use GuzzleHttp\Client;
+
 /**
  * ExamplesTest
  *
@@ -165,5 +167,43 @@ class ExamplesTest extends AbstractFunctionalTest
         $this->assertContains('Headline not in table of content', $pages[4]->getText());
         $this->assertContains('Here is some text', $pages[4]->getText());
         $this->assertContains('Headline not in table of content', $pages[4]->getText());
+    }
+
+    /**
+     * @test
+     */
+    public function testFullFeatureShowCaseValidity()
+    {
+        $this->setUpPage([$this->getFixturePath('Examples/FullFeatureShowCase.txt')]);
+
+        $output = $this->renderFluidTemplate($this->getFixturePath('Examples/FullFeatureShowCase.html'));
+        $client = new Client();
+        $response = $client->post('https://www.pdf-online.com/osa/validate.aspx', [
+            'headers' => [
+                'Accept' => 'application/json'
+            ],
+            'multipart' => [
+                [
+                    'name'     => 'file',
+                    'contents' => $output,
+                    'headers' => [
+                        'Content-Disposition' => 'form-data; name="file"; filename="document.pdf"',
+                        'Content-Type' => 'application/pdf',
+                    ]
+                ]
+            ]
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $responseData = json_decode($response->getBody(), true);
+
+        $this->assertArrayHasKey('Result', $responseData);
+        $this->assertArrayHasKey('Details', $responseData);
+        $this->assertEquals(
+            'Document validated successfully.',
+            $responseData['Result'],
+            implode(PHP_EOL, $responseData['Details'])
+        );
     }
 }
