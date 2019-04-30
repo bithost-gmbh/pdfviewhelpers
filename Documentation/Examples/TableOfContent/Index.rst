@@ -10,6 +10,41 @@
 Table Of Content
 ================
 
+**IMPORTANT NOTICE:** Please note that TCPDF does not produce valid PDF documents when bookmarks are used.
+Although most PDF viewers are still able to render the document you might run into validity troubles using these ViewHelpers.
+
+.. _tableofcontent_typoscript:
+
+TypoScript
+----------
+
+::
+
+	pdfpage = PAGE
+	pdfpage {
+		10 = FLUIDTEMPLATE
+		10 {
+			file = EXT:pdfviewhelpers/Resources/Public/Examples/TableOfContent/Template.html
+		}
+		# ensure there is no other output apart from the pdf
+		# take a look at the generated pdf file (end!) in a text editor to verify there is no other output
+		# like warnings, error messages or html code
+		config {
+			disableAllHeaderCode = 1
+			xhtml_cleaning = 0
+			admPanel = 0
+		}
+	}
+	
+	plugin.tx_pdfviewhelpers.settings {
+		headline {
+			addToTableOfContent = 1
+		}
+	}
+	
+	module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers
+
+
 .. _tableofcontent_fluid:
 
 Fluid Template
