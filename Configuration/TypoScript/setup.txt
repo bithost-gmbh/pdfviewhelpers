@@ -120,7 +120,7 @@ plugin.tx_pdfviewhelpers.settings {
 		paragraphSpacing = 0
 		paragraphLineFeed =
 		autoHyphenation =
-		addToTableOfContent = 1
+		addToTableOfContent = 0
 		tableOfContentLevel = 0
 		padding {
 			top = 6

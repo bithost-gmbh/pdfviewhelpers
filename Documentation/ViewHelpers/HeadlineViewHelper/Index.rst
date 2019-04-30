@@ -10,6 +10,7 @@ HeadlineViewHelper
 
 Rendering text using the settings for headlines.
 It is possible to easily define different default styles and apply them using the ``type`` attribute, see chapter :ref:`Text Types <text-types>`.
+Text rendered with a ``HeadlineViewHelper`` can be added to the table of content automatically by setting ``plugin.tx_pdfviewhelpers.settings.headline.addToTableOfContent = 1``.
 
 **Basic Usage**
 ::

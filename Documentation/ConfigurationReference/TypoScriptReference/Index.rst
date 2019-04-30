@@ -109,7 +109,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	headline.paragraphSpacing                      :ref:`t3tsref:data-type-integer`      *See generalText*
 	headline.paragraphLineFeed                     :ref:`t3tsref:data-type-boolean`      *See generalText*
 	headline.autoHyphenation                       :ref:`t3tsref:data-type-boolean`      *See generalText*
-	headline.addToTableOfContent                   :ref:`t3tsref:data-type-boolean`      1
+	headline.addToTableOfContent                   :ref:`t3tsref:data-type-boolean`      0
 	headline.tableOfContentLevel                   :ref:`t3tsref:data-type-integer`      0
 	list.trim                                      :ref:`t3tsref:data-type-boolean`      *See generalText*
 	list.removeDoubleWhitespace                    :ref:`t3tsref:data-type-boolean`      *See generalText*

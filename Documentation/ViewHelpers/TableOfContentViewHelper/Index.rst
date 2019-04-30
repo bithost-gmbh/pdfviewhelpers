@@ -9,10 +9,14 @@ TableOfContentViewHelper / HtmlBookmarkTemplateViewHelper
 ---------------------------------------------------------
 
 The ``TableOfContentViewHelper`` allows to render a table of content when placed inside a ``PageViewHelper``. The ``HtmlBookmarkTemplateViewHelper`` allows to style the content table entries using HTML.
-Text rendered with a ``HeadlineViewHelper`` is added automatically to the table of content. Additionally it is possible to use the ``BookmarkViewHelper`` to add entries to the table of content.
+Text rendered with a ``HeadlineViewHelper`` can be added to the table of content automatically by setting ``plugin.tx_pdfviewhelpers.settings.headline.addToTableOfContent = 1``.
+Additionally it is possible to use the ``BookmarkViewHelper`` to add entries to the table of content.
 
 Note that the ``TableOfContentViewHelper`` should be placed on the last page of the document, using the ``page`` attribute it can be moved to the front.
 Please see the examples section for an extended :ref:`example of the table of content usage <tableofcontent>`.
+
+**IMPORTANT NOTICE:** Please note that TCPDF does not produce valid PDF documents when bookmarks are used.
+Although most PDF viewers are still able to render the document you might run into validity troubles using these ViewHelpers.
 
 **Regular Mode**
 ::
