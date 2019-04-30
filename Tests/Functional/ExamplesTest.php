@@ -66,6 +66,8 @@ class ExamplesTest extends AbstractFunctionalTest
 
         $this->assertContains('Avoid page break inside', $pages[4]->getText());
 
+        $this->validatePDF($output);
+
         //do not assert file equality, because the files generated on the server are not equal to the local files
         //comparing hashes of two locally generated files works however
         //$expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/FullFeatureShowCase.pdf')));
@@ -92,6 +94,8 @@ class ExamplesTest extends AbstractFunctionalTest
         $this->assertContains('Esteban Marín, Markus Mächler', $text);
         $this->assertContains('Bithost GmbH', $text);
 
+        $this->validatePDF($output);
+
         //$expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/BasicUsage.pdf')));
         //$actualHash = sha1($output);
         //$this->assertEquals($expectedHash, $actualHash);
@@ -115,6 +119,8 @@ class ExamplesTest extends AbstractFunctionalTest
         $this->assertContains('Here is your header', $text);
         $this->assertContains('Here is the HTML header', $text);
         $this->assertContains('Lorem ipsum dolor sit amet', $text);
+
+        $this->validatePDF($output);
 
         //$expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/ExtendExistingPDFs.pdf')));
         //$actualHash = sha1($output);
@@ -167,16 +173,28 @@ class ExamplesTest extends AbstractFunctionalTest
         $this->assertContains('Headline not in table of content', $pages[4]->getText());
         $this->assertContains('Here is some text', $pages[4]->getText());
         $this->assertContains('Headline not in table of content', $pages[4]->getText());
+
+        //Do not validate as TCPDF does not produce valid documents having bookmarks
+        //$this->validatePDF($output);
     }
 
     /**
      * @test
      */
-    public function testFullFeatureShowCaseValidity()
+    public function testPDFA()
     {
-        $this->setUpPage([$this->getFixturePath('Examples/FullFeatureShowCase.txt')]);
+        $this->setUpPage([$this->getFixturePath('Examples/PDFA.txt')]);
 
-        $output = $this->renderFluidTemplate($this->getFixturePath('Examples/FullFeatureShowCase.html'));
+        $output = $this->renderFluidTemplate($this->getFixturePath('Examples/PDFA.html'));
+
+        $this->validatePDF($output);
+    }
+
+    /**
+     * @param string $pdf
+     */
+    protected function validatePDF($pdf)
+    {
         $client = new Client();
         $response = $client->post('https://www.pdf-online.com/osa/validate.aspx', [
             'headers' => [
@@ -185,7 +203,7 @@ class ExamplesTest extends AbstractFunctionalTest
             'multipart' => [
                 [
                     'name'     => 'file',
-                    'contents' => $output,
+                    'contents' => $pdf,
                     'headers' => [
                         'Content-Disposition' => 'form-data; name="file"; filename="document.pdf"',
                         'Content-Type' => 'application/pdf',

@@ -1,0 +1,33 @@
+plugin.tx_pdfviewhelpers.settings {
+	config {
+		class = Bithost\Pdfviewhelpers\Model\PdfaShowCase
+	}
+	document {
+		title = PDFa Show Case Title
+		subject = No Subject
+		keywords = full, feature, show, case
+		outputDestination = I
+		outputPath = pdfa.pdf
+		pdfa = 1
+	}
+	page {
+		margin {
+			top = 20
+			right = 15
+			bottom = 20
+			left = 15
+		}
+	}
+	generalText {
+		color = #555
+	}
+	headline {
+		fontFamily = courier
+		fontStyle = B
+	}
+	list {
+		color = #555
+		fontStyle = I
+		bulletColor = #555
+	}
+}
