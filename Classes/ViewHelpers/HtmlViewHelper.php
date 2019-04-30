@@ -44,9 +44,9 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('autoHyphenation', 'boolean', '', false, (boolean) $this->settings['generalText']['autoHyphenation']);
-        $this->registerArgument('styleSheet', 'string', '', false, $this->settings['html']['styleSheet']);
-        $this->registerArgument('padding', 'array', '', false, null);
+        $this->registerArgument('autoHyphenation', 'boolean', 'If true the text will be hyphenated automatically.', false, (boolean) $this->settings['generalText']['autoHyphenation']);
+        $this->registerArgument('styleSheet', 'string', 'The path to an external style sheet being used to style this HTML content.', false, $this->settings['html']['styleSheet']);
+        $this->registerArgument('padding', 'array', 'The padding of the HTML element as array.', false, null);
 
         if (strlen($this->settings['html']['autoHyphenation'])) {
             $this->overrideArgument('autoHyphenation', 'boolean', '', false, (boolean) $this->settings['html']['autoHyphenation']);

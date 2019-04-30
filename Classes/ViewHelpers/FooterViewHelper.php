@@ -44,8 +44,8 @@ class FooterViewHelper extends AbstractPDFViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('posY', 'integer', '', false, $this->settings['footer']['posY']);
-        $this->registerArgument('scope', 'string', '', false, null);
+        $this->registerArgument('posY', 'integer', 'Absolute posY of the element on the current page. A negative value means it is measured from the bottom of the page.', false, $this->settings['footer']['posY']);
+        $this->registerArgument('scope', 'string', 'The scope the footer is applied to: document, thisPage or thisPageIncludingPageBreaks.', false, null);
     }
 
     /**

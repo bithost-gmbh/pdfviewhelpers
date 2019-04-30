@@ -44,7 +44,7 @@ class LineBreakViewHelper extends AbstractPDFViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('height', 'integer', '', true, null);
+        $this->registerArgument('height', 'integer', 'The height of the line break in the default unit.', true, null);
     }
 
     /**

@@ -10,7 +10,7 @@ matrix:
     - php: 7.0
       env: TYPO3_VERSION=^7
     - php: 7.1
-      env: TYPO3_VERSION=^8
+      env: TYPO3_VERSION=^8 COVERAGE="YES"
     - php: 7.2
       env: TYPO3_VERSION=^9
 
@@ -22,16 +22,21 @@ before_script:
   - composer require typo3/minimal=$TYPO3_VERSION
   - export TYPO3_PATH_WEB=$PWD/.Build/Web
   - pear install pear/PHP_CodeSniffer
+  - wget https://phar.phpunit.de/phpcov.phar
   - phpenv rehash
 
 script:
   - phpcs -n --standard=PSR2 Classes/
+  - mkdir -p build/cov
   - >
-    .Build/bin/phpunit --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/
+    if [[ "$COVERAGE" == "YES" ]]; then  .Build/bin/phpunit --whitelist Classes/ --coverage-php=./build/cov/unit.cov --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/; else .Build/bin/phpunit --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/; fi
   - >
     export typo3DatabaseName="typo3";
     export typo3DatabaseHost="localhost";
     export typo3DatabaseUsername="root";
     export typo3DatabasePassword="";
-    .Build/bin/phpunit --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml Tests/Functional
+    if [[ "$COVERAGE" == "YES" ]]; then  .Build/bin/phpunit --whitelist Classes/ --coverage-php=./build/cov/functional.cov --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml Tests/Functional; else .Build/bin/phpunit --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml Tests/Functional; fi
 
+after_script:
+  - if [[ "$COVERAGE" == "YES" ]]; then php phpcov.phar merge build/cov --clover build/logs/clover.xml; fi
+  - if [[ "$COVERAGE" == "YES" ]]; then .Build/bin/php-coveralls -v --coverage_clover=build/logs/clover.xml; fi

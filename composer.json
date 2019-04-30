@@ -1,7 +1,7 @@
 {
 	"name": "bithost-gmbh/pdfviewhelpers",
 	"type": "typo3-cms-extension",
-	"version": "2.0.2",
+	"version": "2.1.0",
 	"license": "GPL-3.0",
 	"description": "This is a TYPO3 CMS extension that provides various Fluid ViewHelpers to generate PDF documents.",
 	"keywords": ["PDF", "ViewHelpers", "Fluid", "generation", "generator", "TCPDF", "FPDI"],
@@ -22,7 +22,8 @@
 	},
 	"require-dev": {
 		"nimut/testing-framework": "^2.0 || ^3.0 || ^4.0",
-		"smalot/pdfparser": "^0.12.0"
+		"smalot/pdfparser": "^0.12.0",
+		"php-coveralls/php-coveralls": "^2.1"
 	},
 	"autoload": {
 		"psr-4": {

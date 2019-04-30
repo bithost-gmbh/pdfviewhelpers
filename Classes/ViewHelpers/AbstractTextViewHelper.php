@@ -52,6 +52,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         'text',
         'alignment',
         'paragraphSpacing',
+        'paragraphLineFeed',
         'autoHyphenation',
         'lineHeight',
         'characterSpacing',
@@ -69,20 +70,21 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('trim', 'boolean', '', false, null);
-        $this->registerArgument('removeDoubleWhitespace', 'boolean', '', false, null);
-        $this->registerArgument('color', 'string', '', false, null);
-        $this->registerArgument('fontFamily', 'string', '', false, null);
-        $this->registerArgument('fontSize', 'integer', '', false, null);
-        $this->registerArgument('fontStyle', 'string', '', false, null);
-        $this->registerArgument('lineHeight', 'float', '', false, null);
-        $this->registerArgument('characterSpacing', 'float', '', false, null);
-        $this->registerArgument('padding', 'array', '', false, []);
-        $this->registerArgument('text', 'string', '', false, null);
-        $this->registerArgument('alignment', 'string', '', false, null);
-        $this->registerArgument('paragraphSpacing', 'float', '', false, null);
-        $this->registerArgument('autoHyphenation', 'boolean', '', false, null);
-        $this->registerArgument('type', 'string', '', false, null);
+        $this->registerArgument('trim', 'boolean', 'If true leading and trailing whitespace is removed.', false, null);
+        $this->registerArgument('removeDoubleWhitespace', 'boolean', 'If true double whitespaces are removed.', false, null);
+        $this->registerArgument('color', 'string', 'The color in HEX format: #000 or #000000.', false, null);
+        $this->registerArgument('fontFamily', 'string', 'The font family name.', false, null);
+        $this->registerArgument('fontSize', 'integer', 'The font size.', false, null);
+        $this->registerArgument('fontStyle', 'string', 'The font style: regular, bold, italic or underline', false, null);
+        $this->registerArgument('lineHeight', 'float', 'The relative line height.', false, null);
+        $this->registerArgument('characterSpacing', 'float', 'The spacing between individual characters.', false, null);
+        $this->registerArgument('padding', 'array', 'The cell padding given as array.', false, []);
+        $this->registerArgument('text', 'string', 'The text to be rendered.', false, null);
+        $this->registerArgument('alignment', 'string', 'The text alignment: left, center, right or justify', false, null);
+        $this->registerArgument('paragraphSpacing', 'float', 'The spacing between text paragraphs.', false, null);
+        $this->registerArgument('autoHyphenation', 'boolean', 'If true the text will be hyphenated automatically.', false, null);
+        $this->registerArgument('paragraphLineFeed', 'boolean', 'If true a line feed is inserted after each paragraph.', false, null);
+        $this->registerArgument('type', 'string', 'The text type configuration to be used.', false, null);
     }
 
     /**
@@ -161,6 +163,10 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         foreach ($paragraphs as $paragraph) {
             if ($this->arguments['trim']) {
                 $paragraph = trim($paragraph);
+            }
+
+            if ($this->arguments['paragraphLineFeed']) {
+                $paragraph .= "\n";
             }
 
             $this->getPDF()->MultiCell($this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), false, 1, $this->arguments['posX'], $posY, true, 0, false, true, 0, 'T', false);

@@ -52,6 +52,8 @@ plugin.tx_pdfviewhelpers.settings {
 		importPageOnAutomaticPageBreak = 1
 		orientation = portrait
 		format = A4
+		keepMargins = 0
+		tableOfContentPage = 0
 	}
 	header {
 		posY = 5
@@ -73,6 +75,7 @@ plugin.tx_pdfviewhelpers.settings {
 		characterSpacing = 0
 		alignment = left
 		paragraphSpacing = 2
+		paragraphLineFeed = 0
 		autoHyphenation = 0
 		padding {
 			top = 0
@@ -95,6 +98,7 @@ plugin.tx_pdfviewhelpers.settings {
 		characterSpacing =
 		alignment =
 		paragraphSpacing =
+		paragraphLineFeed =
 		autoHyphenation =
 		padding {
 
@@ -114,7 +118,10 @@ plugin.tx_pdfviewhelpers.settings {
 		characterSpacing =
 		alignment =
 		paragraphSpacing = 0
+		paragraphLineFeed =
 		autoHyphenation =
+		addToTableOfContent = 0
+		tableOfContentLevel = 0
 		padding {
 			top = 6
 			bottom = 3
@@ -132,6 +139,7 @@ plugin.tx_pdfviewhelpers.settings {
 		fontStyle =
 		lineHeight =
 		characterSpacing =
+		paragraphLineFeed =
 		alignment = left
 		autoHyphenation =
 		padding {
@@ -152,6 +160,16 @@ plugin.tx_pdfviewhelpers.settings {
 			right = 0
 			bottom = 2
 			left = 0
+		}
+		processingInstructions {
+#			width =
+#			height =
+#			maxWidth =
+#			maxHeight =
+#			minWidth =
+#			minHeight =
+#			crop =
+#			cropVariant =
 		}
 	}
 	html {
@@ -177,6 +195,32 @@ plugin.tx_pdfviewhelpers.settings {
 				color = #000
 			}
 		}
+	}
+	tableOfContent {
+		page = 1
+		numbersFont =
+		filter = .
+		name =
+		htmlMode = 0
+		fontFamily =
+		fontSize =
+		lineHeight =
+		characterSpacing =
+		padding {
+			top = 0
+			right = 0
+			bottom = 2
+			left = 0
+		}
+	}
+	htmlBookmarkTemplate {
+		level = 0
+		sanitizeWhitespace = 1
+	}
+	bookmark {
+		level = 0
+		fontStyle =
+		color =
 	}
 }
 

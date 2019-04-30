@@ -3,9 +3,9 @@
  * This file is part of FPDI
  *
  * @package   setasign\Fpdi
- * @copyright Copyright (c) 2018 Setasign - Jan Slabon (https://www.setasign.com)
+ * @copyright Copyright (c) 2019 Setasign - Jan Slabon (https://www.setasign.com)
  * @license   http://opensource.org/licenses/mit-license The MIT License
-  */
+ */
 
 namespace setasign\Fpdi;
 
@@ -54,6 +54,13 @@ trait FpdiTrait
     protected $readers = [];
 
     /**
+     * Instances created internally.
+     *
+     * @var array
+     */
+    protected $createdReaders = [];
+
+    /**
      * The current reader id.
      *
      * @var string
@@ -80,6 +87,25 @@ trait FpdiTrait
      * @var array
      */
     protected $objectsToCopy = [];
+
+    /**
+     * Release resources and file handles.
+     *
+     * This method is called internally when the document is created successfully. By default it only cleans up
+     * stream reader instances which were created internally.
+     *
+     * @param bool $allReaders
+     */
+    public function cleanUp($allReaders = false)
+    {
+        $readers = $allReaders ? array_keys($this->readers) : $this->createdReaders;
+        foreach ($readers as $id) {
+            $this->readers[$id]->getParser()->getStreamReader()->cleanUp();
+            unset($this->readers[$id]);
+        }
+
+        $this->createdReaders= [];
+    }
 
     /**
      * Set the minimal PDF version.
@@ -144,6 +170,7 @@ trait FpdiTrait
             $streamReader = new StreamReader($file);
         } elseif (\is_string($file)) {
             $streamReader = StreamReader::createByFile($file);
+            $this->createdReaders[] = $id;
         } else {
             $streamReader = $file;
         }
@@ -358,8 +385,8 @@ trait FpdiTrait
     /**
      * Draws an imported page onto the page.
      *
-     * Omit one of the size parameters (width, height) to calculate the other one automatically in view to the aspect
-     * ratio.
+     * Give only one of the size parameters (width, height) to calculate the other one automatically in view to the
+     * aspect ratio.
      *
      * @param mixed $pageId The page id
      * @param float|int|array $x The abscissa of upper-left corner. Alternatively you could use an assoc array
@@ -413,8 +440,8 @@ trait FpdiTrait
     /**
      * Get the size of an imported page.
      *
-     * Omit one of the size parameters (width, height) to calculate the other one automatically in view to the aspect
-     * ratio.
+     * Give only one of the size parameters (width, height) to calculate the other one automatically in view to the
+     * aspect ratio.
      *
      * @param mixed $tpl The template id
      * @param float|int|null $width The width.

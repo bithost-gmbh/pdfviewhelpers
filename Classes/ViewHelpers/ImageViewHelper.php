@@ -29,6 +29,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use TYPO3\CMS\Extbase\Service\ImageService;
 
 /**
  * ImageViewHelper
@@ -38,16 +39,30 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
 class ImageViewHelper extends AbstractContentElementViewHelper
 {
     /**
+     * @var ImageService
+     */
+    protected $imageService;
+
+    /**
+     * @param ImageService $imageService
+     */
+    public function injectImageService(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
+
+    /**
      * @return void
      */
     public function initializeArguments()
     {
         parent::initializeArguments();
 
-        $this->registerArgument('src', 'mixed', '', true, null);
-        $this->registerArgument('link', 'string', '', false, null);
-        $this->registerArgument('alignment', 'string', '', false, $this->settings['image']['alignment']);
-        $this->registerArgument('padding', 'array', '', false, []);
+        $this->registerArgument('src', 'mixed', 'The source of the image, can be a TYPO3 path, a File or FileReference object.', true, null);
+        $this->registerArgument('link', 'string', 'The link added to the image.', false, null);
+        $this->registerArgument('alignment', 'string', 'The alignment of the image if it does not fill up the full width.', false, $this->settings['image']['alignment']);
+        $this->registerArgument('padding', 'array', 'The image padding given as array.', false, []);
+        $this->registerArgument('processingInstructions', 'array', 'The processing instructions applied to the image.', false, $this->settings['image']['processingInstructions']);
     }
 
     /**
@@ -73,8 +88,14 @@ class ImageViewHelper extends AbstractContentElementViewHelper
         $this->initializeMultiColumnSupport();
 
         $imageFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['src']);
-        $src = '@' . $imageFile->getContents();
-        $extension = $imageFile->getExtension();
+        $processedImage = $imageFile;
+
+        if (!empty($this->arguments['processingInstructions'])) {
+            $processedImage = $this->imageService->applyProcessingInstructions($imageFile, $this->arguments['processingInstructions']);
+        }
+
+        $src = '@' . $processedImage->getContents();
+        $extension = $processedImage->getExtension();
 
         $multiColumnContext = $this->getCurrentMultiColumnContext();
         $isInAColumn = is_array($multiColumnContext) && $multiColumnContext['isInAColumn'];
