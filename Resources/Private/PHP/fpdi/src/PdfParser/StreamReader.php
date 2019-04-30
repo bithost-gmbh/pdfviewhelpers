@@ -3,9 +3,9 @@
  * This file is part of FPDI
  *
  * @package   setasign\Fpdi
- * @copyright Copyright (c) 2018 Setasign - Jan Slabon (https://www.setasign.com)
+ * @copyright Copyright (c) 2019 Setasign - Jan Slabon (https://www.setasign.com)
  * @license   http://opensource.org/licenses/mit-license The MIT License
-  */
+ */
 
 namespace setasign\Fpdi\PdfParser;
 
@@ -124,7 +124,15 @@ class StreamReader
      */
     public function __destruct()
     {
-        if ($this->closeStream) {
+        $this->cleanUp();
+    }
+
+    /**
+     * Closes the file handle.
+     */
+    public function cleanUp()
+    {
+        if ($this->closeStream && is_resource($this->stream)) {
             \fclose($this->stream);
         }
     }
