@@ -106,6 +106,13 @@ class BasePDF extends Fpdi
     const SCOPE_DOCUMENT = 'document';
 
     /**
+     * Storing the path of custom fonts to use them on setFont
+     *
+     * @var array
+     */
+    protected $customFontFilePaths = [];
+
+    /**
      * @inheritdoc
      */
     protected function setHeader()
@@ -276,6 +283,29 @@ class BasePDF extends Fpdi
         $this->currentPageFormat = $format;
 
         parent::setPageFormat($format, $orientation);
+    }
+
+    /**
+     * Overwrite SetFont in order to automatically provide paths to custom fonts
+     *
+     * @inheritdoc
+     */
+    public function SetFont($family, $style='', $size=null, $fontfile='', $subset='default', $out=true)
+    {
+        if (empty($fontfile) && isset($this->customFontFilePaths[$family])) {
+            $fontfile = $this->customFontFilePaths[$family];
+        }
+
+        parent::SetFont($family, $style, $size, $fontfile, $subset, $out);
+    }
+
+    /**
+     * @param $fontName
+     * @param $fontFilePath
+     */
+    public function addCustomFontFilePath($fontName, $fontFilePath)
+    {
+        $this->customFontFilePaths[$fontName] = $fontFilePath;
     }
 
     /**

@@ -45,6 +45,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	config.allowedImageTypes_                      Array                                 *See static TypoScript template*
 	config.fonts.subset_                           :ref:`t3tsref:data-type-boolean`      1
 	config.fonts.addTTFFont_                       Array                                 *See static TypoScript template*
+	config.fonts.outputPath_                       :ref:`t3tsref:data-type-string`       typo3temp/pdfviewhelpers/fonts/
 	document.title_                                :ref:`t3tsref:data-type-string`
 	document.subject_                              :ref:`t3tsref:data-type-string`
 	document.author_                               :ref:`t3tsref:data-type-string`
@@ -235,6 +236,15 @@ config.fonts.addTTFFont
 :typoscript:`plugin.tx_pdfviewhelpers.settings.config.fonts.addTTFFont =` Array
 
 Possibility to add custom fonts, please have a look at the dedicated chapter Custom Fonts.
+
+.. _config.fonts.outputPath:
+
+config.fonts.outputPath
+"""""""""""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.config.fonts.outputPath =` :ref:`t3tsref:data-type-string`
+
+Path to directory where font files of custom fonts should be stored. This folder can safely be deleted and will automatically be re/created if it does not exist.
 
 .. _document.title:
 
