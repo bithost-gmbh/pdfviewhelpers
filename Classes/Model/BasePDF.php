@@ -184,6 +184,10 @@ class BasePDF extends Fpdi
      */
     public function Footer() // phpcs:ignore
     {
+        // See https://github.com/tecnickcom/TCPDF/pull/147
+        $initialPageBreakTrigger = $this->PageBreakTrigger;
+        $this->PageBreakTrigger = $this->h;
+
         if ($this->pageFooterClosure instanceof Closure) {
             $this->pageFooterClosure->__invoke();
         } else if ($this->documentFooterClosure instanceof Closure) {
@@ -191,6 +195,7 @@ class BasePDF extends Fpdi
         }
 
         $this->basePdfFooter();
+        $this->PageBreakTrigger = $initialPageBreakTrigger;
     }
 
     /**
