@@ -295,7 +295,7 @@ class BasePDF extends Fpdi
      *
      * @inheritdoc
      */
-    public function SetFont($family, $style='', $size=null, $fontfile='', $subset='default', $out=true)
+    public function SetFont($family, $style = '', $size = null, $fontfile = '', $subset = 'default', $out = true) // phpcs:ignore
     {
         if (empty($fontfile) && isset($this->customFontFilePaths[$family])) {
             $fontfile = $this->customFontFilePaths[$family];
