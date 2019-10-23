@@ -57,7 +57,7 @@ Fluid Template
 		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		  xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
 		  xmlns:pdf="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers"
-		  xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.1.xsd"
+		  xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.2.xsd"
 		  data-namespace-typo3-fluid="true">
 
 	<pdf:document sourceFile="EXT:pdfviewhelpers/Resources/Public/Examples/ExtendExistingPDFs/pdf_template.pdf">

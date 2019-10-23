@@ -191,18 +191,30 @@ class DocumentViewHelper extends AbstractPDFViewHelper
     /**
      * @return void
      *
-     * @throws ValidationException
+     * @throws Exception
      */
     protected function loadCustomFonts()
     {
+        if (empty($this->settings['config']['fonts']['addTTFFont'])) {
+            return;
+        }
+
+        $outputPath = GeneralUtility::getFileAbsFileName($this->settings['config']['fonts']['outputPath']);
+        $outputPath = rtrim($outputPath, '/') . '/';
+
+        if (!is_dir($outputPath)) {
+            GeneralUtility::mkdir_deep($outputPath);
+        }
+
         foreach ($this->settings['config']['fonts']['addTTFFont'] as $ttfFontName => $ttfFont) {
             $path = GeneralUtility::getFileAbsFileName($ttfFont['path']);
             $type = isset($ttfFont['type']) ? $ttfFont['type'] : '';
-
-            $fontName = \TCPDF_FONTS::addTTFfont($path, $type);
+            $fontName = \TCPDF_FONTS::addTTFfont($path, $type, '', 32, $outputPath);
 
             if ($fontName === false) {
                 throw new ValidationException('Font "' . $ttfFontName . '" could not be added. ERROR: 1492808000', 1492808000);
+            } else {
+                $this->getPDF()->addCustomFontFilePath($fontName, $outputPath . $fontName . '.php');
             }
         }
     }
