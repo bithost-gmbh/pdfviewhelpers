@@ -8,7 +8,7 @@
 
 ---
 conf.py:
-  copyright: 2016 - 2018
+  copyright: 2016 - 2019
   project: PDF ViewHelpers
   version: 2.2.0
   release: 2.2.0
