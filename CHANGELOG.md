@@ -1,6 +1,6 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 2.2.0 - Not yet released
+## 2.2.0 - October 23, 2019
 
 - Adds configurable output path for generated font files, [#128](https://github.com/bithost-gmbh/pdfviewhelpers/issues/128)
 - Fixes images not working in footer, [#129](https://github.com/bithost-gmbh/pdfviewhelpers/issues/129)
