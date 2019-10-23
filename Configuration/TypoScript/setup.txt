@@ -156,6 +156,7 @@ plugin.tx_pdfviewhelpers.settings {
 	}
 	image {
 		alignment = left
+		fitOnPage = 1
 		padding {
 			top = 0
 			right = 0

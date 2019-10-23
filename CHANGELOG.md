@@ -4,6 +4,7 @@
 
 - Adds configurable output path for generated font files, [#128](https://github.com/bithost-gmbh/pdfviewhelpers/issues/128)
 - Fixes images not working in footer, [#129](https://github.com/bithost-gmbh/pdfviewhelpers/issues/129)
+- Adds fit on page option to ImageViewHelper
 
 ## 2.1.0 - April 30, 2019
 - Adds paragraph line feed to textual ViewHelpers, [#107](https://github.com/bithost-gmbh/pdfviewhelpers/issues/107) (Thanks [@emmemme](https://github.com/emmemme))

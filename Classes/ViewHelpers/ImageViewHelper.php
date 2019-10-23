@@ -61,6 +61,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
         $this->registerArgument('src', 'mixed', 'The source of the image, can be a TYPO3 path, a File or FileReference object.', true, null);
         $this->registerArgument('link', 'string', 'The link added to the image.', false, null);
         $this->registerArgument('alignment', 'string', 'The alignment of the image if it does not fill up the full width.', false, $this->settings['image']['alignment']);
+        $this->registerArgument('fitOnPage', 'boolean', 'If true the image will automatically be rescaled to fit on page.', false, $this->settings['image']['fitOnPage']);
         $this->registerArgument('padding', 'array', 'The image padding given as array.', false, []);
         $this->registerArgument('processingInstructions', 'array', 'The processing instructions applied to the image.', false, $this->settings['image']['processingInstructions']);
     }
@@ -131,7 +132,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
                     0,
                     true,
                     false,
-                    true,
+                    $this->arguments['fitOnPage'],
                     false
                 );
                 break;
@@ -147,7 +148,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
                     '',
                     $this->arguments['alignment'],
                     0,
-                    true,
+                    $this->arguments['fitOnPage'],
                     false
                 );
                 break;
@@ -162,7 +163,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
                     '',
                     $this->arguments['alignment'],
                     0,
-                    true
+                    $this->arguments['fitOnPage']
                 );
                 break;
         }

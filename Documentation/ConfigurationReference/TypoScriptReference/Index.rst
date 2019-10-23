@@ -128,6 +128,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	list.bulletSize_                               :ref:`t3tsref:data-type-float`        1.5
 	list.autoHyphenation                           :ref:`t3tsref:data-type-boolean`      *See generalText*
 	image.alignment_                               :ref:`t3tsref:data-type-string`       left
+	image.fitOnPage_                               :ref:`t3tsref:data-type-boolean`      1
 	image.padding_                                 Array                                 {bottom: 2}
 	image.processingInstructions_                  Array                                 {}
 	html.autoHyphenation                           :ref:`t3tsref:data-type-boolean`      *See generalText*
@@ -659,6 +660,15 @@ image.alignment
 :typoscript:`plugin.tx_pdfviewhelpers.settings.image.alignment =` :ref:`t3tsref:data-type-string`
 
 Possible values are: ``L`` / ``left``, ``C`` / ``center``, ``R`` / ``right``
+
+.. _image.fitOnPage:
+
+image.fitOnPage
+"""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.image.fitOnPage =` :ref:`t3tsref:data-type-boolean`
+
+If true the image will automatically be rescaled to fit on page.
 
 .. _image.padding:
 
