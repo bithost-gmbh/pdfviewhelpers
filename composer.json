@@ -37,7 +37,6 @@
 		}
 	},
 	"replace": {
-		"pdfviewhelpers": "self.version",
 		"typo3-ter/pdfviewhelpers": "self.version"
 	},
 	"config": {
