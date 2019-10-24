@@ -20,7 +20,7 @@ conf.py:
   - - Index
     - pdfviewhelpers.tex
     - PDF ViewHelpers
-    - Markus Mächler, Esteban Marin
+    - Markus Mächler, Esteban Gehring
     - manual
   latex_elements:
     papersize: a4paper

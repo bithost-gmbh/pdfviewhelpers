@@ -27,7 +27,7 @@ This has a negative impact on the performance as well as might create other unde
 					</pdf:column>
 					<pdf:column>
 						<pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg"/>
-						<pdf:text padding="{top: 1}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
+						<pdf:text padding="{top: 1}" color="#8C8C8C">Esteban Gehring, Markus Mächler</pdf:text>
 					</pdf:column>
 				</pdf:multiColumn>
 			</pdf:avoidPageBreakInside>

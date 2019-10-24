@@ -32,10 +32,10 @@ PDF ViewHelpers
 		2016 - 2018
 
 	:Author:
-		Markus Mächler, Esteban Marin
+		Markus Mächler, Esteban Gehring
 
 	:Email:
-		markus.maechler@bithost.ch, esteban.marin@bithost.ch
+		markus.maechler@bithost.ch, esteban.gehring@bithost.ch
 
 	:License:
 		This document is published under the Open Content License
