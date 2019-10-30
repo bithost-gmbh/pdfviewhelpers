@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.?.? - Not yet released
+
+- Adds `jpeg` (with `e`) to default `allowedImageTypes`
+
 ## 2.2.0 - October 23, 2019
 
 - Adds configurable output path for generated font files, [#128](https://github.com/bithost-gmbh/pdfviewhelpers/issues/128)
