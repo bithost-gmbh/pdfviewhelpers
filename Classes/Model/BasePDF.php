@@ -305,11 +305,26 @@ class BasePDF extends Fpdi
     }
 
     /**
+     * Overwrite AddFont in order to automatically provide paths to custom fonts
+     *
+     * @inheritdoc
+     */
+    public function AddFont($family, $style='', $fontfile='', $subset='default') // phpcs:ignore
+    {
+        if (empty($fontfile) && isset($this->customFontFilePaths[$family])) {
+            $fontfile = $this->customFontFilePaths[$family];
+        }
+
+        return parent::AddFont($family, $style, $fontfile, $subset);
+    }
+
+    /**
      * @param $fontName
      * @param $fontFilePath
      */
     public function addCustomFontFilePath($fontName, $fontFilePath)
     {
+        $this->fontlist[] = $fontName;
         $this->customFontFilePaths[$fontName] = $fontFilePath;
     }
 

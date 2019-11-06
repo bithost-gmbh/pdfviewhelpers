@@ -3,6 +3,7 @@
 ## 2.?.? - Not yet released
 
 - Adds `jpeg` (with `e`) to default `allowedImageTypes`
+- Fixes custom fonts not working in HTMLViewHelper (regression), [#137](https://github.com/bithost-gmbh/pdfviewhelpers/issues/137)
 
 ## 2.2.0 - October 23, 2019
 
