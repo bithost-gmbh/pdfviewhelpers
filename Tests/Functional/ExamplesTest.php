@@ -7,7 +7,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
  *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
- *           Esteban Marin <esteban.marin@bithost.ch>, Bithost GmbH
+ *           Esteban Gehring <esteban.gehring@bithost.ch>, Bithost GmbH
  *
  *  All rights reserved
  *
@@ -33,7 +33,7 @@ use GuzzleHttp\Client;
 /**
  * ExamplesTest
  *
- * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
+ * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
 class ExamplesTest extends AbstractFunctionalTest
 {
@@ -91,7 +91,7 @@ class ExamplesTest extends AbstractFunctionalTest
         $this->assertContains('Welcome to the extension pdfviewhelpers', $text);
         $this->assertContains('Some more information', $text);
         $this->assertContains('Lorem ipsum', $text);
-        $this->assertContains('Esteban Marín, Markus Mächler', $text);
+        $this->assertContains('Esteban Gehring, Markus Mächler', $text);
         $this->assertContains('Bithost GmbH', $text);
 
         $this->validatePDF($output);

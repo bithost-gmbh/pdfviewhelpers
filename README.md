@@ -102,7 +102,7 @@ So if you feel like this extension was useful to you and saved you and your busi
             </pdf:column>
             <pdf:column width="45%" padding="{left: 2}">
                 <pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg" />
-                <pdf:text padding="{top: 1}" color="#8C8C8C">Esteban Marín, Markus Mächler</pdf:text>
+                <pdf:text padding="{top: 1}" color="#8C8C8C">Esteban Gehring, Markus Mächler</pdf:text>
             </pdf:column>
         </pdf:multiColumn>
     

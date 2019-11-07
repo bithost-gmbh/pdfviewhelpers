@@ -7,7 +7,7 @@ namespace Bithost\Pdfviewhelpers\Model;
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
  *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
- *           Esteban Marin <esteban.marin@bithost.ch>, Bithost GmbH
+ *           Esteban Gehring <esteban.gehring@bithost.ch>, Bithost GmbH
  *
  *  All rights reserved
  *
@@ -34,7 +34,7 @@ use Closure;
 /**
  * BasePDF
  *
- * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
+ * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
 class BasePDF extends Fpdi
 {
@@ -305,11 +305,26 @@ class BasePDF extends Fpdi
     }
 
     /**
+     * Overwrite AddFont in order to automatically provide paths to custom fonts
+     *
+     * @inheritdoc
+     */
+    public function AddFont($family, $style='', $fontfile='', $subset='default') // phpcs:ignore
+    {
+        if (empty($fontfile) && isset($this->customFontFilePaths[$family])) {
+            $fontfile = $this->customFontFilePaths[$family];
+        }
+
+        return parent::AddFont($family, $style, $fontfile, $subset);
+    }
+
+    /**
      * @param $fontName
      * @param $fontFilePath
      */
     public function addCustomFontFilePath($fontName, $fontFilePath)
     {
+        $this->fontlist[] = $fontName;
         $this->customFontFilePaths[$fontName] = $fontFilePath;
     }
 

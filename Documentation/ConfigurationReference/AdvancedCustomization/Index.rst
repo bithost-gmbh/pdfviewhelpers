@@ -40,7 +40,7 @@ The following example shows a ViewHelper that could be used to render a TCPDF ba
      * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
      *
      *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
-     *           Esteban Marin <esteban.marin@bithost.ch>, Bithost GmbH
+     *           Esteban Gehring <esteban.gehring@bithost.ch>, Bithost GmbH
      *
      *  All rights reserved
      *
@@ -66,7 +66,7 @@ The following example shows a ViewHelper that could be used to render a TCPDF ba
     /**
      * BarcodeViewHelper
      *
-     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
+     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
      */
     class BarcodeViewHelper extends AbstractContentElementViewHelper {
         /**
@@ -144,7 +144,7 @@ Your own PDF class is required to extend ``Bithost\Pdfviewhelpers\Model\BasePDF`
      * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
      *
      *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
-     *           Esteban Marin <esteban.marin@bithost.ch>, Bithost GmbH
+     *           Esteban Gehring <esteban.gehring@bithost.ch>, Bithost GmbH
      *
      *  All rights reserved
      *
@@ -170,7 +170,7 @@ Your own PDF class is required to extend ``Bithost\Pdfviewhelpers\Model\BasePDF`
     /**
      * MyPDF
      *
-     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Marin <esteban.marin@bithost.ch>
+     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
      */
     class MyPDF extends \Bithost\Pdfviewhelpers\Model\BasePDF
     {
