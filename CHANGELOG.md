@@ -1,9 +1,10 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 2.?.? - Not yet released
+## 2.2.1 - November 7, 2019
 
 - Adds `jpeg` (with `e`) to default `allowedImageTypes`
 - Fixes custom fonts not working in HTMLViewHelper (regression), [#137](https://github.com/bithost-gmbh/pdfviewhelpers/issues/137)
+- Removes replace `pdfviewhelpers` with `self.version` from `composer.json`
 
 ## 2.2.0 - October 23, 2019
 
