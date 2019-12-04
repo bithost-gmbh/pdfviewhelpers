@@ -329,6 +329,22 @@ class BasePDF extends Fpdi
     }
 
     /**
+     * @param array $customFontFilePaths
+     */
+    public function setCustomFontFilePaths(array $customFontFilePaths)
+    {
+        $this->customFontFilePaths = $customFontFilePaths;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomFontFilePaths()
+    {
+        return $this->customFontFilePaths;
+    }
+
+    /**
      * @return integer
      */
     public function getInnerPageWidth()

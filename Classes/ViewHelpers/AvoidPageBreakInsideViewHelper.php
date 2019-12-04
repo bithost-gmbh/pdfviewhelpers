@@ -108,6 +108,7 @@ class AvoidPageBreakInsideViewHelper extends AbstractPDFViewHelper
 
         $shadowPDF->SetMargins($realPdfMargins['left'], $realPdfMargins['top'], $realPdfMargins['right']);
         $shadowPDF->SetAutoPageBreak(true, $realPdfMargins['bottom']);
+        $shadowPDF->setCustomFontFilePaths($realPdf->getCustomFontFilePaths());
         $shadowPDF->AddPage();
 
         return $shadowPDF;
