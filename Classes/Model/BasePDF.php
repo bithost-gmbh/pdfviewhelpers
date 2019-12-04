@@ -112,16 +112,6 @@ class BasePDF extends Fpdi
      */
     protected $customFontFilePaths = [];
 
-    public function getCustomFontFilePaths()
-    {
-        return $this->customFontFilePaths;
-    }
-
-    public function setCustomFontFilePaths(array $customFontFilePaths)
-    {
-        $this->customFontFilePaths = $customFontFilePaths;
-    }
-
     /**
      * @inheritdoc
      */
@@ -336,6 +326,22 @@ class BasePDF extends Fpdi
     {
         $this->fontlist[] = $fontName;
         $this->customFontFilePaths[$fontName] = $fontFilePath;
+    }
+
+    /**
+     * @param array $customFontFilePaths
+     */
+    public function setCustomFontFilePaths(array $customFontFilePaths)
+    {
+        $this->customFontFilePaths = $customFontFilePaths;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomFontFilePaths()
+    {
+        return $this->customFontFilePaths;
     }
 
     /**
