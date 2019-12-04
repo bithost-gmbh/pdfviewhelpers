@@ -125,4 +125,20 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
         $this->assertContains('text1', $pages[0]->getText());
         $this->assertContains('text2', $pages[1]->getText());
     }
+
+    /**
+     * @test
+     */
+    public function testCustomFont()
+    {
+        $this->setUpPage([$this->getFixturePath('AvoidPageBreakInsideViewHelper/CustomFont.txt')]);
+
+        $output = $this->renderFluidTemplate(
+            $this->getFixturePath('AvoidPageBreakInsideViewHelper/CustomFont.html'),
+            [
+                'text1' => 'text1',
+                'text2' => 'text2',
+            ]
+        );
+    }
 }
