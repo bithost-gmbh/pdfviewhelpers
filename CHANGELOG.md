@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.2.2 - December 4, 2019
+
+- Fixes custom fonts not working in AvoidPageBreakViewhelper (regression), [#141](https://github.com/bithost-gmbh/pdfviewhelpers/issues/141) (Thanks [@MK-42](https://github.com/MK-42))
+
 ## 2.2.1 - November 7, 2019
 
 - Adds `jpeg` (with `e`) to default `allowedImageTypes`
