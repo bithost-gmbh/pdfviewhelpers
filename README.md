@@ -1,6 +1,6 @@
-[![TYPO3](https://img.shields.io/badge/TYPO3-7%20LTS-orange.svg)](https://typo3.org/)
 [![TYPO3](https://img.shields.io/badge/TYPO3-8%20LTS-orange.svg)](https://typo3.org/)
 [![TYPO3](https://img.shields.io/badge/TYPO3-9%20LTS-orange.svg)](https://typo3.org/)
+[![TYPO3](https://img.shields.io/badge/TYPO3-10%20LTS-orange.svg)](https://typo3.org/)
 [![Build Status](https://travis-ci.org/bithost-gmbh/pdfviewhelpers.svg?branch=master)](https://travis-ci.org/bithost-gmbh/pdfviewhelpers)
 [![Coverage](https://img.shields.io/coveralls/bithost-gmbh/pdfviewhelpers/master.svg)](https://coveralls.io/github/bithost-gmbh/pdfviewhelpers)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGTVWHW8TP8Q4)
@@ -28,7 +28,7 @@ The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](h
 - Supported output destinations: string, inline, download and file
 - Usable both in frontend and backend
 - Rich inheritance based TypoScript settings
-- Rich API [documentation](https://docs.typo3.org/typo3cms/extensions/pdfviewhelpers/) with lots of examples
+- Rich API [documentation](https://docs.typo3.org/p/bithost-gmbh/pdfviewhelpers/master/en-us/) with lots of examples
 
 ## Support Development
 With the extension `pdfviewhelpers` we try to take the pain out of creating PDF documents. 
@@ -46,7 +46,7 @@ So if you feel like this extension was useful to you and saved you and your busi
 | Git Repository     | https://github.com/bithost-gmbh/pdfviewhelpers                                                                        |
 | TER                | https://typo3.org/extensions/repository/view/pdfviewhelpers                                                           |
 | Packagist          | https://packagist.org/packages/bithost-gmbh/pdfviewhelpers                                                            |
-| Full Documentation | https://docs.typo3.org/typo3cms/extensions/pdfviewhelpers                                                             |
+| Full Documentation | https://docs.typo3.org/p/bithost-gmbh/pdfviewhelpers/master/en-us/                                                    |
 | Changelog          | https://github.com/bithost-gmbh/pdfviewhelpers/blob/master/CHANGELOG.md                                               |
 | Sponsoring         | [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGTVWHW8TP8Q4)                          |
 | Contact            | [@maechler](https://github.com/maechler), [@macjohnny](https://github.com/macjohnny), https://www.bithost.ch/kontakt/ |
@@ -59,7 +59,7 @@ So if you feel like this extension was useful to you and saved you and your busi
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:pdf="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers"
-      xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.2.xsd"
+      xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.3.xsd"
       data-namespace-typo3-fluid="true">
     
 <pdf:document outputDestination="inline" title="Bithost Example">
