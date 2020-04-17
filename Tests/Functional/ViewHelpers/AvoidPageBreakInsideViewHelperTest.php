@@ -140,5 +140,12 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
                 'text2' => 'text2',
             ]
         );
+
+        $pdf = $this->parseContent($output);
+        $pages = $pdf->getPages();
+
+        $this->assertCount(1, $pages);
+        $this->assertContains('text1', $pages[0]->getText());
+        $this->assertContains('text2', $pages[0]->getText());
     }
 }

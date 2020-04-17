@@ -29,9 +29,8 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
-use TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\AbstractNode;
-use TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode;
-use TYPO3\CMS\Fluid\Core\Compiler\TemplateCompiler;
+use TYPO3Fluid\Fluid\Core\Compiler\TemplateCompiler;
+use TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\ViewHelperNode;
 
 /**
  * MultiColumnViewHelper
@@ -39,7 +38,7 @@ use TYPO3\CMS\Fluid\Core\Compiler\TemplateCompiler;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\Fluid\Core\ViewHelper\Facets\ChildNodeAccessInterface
+class MultiColumnViewHelper extends AbstractPDFViewHelper
 {
     /**
      * @var array
@@ -70,7 +69,7 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
         $multiColumnContext['startingPage'] = $this->getPDF()->getPage();
 
         foreach ($this->childNodes as $childNode) {
-            if ($childNode instanceof \TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode
+            if ($childNode instanceof ViewHelperNode
                 && $childNode->getViewHelperClassName() === 'Bithost\Pdfviewhelpers\ViewHelpers\ColumnViewHelper'
             ) {
                 $multiColumnContext['columns'][] = $childNode;
@@ -138,12 +137,12 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper implements \TYPO3\CMS\
      * @param string $argumentsName
      * @param string $closureName
      * @param string $initializationPhpCode
-     * @param AbstractNode $node
+     * @param ViewHelperNode $node
      * @param TemplateCompiler $compiler
      *
      * @return string
      */
-    public function compile($argumentsName, $closureName, &$initializationPhpCode, AbstractNode $node, TemplateCompiler $compiler)
+    public function compile($argumentsName, $closureName, &$initializationPhpCode, ViewHelperNode $node, TemplateCompiler $compiler)
     {
         $compiler->disable();
 
