@@ -1,5 +1,12 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.3.0 - April 17, 2020
+
+- Adds support for TYPO3 10 LTS
+- Drops support for TYPO3 7 LTS
+- Changes PHP minimum version to 7.0
+- Migrates documentation to new build system, [#124](https://github.com/bithost-gmbh/pdfviewhelpers/issues/124)
+
 ## 2.2.2 - December 4, 2019
 
 - Fixes custom fonts not working in AvoidPageBreakViewhelper (regression), [#141](https://github.com/bithost-gmbh/pdfviewhelpers/issues/141) (Thanks [@MK-42](https://github.com/MK-42))
