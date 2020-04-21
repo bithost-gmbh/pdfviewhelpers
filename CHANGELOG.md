@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.3.1 - April 21, 2020
+
+- Updates version constraints for TYPO3 10 LTS
+
 ## 2.3.0 - April 17, 2020
 
 - Adds support for TYPO3 10 LTS
