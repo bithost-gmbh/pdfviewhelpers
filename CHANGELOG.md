@@ -3,6 +3,7 @@
 ## 2.?.? - Not yet released
 
 - Updates FPDI to version `2.3.3`
+- Updates TCPDF to version `6.3.5`
 
 ## 2.3.1 - April 21, 2020
 
