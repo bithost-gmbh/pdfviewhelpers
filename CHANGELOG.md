@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.?.? - Not yet released
+
+- Updates FPDI to version `2.3.3`
+
 ## 2.3.1 - April 21, 2020
 
 - Updates version constraints for TYPO3 10 LTS
