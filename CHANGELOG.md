@@ -4,6 +4,7 @@
 
 - Updates FPDI to version `2.3.3`
 - Updates TCPDF to version `6.3.5`
+- Fixes text sometimes not showing in HTML tables after a page break [#155](https://github.com/bithost-gmbh/pdfviewhelpers/issues/155)
 
 ## 2.3.1 - April 21, 2020
 

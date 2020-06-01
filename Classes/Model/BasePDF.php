@@ -144,7 +144,6 @@ class BasePDF extends Fpdi
 
         parent::setHeader();
         $this->setGraphicVars($graphicVars);
-        $this->setPageMark();
     }
 
     /**
