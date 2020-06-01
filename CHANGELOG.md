@@ -1,10 +1,11 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 2.?.? - Not yet released
+## 2.3.2 - June 1, 2020
 
 - Updates FPDI to version `2.3.3`
 - Updates TCPDF to version `6.3.5`
 - Fixes text sometimes not showing in HTML tables after a page break [#155](https://github.com/bithost-gmbh/pdfviewhelpers/issues/155)
+- Adds enc and flags parameter to addTTFFont [#156](https://github.com/bithost-gmbh/pdfviewhelpers/issues/156)
 
 ## 2.3.1 - April 21, 2020
 
