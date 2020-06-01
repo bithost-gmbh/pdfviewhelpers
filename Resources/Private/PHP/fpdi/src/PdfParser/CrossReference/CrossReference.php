@@ -3,7 +3,7 @@
  * This file is part of FPDI
  *
  * @package   setasign\Fpdi
- * @copyright Copyright (c) 2019 Setasign - Jan Slabon (https://www.setasign.com)
+ * @copyright Copyright (c) 2020 Setasign GmbH & Co. KG (https://www.setasign.com)
  * @license   http://opensource.org/licenses/mit-license The MIT License
  */
 
@@ -235,8 +235,16 @@ class CrossReference
         }
 
         if ($initValue instanceof PdfIndirectObject) {
-            // check for encryption
-            $stream = PdfStream::ensure($initValue->value);
+            try {
+                $stream = PdfStream::ensure($initValue->value);
+
+            } catch (PdfTypeException $e) {
+                throw new CrossReferenceException(
+                    'Invalid object type at xref reference offset.',
+                    CrossReferenceException::INVALID_DATA,
+                    $e
+                );
+            }
 
             $type = PdfDictionary::get($stream->value, 'Type');
             if ($type->value !== 'XRef') {
