@@ -209,7 +209,9 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         foreach ($this->settings['config']['fonts']['addTTFFont'] as $ttfFontName => $ttfFont) {
             $path = GeneralUtility::getFileAbsFileName($ttfFont['path']);
             $type = isset($ttfFont['type']) ? $ttfFont['type'] : '';
-            $fontName = \TCPDF_FONTS::addTTFfont($path, $type, '', 32, $outputPath);
+            $enc = isset($ttfFont['enc']) ? $ttfFont['enc'] : '';
+            $flags = isset($ttfFont['flags']) ? (int) $ttfFont['flags'] : 32;
+            $fontName = \TCPDF_FONTS::addTTFfont($path, $type, $enc, $flags, $outputPath);
 
             if ($fontName === false) {
                 throw new ValidationException('Font "' . $ttfFontName . '" could not be added. ERROR: 1492808000', 1492808000);
