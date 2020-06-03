@@ -296,7 +296,10 @@ class BasePDF extends Fpdi
      */
     public function SetFont($family, $style = '', $size = null, $fontfile = '', $subset = 'default', $out = true) // phpcs:ignore
     {
-        if (empty($fontfile) && isset($this->customFontFilePaths[$family])) {
+        $familyWithStyle = $family . strtolower($style);
+        if (empty($fontfile) && isset($this->customFontFilePaths[$familyWithStyle])) {
+            $fontfile = $this->customFontFilePaths[$familyWithStyle];
+        } elseif (empty($fontfile) && isset($this->customFontFilePaths[$family])) {
             $fontfile = $this->customFontFilePaths[$family];
         }
 
@@ -310,7 +313,10 @@ class BasePDF extends Fpdi
      */
     public function AddFont($family, $style='', $fontfile='', $subset='default') // phpcs:ignore
     {
-        if (empty($fontfile) && isset($this->customFontFilePaths[$family])) {
+        $familyWithStyle = $family . strtolower($style);
+        if (empty($fontfile) && isset($this->customFontFilePaths[$familyWithStyle])) {
+            $fontfile = $this->customFontFilePaths[$familyWithStyle];
+        } elseif (empty($fontfile) && isset($this->customFontFilePaths[$family])) {
             $fontfile = $this->customFontFilePaths[$family];
         }
 
