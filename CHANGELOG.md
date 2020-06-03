@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.3.3 - June 3, 2020
+
+- Fixes custom fonts not working with different styles (e.g. italic or bold), [#161](https://github.com/bithost-gmbh/pdfviewhelpers/issues/161) (Thanks [@Teddytrombone](https://github.com/Teddytrombone))
+
 ## 2.3.2 - June 1, 2020
 
 - Updates FPDI to version `2.3.3`
