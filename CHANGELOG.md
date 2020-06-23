@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.?.? - Not yet released
+
+- Fixes PDF background template overlaps with content, [#165](https://github.com/bithost-gmbh/pdfviewhelpers/issues/165)
+
 ## 2.3.3 - June 3, 2020
 
 - Fixes custom fonts not working with different styles (e.g. italic or bold), [#161](https://github.com/bithost-gmbh/pdfviewhelpers/issues/161) (Thanks [@Teddytrombone](https://github.com/Teddytrombone))

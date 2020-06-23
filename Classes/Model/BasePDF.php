@@ -214,6 +214,7 @@ class BasePDF extends Fpdi
 
         if ($this->importTemplateOnThisPage && $this->currentTemplate !== '') {
             $this->useTemplate($this->currentTemplate);
+            $this->setPageMark();
         }
     }
 
