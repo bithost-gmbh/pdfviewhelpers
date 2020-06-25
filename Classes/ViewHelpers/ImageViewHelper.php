@@ -91,7 +91,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
         $this->initializeMultiColumnSupport();
 
         $imageFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['src']);
-        $processedImage = $this->getProcessedImage($imageFile, $this->arguments['processingInstructions']);
+        $processedImage = $this->processImage($imageFile, $this->arguments['processingInstructions']);
 
         $src = '@' . $processedImage->getContents();
         $extension = $processedImage->getExtension();
@@ -176,7 +176,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
      *
      * @return FileInterface
      */
-    protected function getProcessedImage(FileInterface $imageFile, array $processingInstructions): FileInterface
+    protected function processImage(FileInterface $imageFile, array $processingInstructions)
     {
         $imageFileCrop = $imageFile->hasProperty('crop') && $imageFile->getProperty('crop') ? json_decode($imageFile->getProperty('crop'), true) : [];
 
