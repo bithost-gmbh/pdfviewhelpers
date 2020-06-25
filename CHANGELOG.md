@@ -1,9 +1,10 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 2.?.? - Not yet released
+## 2.3.4 - June 25, 2020
 
 - Fixes PDF background template overlaps with content, [#165](https://github.com/bithost-gmbh/pdfviewhelpers/issues/165)
 - Fixes EXT:news static TypoScript template not working for TYPO3 10 LTS, [#166](https://github.com/bithost-gmbh/pdfviewhelpers/issues/166)
+- Fixes crop and cropVariant not respected, [#136](https://github.com/bithost-gmbh/pdfviewhelpers/issues/136)
 
 ## 2.3.3 - June 3, 2020
 

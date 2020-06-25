@@ -697,8 +697,17 @@ An array of processing instructions that is passed to the method ``ImageService-
 		minWidth =
 		maxWidth = 200
 		minHeight =
-		crop =
-		cropVariant =
+		crop {
+			custom_crop {
+				cropArea {
+					width = 0.5
+					height = 0.5
+					x = 0
+					y = 0
+				}
+			}
+		}
+		cropVariant = custom_crop
 	}
 
 

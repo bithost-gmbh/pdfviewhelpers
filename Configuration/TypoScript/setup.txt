@@ -170,8 +170,17 @@ plugin.tx_pdfviewhelpers.settings {
 #			maxHeight =
 #			minWidth =
 #			minHeight =
-#			crop =
-#			cropVariant =
+#			crop {
+#				custom_crop {
+#					cropArea {
+#						width = 0.5
+#						height = 0.5
+#						x = 0
+#						y = 0
+#					}
+#				}
+#			}
+#			cropVariant = custom_crop
 		}
 	}
 	html {
