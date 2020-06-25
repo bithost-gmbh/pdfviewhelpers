@@ -18,8 +18,11 @@ This ViewHelper renders an image given as src. As src argument you may provide a
 
 The Image ViewHelper supports image processing using the ``processingInstructions`` attribute.
 The attribute value is directly passed to ``ImageService->applyProcessingInstructions``, thus it supports all configurations supported by this method.
+There is no need to set the ``crop`` or ``cropVariant`` in the processingInstructions in case you use the ``default`` crop of a file object.
 
 ::
 
 	<pdf:image src="{file}" processingInstructions="{maxWidth: '600'}" />
 	<pdf:image src="{file}" processingInstructions="{width: '200c'}" width="200" />
+	<pdf:image src="{file}" processingInstructions="{cropVariant: 'pdf_crop'}" />
+	<pdf:image src="{file}" processingInstructions="{cropVariant: 'pdf_crop', crop: cropArrayOrString}" />

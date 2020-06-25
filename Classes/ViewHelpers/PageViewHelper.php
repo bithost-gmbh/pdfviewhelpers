@@ -97,6 +97,7 @@ class PageViewHelper extends AbstractPDFViewHelper
 
         if ($hasImportedPage) {
             $this->getPDF()->useTemplate($template);
+            $this->getPDF()->setPageMark();
         }
 
         $this->setPageNeedsHeader(true);
