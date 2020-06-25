@@ -30,6 +30,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use TYPO3\CMS\Core\Imaging\ImageManipulation\CropVariantCollection;
+use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Extbase\Service\ImageService;
 
 /**
@@ -89,32 +90,8 @@ class ImageViewHelper extends AbstractContentElementViewHelper
     {
         $this->initializeMultiColumnSupport();
 
-        $processingInstructions = $this->arguments['processingInstructions'];
         $imageFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['src']);
-        $processedImage = $imageFile;
-        $imageFileCrop = $imageFile->hasProperty('crop') && $imageFile->getProperty('crop') ? json_decode($imageFile->getProperty('crop'), true) : [];
-
-        if (!empty($processingInstructions) || !empty($imageFileCrop)) {
-            $argumentsCrop = is_array($processingInstructions['crop']) ? $processingInstructions['crop'] : json_decode($processingInstructions['crop'], true);
-            $argumentsCrop = is_array($argumentsCrop) ? $argumentsCrop : [];
-            $crop = array_merge($imageFileCrop, $argumentsCrop);
-
-            $cropVariantCollection = CropVariantCollection::create((string) json_encode($crop));
-            $cropVariant = $processingInstructions['cropVariant'] ?? 'default';
-            $cropArea = $cropVariantCollection->getCropArea($cropVariant);
-
-            unset($processingInstructions['cropVariant']);
-
-            if ($cropArea->isEmpty()) {
-                unset($processingInstructions['crop']);
-            } else {
-                $processingInstructions['crop'] = $cropArea->makeAbsoluteBasedOnFile($imageFile);
-            }
-
-            if (!empty($processingInstructions)) {
-                $processedImage = $this->imageService->applyProcessingInstructions($imageFile, $processingInstructions);
-            }
-        }
+        $processedImage = $this->getProcessedImage($imageFile, $this->arguments['processingInstructions']);
 
         $src = '@' . $processedImage->getContents();
         $extension = $processedImage->getExtension();
@@ -191,5 +168,40 @@ class ImageViewHelper extends AbstractContentElementViewHelper
 
         $this->getPDF()->SetMargins($initialMargins['left'], $initialMargins['top'], $initialMargins['right']);
         $this->getPDF()->SetY($this->getPDF()->getImageRBY() + $this->arguments['padding']['bottom']);
+    }
+
+    /**
+     * @param FileInterface $imageFile
+     * @param array $processingInstructions
+     *
+     * @return FileInterface
+     */
+    protected function getProcessedImage(FileInterface $imageFile, array $processingInstructions): FileInterface
+    {
+        $imageFileCrop = $imageFile->hasProperty('crop') && $imageFile->getProperty('crop') ? json_decode($imageFile->getProperty('crop'), true) : [];
+
+        if (!empty($processingInstructions) || !empty($imageFileCrop)) {
+            $argumentsCrop = is_array($processingInstructions['crop']) ? $processingInstructions['crop'] : json_decode($processingInstructions['crop'], true);
+            $argumentsCrop = is_array($argumentsCrop) ? $argumentsCrop : [];
+            $crop = array_merge($imageFileCrop, $argumentsCrop);
+
+            $cropVariantCollection = CropVariantCollection::create((string) json_encode($crop));
+            $cropVariant = $processingInstructions['cropVariant'] ?? 'default';
+            $cropArea = $cropVariantCollection->getCropArea($cropVariant);
+
+            unset($processingInstructions['cropVariant']);
+
+            if ($cropArea->isEmpty()) {
+                unset($processingInstructions['crop']);
+            } else {
+                $processingInstructions['crop'] = $cropArea->makeAbsoluteBasedOnFile($imageFile);
+            }
+
+            if (!empty($processingInstructions)) {
+                return $this->imageService->applyProcessingInstructions($imageFile, $processingInstructions);
+            }
+        }
+
+        return $imageFile;
     }
 }
