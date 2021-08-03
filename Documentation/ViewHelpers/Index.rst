@@ -24,6 +24,7 @@ For detailed information about the ViewHelper attributes please refer to the Con
 	HeadlineViewHelper/Index
 	ListViewHelper/Index
 	HtmlViewHelper/Index
+	MpdfViewHelper/Index
 	ImageViewHelper/Index
 	LineBreakViewHelper/Index
 	GraphicsLineViewHelper/Index

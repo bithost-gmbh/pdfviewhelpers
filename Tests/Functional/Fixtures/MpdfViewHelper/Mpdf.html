@@ -1,0 +1,6 @@
+{namespace pdf=Bithost\Pdfviewhelpers\ViewHelpers}
+<pdf:document outputDestination="S">
+    <pdf:page>
+        <pdf:mpdf styleSheet="{styleSheet}">{html}</pdf:mpdf>
+    </pdf:page>
+</pdf:document>

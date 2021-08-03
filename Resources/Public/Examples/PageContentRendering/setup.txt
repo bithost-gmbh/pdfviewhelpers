@@ -1,0 +1,58 @@
+pdfpage = PAGE
+pdfpage {
+	# ensure there is no other output apart from the pdf
+	# take a look at the generated pdf file (end!) in a text editor to verify there is no other output
+	# like warnings, error messages or html code
+	config {
+		disableAllHeaderCode = 1
+		xhtml_cleaning = 0
+		admPanel = 0
+	}
+
+	10 = FLUIDTEMPLATE
+	10 {
+		file = EXT:pdfviewhelpers/Resources/Public/Examples/PageContentRendering/Template.html
+
+		variables {
+			mainContent < styles.content.get
+			mainContent.select.where = colPos=0
+		}
+	}
+}
+
+plugin.tx_pdfviewhelpers.settings {
+	config {
+		fonts {
+			addTTFFont {
+				roboto {
+					path = EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Roboto.ttf
+				}
+			}
+		}
+	}
+	page {
+		margin {
+			top = 40
+			bottom = 25
+		}
+	}
+	generalText {
+		fontFamily = roboto
+	}
+	html {
+		styleSheet = EXT:pdfviewhelpers/Resources/Public/Examples/PageContentRendering/styles.css
+		renderer = mpdf
+		rendererOptions {
+			fontDir {
+				0 = EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase
+			}
+			fontdata {
+				roboto {
+					R = Roboto.ttf
+				}
+			}
+		}
+	}
+}
+
+module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers

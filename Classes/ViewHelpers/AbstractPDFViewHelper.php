@@ -35,6 +35,7 @@ use Bithost\Pdfviewhelpers\MultiColumn\ContextStack;
 use Bithost\Pdfviewhelpers\Service\HyphenationService;
 use Bithost\Pdfviewhelpers\Service\ConversionService;
 use Bithost\Pdfviewhelpers\Service\ValidationService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -246,5 +247,19 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
         } else {
             throw new ValidationException('No hyphenFile configured, make sure to configure a hyphenFile for the DocumentViewHelper. ERROR: 1536993844', 1536993844);
         }
+    }
+
+    /**
+     * @param string $path Path relative to temp dir
+     *
+     * @return string Absolute path to subfolder in temp dir
+     */
+    protected function getTempPath($path)
+    {
+        $basePath = rtrim($this->settings['config']['tempDirectory'], '/');
+        $combinedPath = $basePath . DIRECTORY_SEPARATOR . ltrim($path, '/');
+        $fullPath = GeneralUtility::getFileAbsFileName($combinedPath);
+
+        return $fullPath;
     }
 }

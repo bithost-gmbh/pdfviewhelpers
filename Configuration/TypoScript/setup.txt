@@ -12,6 +12,7 @@ plugin.tx_pdfviewhelpers.settings {
 			imageEPS = ai,eps
 			imageSVG = svg
 		}
+		tempDirectory = typo3temp/pdfviewhelpers
 		fonts {
 			subset = 1
 			outputPath = typo3temp/pdfviewhelpers/fonts/
@@ -191,6 +192,10 @@ plugin.tx_pdfviewhelpers.settings {
 			right = 0
 			bottom = 2
 			left = 0
+		}
+		renderer = tcpdf
+		rendererOptions {
+
 		}
 	}
 	graphics {

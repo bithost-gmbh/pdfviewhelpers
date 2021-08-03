@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:pdf="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers"
+      xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.3.xsd"
+      data-namespace-typo3-fluid="true">
+
+<pdf:document outputDestination="inline" title="Bithost Example">
+    <pdf:header posY="15">
+        <pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/logo.png" width="40"/>
+        <pdf:text alignment="right" color="#8C8C8C" paragraphSpacing="0" posY="15">
+            Bithost GmbH
+            Milchbuckstrasse 83
+            CH-8057 Zürich
+        </pdf:text>
+    </pdf:header>
+    <pdf:footer posY="-15">
+        <pdf:graphics.line style="{color: '#8C8C8C'}" padding="{top: 0, bottom: 1.5}"/>
+        <pdf:text color="#8C8C8C">EXT:pdfviewhelpers</pdf:text>
+        <pdf:text alignment="right" color="#8C8C8C" posY="-13.5">Page Content Rendering</pdf:text>
+    </pdf:footer>
+
+    <pdf:page>
+        <pdf:html renderer="mpdf">{mainContent}</pdf:html>
+    </pdf:page>
+</pdf:document>
+
+</html>

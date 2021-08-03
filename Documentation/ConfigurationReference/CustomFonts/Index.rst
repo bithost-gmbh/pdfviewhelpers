@@ -54,3 +54,23 @@ Limitations
 """""""""""
 
 TCPDF does not support ``OpenType`` fonts with CFF data. If your font can not be added, please try to convert it to ``TTF``, there are a couple of free online converters available.
+
+In order to use custom fonts within the ``MpdfViewHelper`` you have to separately configure them like this:
+
+::
+
+	plugin.tx_pdfviewhelpers.settings {
+		mpdf {
+			configuration {
+				fontDir {
+					0 = EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase
+				}
+				fontdata {
+					roboto {
+						R = Roboto.ttf
+					}
+				}
+				default_font = roboto
+			}
+		}
+	}

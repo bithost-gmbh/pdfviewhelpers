@@ -1,0 +1,33 @@
+a {
+    text-decoration: underline;
+    color: #4070a0;
+}
+
+h1, h2, h3,
+h1 a, h2 a, h3 a {
+    text-decoration: none;
+    color: #ff642c;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: 15px;
+}
+
+h3 {
+    font-size: 12px;
+}
+
+th {
+    background-color: #DDD;
+    border: 1px solid #DDD;
+    font-weight: bold;
+}
+
+td {
+    border-bottom: 1px solid #DDD;
+}

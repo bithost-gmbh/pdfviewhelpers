@@ -229,6 +229,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper
     protected function loadSourceFile()
     {
         if (!empty($this->arguments['sourceFile'])) {
+            // TODO support FAL?
             $sourceFilePath = GeneralUtility::getFileAbsFileName($this->arguments['sourceFile']);
 
             if (!file_exists($sourceFilePath) || !is_readable($sourceFilePath)) {
