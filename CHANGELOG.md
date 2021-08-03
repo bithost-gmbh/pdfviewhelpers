@@ -2,7 +2,7 @@
 
 ## 2.3.5 - August 3, 2021
 
-- Adds extension-key configuration to composer.json, [#184](https://github.com/bithost-gmbh/pdfviewhelpers/issues/184)
+- Adds extension-key configuration to composer.json, [#184](https://github.com/bithost-gmbh/pdfviewhelpers/issues/184) (Thanks [@aimeos](https://github.com/aimeos) and [@DanielSiepmann](https://github.com/DanielSiepmann))
 
 ## 2.3.4 - June 25, 2020
 
