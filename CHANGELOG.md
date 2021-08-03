@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.3.5 - August 3, 2021
+
+- Adds extension-key configuration to composer.json, [#184](https://github.com/bithost-gmbh/pdfviewhelpers/issues/184)
+
 ## 2.3.4 - June 25, 2020
 
 - Fixes PDF background template overlaps with content, [#165](https://github.com/bithost-gmbh/pdfviewhelpers/issues/165)
