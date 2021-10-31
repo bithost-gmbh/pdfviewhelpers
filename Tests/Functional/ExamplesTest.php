@@ -50,21 +50,21 @@ class ExamplesTest extends AbstractFunctionalTest
 
         $this->assertEquals(5, count($pages));
 
-        $this->assertContains('hallo@bithost.ch - www.bithost.ch', $pages[0]->getText());
-        $this->assertContains('Full Feature Show Case', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('hallo@bithost.ch - www.bithost.ch', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('Full Feature Show Case', $pages[0]->getText());
 
-        $this->assertContains('hallo@bithost.ch - www.bithost.ch', $pages[1]->getText());
-        $this->assertContains('Application Development', $pages[1]->getText());
-        $this->assertContains('This is a h1 headline', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('hallo@bithost.ch - www.bithost.ch', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('Application Development', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('This is a h1 headline', $pages[1]->getText());
 
-        $this->assertContains('Only this page will have a different header', $pages[2]->getText());
+        $this->assertStringContainsStringIgnoringCase('Only this page will have a different header', $pages[2]->getText());
 
-        $this->assertContains('hallo@bithost.ch - www.bithost.ch', $pages[3]->getText());
-        $this->assertContains('HTML content being styled externally', $pages[3]->getText());
-        $this->assertContains('A Link to click', $pages[3]->getText());
-        $this->assertContains('We are on page 4 of 5 pages.', $pages[3]->getText());
+        $this->assertStringContainsStringIgnoringCase('hallo@bithost.ch - www.bithost.ch', $pages[3]->getText());
+        $this->assertStringContainsStringIgnoringCase('HTML content being styled externally', $pages[3]->getText());
+        $this->assertStringContainsStringIgnoringCase('A Link to click', $pages[3]->getText());
+        $this->assertStringContainsStringIgnoringCase('We are on page 4 of 5 pages.', $pages[3]->getText());
 
-        $this->assertContains('Avoid page break inside', $pages[4]->getText());
+        $this->assertStringContainsStringIgnoringCase('Avoid page break inside', $pages[4]->getText());
 
         $this->validatePDF($output);
 
@@ -87,12 +87,12 @@ class ExamplesTest extends AbstractFunctionalTest
         $text = $pdf->getText();
 
         $this->assertEquals(1, count($pdf->getPages()));
-        $this->assertContains('28.03.2013', $text);
-        $this->assertContains('Welcome to the extension pdfviewhelpers', $text);
-        $this->assertContains('Some more information', $text);
-        $this->assertContains('Lorem ipsum', $text);
-        $this->assertContains('Esteban Gehring, Markus Mächler', $text);
-        $this->assertContains('Bithost GmbH', $text);
+        $this->assertStringContainsStringIgnoringCase('28.03.2013', $text);
+        $this->assertStringContainsStringIgnoringCase('Welcome to the extension pdfviewhelpers', $text);
+        $this->assertStringContainsStringIgnoringCase('Some more information', $text);
+        $this->assertStringContainsStringIgnoringCase('Lorem ipsum', $text);
+        $this->assertStringContainsStringIgnoringCase('Esteban Gehring, Markus Mächler', $text);
+        $this->assertStringContainsStringIgnoringCase('Bithost GmbH', $text);
 
         $this->validatePDF($output);
 
@@ -113,12 +113,12 @@ class ExamplesTest extends AbstractFunctionalTest
         $text = $pdf->getText();
 
         $this->assertEquals(1, count($pdf->getPages()));
-        $this->assertContains('Mega GmbH', $text);
-        $this->assertContains('Ansprechpartner', $text);
-        $this->assertContains('www.bithost.ch', $text);
-        $this->assertContains('Here is your header', $text);
-        $this->assertContains('Here is the HTML header', $text);
-        $this->assertContains('Lorem ipsum dolor sit amet', $text);
+        $this->assertStringContainsStringIgnoringCase('Mega GmbH', $text);
+        $this->assertStringContainsStringIgnoringCase('Ansprechpartner', $text);
+        $this->assertStringContainsStringIgnoringCase('www.bithost.ch', $text);
+        $this->assertStringContainsStringIgnoringCase('Here is your header', $text);
+        $this->assertStringContainsStringIgnoringCase('Here is the HTML header', $text);
+        $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $text);
 
         $this->validatePDF($output);
 
@@ -140,39 +140,38 @@ class ExamplesTest extends AbstractFunctionalTest
 
         $this->assertCount(5, $pages);
 
-        $this->assertContains('HTML Table of content', $pages[0]->getText());
-        $this->assertContains('html-table-of-content-header', $pages[0]->getText());
-        $this->assertContains('html-table-of-content-footer', $pages[0]->getText());
-        $this->assertContains('LEVEL 0: Headline page 1', $pages[0]->getText());
-        $this->assertContains('LEVEL 0: Headline page 2', $pages[0]->getText());
-        $this->assertContains('LEVEL 1: Headline page 2, level 1', $pages[0]->getText());
-        $this->assertContains('LEVEL 0: Adding custom styled bookmark for a text', $pages[0]->getText());
-        $this->assertContains('LEVEL 0: Adding custom styled ADVANCED bookmark for a text', $pages[0]->getText());
-        $this->assertNotContains('Headline not in table of content', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('HTML Table of content', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('html-table-of-content-header', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('html-table-of-content-footer', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('LEVEL 0: Headline page 1', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('LEVEL 0: Headline page 2', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('LEVEL 1: Headline page 2, level 1', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('LEVEL 0: Adding custom styled bookmark for a text', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('LEVEL 0: Adding custom styled ADVANCED bookmark for a text', $pages[0]->getText());
+        $this->assertStringNotContainsStringIgnoringCase('Headline not in table of content', $pages[0]->getText());
 
-        $this->assertContains('Regular table of content', $pages[1]->getText());
-        $this->assertContains('regular-table-of-content-header', $pages[1]->getText());
-        $this->assertContains('regular-table-of-content-footer', $pages[1]->getText());
-        $this->assertContains('Headline page 1', $pages[1]->getText());
-        $this->assertContains('Headline page 2', $pages[1]->getText());
-        $this->assertContains('Headline page 2, level 1', $pages[1]->getText());
-        $this->assertContains('Adding custom styled bookmark for a text', $pages[1]->getText());
-        $this->assertContains('Adding custom styled ADVANCED bookmark for a text', $pages[1]->getText());
-        $this->assertNotContains('LEVEL 0', $pages[1]->getText());
-        $this->assertNotContains('LEVEL 1', $pages[1]->getText());
-        $this->assertNotContains('Headline not in table of content', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('Regular table of content', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('regular-table-of-content-header', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('regular-table-of-content-footer', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('Headline page 1', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('Headline page 2', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('Headline page 2, level 1', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('Adding custom styled bookmark for a text', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('Adding custom styled ADVANCED bookmark for a text', $pages[1]->getText());
+        $this->assertStringNotContainsStringIgnoringCase('LEVEL 0', $pages[1]->getText());
+        $this->assertStringNotContainsStringIgnoringCase('Headline not in table of content', $pages[1]->getText());
 
-        $this->assertContains('Headline page 1', $pages[2]->getText());
-        $this->assertContains('General Header', $pages[2]->getText());
-        $this->assertContains('General Footer', $pages[2]->getText());
+        $this->assertStringContainsStringIgnoringCase('Headline page 1', $pages[2]->getText());
+        $this->assertStringContainsStringIgnoringCase('General Header', $pages[2]->getText());
+        $this->assertStringContainsStringIgnoringCase('General Footer', $pages[2]->getText());
 
-        $this->assertContains('Headline page 2', $pages[3]->getText());
-        $this->assertContains('Headline page 2, level 1', $pages[3]->getText());
-        $this->assertContains('Headline page 2, level 2', $pages[3]->getText());
+        $this->assertStringContainsStringIgnoringCase('Headline page 2', $pages[3]->getText());
+        $this->assertStringContainsStringIgnoringCase('Headline page 2, level 1', $pages[3]->getText());
+        $this->assertStringContainsStringIgnoringCase('Headline page 2, level 2', $pages[3]->getText());
 
-        $this->assertContains('Headline not in table of content', $pages[4]->getText());
-        $this->assertContains('Here is some text', $pages[4]->getText());
-        $this->assertContains('Headline not in table of content', $pages[4]->getText());
+        $this->assertStringContainsStringIgnoringCase('Headline not in table of content', $pages[4]->getText());
+        $this->assertStringContainsStringIgnoringCase('Here is some text', $pages[4]->getText());
+        $this->assertStringContainsStringIgnoringCase('Headline not in table of content', $pages[4]->getText());
 
         //Do not validate as TCPDF does not produce valid documents having bookmarks
         //$this->validatePDF($output);
