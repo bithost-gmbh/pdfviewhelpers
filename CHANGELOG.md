@@ -1,5 +1,16 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.4.0 - Not yet released
+
+- Adds support for TYPO3 11 LTS, [#189](https://github.com/bithost-gmbh/pdfviewhelpers/issues/189)
+- Adds StopOutputMiddleware as a replacement for TSFE::isOutputting, [#190](https://github.com/bithost-gmbh/pdfviewhelpers/pull/190) (Thanks [@nhovratov](https://github.com/nhovratov)
+- Adds Services.yaml, [#188](https://github.com/bithost-gmbh/pdfviewhelpers/pull/188) (Thanks [@kabarakh](https://github.com/kabarakh)
+- Updates FPDI to version `2.3.6`
+- Updates TCPDF to version `6.4.2`
+- Changes PHP minimum version to `7.2`
+- Forces `TSFE::set_no_cache` if `plugin.tx_pdfviewhelpers.settings.config.disableCache` is set
+- Drops support for TYPO3 8 LTS
+
 ## 2.3.5 - August 3, 2021
 
 - Adds extension-key configuration to composer.json, [#184](https://github.com/bithost-gmbh/pdfviewhelpers/issues/184) (Thanks [@aimeos](https://github.com/aimeos) and [@DanielSiepmann](https://github.com/DanielSiepmann))
