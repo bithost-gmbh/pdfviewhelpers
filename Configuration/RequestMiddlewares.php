@@ -2,8 +2,8 @@
 
 return [
     'frontend' => [
-        'pdfviewhelpers' => [
-            'target' => \Bithost\Pdfviewhelpers\Middleware\PdfViewHelpersStopOutputMiddleware::class,
+        'bithost/pdfviewhelpers/stop-output' => [
+            'target' => \Bithost\Pdfviewhelpers\Middleware\Frontend\StopOutputMiddleware::class,
             'after' => 'typo3/cms-frontend/page-argument-validator'
         ]
     ]
