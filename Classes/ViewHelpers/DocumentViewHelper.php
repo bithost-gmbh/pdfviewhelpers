@@ -132,7 +132,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper
 
         //Disables cache if set so and in frontend mode
         if ($GLOBALS['TSFE'] instanceof TypoScriptFrontendController && $this->settings['config']['disableCache']) {
-            $GLOBALS['TSFE']->set_no_cache();
+            $GLOBALS['TSFE']->set_no_cache('EXT:pdfviewhelpers force disabled caching, see plugin.tx_pdfviewhelpers.settings.config.disableCache', true);
         }
 
         $this->viewHelperVariableContainer->add('DocumentViewHelper', 'hyphenFile', $this->arguments['hyphenFile']);
