@@ -47,11 +47,6 @@ abstract class AbstractFunctionalTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/pdfviewhelpers'];
 
     /**
-     * @var array
-     */
-    protected $coreExtensionsToLoad = ['extbase', 'fluid'];
-
-    /**
      * 150 words 890 characters
      *
      * @var string
