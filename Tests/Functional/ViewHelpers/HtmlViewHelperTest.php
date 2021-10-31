@@ -51,19 +51,19 @@ class HtmlViewHelperTest extends AbstractFunctionalTest
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertContains('Headline', $pdf->getText());
-        $this->assertContains('Text', $pdf->getText());
-        $this->assertNotContains('<h1>', $pdf->getText());
-        $this->assertNotContains('<p>', $pdf->getText());
+        $this->assertStringContainsStringIgnoringCase('Headline', $pdf->getText());
+        $this->assertStringContainsStringIgnoringCase('Text', $pdf->getText());
+        $this->assertStringNotContainsStringIgnoringCase('<h1>', $pdf->getText());
+        $this->assertStringNotContainsStringIgnoringCase('<p>', $pdf->getText());
     }
 
     /**
      * @test
-     *
-     * @expectedException \Bithost\Pdfviewhelpers\Exception\ValidationException
      */
     public function testInvalidStylesheet()
     {
+        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+
         $this->renderFluidTemplate(
             $this->getFixturePath('HtmlViewHelper/Html.html'),
             ['html' => '', 'styleSheet' => 'EXT:pdfviewhelpers/Tests/Functional/Fixtures/HtmlViewHelper/NonExistingPath.css']

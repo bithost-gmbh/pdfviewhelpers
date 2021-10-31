@@ -76,11 +76,11 @@ class ImageViewHelperTest extends AbstractFunctionalTest
 
     /**
      * @test
-     *
-     * @expectedException \Bithost\Pdfviewhelpers\Exception\ValidationException
      */
     public function testInvalidStringSource()
     {
+        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+
         $output = $this->renderFluidTemplate(
             $this->getFixturePath('ImageViewHelper/Image.html'),
             ['src' => $this->getFixturePath('ImageViewHelper/NoFileHere.jpg')]
