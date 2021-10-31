@@ -50,7 +50,7 @@ class ListViewHelperTest extends AbstractFunctionalTest
         $pdf = $this->parseContent($output);
 
         foreach ($listElements as $listElement) {
-            $this->assertContains($listElement, $pdf->getText());
+            $this->assertStringContainsStringIgnoringCase($listElement, $pdf->getText());
         }
     }
 }

@@ -56,8 +56,8 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
         $pages = $pdf->getPages();
 
         $this->assertCount(2, $pages);
-        $this->assertContains('text1', $pages[0]->getText());
-        $this->assertContains('text2', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('text2', $pages[1]->getText());
     }
 
     /**
@@ -78,8 +78,8 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
         $pages = $pdf->getPages();
 
         $this->assertCount(2, $pages);
-        $this->assertContains('text1', $pages[0]->getText());
-        $this->assertContains('text2', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('text2', $pages[1]->getText());
     }
 
     /**
@@ -100,8 +100,8 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
         $pages = $pdf->getPages();
 
         $this->assertCount(2, $pages);
-        $this->assertContains('text1', $pages[0]->getText());
-        $this->assertContains('text2', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('text2', $pages[0]->getText());
     }
 
     /**
@@ -122,8 +122,8 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
         $pages = $pdf->getPages();
 
         $this->assertCount(3, $pages);
-        $this->assertContains('text1', $pages[0]->getText());
-        $this->assertContains('text2', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('text2', $pages[1]->getText());
     }
 
     /**
@@ -145,7 +145,7 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
         $pages = $pdf->getPages();
 
         $this->assertCount(1, $pages);
-        $this->assertContains('text1', $pages[0]->getText());
-        $this->assertContains('text2', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('text2', $pages[0]->getText());
     }
 }

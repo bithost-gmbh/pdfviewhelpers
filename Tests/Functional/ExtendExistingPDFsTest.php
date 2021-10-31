@@ -53,15 +53,15 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTest
 
         $this->assertCount(2, $pages);
 
-        $this->assertContains('Mega GmbH', $pages[0]->getText());
-        $this->assertContains('Ansprechpartner', $pages[0]->getText());
-        $this->assertContains('www.bithost.ch', $pages[0]->getText());
-        $this->assertContains('Lorem ipsum dolor sit amet', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('Mega GmbH', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('Ansprechpartner', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('www.bithost.ch', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[0]->getText());
 
-        $this->assertContains('Mega GmbH', $pages[1]->getText());
-        $this->assertContains('Ansprechpartner', $pages[1]->getText());
-        $this->assertContains('www.bithost.ch', $pages[1]->getText());
-        $this->assertContains('Lorem ipsum dolor sit amet', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('Mega GmbH', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('Ansprechpartner', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('www.bithost.ch', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[1]->getText());
     }
 
     /**
@@ -82,24 +82,24 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTest
 
         $this->assertCount(2, $pages);
 
-        $this->assertContains('Mega GmbH', $pages[0]->getText());
-        $this->assertContains('Ansprechpartner', $pages[0]->getText());
-        $this->assertContains('www.bithost.ch', $pages[0]->getText());
-        $this->assertContains('Lorem ipsum dolor sit amet', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('Mega GmbH', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('Ansprechpartner', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('www.bithost.ch', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[0]->getText());
 
-        $this->assertNotContains('Mega GmbH', $pages[1]->getText());
-        $this->assertNotContains('Ansprechpartner', $pages[1]->getText());
-        $this->assertNotContains('www.bithost.ch', $pages[1]->getText());
-        $this->assertContains('Lorem ipsum dolor sit amet', $pages[1]->getText());
+        $this->assertStringNotContainsStringIgnoringCase('Mega GmbH', $pages[1]->getText());
+        $this->assertStringNotContainsStringIgnoringCase('Ansprechpartner', $pages[1]->getText());
+        $this->assertStringNotContainsStringIgnoringCase('www.bithost.ch', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[1]->getText());
     }
 
     /**
      * @test
-     *
-     * @expectedException \Bithost\Pdfviewhelpers\Exception\Exception
      */
     public function testImportWrongPage()
     {
+        $this->expectException(\Bithost\Pdfviewhelpers\Exception\Exception::class);
+
         $this->renderFluidTemplate(
             $this->getFixturePath('ExtendExistingPDFs/Template.html'),
             [

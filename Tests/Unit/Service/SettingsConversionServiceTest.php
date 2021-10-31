@@ -46,7 +46,7 @@ class SettingsConversionServiceTest extends AbstractUnitTest
     /**
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->settingsConversionService = new ConversionService();
     }
@@ -82,11 +82,11 @@ class SettingsConversionServiceTest extends AbstractUnitTest
 
     /**
      * @test
-     *
-     * @expectedException \Bithost\Pdfviewhelpers\Exception\ValidationException
      */
     public function testInvalidOrientation()
     {
+        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+
         $this->settingsConversionService->convertSpeakingOrientationToTcpdfOrientation('foobar');
     }
 
@@ -119,11 +119,11 @@ class SettingsConversionServiceTest extends AbstractUnitTest
 
     /**
      * @test
-     *
-     * @expectedException \Bithost\Pdfviewhelpers\Exception\ValidationException
      */
     public function testInvalidOutputDestination()
     {
+        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+
         $this->settingsConversionService->convertSpeakingOutputDestinationToTcpdfOutputDestination('foobar');
     }
 
@@ -150,11 +150,11 @@ class SettingsConversionServiceTest extends AbstractUnitTest
 
     /**
      * @test
-     *
-     * @expectedException \Bithost\Pdfviewhelpers\Exception\ValidationException
      */
     public function testInvalidFontStyle()
     {
+        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+
         $this->settingsConversionService->convertSpeakingFontStyleToTcpdfFontStyle('foobar');
     }
 
@@ -181,11 +181,11 @@ class SettingsConversionServiceTest extends AbstractUnitTest
 
     /**
      * @test
-     *
-     * @expectedException \Bithost\Pdfviewhelpers\Exception\ValidationException
      */
     public function testInvalidAlignment()
     {
+        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+
         $this->settingsConversionService->convertSpeakingAlignmentToTcpdfAlignment('foobar');
     }
 

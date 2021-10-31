@@ -47,15 +47,15 @@ class PageViewHelperTest extends AbstractFunctionalTest
         $pages = $pdf->getPages();
 
         $this->assertEquals(3, count($pages));
-        $this->assertContains('Page 1', $pages[0]->getText());
-        $this->assertNotContains('Page 2', $pages[0]->getText());
-        $this->assertNotContains('Page 3', $pages[0]->getText());
-        $this->assertContains('Page 2', $pages[1]->getText());
-        $this->assertNotContains('Page 1', $pages[1]->getText());
-        $this->assertNotContains('Page 3', $pages[1]->getText());
-        $this->assertContains('Page 3', $pages[2]->getText());
-        $this->assertNotContains('Page 1', $pages[2]->getText());
-        $this->assertNotContains('Page 2', $pages[2]->getText());
+        $this->assertStringContainsStringIgnoringCase('Page 1', $pages[0]->getText());
+        $this->assertStringNotContainsStringIgnoringCase('Page 2', $pages[0]->getText());
+        $this->assertStringNotContainsStringIgnoringCase('Page 3', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('Page 2', $pages[1]->getText());
+        $this->assertStringNotContainsStringIgnoringCase('Page 1', $pages[1]->getText());
+        $this->assertStringNotContainsStringIgnoringCase('Page 3', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('Page 3', $pages[2]->getText());
+        $this->assertStringNotContainsStringIgnoringCase('Page 1', $pages[2]->getText());
+        $this->assertStringNotContainsStringIgnoringCase('Page 2', $pages[2]->getText());
     }
 
     /**

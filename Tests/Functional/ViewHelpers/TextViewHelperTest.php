@@ -53,7 +53,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertContains('Some text containing double whitespaces', $pdf->getText());
+        $this->assertStringContainsStringIgnoringCase('Some text containing double whitespaces', $pdf->getText());
     }
 
     /**
@@ -67,7 +67,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertContains(trim($this->untrimmedText), $pdf->getText());
+        $this->assertStringContainsStringIgnoringCase(trim($this->untrimmedText), $pdf->getText());
     }
 
     /**
@@ -81,7 +81,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertContains('Text', $pdf->getText());
+        $this->assertStringContainsStringIgnoringCase('Text', $pdf->getText());
     }
 
     /**
@@ -95,16 +95,16 @@ class TextViewHelperTest extends AbstractFunctionalTest
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertContains('Text', $pdf->getText());
+        $this->assertStringContainsStringIgnoringCase('Text', $pdf->getText());
     }
 
     /**
      * @test
-     *
-     * @expectedException \Bithost\Pdfviewhelpers\Exception\ValidationException
      */
     public function testInvalidColor()
     {
+        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+
         $this->renderFluidTemplate(
             $this->getFixturePath('TextViewHelper/TextColor.html'),
             ['color' => '#1']
@@ -122,16 +122,16 @@ class TextViewHelperTest extends AbstractFunctionalTest
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertContains('Text', $pdf->getText());
+        $this->assertStringContainsStringIgnoringCase('Text', $pdf->getText());
     }
 
     /**
      * @test
-     *
-     * @expectedException \Bithost\Pdfviewhelpers\Exception\ValidationException
      */
     public function testInvalidPAddingKey()
     {
+        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+
         $this->renderFluidTemplate(
             $this->getFixturePath('TextViewHelper/TextPadding.html'),
             ['padding' => ['tops' => 2]]
@@ -140,11 +140,11 @@ class TextViewHelperTest extends AbstractFunctionalTest
 
     /**
      * @test
-     *
-     * @expectedException \Bithost\Pdfviewhelpers\Exception\ValidationException
      */
     public function testInvalidPAdding()
     {
+        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+
         $this->renderFluidTemplate(
             $this->getFixturePath('TextViewHelper/TextPadding.html'),
             ['padding' => ['bottom' => 'lorem']]

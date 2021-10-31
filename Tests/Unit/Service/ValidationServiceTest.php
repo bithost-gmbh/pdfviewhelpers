@@ -48,7 +48,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->validationService = new ValidationService();
     }
@@ -107,13 +107,12 @@ class ValidationServiceTest extends AbstractUnitTest
 
     /**
      * @test
-     *
-     * @expectedException \Bithost\Pdfviewhelpers\Exception\ValidationException
      */
     public function testInvalidPaddingTooManyElements()
     {
         $padding = ['top' => 0, 'right' => 0, 'bottom' => 0, 'left' => 0, 'bla' => 0];
 
+        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
         $this->validationService->validatePadding($padding);
     }
 
