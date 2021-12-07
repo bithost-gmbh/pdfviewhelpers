@@ -1,6 +1,6 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 2.4.0 - Not yet released
+## 2.4.0 - December 7, 2021
 
 - Adds support for TYPO3 11 LTS, [#189](https://github.com/bithost-gmbh/pdfviewhelpers/issues/189)
 - Adds StopOutputMiddleware as a replacement for TSFE::isOutputting, [#190](https://github.com/bithost-gmbh/pdfviewhelpers/pull/190) (Thanks [@nhovratov](https://github.com/nhovratov)
