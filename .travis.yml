@@ -11,6 +11,8 @@ matrix:
       env: TYPO3_VERSION=^9 COVERAGE="YES"
     - php: 7.4
       env: TYPO3_VERSION=^10
+    - php: 7.4
+      env: TYPO3_VERSION=^11
     - php: 8.0
       env: TYPO3_VERSION=^11
 
