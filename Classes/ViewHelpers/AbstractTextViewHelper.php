@@ -99,6 +99,11 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         $this->mergeSettingsAndArguments();
 
         if (empty($this->arguments['text'])) {
+            // Workaround for an issue with the PageNumberAliasViewHelper and custom fonts, also see https://github.com/bithost-gmbh/pdfviewhelpers/issues/187
+            if ($this->validationService->validateFontFamily($this->arguments['fontFamily'])) {
+                $this->getPDF()->SetFont($this->arguments['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($this->arguments['fontStyle']));
+            }
+
             $this->arguments['text'] = $this->renderChildren();
         }
 

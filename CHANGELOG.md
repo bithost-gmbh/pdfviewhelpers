@@ -10,6 +10,7 @@
 - Changes PHP minimum version to `7.2`
 - Forces `TSFE::set_no_cache` if `plugin.tx_pdfviewhelpers.settings.config.disableCache` is set
 - Drops support for TYPO3 8 LTS
+- Fixes PageNumberAliasViewHelper not working with custom fonts, [#187](https://github.com/bithost-gmbh/pdfviewhelpers/issues/187)
 
 ## 2.3.5 - August 3, 2021
 
