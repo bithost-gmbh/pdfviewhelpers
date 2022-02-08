@@ -19,7 +19,7 @@ class StopOutputMiddleware implements MiddlewareInterface
         $response = $handler->handle($request);
 
         if (GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion() >= 11
-            && $GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers']['pdfOutput'] ?? false
+            && ($GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers']['pdfOutput'] ?? false)
         ) {
             return new NullResponse();
         }
