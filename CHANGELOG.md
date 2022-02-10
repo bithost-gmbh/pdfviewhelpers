@@ -1,5 +1,10 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.4.1 - February 10, 2022
+
+- Fixes undefined array key warning, [#198](https://github.com/bithost-gmbh/pdfviewhelpers/issues/198) (Thanks [@Physikbuddha](https://github.com/Physikbuddha)
+- Updates version constraint for typo3/cms-core to improve readability and compatibility
+
 ## 2.4.0 - December 7, 2021
 
 - Adds support for TYPO3 11 LTS, [#189](https://github.com/bithost-gmbh/pdfviewhelpers/issues/189)
