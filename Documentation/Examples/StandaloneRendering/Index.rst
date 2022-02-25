@@ -20,8 +20,7 @@ PHP
 ::
 
 	<?php
-	$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-	$standaloneView = $objectManager->get(\TYPO3\CMS\Fluid\View\StandaloneView::class);
+	$standaloneView = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Fluid\View\StandaloneView::class);
 	$templatePath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Template.html');
 
 	$standaloneView->setFormat('html');
