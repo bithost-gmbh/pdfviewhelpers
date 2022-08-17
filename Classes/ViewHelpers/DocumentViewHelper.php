@@ -85,6 +85,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $this->registerArgument('pdfa', 'boolean', 'If true PDF/A mode is enabled.', false, (boolean) $this->settings['document']['pdfa']);
         $this->registerArgument('language', 'string', 'The language of the document.', false, $this->settings['document']['language']);
         $this->registerArgument('hyphenFile', 'string', 'The hyphen file to be used for the automatic hyphenation.', false, $this->settings['document']['hyphenFile']);
+        $this->registerArgument('pdfua', 'boolean', 'If true PDF/UA-1 mode is enabled.', false, (boolean) $this->settings['document']['pdfua']);
     }
 
     /**
@@ -120,6 +121,58 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $this->loadTcpdfLanguageSettings();
         $this->loadCustomFonts();
         $this->loadSourceFile();
+
+        /*
+        Part for increasing accessability (ua-1)
+        */
+        $this->getPDF()->removeTcpdfLink();
+
+        if ($this->arguments['pdfua']) {
+            //sadly I do not see a possibility to improve the tagging-Problem (every content is not tagged with tcpdf)
+            //images have no alternative text :-(
+
+            // set array for viewer preferences
+            $preferences = array(
+                'DisplayDocTitle' => true
+                //here are much more settings, but i think we do not need more of them
+            );
+
+            // set pdf viewer preferences
+            $this->getPDF()->setViewerPreferences($preferences);
+
+            //set PDF/UA-Flag
+            //from https://taggedpdf.com/508-pdf-help-center/pdfua-identifier-missing/
+            $this->getPDF()->setExtraXMPRDF('
+    <rdf:Description rdf:about=""
+	    xmlns:pdfaExtension="http://www.aiim.org/pdfa/ns/extension/"
+	    xmlns:pdfaSchema="http://www.aiim.org/pdfa/ns/schema#"
+	    xmlns:pdfaProperty="http://www.aiim.org/pdfa/ns/property#"
+	    xmlns:pdfuaid="http://www.aiim.org/pdfua/ns/id/">
+		<pdfaExtension:schemas>
+			<rdf:Bag>
+				<rdf:li rdf:parseType="Resource">
+					<pdfaSchema:schema>PDF/UA Universal Accessibility Schema</pdfaSchema:schema>
+					<pdfaSchema:namespaceURI>http://www.aiim.org/pdfua/ns/id/</pdfaSchema:namespaceURI>
+					<pdfaSchema:prefix>pdfuaid</pdfaSchema:prefix>
+					<pdfaSchema:property>
+						<rdf:Seq>
+							<rdf:li rdf:parseType="Resource">
+								<pdfaProperty:name>part</pdfaProperty:name>
+								<pdfaProperty:valueType>Integer</pdfaProperty:valueType>
+								<pdfaProperty:category>internal</pdfaProperty:category>
+								<pdfaProperty:description>Indicates, which part of ISO 14289 standard is followed</pdfaProperty:description>
+							</rdf:li>
+						</rdf:Seq>
+					</pdfaSchema:property>
+				</rdf:li>
+			</rdf:Bag>
+		</pdfaExtension:schemas>
+		<pdfuaid:part>1</pdfuaid:part>
+	</rdf:Description>'
+            );
+        }
+
+
 
         $this->getPDF()->setSRGBmode($this->settings['config']['sRGBMode'] === '1');
         $this->getPDF()->setFontSubsetting($this->settings['config']['fonts']['subset'] === '1');

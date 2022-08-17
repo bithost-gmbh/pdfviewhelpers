@@ -88,8 +88,6 @@ class PageViewHelper extends AbstractPDFViewHelper
             }
         }
 
-        $this->getPDF()->removeTcpdfLink();
-
         $this->getPDF()->setIsAutoPageBreak(false);
         $this->getPDF()->setImportTemplateOnThisPage(false);
         $this->getPDF()->SetMargins($this->arguments['margin']['left'], $this->arguments['margin']['top'], $this->arguments['margin']['right']);
