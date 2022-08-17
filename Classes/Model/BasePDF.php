@@ -408,4 +408,11 @@ class BasePDF extends Fpdi
     {
         return $this->pdfunit;
     }
+
+    /**
+     * remove the ad-Link in bottom left
+     */
+    function removeTcpdfLink() {
+        $this->tcpdflink = false;
+    }
 }
