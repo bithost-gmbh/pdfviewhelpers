@@ -131,7 +131,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $this->getPDF()->setCreator($this->arguments['creator']);
 
         //Disables cache if set so and in frontend mode
-        if ($GLOBALS['TSFE'] instanceof TypoScriptFrontendController && $this->settings['config']['disableCache']) {
+        if (isset($GLOBALS['TSFE']) && $GLOBALS['TSFE'] instanceof TypoScriptFrontendController && $this->settings['config']['disableCache']) {
             $GLOBALS['TSFE']->set_no_cache('EXT:pdfviewhelpers force disabled caching, see plugin.tx_pdfviewhelpers.settings.config.disableCache', true);
         }
 

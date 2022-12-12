@@ -101,7 +101,7 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
     {
         $multiColumnContext = $this->getCurrentMultiColumnContext();
 
-        if ($multiColumnContext !== null && $multiColumnContext['isInAColumn']) {
+        if (is_array($multiColumnContext) && $multiColumnContext['isInAColumn']) {
             if ($this->arguments['width'] === null) {
                 $this->arguments['width'] =  $multiColumnContext['columnWidth'];
             } else {
