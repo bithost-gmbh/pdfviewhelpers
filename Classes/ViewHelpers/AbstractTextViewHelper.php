@@ -124,11 +124,11 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
 
         if ($this->validationService->validateColor($this->arguments['color'])) {
             $this->arguments['color'] = $this->conversionService->convertHexToRGB($this->arguments['color']);
-            $this->getPDF()->SetTextColor($this->arguments['color']['R'], $this->arguments['color']['G'], $this->arguments['color']['B']);
+            $this->getPDF()->setTextColor($this->arguments['color']['R'], $this->arguments['color']['G'], $this->arguments['color']['B']);
         }
 
         if ($this->validationService->validateFontSize($this->arguments['fontSize'])) {
-            $this->getPDF()->SetFontSize($this->arguments['fontSize']);
+            $this->getPDF()->setFontSize($this->arguments['fontSize']);
         }
 
         if ($this->validationService->validateFontFamily($this->arguments['fontFamily'])) {
@@ -183,7 +183,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
             $posY = $this->getPDF()->GetY();
         }
 
-        $this->getPDF()->SetY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
+        $this->getPDF()->setY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
     }
 
     /**

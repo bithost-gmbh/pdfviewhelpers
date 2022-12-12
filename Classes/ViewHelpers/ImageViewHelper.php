@@ -109,7 +109,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
             $marginRight = $initialMargins['right'] + $this->arguments['padding']['right'];
         }
 
-        $this->getPDF()->SetMargins($marginLeft, $initialMargins['top'], $marginRight);
+        $this->getPDF()->setMargins($marginLeft, $initialMargins['top'], $marginRight);
 
         switch ($this->conversionService->convertImageExtensionToRenderMode($extension)) {
             case 'image':
@@ -166,8 +166,8 @@ class ImageViewHelper extends AbstractContentElementViewHelper
                 break;
         }
 
-        $this->getPDF()->SetMargins($initialMargins['left'], $initialMargins['top'], $initialMargins['right']);
-        $this->getPDF()->SetY($this->getPDF()->getImageRBY() + $this->arguments['padding']['bottom']);
+        $this->getPDF()->setMargins($initialMargins['left'], $initialMargins['top'], $initialMargins['right']);
+        $this->getPDF()->setY($this->getPDF()->getImageRBY() + $this->arguments['padding']['bottom']);
     }
 
     /**

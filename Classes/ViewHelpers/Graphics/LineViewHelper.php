@@ -110,7 +110,7 @@ class LineViewHelper extends AbstractContentElementViewHelper
         );
 
         if ($this->arguments['padding']['bottom'] > 0) {
-            $this->getPDF()->SetAbsY($this->getPDF()->GetY() + $this->arguments['padding']['top'] + $this->arguments['padding']['bottom']);
+            $this->getPDF()->setAbsY($this->getPDF()->GetY() + $this->arguments['padding']['top'] + $this->arguments['padding']['bottom']);
         }
     }
 }
