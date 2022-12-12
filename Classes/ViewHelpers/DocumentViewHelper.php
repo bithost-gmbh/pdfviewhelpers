@@ -124,11 +124,11 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $this->getPDF()->setSRGBmode($this->settings['config']['sRGBMode'] === '1');
         $this->getPDF()->setFontSubsetting($this->settings['config']['fonts']['subset'] === '1');
         $this->getPDF()->setJPEGQuality($this->settings['config']['jpgQuality']);
-        $this->getPDF()->SetTitle($this->arguments['title']);
-        $this->getPDF()->SetSubject($this->arguments['subject']);
-        $this->getPDF()->SetAuthor($this->arguments['author']);
-        $this->getPDF()->SetKeywords($this->arguments['keywords']);
-        $this->getPDF()->SetCreator($this->arguments['creator']);
+        $this->getPDF()->setTitle($this->arguments['title']);
+        $this->getPDF()->setSubject($this->arguments['subject']);
+        $this->getPDF()->setAuthor($this->arguments['author']);
+        $this->getPDF()->setKeywords($this->arguments['keywords']);
+        $this->getPDF()->setCreator($this->arguments['creator']);
 
         //Disables cache if set so and in frontend mode
         if ($GLOBALS['TSFE'] instanceof TypoScriptFrontendController && $this->settings['config']['disableCache']) {

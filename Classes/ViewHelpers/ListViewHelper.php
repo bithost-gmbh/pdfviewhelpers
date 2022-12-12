@@ -100,7 +100,7 @@ class ListViewHelper extends AbstractTextViewHelper
         $textWidth = $this->arguments['width'] - $this->arguments['padding']['left'] - 2 * $this->arguments['bulletSize'];
 
         //Update y respecting padding
-        $this->getPDF()->SetY($this->arguments['posY'] + $this->arguments['padding']['top']);
+        $this->getPDF()->setY($this->arguments['posY'] + $this->arguments['padding']['top']);
 
         if (!empty($this->arguments['bulletImageSrc'])) {
             $bulletImageFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['bulletImageSrc']);
@@ -109,7 +109,7 @@ class ListViewHelper extends AbstractTextViewHelper
 
         //The height of a single text line
         $oneLineTextHeight = $this->getPDF()->getStringHeight($textWidth, '.');
-
+        $elementEndY = $this->getPDF()->getY();
         foreach ($this->arguments['listElements'] as $listElement) {
             if ($this->arguments['autoHyphenation']) {
                 $listElement = $this->hyphenationService->hyphenateText(
@@ -151,7 +151,7 @@ class ListViewHelper extends AbstractTextViewHelper
             $this->getPDF()->setY($elementEndY);
         }
 
-        $this->getPDF()->SetY($elementEndY + $this->arguments['padding']['bottom']);
+        $this->getPDF()->setY($elementEndY + $this->arguments['padding']['bottom']);
     }
 
     /**

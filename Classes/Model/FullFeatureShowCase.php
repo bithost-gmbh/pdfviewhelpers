@@ -47,13 +47,13 @@ class FullFeatureShowCase extends BasePDF
      */
     public function basePdfFooter()
     {
-        $this->SetY(-20);
-        $this->SetDrawColor(140, 140, 140);
+        $this->setY(-20);
+        $this->setDrawColor(140, 140, 140);
         $this->Line(15, $this->y, $this->w - 15, $this->y);
 
-        $this->SetY(-17);
-        $this->SetTextColor(140, 140, 140);
-        $this->SetFontSize(11);
-        $this->Cell($this->w - 15, 10, 'Page ' . $this->getAliasNumPage() . ' of ' . $this->getAliasNbPages(), 0, false, 'C', 0, '', 1, false, 'T', 'M');
+        $this->setY(-17);
+        $this->setTextColor(140, 140, 140);
+        $this->setFontSize(11);
+        $this->Cell($this->w - 15, 10, 'Page ' . $this->getAliasNumPage() . ' of ' . $this->getAliasNbPages(), 0, false, 'C', 0, '', 1);
     }
 }

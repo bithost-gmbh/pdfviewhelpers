@@ -75,7 +75,7 @@ class FooterViewHelper extends AbstractPDFViewHelper
             $footerViewHelper->pushMultiColumnContext([]); // avoid interference of page and footer multi column context
 
             if ($arguments['posY']) {
-                $pdf->SetY($arguments['posY']);
+                $pdf->setY($arguments['posY']);
             }
 
             $renderChildrenClosure();

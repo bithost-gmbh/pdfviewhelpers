@@ -241,7 +241,7 @@ class BasePDF extends Fpdi
     }
 
     /**
-     * @param Closure $closure
+     * @param Closure|null $closure
      * @param string $scope
      *
      * @return void
@@ -257,7 +257,7 @@ class BasePDF extends Fpdi
     }
 
     /**
-     * @param Closure $closure
+     * @param Closure|null $closure
      * @param string $scope
      *
      * @return void

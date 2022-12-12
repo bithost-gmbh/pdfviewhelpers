@@ -95,7 +95,7 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper
         /** @var ViewHelperNode $column */
         foreach ($multiColumnContext['columns'] as $column) {
             $this->getPDF()->setPage($multiColumnContext['startingPage']);
-            $this->getPDF()->SetY($multiColumnContext['posY']);
+            $this->getPDF()->setY($multiColumnContext['posY']);
 
             $column->evaluate($this->renderingContext);
 
@@ -114,8 +114,8 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper
         }
 
         $this->getPDF()->setPage($multiColumnContext['longestColumnPage']);
-        $this->getPDF()->SetY($multiColumnContext['longestColumnPosY']);
-        $this->getPDF()->SetX($multiColumnContext['posX']);
+        $this->getPDF()->setY($multiColumnContext['longestColumnPosY']);
+        $this->getPDF()->setX($multiColumnContext['posX']);
 
         $this->popMultiColumnContext();
     }

@@ -93,7 +93,7 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
             $marginRight = $this->getPDF()->getPageWidth() - $marginLeft - $this->arguments['width'] + $this->arguments['padding']['right'];
         }
 
-        $this->getPDF()->SetMargins($marginLeft, $initialMargins['top'], $marginRight);
+        $this->getPDF()->setMargins($marginLeft, $initialMargins['top'], $marginRight);
 
         if (!empty($this->arguments['styleSheet'])) {
             $styleSheetFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['styleSheet']);
@@ -109,18 +109,18 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         }
 
         //reset settings to generalText
-        $this->getPDF()->SetTextColor($color['R'], $color['G'], $color['B']);
-        $this->getPDF()->SetFontSize($this->settings['generalText']['fontSize']);
+        $this->getPDF()->setTextColor($color['R'], $color['G'], $color['B']);
+        $this->getPDF()->setFontSize($this->settings['generalText']['fontSize']);
         $this->getPDF()->SetFont($this->settings['generalText']['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($this->settings['generalText']['fontStyle']));
         $this->getPDF()->setCellPaddings(0, 0, 0, 0); //reset padding to avoid errors on nested tags
         $this->getPDF()->setCellHeightRatio($this->settings['generalText']['lineHeight']);
         $this->getPDF()->setFontSpacing($this->settings['generalText']['characterSpacing']);
 
-        $this->getPDF()->SetY($this->arguments['posY'] + $this->arguments['padding']['top']);
+        $this->getPDF()->setY($this->arguments['posY'] + $this->arguments['padding']['top']);
 
         $this->getPDF()->writeHTML($htmlStyle . $html, true, false, true, false, '');
 
-        $this->getPDF()->SetY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
-        $this->getPDF()->SetMargins($initialMargins['left'], $initialMargins['top'], $initialMargins['right']);
+        $this->getPDF()->setY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
+        $this->getPDF()->setMargins($initialMargins['left'], $initialMargins['top'], $initialMargins['right']);
     }
 }

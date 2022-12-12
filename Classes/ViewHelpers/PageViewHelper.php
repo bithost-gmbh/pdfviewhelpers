@@ -90,8 +90,8 @@ class PageViewHelper extends AbstractPDFViewHelper
 
         $this->getPDF()->setIsAutoPageBreak(false);
         $this->getPDF()->setImportTemplateOnThisPage(false);
-        $this->getPDF()->SetMargins($this->arguments['margin']['left'], $this->arguments['margin']['top'], $this->arguments['margin']['right']);
-        $this->getPDF()->SetAutoPageBreak($this->arguments['autoPageBreak'], $this->arguments['margin']['bottom']);
+        $this->getPDF()->setMargins($this->arguments['margin']['left'], $this->arguments['margin']['top'], $this->arguments['margin']['right']);
+        $this->getPDF()->setAutoPageBreak($this->arguments['autoPageBreak'], $this->arguments['margin']['bottom']);
 
         $this->getPDF()->AddPage($this->arguments['orientation'], $this->arguments['format'], $this->arguments['keepMargins'], $this->arguments['tableOfContentPage']);
 

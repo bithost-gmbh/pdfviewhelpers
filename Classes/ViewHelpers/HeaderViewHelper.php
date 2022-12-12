@@ -75,7 +75,7 @@ class HeaderViewHelper extends AbstractPDFViewHelper
             $headerViewHelper->pushMultiColumnContext([]); // avoid interference of page and header multi column context
 
             if ($arguments['posY']) {
-                $pdf->SetY($arguments['posY']);
+                $pdf->setY($arguments['posY']);
             }
 
             $renderChildrenClosure();

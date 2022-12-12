@@ -92,7 +92,7 @@ class TableOfContentViewHelper extends AbstractPDFViewHelper
      */
     public function render()
     {
-        $this->getPDF()->SetFontSize($this->arguments['fontSize']);
+        $this->getPDF()->setFontSize($this->arguments['fontSize']);
         $this->getPDF()->SetFont($this->arguments['fontFamily']);
         $this->getPDF()->setCellPaddings($this->arguments['padding']['left'], $this->arguments['padding']['top'], $this->arguments['padding']['right'], $this->arguments['padding']['bottom']);
         $this->getPDF()->setCellHeightRatio($this->settings['generalText']['lineHeight']);
