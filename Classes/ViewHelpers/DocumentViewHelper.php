@@ -129,6 +129,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $this->getPDF()->SetAuthor($this->arguments['author']);
         $this->getPDF()->SetKeywords($this->arguments['keywords']);
         $this->getPDF()->SetCreator($this->arguments['creator']);
+        $this->getPDF()->disableTcpdfLink();
 
         //Disables cache if set so and in frontend mode
         if ($GLOBALS['TSFE'] instanceof TypoScriptFrontendController && $this->settings['config']['disableCache']) {

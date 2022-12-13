@@ -408,4 +408,9 @@ class BasePDF extends Fpdi
     {
         return $this->pdfunit;
     }
+
+    public function disableTcpdfLink()
+    {
+        $this->tcpdflink = false;
+    }
 }
