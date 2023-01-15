@@ -58,6 +58,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	document.unicode_                              :ref:`t3tsref:data-type-boolean`      1
 	document.encoding_                             :ref:`t3tsref:data-type-string`       UTF-8
 	document.pdfa_                                 :ref:`t3tsref:data-type-boolean`      0
+	document.pdfua_                                :ref:`t3tsref:data-type-boolean`      0
 	document.language_                             :ref:`t3tsref:data-type-string`       ger
 	document.hyphenFile_                           :ref:`t3tsref:data-type-string`       hyph-de-ch-1901.tex
 	page.autoPageBreak_                            :ref:`t3tsref:data-type-boolean`      0
@@ -368,6 +369,15 @@ document.pdfa
 :typoscript:`plugin.tx_pdfviewhelpers.settings.document.pdfa =` :ref:`t3tsref:data-type-boolean`
 
 Sets the document to PDF/A mode if true.
+
+.. _document.pdfua:
+
+document.pdfua
+""""""""""""""
+
+:typoscript:`plugin.tx_pdfviewhelpers.settings.document.pdfua =` :ref:`t3tsref:data-type-boolean`
+
+Enables experimental support for PDF/UA. Please note that this feature is very much incomplete, feel free to contribute any improvements on this!
 
 .. _document.language:
 
