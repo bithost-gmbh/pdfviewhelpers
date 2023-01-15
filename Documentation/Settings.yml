@@ -8,10 +8,10 @@
 
 ---
 conf.py:
-  copyright: 2016 - 2021
+  copyright: 2016 - 2023
   project: PDF ViewHelpers
-  version: 2.4.1
-  release: 2.4.1
+  version: 2.5.0
+  release: 2.5.0
   intersphinx_mapping:
     t3tsref:
     - http://docs.typo3.org/typo3cms/TyposcriptReference/
