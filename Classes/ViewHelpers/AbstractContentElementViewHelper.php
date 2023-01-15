@@ -103,11 +103,11 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
 
         if (is_array($multiColumnContext) && ($multiColumnContext['isInAColumn'] ?? false)) {
             $columnWidth = $multiColumnContext['columnWidth'] ?? 0;
+
             if ($this->arguments['width'] === null) {
                 $this->arguments['width'] = $columnWidth;
             } else {
-                $convertedWidth = $this->conversionService->convertSpeakingWidthToTcpdfWidth($this->arguments['width'],
-                    $columnWidth);
+                $convertedWidth = $this->conversionService->convertSpeakingWidthToTcpdfWidth($this->arguments['width'], $columnWidth);
                 $this->arguments['width'] = min($convertedWidth, $columnWidth);
             }
 
