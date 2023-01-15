@@ -1,5 +1,12 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 2.5.0 - January 15, 2023
+
+- Adds experimental support for PDF/UA, [#204](https://github.com/bithost-gmbh/pdfviewhelpers/issues/204) (Thanks [@MoppieMop](https://github.com/MoppieMop))
+- Adds allowed composer plugins `typo3/class-alias-loader` and `typo3/cms-composer-installers`, [#212](https://github.com/bithost-gmbh/pdfviewhelpers/issues/212) (Thanks [@liayn](https://github.com/liayn))
+- Updates TCPDF to version `6.6.2`, [#212](https://github.com/bithost-gmbh/pdfviewhelpers/issues/212) (Thanks [@liayn](https://github.com/liayn))
+- Removes TCPDF link, (Thanks [@MoppieMop](https://github.com/MoppieMop) and [@liayn](https://github.com/liayn))
+
 ## 2.4.1 - February 10, 2022
 
 - Fixes undefined array key warning, [#198](https://github.com/bithost-gmbh/pdfviewhelpers/issues/198) (Thanks [@Physikbuddha](https://github.com/Physikbuddha)
