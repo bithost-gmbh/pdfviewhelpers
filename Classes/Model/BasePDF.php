@@ -410,9 +410,12 @@ class BasePDF extends Fpdi
     }
 
     /**
-     * remove the ad-Link in bottom left
+     * Disable the ad-link in the bottom left corner
+     *
+     * @return void
      */
-    function removeTcpdfLink() {
+    public function disableTcpdfLink()
+    {
         $this->tcpdflink = false;
     }
 }

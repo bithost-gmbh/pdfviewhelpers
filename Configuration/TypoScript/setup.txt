@@ -38,6 +38,7 @@ plugin.tx_pdfviewhelpers.settings {
 		unicode = 1
 		encoding = UTF-8
 		pdfa = 0
+		pdfua = 0
 		language = ger
 		hyphenFile = hyph-de-ch-1901.tex
 	}
