@@ -1,6 +1,6 @@
 <?php
 
-namespace Bithost\Pdfviewhelpers\Tests\Unit;
+namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
 
 /* * *
  *
@@ -28,14 +28,26 @@ namespace Bithost\Pdfviewhelpers\Tests\Unit;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
 
 /**
- * BaseFunctionalTest
+ * PDFATest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-abstract class AbstractUnitTest extends UnitTestCase
+class PDFATest extends AbstractFunctionalTest
 {
+    protected $typoScriptFiles = [
+        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/PDFA.txt',
+    ];
 
+    /**
+     * @test
+     */
+    public function testPDFA()
+    {
+        $output = $this->renderFluidTemplate($this->getFixtureExtPath('Examples/PDFA.html'));
+
+        $this->validatePDF($output);
+    }
 }

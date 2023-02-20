@@ -97,7 +97,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
         $extension = $processedImage->getExtension();
 
         $multiColumnContext = $this->getCurrentMultiColumnContext();
-        $isInAColumn = is_array($multiColumnContext) && $multiColumnContext['isInAColumn'];
+        $isInAColumn = is_array($multiColumnContext) && ($multiColumnContext['isInAColumn'] ?? false);
         $initialMargins = $this->getPDF()->getMargins();
         $this->arguments['posY'] += $this->arguments['padding']['top'];
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bithost\Pdfviewhelpers\Tests\Unit;
+namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 /* * *
  *
@@ -28,14 +28,37 @@ namespace Bithost\Pdfviewhelpers\Tests\Unit;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
 
 /**
- * BaseFunctionalTest
+ * AvoidPageBreakInsideCustomFontViewHelperTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-abstract class AbstractUnitTest extends UnitTestCase
+class AvoidPageBreakInsideCustomFontViewHelperTest extends AbstractFunctionalTest
 {
+    protected $typoScriptFiles = [
+        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/AvoidPageBreakInsideViewHelper/CustomFont.txt',
+    ];
 
+    /**
+     * @test
+     */
+    public function testCustomFont()
+    {
+        $output = $this->renderFluidTemplate(
+            $this->getFixtureExtPath('AvoidPageBreakInsideViewHelper/CustomFont.html'),
+            [
+                'text1' => 'text1',
+                'text2' => 'text2',
+            ]
+        );
+
+        $pdf = $this->parseContent($output);
+        $pages = $pdf->getPages();
+
+        $this->assertCount(1, $pages);
+        $this->assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
+        $this->assertStringContainsStringIgnoringCase('text2', $pages[0]->getText());
+    }
 }
