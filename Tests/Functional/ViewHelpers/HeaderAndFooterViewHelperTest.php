@@ -43,7 +43,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
     public function testDocumentScope()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('HeaderAndFooterViewHelper/DocumentScope.html'),
+            $this->getFixtureExtPath('HeaderAndFooterViewHelper/DocumentScope.html'),
             ['autoPageBreak' => false, 'text' => $this->getLongLoremIpsumText(10)]
         );
 
@@ -60,7 +60,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
     public function testDocumentScopeWithAutoPageBreak()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('HeaderAndFooterViewHelper/DocumentScope.html'),
+            $this->getFixtureExtPath('HeaderAndFooterViewHelper/DocumentScope.html'),
             ['autoPageBreak' => true, 'text' => $this->getLongLoremIpsumText(10)]
         );
 
@@ -76,7 +76,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
      */
     public function testDocumentScopeEmpty()
     {
-        $output = $this->renderFluidTemplate($this->getFixturePath('HeaderAndFooterViewHelper/DocumentScopeEmpty.html'));
+        $output = $this->renderFluidTemplate($this->getFixtureExtPath('HeaderAndFooterViewHelper/DocumentScopeEmpty.html'));
 
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();
@@ -91,7 +91,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
     public function testPageScope()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('HeaderAndFooterViewHelper/PageScope.html'),
+            $this->getFixtureExtPath('HeaderAndFooterViewHelper/PageScope.html'),
             ['autoPageBreak' => false, 'text' => $this->getLongLoremIpsumText(10)]
         );
 
@@ -107,7 +107,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
      */
     public function testPageScopeEmpty()
     {
-        $output = $this->renderFluidTemplate($this->getFixturePath('HeaderAndFooterViewHelper/PageScopeEmpty.html'));
+        $output = $this->renderFluidTemplate($this->getFixtureExtPath('HeaderAndFooterViewHelper/PageScopeEmpty.html'));
 
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();
@@ -122,7 +122,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
     public function testPageScopeWithAutoPageBreak()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('HeaderAndFooterViewHelper/PageScope.html'),
+            $this->getFixtureExtPath('HeaderAndFooterViewHelper/PageScope.html'),
             ['autoPageBreak' => true, 'text' => $this->getLongLoremIpsumText(10)]
         );
 
@@ -139,7 +139,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
     public function testDocumentAndPageScope()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('HeaderAndFooterViewHelper/DocumentAndPageScope.html'),
+            $this->getFixtureExtPath('HeaderAndFooterViewHelper/DocumentAndPageScope.html'),
             ['autoPageBreak' => true, 'text' => $this->getLongLoremIpsumText(10)]
         );
 

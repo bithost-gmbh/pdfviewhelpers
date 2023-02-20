@@ -44,7 +44,7 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
     public function testPageBreakPossible1()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('AvoidPageBreakInsideViewHelper/Template.html'),
+            $this->getFixtureExtPath('AvoidPageBreakInsideViewHelper/Template.html'),
             [
                 'text1' => 'text1' . $this->getLongLoremIpsumText(5), //6 duplicates fit on one page
                 'text2' => 'text2' . $this->getLongLoremIpsumText(5),
@@ -66,7 +66,7 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
     public function testPageBreakPossible2()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('AvoidPageBreakInsideViewHelper/Template.html'),
+            $this->getFixtureExtPath('AvoidPageBreakInsideViewHelper/Template.html'),
             [
                 'text1' => 'text1' . $this->getLongLoremIpsumText(5), //6 duplicates fit on one page
                 'text2' => 'text2' . $this->getLongLoremIpsumText(5),
@@ -88,7 +88,7 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
     public function testImpossibleToAvoid1()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('AvoidPageBreakInsideViewHelper/Template.html'),
+            $this->getFixtureExtPath('AvoidPageBreakInsideViewHelper/Template.html'),
             [
                 'text1' => 'text1' . $this->getLongLoremIpsumText(5), //6 duplicates fit on one page
                 'text2' => 'text2' . $this->getLongLoremIpsumText(7),
@@ -110,7 +110,7 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
     public function testImpossibleToAvoid2()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('AvoidPageBreakInsideViewHelper/Template.html'),
+            $this->getFixtureExtPath('AvoidPageBreakInsideViewHelper/Template.html'),
             [
                 'text1' => 'text1' . $this->getLongLoremIpsumText(5), //6 duplicates fit on one page
                 'text2' => 'text2' . $this->getLongLoremIpsumText(7),
@@ -124,28 +124,5 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
         $this->assertCount(3, $pages);
         $this->assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
         $this->assertStringContainsStringIgnoringCase('text2', $pages[1]->getText());
-    }
-
-    /**
-     * @test
-     */
-    public function testCustomFont()
-    {
-        $this->setUpPage([$this->getFixturePath('AvoidPageBreakInsideViewHelper/CustomFont.txt')]);
-
-        $output = $this->renderFluidTemplate(
-            $this->getFixturePath('AvoidPageBreakInsideViewHelper/CustomFont.html'),
-            [
-                'text1' => 'text1',
-                'text2' => 'text2',
-            ]
-        );
-
-        $pdf = $this->parseContent($output);
-        $pages = $pdf->getPages();
-
-        $this->assertCount(1, $pages);
-        $this->assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('text2', $pages[0]->getText());
     }
 }

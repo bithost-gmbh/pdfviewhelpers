@@ -41,7 +41,7 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTest
     public function testDoImportOnAutomaticPageBreak()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('ExtendExistingPDFs/Template.html'),
+            $this->getFixtureExtPath('ExtendExistingPDFs/Template.html'),
             [
                 'importPage' => 1,
                 'importPageOnAutomaticPageBreak' => true,
@@ -70,7 +70,7 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTest
     public function testDoNotImportOnAutomaticPageBreak()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('ExtendExistingPDFs/Template.html'),
+            $this->getFixtureExtPath('ExtendExistingPDFs/Template.html'),
             [
                 'importPage' => 1,
                 'importPageOnAutomaticPageBreak' => false,
@@ -101,7 +101,7 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTest
         $this->expectException(\Bithost\Pdfviewhelpers\Exception\Exception::class);
 
         $this->renderFluidTemplate(
-            $this->getFixturePath('ExtendExistingPDFs/Template.html'),
+            $this->getFixtureExtPath('ExtendExistingPDFs/Template.html'),
             [
                 'importPage' => 2,
                 'importPageOnAutomaticPageBreak' => true,

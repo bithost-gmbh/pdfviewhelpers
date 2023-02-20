@@ -44,7 +44,7 @@ class ImageViewHelperTest extends AbstractFunctionalTest
     public function testStringSource()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('ImageViewHelper/Image.html'),
+            $this->getFixtureExtPath('ImageViewHelper/Image.html'),
             ['src' => 'EXT:pdfviewhelpers/Tests/Functional/Fixtures/ImageViewHelper/Bithost.jpg']
         );
 
@@ -60,11 +60,11 @@ class ImageViewHelperTest extends AbstractFunctionalTest
     public function testFileSource()
     {
         $fileInterfaceMock = $this->createMock(FileInterface::class);
-        $fileInterfaceMock->method('getContents')->willReturn(file_get_contents($this->getFixturePath('ImageViewHelper/Bithost.jpg')));
+        $fileInterfaceMock->method('getContents')->willReturn(file_get_contents($this->getFixtureAbsolutePath('ImageViewHelper/Bithost.jpg')));
         $fileInterfaceMock->method('getExtension')->willReturn('jpg');
 
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('ImageViewHelper/Image.html'),
+            $this->getFixtureExtPath('ImageViewHelper/Image.html'),
             ['src' => $fileInterfaceMock]
         );
 
@@ -82,8 +82,8 @@ class ImageViewHelperTest extends AbstractFunctionalTest
         $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
 
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('ImageViewHelper/Image.html'),
-            ['src' => $this->getFixturePath('ImageViewHelper/NoFileHere.jpg')]
+            $this->getFixtureExtPath('ImageViewHelper/Image.html'),
+            ['src' => $this->getFixtureExtPath('ImageViewHelper/NoFileHere.jpg')]
         );
     }
 }

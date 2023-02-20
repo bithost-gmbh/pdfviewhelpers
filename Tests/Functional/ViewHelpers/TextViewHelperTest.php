@@ -48,7 +48,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
     public function testTrimAndRemoveDoubleWhitespace()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('TextViewHelper/Text.html'),
+            $this->getFixtureExtPath('TextViewHelper/Text.html'),
             ['text' => $this->untrimmedText]
         );
         $pdf = $this->parseContent($output);
@@ -62,7 +62,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
     public function testNotRemoveDoubleWhitespace()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('TextViewHelper/TextOverwrite.html'),
+            $this->getFixtureExtPath('TextViewHelper/TextOverwrite.html'),
             ['text' => $this->untrimmedText, 'trim' => 1, 'removeDoubleWhitespace' => 0]
         );
         $pdf = $this->parseContent($output);
@@ -76,7 +76,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
     public function testColorShort()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('TextViewHelper/TextColor.html'),
+            $this->getFixtureExtPath('TextViewHelper/TextColor.html'),
             ['color' => '#333']
         );
         $pdf = $this->parseContent($output);
@@ -90,7 +90,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
     public function testColorLong()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('TextViewHelper/TextColor.html'),
+            $this->getFixtureExtPath('TextViewHelper/TextColor.html'),
             ['color' => '#123456']
         );
         $pdf = $this->parseContent($output);
@@ -106,7 +106,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
         $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
 
         $this->renderFluidTemplate(
-            $this->getFixturePath('TextViewHelper/TextColor.html'),
+            $this->getFixtureExtPath('TextViewHelper/TextColor.html'),
             ['color' => '#1']
         );
     }
@@ -117,7 +117,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
     public function testPartialPaddingOverwrite()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('TextViewHelper/TextPadding.html'),
+            $this->getFixtureExtPath('TextViewHelper/TextPadding.html'),
             ['padding' => ['top' => 2]]
         );
         $pdf = $this->parseContent($output);
@@ -133,7 +133,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
         $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
 
         $this->renderFluidTemplate(
-            $this->getFixturePath('TextViewHelper/TextPadding.html'),
+            $this->getFixtureExtPath('TextViewHelper/TextPadding.html'),
             ['padding' => ['tops' => 2]]
         );
     }
@@ -146,7 +146,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
         $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
 
         $this->renderFluidTemplate(
-            $this->getFixturePath('TextViewHelper/TextPadding.html'),
+            $this->getFixtureExtPath('TextViewHelper/TextPadding.html'),
             ['padding' => ['bottom' => 'lorem']]
         );
     }

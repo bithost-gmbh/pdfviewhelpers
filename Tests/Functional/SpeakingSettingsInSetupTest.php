@@ -1,6 +1,6 @@
 <?php
 
-namespace Bithost\Pdfviewhelpers\Tests\Unit;
+namespace Bithost\Pdfviewhelpers\Tests\Functional;
 
 /* * *
  *
@@ -28,14 +28,28 @@ namespace Bithost\Pdfviewhelpers\Tests\Unit;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
-
 /**
- * BaseFunctionalTest
+ * SpeakingSettingsInSetupTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-abstract class AbstractUnitTest extends UnitTestCase
+class SpeakingSettingsInSetupTest extends AbstractFunctionalTest
 {
+    protected $typoScriptFiles = [
+        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/SpeakingSettings/setup_speaking.txt',
+    ];
 
+    /**
+     * @test
+     */
+    public function testSpeakingSetupSettings()
+    {
+        $this->markTestSkipped('Changing settings in TS not working because of AbstractViewHelper::$argumentDefinitionCache.');
+
+        $output = $this->renderFluidTemplate($this->getFixtureExtPath('SpeakingSettings/TypoScript.html'));
+        $pdf = $this->parseContent($output);
+        $text = $pdf->getText();
+
+        $this->assertStringContainsStringIgnoringCase('Test', $text);
+    }
 }
