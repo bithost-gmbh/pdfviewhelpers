@@ -43,7 +43,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTest
      */
     public function testMetaInformation()
     {
-        $output = $this->renderFluidTemplate($this->getFixturePath('DocumentViewHelper/MetaInformation.html'));
+        $output = $this->renderFluidTemplate($this->getFixtureExtPath('DocumentViewHelper/MetaInformation.html'));
         $pdf = $this->parseContent($output);
         $details = $pdf->getDetails();
 
@@ -56,7 +56,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTest
     public function testMetaInformationOverwrite()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('DocumentViewHelper/MetaInformationOverwrite.html'),
+            $this->getFixtureExtPath('DocumentViewHelper/MetaInformationOverwrite.html'),
             ['creator' => 'Some other creator']
         );
         $pdf = $this->parseContent($output);
@@ -71,7 +71,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTest
     public function testOutputDestinationF()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('DocumentViewHelper/OutputDestination.html'),
+            $this->getFixtureExtPath('DocumentViewHelper/OutputDestination.html'),
             ['outputDestination' => 'F']
         );
         $savePath = GeneralUtility::getFileAbsFileName('DocumentOutputDestination.pdf');
@@ -88,7 +88,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTest
     public function testOutputDestinationS()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('DocumentViewHelper/OutputDestination.html'),
+            $this->getFixtureExtPath('DocumentViewHelper/OutputDestination.html'),
             ['outputDestination' => 'S']
         );
 
@@ -101,7 +101,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTest
     public function testOutputDestinationE()
     {
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('DocumentViewHelper/OutputDestination.html'),
+            $this->getFixtureExtPath('DocumentViewHelper/OutputDestination.html'),
             ['outputDestination' => 'E']
         );
 

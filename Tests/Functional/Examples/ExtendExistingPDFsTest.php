@@ -1,6 +1,6 @@
 <?php
 
-namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
+namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
 
 /* * *
  *
@@ -31,23 +31,37 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
 
 /**
- * PageBreakViewHelperTest
+ * ExtendExistingPDFsTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class PageBreakViewHelperTest extends AbstractFunctionalTest
+class ExtendExistingPDFsTest extends AbstractFunctionalTest
 {
+    protected $typoScriptFiles = [
+        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/ExtendExistingPDFs.txt',
+    ];
+
     /**
      * @test
      */
-    public function testForcePageBreak()
+    public function testExtendExistingPDFs()
     {
-        $output = $this->renderFluidTemplate($this->getFixtureExtPath('PageBreakViewHelper/Pages.html'));
+        $output = $this->renderFluidTemplate($this->getFixtureExtPath('Examples/ExtendExistingPDFs.html'));
         $pdf = $this->parseContent($output);
-        $pages = $pdf->getPages();
+        $text = $pdf->getText();
 
-        $this->assertEquals(2, count($pages));
-        $this->assertStringContainsStringIgnoringCase('Page 1', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('Page 2', $pages[1]->getText());
+        $this->assertEquals(1, count($pdf->getPages()));
+        $this->assertStringContainsStringIgnoringCase('Mega GmbH', $text);
+        $this->assertStringContainsStringIgnoringCase('Ansprechpartner', $text);
+        $this->assertStringContainsStringIgnoringCase('www.bithost.ch', $text);
+        $this->assertStringContainsStringIgnoringCase('Here is your header', $text);
+        $this->assertStringContainsStringIgnoringCase('Here is the HTML header', $text);
+        $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $text);
+
+        $this->validatePDF($output);
+
+        //$expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/ExtendExistingPDFs.pdf')));
+        //$actualHash = sha1($output);
+        //$this->assertEquals($expectedHash, $actualHash);
     }
 }

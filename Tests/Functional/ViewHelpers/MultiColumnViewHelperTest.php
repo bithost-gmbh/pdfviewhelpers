@@ -42,7 +42,7 @@ class MultiColumnViewHelperTest extends AbstractFunctionalTest
      */
     public function testMultipleColumnsRendered()
     {
-        $output = $this->renderFluidTemplate($this->getFixturePath('MultiColumnViewHelper/MultiColumn.html'));
+        $output = $this->renderFluidTemplate($this->getFixtureExtPath('MultiColumnViewHelper/MultiColumn.html'));
         $pdf = $this->parseContent($output);
 
         $this->assertStringContainsStringIgnoringCase('Column 1', $pdf->getText());

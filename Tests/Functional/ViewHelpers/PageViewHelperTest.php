@@ -42,7 +42,7 @@ class PageViewHelperTest extends AbstractFunctionalTest
      */
     public function testAddPages()
     {
-        $output = $this->renderFluidTemplate($this->getFixturePath('PageViewHelper/AddPages.html'));
+        $output = $this->renderFluidTemplate($this->getFixtureExtPath('PageViewHelper/AddPages.html'));
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
 
@@ -65,7 +65,7 @@ class PageViewHelperTest extends AbstractFunctionalTest
     {
         $longLoremIpsumText = $this->getLongLoremIpsumText(10);
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('PageViewHelper/AutoPageBreak.html'),
+            $this->getFixtureExtPath('PageViewHelper/AutoPageBreak.html'),
             ['autoPageBreak' => 1, 'text' => $longLoremIpsumText]
         );
         $pdf = $this->parseContent($output);
@@ -80,7 +80,7 @@ class PageViewHelperTest extends AbstractFunctionalTest
     {
         $longLoremIpsumText = $this->getLongLoremIpsumText(10);
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('PageViewHelper/AutoPageBreak.html'),
+            $this->getFixtureExtPath('PageViewHelper/AutoPageBreak.html'),
             ['autoPageBreak' => 0, 'text' => $longLoremIpsumText]
         );
         $pdf = $this->parseContent($output);

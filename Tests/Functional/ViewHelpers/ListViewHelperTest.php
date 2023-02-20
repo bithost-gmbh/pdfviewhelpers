@@ -44,7 +44,7 @@ class ListViewHelperTest extends AbstractFunctionalTest
     {
         $listElements = ['lorem', 'ipsum', 'dolor'];
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('ListViewHelper/List.html'),
+            $this->getFixtureExtPath('ListViewHelper/List.html'),
             ['listElements' => $listElements]
         );
         $pdf = $this->parseContent($output);

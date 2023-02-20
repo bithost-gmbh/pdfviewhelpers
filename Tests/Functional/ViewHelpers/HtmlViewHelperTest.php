@@ -43,10 +43,10 @@ class HtmlViewHelperTest extends AbstractFunctionalTest
     public function testRenderRichText()
     {
         $html = '<h1>Headline</h1><p>Text</p>';
-        $styleSheet = 'EXT:pdfviewhelpers/Tests/Functional/Fixtures/HtmlViewHelper/styles.css';
+        $styleSheet = $this->getFixtureExtPath('HtmlViewHelper/styles.css');
 
         $output = $this->renderFluidTemplate(
-            $this->getFixturePath('HtmlViewHelper/Html.html'),
+            $this->getFixtureExtPath('HtmlViewHelper/Html.html'),
             ['html' => $html, 'styleSheet' => $styleSheet]
         );
         $pdf = $this->parseContent($output);
@@ -65,8 +65,8 @@ class HtmlViewHelperTest extends AbstractFunctionalTest
         $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
 
         $this->renderFluidTemplate(
-            $this->getFixturePath('HtmlViewHelper/Html.html'),
-            ['html' => '', 'styleSheet' => 'EXT:pdfviewhelpers/Tests/Functional/Fixtures/HtmlViewHelper/NonExistingPath.css']
+            $this->getFixtureExtPath('HtmlViewHelper/Html.html'),
+            ['html' => '', 'styleSheet' => $this->getFixtureExtPath('HtmlViewHelper/NonExistingPath.css')]
         );
     }
 }
