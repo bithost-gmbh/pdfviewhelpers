@@ -13,7 +13,7 @@ jobs:
       matrix:
         env:
           - { php: 7.2, TYPO3_VERSION: ^9 }
-          - { php: 7.3, TYPO3_VERSION: ^9, COVERAGE: YES }
+          - { php: 7.3, TYPO3_VERSION: ^9 }
           - { php: 7.4, TYPO3_VERSION: ^10 }
           - { php: 8.0, TYPO3_VERSION: 11.5.2 }
           - { php: 8.1, TYPO3_VERSION: 11.5.2 }

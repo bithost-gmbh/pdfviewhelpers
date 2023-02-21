@@ -22,7 +22,6 @@
 	"require-dev": {
 		"typo3/testing-framework": "^4.0 || ^5.0 || ^6.0",
 		"smalot/pdfparser": "^2",
-		"php-coveralls/php-coveralls": "^2.1",
 		"squizlabs/php_codesniffer": "^3.7"
 	},
 	"autoload": {
