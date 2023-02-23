@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 3.0.0 - Not yet released
+
+- Removes deprecated classes EmptyFPDI and EmptyTCPDF
+
 ## 2.5.0 - January 15, 2023
 
 - Adds experimental support for PDF/UA, [#204](https://github.com/bithost-gmbh/pdfviewhelpers/issues/204) (Thanks [@MoppieMop](https://github.com/MoppieMop))
