@@ -3,6 +3,7 @@
 ## 3.0.0 - Not yet released
 
 - Removes deprecated classes EmptyFPDI and EmptyTCPDF
+- Drops support for TYPO3 9 LTS
 
 ## 2.5.0 - January 15, 2023
 

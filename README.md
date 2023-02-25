@@ -1,4 +1,3 @@
-[![TYPO3](https://img.shields.io/badge/TYPO3-9%20LTS-orange.svg)](https://typo3.org/)
 [![TYPO3](https://img.shields.io/badge/TYPO3-10%20LTS-orange.svg)](https://typo3.org/)
 [![TYPO3](https://img.shields.io/badge/TYPO3-11%20LTS-orange.svg)](https://typo3.org/)
 [![Build Status](https://github.com/bithost-gmbh/pdfviewhelpers/actions/workflows/build.yml/badge.svg)](https://github.com/bithost-gmbh/pdfviewhelpers/actions/)
