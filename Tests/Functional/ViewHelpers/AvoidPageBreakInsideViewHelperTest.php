@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 /* * *
@@ -29,7 +31,6 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * AvoidPageBreakInsideViewHelperTest
@@ -41,7 +42,7 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testPageBreakPossible1()
+    public function testPageBreakPossible1(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('AvoidPageBreakInsideViewHelper/Template.html'),
@@ -63,7 +64,7 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testPageBreakPossible2()
+    public function testPageBreakPossible2(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('AvoidPageBreakInsideViewHelper/Template.html'),
@@ -85,7 +86,7 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testImpossibleToAvoid1()
+    public function testImpossibleToAvoid1(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('AvoidPageBreakInsideViewHelper/Template.html'),
@@ -107,7 +108,7 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testImpossibleToAvoid2()
+    public function testImpossibleToAvoid2(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('AvoidPageBreakInsideViewHelper/Template.html'),

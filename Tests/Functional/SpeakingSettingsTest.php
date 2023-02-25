@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Tests\Functional;
 
 /* * *
@@ -28,6 +30,8 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
+
 /**
  * SpeakingSettingsTest
  *
@@ -35,14 +39,14 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  */
 class SpeakingSettingsTest extends AbstractFunctionalTest
 {
-    protected $typoScriptFiles = [
+    protected array $typoScriptFiles = [
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/SpeakingSettings/setup.txt',
     ];
 
     /**
      * @test
      */
-    public function testSetupSettings()
+    public function testSetupSettings(): void
     {
         $this->markTestSkipped('Changing settings in TS not working because of AbstractViewHelper::$argumentDefinitionCache.');
 
@@ -56,7 +60,7 @@ class SpeakingSettingsTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testFluid()
+    public function testFluid(): void
     {
         $outputDestinations = ['string', 'S'];
         $orientations = ['portrait', 'P', 'landscape', 'L'];
@@ -90,9 +94,9 @@ class SpeakingSettingsTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testInvalidOutputDestination()
+    public function testInvalidOutputDestination(): void
     {
-        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+        $this->expectException(ValidationException::class);
 
         $this->renderFluidTemplate(
             $this->getFixtureExtPath('SpeakingSettings/FluidAttributes.html'),
@@ -108,9 +112,9 @@ class SpeakingSettingsTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testInvalidOrientation()
+    public function testInvalidOrientation(): void
     {
-        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+        $this->expectException(ValidationException::class);
 
         $this->renderFluidTemplate(
             $this->getFixtureExtPath('SpeakingSettings/FluidAttributes.html'),
@@ -126,9 +130,9 @@ class SpeakingSettingsTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testInvalidFontStyle()
+    public function testInvalidFontStyle(): void
     {
-        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+        $this->expectException(ValidationException::class);
 
         $this->renderFluidTemplate(
             $this->getFixtureExtPath('SpeakingSettings/FluidAttributes.html'),
@@ -144,9 +148,9 @@ class SpeakingSettingsTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testInvalidAlignment()
+    public function testInvalidAlignment(): void
     {
-        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+        $this->expectException(ValidationException::class);
 
         $this->renderFluidTemplate(
             $this->getFixtureExtPath('SpeakingSettings/FluidAttributes.html'),

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -39,7 +41,7 @@ use Bithost\Pdfviewhelpers\Model\BasePDF;
 class PageViewHelper extends AbstractPDFViewHelper
 {
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
@@ -56,7 +58,7 @@ class PageViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
+     * @inheritDoc
      *
      * @throws Exception
      */
@@ -71,11 +73,9 @@ class PageViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    public function render()
+    public function render(): void
     {
         $template = '';
         $hasImportedPage = !empty($this->arguments['importPage']);
@@ -122,27 +122,18 @@ class PageViewHelper extends AbstractPDFViewHelper
         $this->setDefaultHeaderFooterScope(BasePDF::SCOPE_DOCUMENT);
     }
 
-    /**
-     * @param string $scope
-     */
-    protected function setDefaultHeaderFooterScope($scope)
+    protected function setDefaultHeaderFooterScope(string $scope): void
     {
         $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'defaultHeaderFooterScope', $scope);
     }
 
-    /**
-     * @param boolean $needsHeader
-     */
-    protected function setPageNeedsHeader($needsHeader)
+    protected function setPageNeedsHeader(bool $needsHeader): void
     {
         $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pageNeedsHeader', $needsHeader);
     }
 
-    /**
-     * @return boolean
-     */
-    protected function pageNeedsHeader()
+    protected function pageNeedsHeader(): bool
     {
-        return $this->viewHelperVariableContainer->get('DocumentViewHelper', 'pageNeedsHeader');
+        return (bool) $this->viewHelperVariableContainer->get('DocumentViewHelper', 'pageNeedsHeader');
     }
 }

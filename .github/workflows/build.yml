@@ -47,7 +47,7 @@ jobs:
         run: composer require typo3/cms-core="${TYPO3_VERSION}"
 
       - name: PHPCS
-        run: .Build/bin/phpcs -n --standard=PSR2 Classes/
+        run: .Build/bin/phpcs -n --standard=PSR12 Classes/
 
       - name: Unit Tests
         run: .Build/bin/phpunit --testdox -c .Build/vendor/typo3/testing-framework/Resources/Core/Build/UnitTests.xml Tests/Unit/;

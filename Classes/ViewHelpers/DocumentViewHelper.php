@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -45,27 +47,21 @@ class DocumentViewHelper extends AbstractPDFViewHelper
 {
     /**
      * TCPDF output destinations that send http headers and echo the pdf
-     *
-     * @var array
      */
-    protected $tcpdfOutputContentDestinations = ['I', 'D', 'FI', 'FD'];
+    protected array $tcpdfOutputContentDestinations = ['I', 'D', 'FI', 'FD'];
 
     /**
      * TCPDF output destinations that save the pdf to the filesystem
-     *
-     * @var array
      */
-    protected $tcpdfSaveFileDestinations = ['F', 'FI', 'FD'];
+    protected array $tcpdfSaveFileDestinations = ['F', 'FI', 'FD'];
 
     /**
      * TCPDF output destinations that return the pdf as string
-     *
-     * @var array
      */
-    protected $tcpdfReturnContentDestinations = ['S', 'E'];
+    protected array $tcpdfReturnContentDestinations = ['S', 'E'];
 
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
@@ -80,16 +76,16 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $this->registerArgument('outputPath', 'string', 'The name or path of the saved document.', false, $this->settings['document']['outputPath']);
         $this->registerArgument('sourceFile', 'string', 'The path to the source file for templates to be applied to this document.', false, $this->settings['document']['sourceFile']);
         $this->registerArgument('unit', 'string', 'The default unit of measure.', false, $this->settings['document']['unit']);
-        $this->registerArgument('unicode', 'boolean', 'If true unicode is used.', false, (boolean) $this->settings['document']['unicode']);
+        $this->registerArgument('unicode', 'boolean', 'If true unicode is used.', false, (bool) $this->settings['document']['unicode']);
         $this->registerArgument('encoding', 'string', 'The encoding of the document.', false, $this->settings['document']['encoding']);
-        $this->registerArgument('pdfa', 'boolean', 'If true PDF/A mode is enabled.', false, (boolean) $this->settings['document']['pdfa']);
-        $this->registerArgument('pdfua', 'boolean', 'If true PDF/UA-1 mode is enabled.', false, (boolean) $this->settings['document']['pdfua']);
+        $this->registerArgument('pdfa', 'boolean', 'If true PDF/A mode is enabled.', false, (bool) $this->settings['document']['pdfa']);
+        $this->registerArgument('pdfua', 'boolean', 'If true PDF/UA-1 mode is enabled.', false, (bool) $this->settings['document']['pdfua']);
         $this->registerArgument('language', 'string', 'The language of the document.', false, $this->settings['document']['language']);
         $this->registerArgument('hyphenFile', 'string', 'The hyphen file to be used for the automatic hyphenation.', false, $this->settings['document']['hyphenFile']);
     }
 
     /**
-     * @return void
+     * @inheritDoc
      *
      * @throws Exception
      */
@@ -143,11 +139,9 @@ class DocumentViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return string
-     *
      * @throws Exception
      */
-    public function render()
+    public function render(): string
     {
         $this->renderChildren();
 
@@ -175,11 +169,9 @@ class DocumentViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws ValidationException
      */
-    protected function loadTcpdfLanguageSettings()
+    protected function loadTcpdfLanguageSettings(): void
     {
         $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
         $languageFilePath = $extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->arguments['language'] . '.php';
@@ -192,11 +184,9 @@ class DocumentViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    protected function loadCustomFonts()
+    protected function loadCustomFonts(): void
     {
         if (empty($this->settings['config']['fonts']['addTTFFont'])) {
             return;
@@ -225,11 +215,9 @@ class DocumentViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    protected function loadSourceFile()
+    protected function loadSourceFile(): void
     {
         if (!empty($this->arguments['sourceFile'])) {
             $sourceFilePath = GeneralUtility::getFileAbsFileName($this->arguments['sourceFile']);
@@ -249,11 +237,9 @@ class DocumentViewHelper extends AbstractPDFViewHelper
     /**
      * Experimental PDF/UA support, also see https://github.com/bithost-gmbh/pdfviewhelpers/issues/204
      *
-     * @return void
-     *
      * @throws Exception
      */
-    public function loadPDFUASupport()
+    public function loadPDFUASupport(): void
     {
         if ($this->arguments['pdfua']) {
             $viewerPreferences = [

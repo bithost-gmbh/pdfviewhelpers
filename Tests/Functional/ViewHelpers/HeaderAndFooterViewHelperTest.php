@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 /* * *
@@ -40,7 +42,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testDocumentScope()
+    public function testDocumentScope(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('HeaderAndFooterViewHelper/DocumentScope.html'),
@@ -57,7 +59,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testDocumentScopeWithAutoPageBreak()
+    public function testDocumentScopeWithAutoPageBreak(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('HeaderAndFooterViewHelper/DocumentScope.html'),
@@ -74,7 +76,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testDocumentScopeEmpty()
+    public function testDocumentScopeEmpty(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('HeaderAndFooterViewHelper/DocumentScopeEmpty.html'));
 
@@ -88,7 +90,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testPageScope()
+    public function testPageScope(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('HeaderAndFooterViewHelper/PageScope.html'),
@@ -105,7 +107,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testPageScopeEmpty()
+    public function testPageScopeEmpty(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('HeaderAndFooterViewHelper/PageScopeEmpty.html'));
 
@@ -119,7 +121,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testPageScopeWithAutoPageBreak()
+    public function testPageScopeWithAutoPageBreak(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('HeaderAndFooterViewHelper/PageScope.html'),
@@ -136,7 +138,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testDocumentAndPageScope()
+    public function testDocumentAndPageScope(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('HeaderAndFooterViewHelper/DocumentAndPageScope.html'),

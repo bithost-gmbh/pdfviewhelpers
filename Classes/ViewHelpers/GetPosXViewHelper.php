@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -38,7 +40,7 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
 class GetPosXViewHelper extends AbstractPDFViewHelper
 {
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
@@ -48,16 +50,14 @@ class GetPosXViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return integer
-     *
      * @throws Exception
      */
-    public function render()
+    public function render(): float
     {
         if ($this->arguments['absolute']) {
-            return $this->getPDF()->GetAbsX();
+            return (float) $this->getPDF()->GetAbsX();
         } else {
-            return $this->getPDF()->GetX();
+            return (float) $this->getPDF()->GetX();
         }
     }
 }

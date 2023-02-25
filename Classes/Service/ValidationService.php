@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Service;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -26,7 +28,7 @@ namespace Bithost\Pdfviewhelpers\Service;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -39,15 +41,12 @@ use TYPO3\CMS\Core\SingletonInterface;
 class ValidationService implements SingletonInterface
 {
     /**
-     * @param array $padding
-     *
-     * @return boolean
-     *
      * @throws ValidationException
      */
-    public function validatePadding($padding)
+    public function validatePadding(array $padding): bool
     {
-        if (count($padding) === 4
+        if (
+            count($padding) === 4
             && isset($padding['top'], $padding['right'], $padding['bottom'], $padding['left'])
             && is_numeric($padding['top']) && is_numeric($padding['right'])
             && is_numeric($padding['bottom']) && is_numeric($padding['left'])
@@ -59,13 +58,9 @@ class ValidationService implements SingletonInterface
     }
 
     /**
-     * @param string $colorHex
-     *
-     * @return boolean
-     *
      * @throws ValidationException
      */
-    public function validateColor($colorHex)
+    public function validateColor(string $colorHex): bool
     {
         if (preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $colorHex)) {
             return true;
@@ -75,13 +70,11 @@ class ValidationService implements SingletonInterface
     }
 
     /**
-     * @param string $width
-     *
-     * @return boolean
+     * @param string|int|float $width
      *
      * @throws ValidationException
      */
-    public function validateWidth($width)
+    public function validateWidth($width): bool
     {
         if (is_numeric($width) && $width >= 0 || mb_substr($width, -1) === '%') {
             return true;
@@ -91,13 +84,11 @@ class ValidationService implements SingletonInterface
     }
 
     /**
-     * @param string $fontSize
-     *
-     * @return boolean
+     * @param string|int|float $fontSize
      *
      * @throws ValidationException
      */
-    public function validateFontSize($fontSize)
+    public function validateFontSize($fontSize): bool
     {
         if (is_numeric($fontSize) && $fontSize >= 0) {
             return true;
@@ -109,13 +100,9 @@ class ValidationService implements SingletonInterface
     /**
      * Check fontFamily for compatibility with TCPDF naming conventions
      *
-     * @param string $fontFamily
-     *
-     * @return boolean
-     *
      * @throws ValidationException
      */
-    public function validateFontFamily($fontFamily)
+    public function validateFontFamily(string $fontFamily): bool
     {
         //TCPDF transformation START
         $tcpdfFontFamilyName = strtolower($fontFamily);
@@ -123,6 +110,7 @@ class ValidationService implements SingletonInterface
         $search = ['bold', 'oblique', 'italic', 'regular'];
         $replace = ['b', 'i', 'i', ''];
         $tcpdfFontFamilyName = str_replace($search, $replace, $tcpdfFontFamilyName);
+
         if (empty($tcpdfFontFamilyName)) {
             // set generic name
             $tcpdfFontFamilyName = 'tcpdffont';
@@ -137,13 +125,11 @@ class ValidationService implements SingletonInterface
     }
 
     /**
-     * @param string $paragraphSpacing
-     *
-     * @return boolean
+     * @param string|int|float $paragraphSpacing
      *
      * @throws ValidationException
      */
-    public function validateParagraphSpacing($paragraphSpacing)
+    public function validateParagraphSpacing($paragraphSpacing): bool
     {
         if (is_numeric($paragraphSpacing) && $paragraphSpacing >= 0) {
             return true;
@@ -153,13 +139,11 @@ class ValidationService implements SingletonInterface
     }
 
     /**
-     * @param string $height
-     *
-     * @return boolean
+     * @param string|int|float $height
      *
      * @throws ValidationException
      */
-    public function validateHeight($height)
+    public function validateHeight($height): bool
     {
         if (is_numeric($height) && $height >= 0) {
             return true;
@@ -169,13 +153,9 @@ class ValidationService implements SingletonInterface
     }
 
     /**
-     * @param array $listElements
-     *
-     * @return boolean
-     *
      * @throws ValidationException
      */
-    public function validateListElements(array $listElements)
+    public function validateListElements(array $listElements): bool
     {
         if (count($listElements) == count($listElements, COUNT_RECURSIVE)) {
             return true;
@@ -185,29 +165,25 @@ class ValidationService implements SingletonInterface
     }
 
     /**
-     * @param string $lineHeight
-     *
-     * @return boolean
+     * @param string|int|float $lineHeight
      *
      * @throws ValidationException
      */
-    public function validateLineHeight($lineHeight)
+    public function validateLineHeight($lineHeight): bool
     {
         if (is_numeric($lineHeight) && $lineHeight >= 0) {
             return true;
         } else {
-            throw new ValidationException('Invalid lineHeight "' . $lineHeight .'" provided, must be a positive float value. ERROR: 1536704503', 1536704503);
+            throw new ValidationException('Invalid lineHeight "' . $lineHeight . '" provided, must be a positive float value. ERROR: 1536704503', 1536704503);
         }
     }
 
     /**
-     * @param string $characterSpacing
-     *
-     * @return boolean
+     * @param string|int|float $characterSpacing
      *
      * @throws ValidationException
      */
-    public function validateCharacterSpacing($characterSpacing)
+    public function validateCharacterSpacing($characterSpacing): bool
     {
         if (is_numeric($characterSpacing) && $characterSpacing >= 0) {
             return true;

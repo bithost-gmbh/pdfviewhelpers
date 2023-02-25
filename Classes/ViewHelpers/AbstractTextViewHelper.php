@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -38,10 +40,7 @@ use Bithost\Pdfviewhelpers\Exception\ValidationException;
  */
 abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
 {
-    /**
-     * @var array
-     */
-    protected $mergeProperties = [
+    protected array $mergeProperties = [
         'trim',
         'removeDoubleWhitespace',
         'color',
@@ -58,13 +57,10 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         'characterSpacing',
     ];
 
-    /**
-     * @return string
-     */
-    abstract protected function getSettingsKey();
+    abstract protected function getSettingsKey(): string;
 
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
@@ -88,7 +84,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
     }
 
     /**
-     * @return void
+     * @inheritDoc
      *
      * @throws Exception
      */
@@ -108,7 +104,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         }
 
         if ($this->arguments['trim']) {
-            $this->arguments['text'] = trim($this->arguments['text']);
+            $this->arguments['text'] = trim((string) $this->arguments['text']);
         }
 
         if ($this->arguments['removeDoubleWhitespace']) {
@@ -154,11 +150,9 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    public function render()
+    public function render(): void
     {
         $this->initializeMultiColumnSupport();
 
@@ -167,7 +161,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
 
         foreach ($paragraphs as $paragraph) {
             if ($this->arguments['trim']) {
-                $paragraph = trim($paragraph);
+                $paragraph = trim((string) $paragraph);
             }
 
             if ($this->arguments['paragraphLineFeed']) {
@@ -186,18 +180,13 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         $this->getPDF()->setY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
     }
 
-    /**
-     * @param array $default
-     * @param array $overwrite
-     *
-     * @return array
-     */
-    protected function mergeSettingsArrays(array $default, array $overwrite)
+    protected function mergeSettingsArrays(array $default, array $overwrite): array
     {
         $mergedArray = $default;
 
         foreach ($this->mergeProperties as $mergeProperty) {
-            if (isset($overwrite[$mergeProperty])
+            if (
+                isset($overwrite[$mergeProperty])
                 && $overwrite[$mergeProperty] !== null
                 && (!is_string($overwrite[$mergeProperty]) || mb_strlen($overwrite[$mergeProperty]))
             ) {
@@ -220,11 +209,9 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
      * 2. types[generalText|text|headline|list]
      * 3. arguments
      *
-     * @return void
-     *
      * @throws ValidationException
      */
-    protected function mergeSettingsAndArguments()
+    protected function mergeSettingsAndArguments(): void
     {
         $settingsKey = $this->getSettingsKey();
         $mergedSettings = $this->mergeSettingsArrays($this->settings['generalText'], $this->settings[$settingsKey]);

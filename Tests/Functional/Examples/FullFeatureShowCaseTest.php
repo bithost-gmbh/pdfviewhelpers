@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
 
 /* * *
@@ -37,14 +39,14 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
  */
 class FullFeatureShowCaseTest extends AbstractFunctionalTest
 {
-    protected $typoScriptFiles = [
+    protected array $typoScriptFiles = [
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/FullFeatureShowCase.txt',
     ];
 
     /**
      * @test
      */
-    public function testFullFeatureShowCase()
+    public function testFullFeatureShowCase(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('Examples/FullFeatureShowCase.html'));
         $pdf = $this->parseContent($output);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -38,18 +40,18 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
 class ColumnViewHelper extends AbstractPDFViewHelper
 {
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
         parent::initializeArguments();
 
-        $this->registerArgument('width', 'string', 'The width of this column in the current unit or percentage.', false, null);
+        $this->registerArgument('width', 'string', 'The width of this column in the current unit or percentage.', false, '');
         $this->registerArgument('padding', 'array', 'The padding of this column given as array.', false, []);
     }
 
     /**
-     * @return void
+     * @inheritDoc
      *
      * @throws Exception
      */
@@ -62,7 +64,7 @@ class ColumnViewHelper extends AbstractPDFViewHelper
 
         $this->validationService->validatePadding($this->arguments['padding']);
 
-        if (strlen($this->arguments['width'])) {
+        if (strlen((string) $this->arguments['width'])) {
             if ($this->validationService->validateWidth($this->arguments['width'])) {
                 $multiColumnContext['columnWidth'] = $this->conversionService->convertSpeakingWidthToTcpdfWidth($this->arguments['width'], $multiColumnContext['pageWidthWithoutMargins']);
             }
@@ -78,11 +80,9 @@ class ColumnViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    public function render()
+    public function render(): void
     {
         $this->getPDF()->setY($this->getPDF()->GetY() + $this->arguments['padding']['top']);
         $this->renderChildren();

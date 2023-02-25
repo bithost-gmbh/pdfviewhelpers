@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 /* * *
@@ -37,14 +39,14 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
  */
 class AvoidPageBreakInsideCustomFontViewHelperTest extends AbstractFunctionalTest
 {
-    protected $typoScriptFiles = [
+    protected array $typoScriptFiles = [
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/AvoidPageBreakInsideViewHelper/CustomFont.txt',
     ];
 
     /**
      * @test
      */
-    public function testCustomFont()
+    public function testCustomFont(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('AvoidPageBreakInsideViewHelper/CustomFont.html'),

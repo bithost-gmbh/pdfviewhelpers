@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Model;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -26,7 +28,7 @@ namespace Bithost\Pdfviewhelpers\Model;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 use setasign\Fpdi\Tcpdf\Fpdi;
 use Closure;
@@ -41,65 +43,39 @@ class BasePDF extends Fpdi
     /**
      * Indicating whether the current page is using a template.
      * This is needed to automatically add the template on an automatic page break.
-     *
-     * @var bool
      */
-    protected $importTemplateOnThisPage = false;
+    protected bool $importTemplateOnThisPage = false;
 
     /**
      * Document wide HeaderViewHelper
-     *
-     * @var Closure
      */
-    protected $documentHeaderClosure = null;
+    protected ?Closure $documentHeaderClosure = null;
 
     /**
      * Page wide HeaderViewHelper, overwriting Document wide HeaderViewHelper
-     *
-     * @var Closure
      */
-    protected $pageHeaderClosure = null;
+    protected ?Closure $pageHeaderClosure = null;
 
-    /**
-     * @var string
-     */
-    protected $pageHeaderScope = '';
+    protected string $pageHeaderScope = '';
 
     /**
      * Document wide FooterViewHelper
-     *
-     * @var Closure
      */
-    protected $documentFooterClosure = null;
+    protected ?Closure $documentFooterClosure = null;
 
     /**
      * Page wide FooterViewHelper, overwriting Document wide FooterViewHelper
-     *
-     * @var Closure
      */
-    protected $pageFooterClosure = null;
+    protected ?Closure $pageFooterClosure = null;
+
+    protected string $pageFooterScope = '';
 
     /**
      * Indicating whether page break is triggered by PageViewHelper or an auto page break
-     *
-     * @var boolean
      */
-    protected $isAutoPageBreak = false;
-
-    /**
-     * @var string
-     */
-    protected $pageFooterScope = '';
-
-    /**
-     * @var string
-     */
-    protected $currentPageFormat = '';
-
-    /**
-     * @var string
-     */
-    protected $currentTemplate = '';
+    protected bool $isAutoPageBreak = false;
+    protected string $currentPageFormat = '';
+    protected string $currentTemplate = '';
 
     const SCOPE_THIS_PAGE = 'thisPage';
     const SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS = 'thisPageIncludingPageBreaks';
@@ -107,10 +83,8 @@ class BasePDF extends Fpdi
 
     /**
      * Storing the path of custom fonts to use them on setFont
-     *
-     * @var array
      */
-    protected $customFontFilePaths = [];
+    protected array $customFontFilePaths = [];
 
     /**
      * @inheritdoc
@@ -135,10 +109,8 @@ class BasePDF extends Fpdi
     /**
      * Custom method to call setHeader to render header after the children of a PageViewHelper are rendered.
      * This allows to overwrite the header within a PageViewHelper.
-     *
-     * @return void
      */
-    public function renderHeader()
+    public function renderHeader(): void
     {
         $graphicVars = $this->getGraphicVars();
 
@@ -148,19 +120,15 @@ class BasePDF extends Fpdi
 
     /**
      * Use this method uf you extend BasePDF and want to render a header by accessing the TCPDF API directly
-     *
-     * @return void
      */
-    protected function basePdfHeader()
+    protected function basePdfHeader(): void
     {
     }
 
     /**
      * Use this method uf you extend BasePDF and want to render a footer by accessing the TCPDF API directly
-     *
-     * @return void
      */
-    protected function basePdfFooter()
+    protected function basePdfFooter(): void
     {
     }
 
@@ -230,23 +198,12 @@ class BasePDF extends Fpdi
         parent::useTemplate($template, $x, $y, $width, $height, $adjustPageSize);
     }
 
-    /**
-     * @param bool $importTemplateOnThisPage
-     *
-     * @return void
-     */
-    public function setImportTemplateOnThisPage($importTemplateOnThisPage)
+    public function setImportTemplateOnThisPage(bool $importTemplateOnThisPage): void
     {
         $this->importTemplateOnThisPage = $importTemplateOnThisPage;
     }
 
-    /**
-     * @param Closure|null $closure
-     * @param string $scope
-     *
-     * @return void
-     */
-    public function setHeaderClosure(Closure $closure = null, $scope = self::SCOPE_DOCUMENT)
+    public function setHeaderClosure(?Closure $closure = null, string $scope = self::SCOPE_DOCUMENT): void
     {
         if ($scope === self::SCOPE_DOCUMENT) {
             $this->documentHeaderClosure = $closure;
@@ -256,13 +213,7 @@ class BasePDF extends Fpdi
         }
     }
 
-    /**
-     * @param Closure|null $closure
-     * @param string $scope
-     *
-     * @return void
-     */
-    public function setFooterClosure(Closure $closure = null, $scope = self::SCOPE_DOCUMENT)
+    public function setFooterClosure(?Closure $closure = null, string $scope = self::SCOPE_DOCUMENT): void
     {
         if ($scope === self::SCOPE_DOCUMENT) {
             $this->documentFooterClosure = $closure;
@@ -272,10 +223,7 @@ class BasePDF extends Fpdi
         }
     }
 
-    /**
-     * @param boolean $isAutoPageBreak
-     */
-    public function setIsAutoPageBreak($isAutoPageBreak)
+    public function setIsAutoPageBreak(bool $isAutoPageBreak)
     {
         $this->isAutoPageBreak = $isAutoPageBreak;
     }
@@ -298,6 +246,7 @@ class BasePDF extends Fpdi
     public function SetFont($family, $style = '', $size = null, $fontfile = '', $subset = 'default', $out = true) // phpcs:ignore
     {
         $familyWithStyle = $family . strtolower($style);
+
         if (empty($fontfile) && isset($this->customFontFilePaths[$familyWithStyle])) {
             $fontfile = $this->customFontFilePaths[$familyWithStyle];
         } elseif (empty($fontfile) && isset($this->customFontFilePaths[$family])) {
@@ -315,6 +264,7 @@ class BasePDF extends Fpdi
     public function AddFont($family, $style='', $fontfile='', $subset='default') // phpcs:ignore
     {
         $familyWithStyle = $family . strtolower($style);
+
         if (empty($fontfile) && isset($this->customFontFilePaths[$familyWithStyle])) {
             $fontfile = $this->customFontFilePaths[$familyWithStyle];
         } elseif (empty($fontfile) && isset($this->customFontFilePaths[$family])) {
@@ -324,97 +274,65 @@ class BasePDF extends Fpdi
         return parent::AddFont($family, $style, $fontfile, $subset);
     }
 
-    /**
-     * @param $fontName
-     * @param $fontFilePath
-     */
-    public function addCustomFontFilePath($fontName, $fontFilePath)
+    public function addCustomFontFilePath(string $fontName, string $fontFilePath): void
     {
         $this->fontlist[] = $fontName;
         $this->customFontFilePaths[$fontName] = $fontFilePath;
     }
 
-    /**
-     * @param array $customFontFilePaths
-     */
-    public function setCustomFontFilePaths(array $customFontFilePaths)
+    public function setCustomFontFilePaths(array $customFontFilePaths): void
     {
         $this->customFontFilePaths = $customFontFilePaths;
     }
 
-    /**
-     * @return array
-     */
-    public function getCustomFontFilePaths()
+    public function getCustomFontFilePaths(): array
     {
         return $this->customFontFilePaths;
     }
 
-    /**
-     * @return integer
-     */
-    public function getInnerPageWidth()
+    public function getInnerPageWidth(): float
     {
         $pageWidth = $this->getPageWidth();
         $pageMargins = $this->getMargins();
 
-        return $pageWidth - $pageMargins['left'] - $pageMargins['right'];
+        return (float) $pageWidth - $pageMargins['left'] - $pageMargins['right'];
     }
 
-    /**
-     * @return float
-     */
-    public function getScaledInnerPageHeight()
+    public function getScaledInnerPageHeight(): float
     {
         $margins = $this->getMargins();
 
-        return $this->getScaledPageHeight() - $margins['top'] - $margins['bottom'];
+        return (float) $this->getScaledPageHeight() - $margins['top'] - $margins['bottom'];
     }
 
-    /**
-     * @param integer $page
-     *
-     * @return float;
-     */
-    public function getScaledPageHeight($page = null)
+    public function getScaledPageHeight(?int $page = null): float
     {
         if ($page === null) {
             $page = $this->getPage();
         }
 
-        return $this->getPageHeight($page) / $this->getScaleFactor();
+        return (float) $this->getPageHeight($page) / $this->getScaleFactor();
     }
 
-    /**
-     * @return string
-     */
-    public function getCurrentPageOrientation()
+    public function getCurrentPageOrientation(): string
     {
         return $this->CurOrientation;
     }
 
-    /**
-     * @return string
-     */
-    public function getCurrentPageFormat()
+    public function getCurrentPageFormat(): string
     {
         return $this->currentPageFormat;
     }
 
-    /**
-     * @return string
-     */
-    public function getPdfUnit()
+    public function getPdfUnit(): string
     {
         return $this->pdfunit;
     }
 
     /**
      * Disable the ad-link in the bottom left corner
-     *
-     * @return void
      */
-    public function disableTcpdfLink()
+    public function disableTcpdfLink(): void
     {
         $this->tcpdflink = false;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 /* * *
@@ -28,6 +30,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
 use TYPO3\CMS\Core\Resource\FileInterface;
 
@@ -41,7 +44,7 @@ class ImageViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testStringSource()
+    public function testStringSource(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('ImageViewHelper/Image.html'),
@@ -57,7 +60,7 @@ class ImageViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testFileSource()
+    public function testFileSource(): void
     {
         $fileInterfaceMock = $this->createMock(FileInterface::class);
         $fileInterfaceMock->method('getContents')->willReturn(file_get_contents($this->getFixtureAbsolutePath('ImageViewHelper/Bithost.jpg')));
@@ -77,9 +80,9 @@ class ImageViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testInvalidStringSource()
+    public function testInvalidStringSource(): void
     {
-        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+        $this->expectException(ValidationException::class);
 
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('ImageViewHelper/Image.html'),

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -50,13 +52,6 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
      *
      * @var boolean
      */
-    protected $escapingInterceptorEnabled = false;
-
-    /**
-     * Do not escape output of ViewHelpers
-     *
-     * @var boolean
-     */
     protected $escapeChildren = false;
 
     /**
@@ -66,69 +61,36 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
      */
     protected $escapeOutput = false;
 
-    /**
-     * @var array
-     */
-    protected $settings = [];
+    protected array $settings = [];
+    protected ConfigurationManagerInterface $configurationManager;
+    protected ValidationService $validationService;
+    protected HyphenationService $hyphenationService;
+    protected ConversionService $conversionService;
 
-    /**
-     * @var ConfigurationManagerInterface
-     */
-    protected $configurationManager = null;
-
-    /**
-     * @var ValidationService
-     */
-    protected $validationService = null;
-
-    /**
-     * @var HyphenationService
-     */
-    protected $hyphenationService = null;
-
-    /**
-     * @var ConversionService
-     */
-    protected $conversionService = null;
-
-    /**
-     * @param ConfigurationManagerInterface $configurationManager
-     */
-    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
     {
         $this->configurationManager = $configurationManager;
     }
 
-    /**
-     * @param ValidationService $validationService
-     */
-    public function injectValidationService(ValidationService $validationService)
+    public function injectValidationService(ValidationService $validationService): void
     {
         $this->validationService = $validationService;
     }
 
-    /**
-     * @param HyphenationService $hyphenationService
-     */
-    public function injectHyphenationService(HyphenationService $hyphenationService)
+    public function injectHyphenationService(HyphenationService $hyphenationService): void
     {
         $this->hyphenationService = $hyphenationService;
     }
 
-    /**
-     * @param ConversionService $conversionService
-     */
-    public function injectConversionService(ConversionService $conversionService)
+    public function injectConversionService(ConversionService $conversionService): void
     {
         $this->conversionService = $conversionService;
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'Pdfviewhelpers', 'tx_pdfviewhelpers');
 
@@ -139,23 +101,16 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
         $this->conversionService->setSettings($this->settings);
     }
 
-    /**
-     * @param BasePDF $pdf
-     *
-     * @return void
-     */
-    protected function setPDF(BasePDF $pdf)
+    protected function setPDF(BasePDF $pdf): void
     {
         $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pdf', $pdf);
         $this->hyphenationService->setPDF($pdf);
     }
 
     /**
-     * @return BasePDF
-     *
      * @throws Exception
      */
-    protected function getPDF()
+    protected function getPDF(): BasePDF
     {
         if ($this->viewHelperVariableContainer->exists('DocumentViewHelper', 'pdf')) {
             return $this->viewHelperVariableContainer->get('DocumentViewHelper', 'pdf');
@@ -165,11 +120,9 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    protected function removePDF()
+    protected function removePDF(): void
     {
         if ($this instanceof DocumentViewHelper && $this->viewHelperVariableContainer->exists('DocumentViewHelper', 'pdf')) {
             $this->viewHelperVariableContainer->remove('DocumentViewHelper', 'pdf');
@@ -178,12 +131,7 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
         }
     }
 
-    /**
-     * @param array $multiColumnContext
-     *
-     * @return void
-     */
-    protected function pushMultiColumnContext(array $multiColumnContext)
+    protected function pushMultiColumnContext(array $multiColumnContext): void
     {
         if (!$this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'contextStack')) {
             $contextStack = new ContextStack();
@@ -197,10 +145,7 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
         }
     }
 
-    /**
-     * @return array $multiColumnContext
-     */
-    protected function popMultiColumnContext()
+    protected function popMultiColumnContext(): ?array
     {
         if ($this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'contextStack')) {
             $contextStack = $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'contextStack');
@@ -211,35 +156,28 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
         }
     }
 
-    /**
-     * @return array $multiColumnContext
-     */
-    protected function getCurrentMultiColumnContext()
+    protected function getCurrentMultiColumnContext(): ?array
     {
         if ($this->viewHelperVariableContainer->exists('MultiColumnViewHelper', 'contextStack')) {
             $contextStack = $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'contextStack');
+            $top = $contextStack->top();
 
-            return $contextStack->top();
+            return is_array($top) ? $top : null;
         } else {
             return null;
         }
     }
 
-    /**
-     * @param array $multiColumnContext
-     */
-    protected function setCurrentMultiColumnContext($multiColumnContext)
+    protected function setCurrentMultiColumnContext(array $multiColumnContext): void
     {
         $this->popMultiColumnContext();
         $this->pushMultiColumnContext($multiColumnContext);
     }
 
     /**
-     * @return string
-     *
      * @throws ValidationException
      */
-    protected function getHyphenFileName()
+    protected function getHyphenFileName(): string
     {
         if ($this->viewHelperVariableContainer->exists('DocumentViewHelper', 'hyphenFile')) {
             return $this->viewHelperVariableContainer->get('DocumentViewHelper', 'hyphenFile');

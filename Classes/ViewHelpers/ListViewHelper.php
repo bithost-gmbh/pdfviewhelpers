@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -39,7 +41,7 @@ use Bithost\Pdfviewhelpers\Exception\ValidationException;
 class ListViewHelper extends AbstractTextViewHelper
 {
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
@@ -52,7 +54,7 @@ class ListViewHelper extends AbstractTextViewHelper
     }
 
     /**
-     * @return void
+     * @inheritDoc
      *
      * @throws Exception
      */
@@ -82,11 +84,9 @@ class ListViewHelper extends AbstractTextViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    public function render()
+    public function render(): void
     {
         $this->initializeMultiColumnSupport();
 
@@ -154,10 +154,7 @@ class ListViewHelper extends AbstractTextViewHelper
         $this->getPDF()->setY($elementEndY + $this->arguments['padding']['bottom']);
     }
 
-    /**
-     * @return string
-     */
-    protected function getSettingsKey()
+    protected function getSettingsKey(): string
     {
         return 'list';
     }

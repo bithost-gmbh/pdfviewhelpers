@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Tests\Unit\Service;
 
 /* * *
@@ -40,14 +42,8 @@ use Bithost\Pdfviewhelpers\Tests\Unit\AbstractUnitTest;
  */
 class ValidationServiceTest extends AbstractUnitTest
 {
-    /**
-     * @var ValidationService
-     */
-    protected $validationService;
+    protected ValidationService $validationService;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         $this->validationService = new ValidationService();
@@ -56,7 +52,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testValidPadding()
+    public function testValidPadding(): void
     {
         $padding = ['top' => 10, 'right' => 0, 'bottom' => 20, 'left' => 10];
 
@@ -66,7 +62,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testInvalidPaddingMissingAttribute()
+    public function testInvalidPaddingMissingAttribute(): void
     {
         $padding = ['top' => 0, 'right' => 0, 'bottom' => 0, 'left' => 0];
 
@@ -87,7 +83,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testInvalidPaddingNonNumeric()
+    public function testInvalidPaddingNonNumeric(): void
     {
         $padding = ['top' => 0, 'right' => 0, 'bottom' => 0, 'left' => 0];
 
@@ -108,7 +104,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testInvalidPaddingTooManyElements()
+    public function testInvalidPaddingTooManyElements(): void
     {
         $padding = ['top' => 0, 'right' => 0, 'bottom' => 0, 'left' => 0, 'bla' => 0];
 
@@ -119,7 +115,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testColor()
+    public function testColor(): void
     {
         $colorShort = '#1B3';
         $colorLong = '#8ABC99';
@@ -131,7 +127,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testInvalidColor()
+    public function testInvalidColor(): void
     {
         $invalidColors = ['#1Y3', '#8ABC99B', '123', '#12'];
 
@@ -148,7 +144,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testWidth()
+    public function testWidth(): void
     {
         $validWidths = ['10', '0', '1', '100.5'];
 
@@ -160,7 +156,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testInvalidWidth()
+    public function testInvalidWidth(): void
     {
         $invalidWidths = ['-1', '-0.1', 'a10', '10b', 'abc', ''];
 
@@ -177,7 +173,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testFontSize()
+    public function testFontSize(): void
     {
         $validFontSizes = ['10', '0', '1', '100.5'];
 
@@ -189,7 +185,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testInvalidFontSize()
+    public function testInvalidFontSize(): void
     {
         $invalidFontSizes = ['-1', '-0.1', 'a10', '10b', 'abc', ''];
 
@@ -206,7 +202,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testFontFamily()
+    public function testFontFamily(): void
     {
         $fontFamilies = ['robotob', 'courieri', 'timesb'];
 
@@ -218,7 +214,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testInvalidFontFamily()
+    public function testInvalidFontFamily(): void
     {
         $invalidFontFamilies = ['robotobold', 'courieritalic', 'times-b', ''];
 
@@ -235,7 +231,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testParaghraphSpacing()
+    public function testParaghraphSpacing(): void
     {
         $validParagraphSpacing = ['10', '0', '1', '100.5'];
 
@@ -247,7 +243,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testInvalidParaghraphSpacing()
+    public function testInvalidParaghraphSpacing(): void
     {
         $invalidParagraphSpacing = ['-1', '-0.1', 'a10', '10b', 'abc', ''];
 
@@ -264,7 +260,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testHeight()
+    public function testHeight(): void
     {
         $validHeight = ['10', '0', '1', '100.5'];
 
@@ -276,7 +272,7 @@ class ValidationServiceTest extends AbstractUnitTest
     /**
      * @test
      */
-    public function testInvalidHeight()
+    public function testInvalidHeight(): void
     {
         $invalidHeight = ['-1', '-0.1', 'a10', '10b', 'abc', ''];
 

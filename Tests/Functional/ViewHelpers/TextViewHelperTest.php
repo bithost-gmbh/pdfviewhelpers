@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 /* * *
@@ -28,6 +30,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
 
 /**
@@ -45,7 +48,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testTrimAndRemoveDoubleWhitespace()
+    public function testTrimAndRemoveDoubleWhitespace(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('TextViewHelper/Text.html'),
@@ -59,7 +62,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testNotRemoveDoubleWhitespace()
+    public function testNotRemoveDoubleWhitespace(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('TextViewHelper/TextOverwrite.html'),
@@ -73,7 +76,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testColorShort()
+    public function testColorShort(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('TextViewHelper/TextColor.html'),
@@ -87,7 +90,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testColorLong()
+    public function testColorLong(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('TextViewHelper/TextColor.html'),
@@ -101,7 +104,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testInvalidColor()
+    public function testInvalidColor(): void
     {
         $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
 
@@ -114,7 +117,7 @@ class TextViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testPartialPaddingOverwrite()
+    public function testPartialPaddingOverwrite(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('TextViewHelper/TextPadding.html'),
@@ -128,9 +131,9 @@ class TextViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testInvalidPAddingKey()
+    public function testInvalidPAddingKey(): void
     {
-        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+        $this->expectException(ValidationException::class);
 
         $this->renderFluidTemplate(
             $this->getFixtureExtPath('TextViewHelper/TextPadding.html'),
@@ -141,9 +144,9 @@ class TextViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testInvalidPAdding()
+    public function testInvalidPAdding(): void
     {
-        $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
+        $this->expectException(ValidationException::class);
 
         $this->renderFluidTemplate(
             $this->getFixtureExtPath('TextViewHelper/TextPadding.html'),

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -41,12 +43,12 @@ use TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\ViewHelperNode;
 class MultiColumnViewHelper extends AbstractPDFViewHelper
 {
     /**
-     * @var array
+     * @inheritdoc
      */
     protected $childNodes = [];
 
     /**
-     * @return void
+     * @inheritDoc
      *
      * @throws Exception
      */
@@ -69,7 +71,8 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper
         $multiColumnContext['startingPage'] = $this->getPDF()->getPage();
 
         foreach ($this->childNodes as $childNode) {
-            if ($childNode instanceof ViewHelperNode
+            if (
+                $childNode instanceof ViewHelperNode
                 && $childNode->getViewHelperClassName() === 'Bithost\Pdfviewhelpers\ViewHelpers\ColumnViewHelper'
             ) {
                 $multiColumnContext['columns'][] = $childNode;
@@ -84,11 +87,9 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    public function render()
+    public function render(): void
     {
         $multiColumnContext = $this->getCurrentMultiColumnContext();
 
@@ -102,8 +103,9 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper
             //get possible new multi column context
             $multiColumnContext = $this->getCurrentMultiColumnContext();
 
-            if ($multiColumnContext['longestColumnPage'] < $this->getPDF()->getPage() ||
-                ($multiColumnContext['longestColumnPage'] === $this->getPDF()->getPage() &&  $multiColumnContext['longestColumnPosY'] < $this->getPDF()->GetY())
+            if (
+                $multiColumnContext['longestColumnPage'] < $this->getPDF()->getPage()
+                || ($multiColumnContext['longestColumnPage'] === $this->getPDF()->getPage() &&  $multiColumnContext['longestColumnPosY'] < $this->getPDF()->GetY())
             ) {
                 $multiColumnContext['longestColumnPosY'] = $this->getPDF()->GetY();
                 $multiColumnContext['longestColumnPage'] = $this->getPDF()->getPage();
@@ -121,9 +123,7 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @param array $childNodes
-     *
-     * @return void
+     * @inheritDoc
      */
     public function setChildNodes(array $childNodes)
     {

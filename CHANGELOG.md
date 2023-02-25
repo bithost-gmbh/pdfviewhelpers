@@ -2,6 +2,7 @@
 
 ## 3.0.0 - Not yet released
 
+- Adds type hints and enforces strict types, [#133](https://github.com/bithost-gmbh/pdfviewhelpers/issues/133)
 - Removes deprecated classes EmptyFPDI and EmptyTCPDF
 - Drops support for TYPO3 9 LTS
 - Drops support for PHP < 7.4

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Tests\Functional;
 
 /* * *
@@ -28,6 +30,8 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Exception\Exception;
+
 /**
  * ExtendExistingPDFsTest
  *
@@ -38,7 +42,7 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testDoImportOnAutomaticPageBreak()
+    public function testDoImportOnAutomaticPageBreak(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('ExtendExistingPDFs/Template.html'),
@@ -67,7 +71,7 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testDoNotImportOnAutomaticPageBreak()
+    public function testDoNotImportOnAutomaticPageBreak(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('ExtendExistingPDFs/Template.html'),
@@ -96,9 +100,9 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testImportWrongPage()
+    public function testImportWrongPage(): void
     {
-        $this->expectException(\Bithost\Pdfviewhelpers\Exception\Exception::class);
+        $this->expectException(Exception::class);
 
         $this->renderFluidTemplate(
             $this->getFixtureExtPath('ExtendExistingPDFs/Template.html'),

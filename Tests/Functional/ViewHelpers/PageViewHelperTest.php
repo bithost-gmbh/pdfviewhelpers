@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 /* * *
@@ -40,7 +42,7 @@ class PageViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testAddPages()
+    public function testAddPages(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('PageViewHelper/AddPages.html'));
         $pdf = $this->parseContent($output);
@@ -61,7 +63,7 @@ class PageViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testAutoPageBreakOn()
+    public function testAutoPageBreakOn(): void
     {
         $longLoremIpsumText = $this->getLongLoremIpsumText(10);
         $output = $this->renderFluidTemplate(
@@ -76,7 +78,7 @@ class PageViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testAutoPageBreakOff()
+    public function testAutoPageBreakOff(): void
     {
         $longLoremIpsumText = $this->getLongLoremIpsumText(10);
         $output = $this->renderFluidTemplate(

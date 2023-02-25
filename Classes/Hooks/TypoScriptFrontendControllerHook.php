@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Hooks;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -26,27 +28,25 @@ namespace Bithost\Pdfviewhelpers\Hooks;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * TypoScriptFrontendController
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class TypoScriptFrontendController implements SingletonInterface
+class TypoScriptFrontendControllerHook implements SingletonInterface
 {
     /**
      * Prevent any output when a pdf is rendered, especially any headers being set!
-     *
-     * @param    array $params Parameters from frontend
-     * @param    object $ref TSFE object
-     * @return    void
      */
-    public function isOutputting(&$params, $ref)
+    public function isOutputting(array &$params, TypoScriptFrontendController $ref): void
     {
-        if (isset($params['pObj']->applicationData['tx_pdfviewhelpers']['pdfOutput'])
+        if (
+            isset($params['pObj']->applicationData['tx_pdfviewhelpers']['pdfOutput'])
             && $params['pObj']->applicationData['tx_pdfviewhelpers']['pdfOutput'] === true
         ) {
             $params['enableOutput'] = false;

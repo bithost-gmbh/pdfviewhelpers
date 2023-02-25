@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 /* * *
@@ -41,7 +43,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testMetaInformation()
+    public function testMetaInformation(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('DocumentViewHelper/MetaInformation.html'));
         $pdf = $this->parseContent($output);
@@ -53,7 +55,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testMetaInformationOverwrite()
+    public function testMetaInformationOverwrite(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('DocumentViewHelper/MetaInformationOverwrite.html'),
@@ -68,7 +70,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testOutputDestinationF()
+    public function testOutputDestinationF(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('DocumentViewHelper/OutputDestination.html'),
@@ -85,7 +87,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testOutputDestinationS()
+    public function testOutputDestinationS(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('DocumentViewHelper/OutputDestination.html'),
@@ -98,7 +100,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testOutputDestinationE()
+    public function testOutputDestinationE(): void
     {
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('DocumentViewHelper/OutputDestination.html'),

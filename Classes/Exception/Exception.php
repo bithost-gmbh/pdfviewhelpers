@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Exception;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -26,7 +28,7 @@ namespace Bithost\Pdfviewhelpers\Exception;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 /**
  * Exception
@@ -35,5 +37,4 @@ namespace Bithost\Pdfviewhelpers\Exception;
  */
 class Exception extends \Exception
 {
-
 }

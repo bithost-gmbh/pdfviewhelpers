@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -37,17 +39,13 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
  */
 class HeadlineViewHelper extends AbstractTextViewHelper
 {
-    /**
-     * @return string
-     */
-    protected function getSettingsKey()
+    protected function getSettingsKey(): string
     {
         return 'headline';
     }
 
-
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
@@ -58,7 +56,7 @@ class HeadlineViewHelper extends AbstractTextViewHelper
     }
 
     /**
-     * @return void
+     * @inheritDoc
      *
      * @throws Exception
      */

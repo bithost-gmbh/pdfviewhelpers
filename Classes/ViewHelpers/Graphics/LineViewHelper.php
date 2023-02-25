@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers\Graphics;
 
 /* * *
@@ -40,7 +42,7 @@ use Bithost\Pdfviewhelpers\ViewHelpers\AbstractContentElementViewHelper;
 class LineViewHelper extends AbstractContentElementViewHelper
 {
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
@@ -55,7 +57,7 @@ class LineViewHelper extends AbstractContentElementViewHelper
     }
 
     /**
-     * @return void
+     * @inheritDoc
      *
      * @throws Exception
      */
@@ -95,11 +97,9 @@ class LineViewHelper extends AbstractContentElementViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    public function render()
+    public function render(): void
     {
         $this->getPDF()->Line(
             $this->arguments['fromX'] + $this->arguments['padding']['left'],

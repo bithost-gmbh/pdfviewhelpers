@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -38,12 +40,10 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
 class GetPosYViewHelper extends AbstractPDFViewHelper
 {
     /**
-     * @return integer
-     *
      * @throws Exception
      */
-    public function render()
+    public function render(): float
     {
-        return $this->getPDF()->GetY();
+        return (float) $this->getPDF()->GetY();
     }
 }

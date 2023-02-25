@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -40,21 +42,15 @@ use TYPO3\CMS\Extbase\Service\ImageService;
  */
 class ImageViewHelper extends AbstractContentElementViewHelper
 {
-    /**
-     * @var ImageService
-     */
-    protected $imageService;
+    protected ImageService $imageService;
 
-    /**
-     * @param ImageService $imageService
-     */
-    public function injectImageService(ImageService $imageService)
+    public function injectImageService(ImageService $imageService): void
     {
         $this->imageService = $imageService;
     }
 
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
@@ -69,7 +65,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
     }
 
     /**
-     * @return void
+     * @inheritDoc
      *
      * @throws Exception
      */
@@ -82,11 +78,9 @@ class ImageViewHelper extends AbstractContentElementViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    public function render()
+    public function render(): void
     {
         $this->initializeMultiColumnSupport();
 
@@ -170,13 +164,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
         $this->getPDF()->setY($this->getPDF()->getImageRBY() + $this->arguments['padding']['bottom']);
     }
 
-    /**
-     * @param FileInterface $imageFile
-     * @param array $processingInstructions
-     *
-     * @return FileInterface
-     */
-    protected function processImage(FileInterface $imageFile, array $processingInstructions)
+    protected function processImage(FileInterface $imageFile, array $processingInstructions): FileInterface
     {
         $imageFileCrop = $imageFile->hasProperty('crop') && $imageFile->getProperty('crop') ? json_decode($imageFile->getProperty('crop'), true) : [];
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
 
 /* * *
@@ -37,14 +39,14 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
  */
 class TableOfContentTest extends AbstractFunctionalTest
 {
-    protected $typoScriptFiles = [
+    protected array $typoScriptFiles = [
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/TableOfContent.txt',
     ];
 
     /**
      * @test
      */
-    public function testTableOfContent()
+    public function testTableOfContent(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('Examples/TableOfContent.html'));
         $pdf = $this->parseContent($output);

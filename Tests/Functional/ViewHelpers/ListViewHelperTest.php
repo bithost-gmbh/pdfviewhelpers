@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 /* * *
@@ -40,7 +42,7 @@ class ListViewHelperTest extends AbstractFunctionalTest
     /**
      * @test
      */
-    public function testListRendered()
+    public function testListRendered(): void
     {
         $listElements = ['lorem', 'ipsum', 'dolor'];
         $output = $this->renderFluidTemplate(

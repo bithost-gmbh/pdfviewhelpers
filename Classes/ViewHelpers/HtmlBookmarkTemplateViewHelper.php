@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -36,7 +38,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 class HtmlBookmarkTemplateViewHelper extends AbstractPDFViewHelper
 {
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
@@ -46,16 +48,13 @@ class HtmlBookmarkTemplateViewHelper extends AbstractPDFViewHelper
         $this->registerArgument('sanitizeWhitespace', 'boolean', 'If true the input will be trimmed and whitespaces between HTML tags will be removed.', false, $this->settings['htmlBookmarkTemplate']['sanitizeWhitespace']);
     }
 
-    /**
-     * @return void
-     */
-    public function render()
+    public function render(): void
     {
         $bookmarkTemplates = $this->viewHelperVariableContainer->get('TableOfContentViewHelper', 'bookmarkTemplates');
         $template = $this->renderChildren();
 
         if ($this->arguments['sanitizeWhitespace']) {
-            $template = trim($template);
+            $template = trim((string) $template);
             $template = preg_replace('/(\>)\s*(\<)/m', '$1$2', $template);
         }
 

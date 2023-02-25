@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\MultiColumn;
 
 /***
@@ -35,47 +37,32 @@ namespace Bithost\Pdfviewhelpers\MultiColumn;
  */
 class ContextStack
 {
-    /**
-     * @var array
-     */
-    protected $stack = [];
+    protected array $stack = [];
 
-    /**
-     * @return int
-     */
-    public function size()
+    public function size(): int
     {
         return count($this->stack);
     }
 
     /**
-     * @return array
+     * @return false|array
      */
     public function top()
     {
         return end($this->stack);
     }
 
-    /**
-     * @param array $context
-     */
-    public function push(array $context)
+    public function push(array $context): void
     {
         array_push($this->stack, $context);
     }
 
-    /**
-     * @return array
-     */
-    public function pop()
+    public function pop(): array
     {
         return array_pop($this->stack);
     }
 
-    /**
-     * @return bool
-     */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return empty($this->stack);
     }

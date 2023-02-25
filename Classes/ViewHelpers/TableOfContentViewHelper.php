@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -38,7 +40,7 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
 class TableOfContentViewHelper extends AbstractPDFViewHelper
 {
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
@@ -56,6 +58,9 @@ class TableOfContentViewHelper extends AbstractPDFViewHelper
         $this->registerArgument('padding', 'array', 'The padding for the entries.', false, []);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function initialize()
     {
         parent::initialize();
@@ -86,11 +91,9 @@ class TableOfContentViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    public function render()
+    public function render(): void
     {
         $this->getPDF()->setFontSize($this->arguments['fontSize']);
         $this->getPDF()->SetFont($this->arguments['fontFamily']);

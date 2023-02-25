@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -39,7 +41,7 @@ use Bithost\Pdfviewhelpers\Exception\ValidationException;
 class BookmarkViewHelper extends AbstractPDFViewHelper
 {
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
@@ -52,7 +54,7 @@ class BookmarkViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
+     * @inheritDoc
      *
      * @throws ValidationException
      */
@@ -80,11 +82,9 @@ class BookmarkViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    public function render()
+    public function render(): void
     {
         $this->getPDF()->Bookmark(
             $this->arguments['text'],

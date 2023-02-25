@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -38,7 +40,7 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
 abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
 {
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
@@ -51,7 +53,7 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
+     * @inheritDoc
      *
      * @throws Exception
      */
@@ -79,11 +81,9 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    protected function initializeHeaderAndFooter()
+    protected function initializeHeaderAndFooter(): void
     {
         if ($this->viewHelperVariableContainer->get('DocumentViewHelper', 'pageNeedsHeader')) {
             $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pageNeedsHeader', false);
@@ -93,11 +93,9 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    protected function initializeMultiColumnSupport()
+    protected function initializeMultiColumnSupport(): void
     {
         $multiColumnContext = $this->getCurrentMultiColumnContext();
 

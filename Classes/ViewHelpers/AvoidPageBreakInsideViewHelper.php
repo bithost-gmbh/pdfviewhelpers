@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -40,7 +42,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class AvoidPageBreakInsideViewHelper extends AbstractPDFViewHelper
 {
     /**
-     * @return void
+     * @inheritDoc
      */
     public function initializeArguments()
     {
@@ -50,11 +52,9 @@ class AvoidPageBreakInsideViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      */
-    public function render()
+    public function render(): void
     {
         $realPDF = $this->getPDF();
         $shadowPDF = $this->prepareShadowPdf($realPDF);
@@ -90,12 +90,7 @@ class AvoidPageBreakInsideViewHelper extends AbstractPDFViewHelper
         $this->renderChildren();
     }
 
-    /**
-     * @param BasePDF $realPdf
-     *
-     * @return BasePDF
-     */
-    protected function prepareShadowPdf(BasePDF $realPdf)
+    protected function prepareShadowPdf(BasePDF $realPdf): BasePDF
     {
         /** @var BasePDF $shadowPDF */
         $shadowPDF = GeneralUtility::makeInstance(

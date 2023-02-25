@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Model;
 
 /***
@@ -38,14 +40,14 @@ class FullFeatureShowCase extends BasePDF
     /**
      * @inheritdoc
      */
-    public function basePdfHeader()
+    public function basePdfHeader(): void
     {
     }
 
     /**
      * @inheritdoc
      */
-    public function basePdfFooter()
+    public function basePdfFooter(): void
     {
         $this->setY(-20);
         $this->setDrawColor(140, 140, 140);

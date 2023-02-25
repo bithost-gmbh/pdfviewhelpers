@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 /* * *
@@ -35,10 +37,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  */
 class TextViewHelper extends AbstractTextViewHelper
 {
-    /**
-     * @return string
-     */
-    protected function getSettingsKey()
+    protected function getSettingsKey(): string
     {
         return 'text';
     }

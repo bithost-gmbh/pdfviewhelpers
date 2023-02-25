@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Service;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -26,7 +28,7 @@ namespace Bithost\Pdfviewhelpers\Service;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -41,27 +43,17 @@ use TCPDF_STATIC;
  */
 class HyphenationService implements SingletonInterface
 {
-    /**
-     * @var TCPDF
-     */
-    protected $pdf;
+    protected TCPDF $pdf;
 
     /**
      * Used to cache loading of hyphen patterns
-     *
-     * @var array
      */
-    protected $hyphenPatterns = [];
+    protected array $hyphenPatterns = [];
 
     /**
-     * @param string $text
-     * @param string $hyphenFilePath
-     *
-     * @return string
-     *
      * @throws ValidationException
      */
-    public function hyphenateText($text, $hyphenFilePath)
+    public function hyphenateText(string $text, string $hyphenFilePath): string
     {
         if (!file_exists($hyphenFilePath) || !is_readable($hyphenFilePath)) {
             throw new ValidationException('Path to hyphen file "' . $hyphenFilePath . '" does not exist or file is not readable. ERROR: 1525410458', 1525410458);
@@ -71,25 +63,15 @@ class HyphenationService implements SingletonInterface
             $this->hyphenPatterns[$hyphenFilePath] = TCPDF_STATIC::getHyphenPatternsFromTEX($hyphenFilePath);
         }
 
-        return (string) $this->pdf->hyphenateText($text, $this->hyphenPatterns[$hyphenFilePath]);
+        return $this->pdf->hyphenateText($text, $this->hyphenPatterns[$hyphenFilePath]);
     }
 
-    /**
-     * @param string $hyphenFile
-     *
-     * @return string
-     */
-    public function getHyphenFilePath($hyphenFile)
+    public function getHyphenFilePath(string $hyphenFile): string
     {
         return GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Resources/Private/Hyphenation/' . $hyphenFile);
     }
 
-    /**
-     * @param TCPDF $pdf
-     *
-     * @return void
-     */
-    public function setPDF(TCPDF $pdf)
+    public function setPDF(TCPDF $pdf): void
     {
         $this->pdf = $pdf;
     }

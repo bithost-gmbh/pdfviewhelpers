@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bithost\Pdfviewhelpers\Service;
 
-/***
+/* * *
  *
  * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
  *
@@ -26,7 +28,7 @@ namespace Bithost\Pdfviewhelpers\Service;
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***/
+ * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
@@ -41,30 +43,15 @@ use TYPO3\CMS\Core\SingletonInterface;
  */
 class ConversionService implements SingletonInterface
 {
-    /**
-     * @var array
-     */
-    protected $settings = null;
+    protected array $settings = [];
+    protected ResourceFactory $resourceFactory;
 
-    /**
-     * @var ResourceFactory
-     */
-    protected $resourceFactory = null;
-
-    /**
-     * @param ResourceFactory $resourceFactory
-     */
-    public function injectResourceFactory(ResourceFactory $resourceFactory)
+    public function injectResourceFactory(ResourceFactory $resourceFactory): void
     {
         $this->resourceFactory = $resourceFactory;
     }
 
-    /**
-     * @param string $colorHex
-     *
-     * @return array
-     */
-    public function convertHexToRGB($colorHex)
+    public function convertHexToRGB(string $colorHex): array
     {
         $colorHex = str_replace("#", "", $colorHex);
 
@@ -82,13 +69,9 @@ class ConversionService implements SingletonInterface
     }
 
     /**
-     * @param string $orientation
-     *
-     * @return string
-     *
      * @throws ValidationException
      */
-    public function convertSpeakingOrientationToTcpdfOrientation($orientation)
+    public function convertSpeakingOrientationToTcpdfOrientation(string $orientation): string
     {
         switch ($orientation) {
             case 'portrait':
@@ -103,13 +86,9 @@ class ConversionService implements SingletonInterface
     }
 
     /**
-     * @param string $outputDestination
-     *
-     * @return string
-     *
      * @throws ValidationException
      */
-    public function convertSpeakingOutputDestinationToTcpdfOutputDestination($outputDestination)
+    public function convertSpeakingOutputDestinationToTcpdfOutputDestination(string $outputDestination): string
     {
         switch ($outputDestination) {
             case 'inline':
@@ -139,13 +118,9 @@ class ConversionService implements SingletonInterface
     }
 
     /**
-     * @param string $fontStyle
-     *
-     * @return string
-     *
      * @throws ValidationException
      */
-    public function convertSpeakingFontStyleToTcpdfFontStyle($fontStyle)
+    public function convertSpeakingFontStyleToTcpdfFontStyle(string $fontStyle): string
     {
         switch ($fontStyle) {
             case 'bold':
@@ -169,13 +144,9 @@ class ConversionService implements SingletonInterface
     }
 
     /**
-     * @param string $alignment
-     *
-     * @return string
-     *
      * @throws ValidationException
      */
-    public function convertSpeakingAlignmentToTcpdfAlignment($alignment)
+    public function convertSpeakingAlignmentToTcpdfAlignment(string $alignment): string
     {
         switch ($alignment) {
             case 'left':
@@ -196,16 +167,14 @@ class ConversionService implements SingletonInterface
     }
 
     /**
-     * @param string $width A simple integer (e.g. 100) or percentage value (e.g. 50%)
-     * @param integer $fullWidth The width that is considered to be 100%
-     *
-     * @return float
+     * @param string|int|float $width A simple integer (e.g. 100) or percentage value (e.g. 50%)
+     * @param int|float $fullWidth The width that is considered to be 100%
      *
      * @throws ValidationException
      */
-    public function convertSpeakingWidthToTcpdfWidth($width, $fullWidth)
+    public function convertSpeakingWidthToTcpdfWidth($width, $fullWidth): float
     {
-        if (mb_substr($width, -1) === '%') {
+        if (is_string($width) && mb_substr($width, -1) === '%') {
             $stringPercentage = rtrim($width, '%');
             $invalidWidth = !is_numeric($stringPercentage);
             $columnWidth = ((float) $stringPercentage / 100) * $fullWidth;
@@ -222,13 +191,9 @@ class ConversionService implements SingletonInterface
     }
 
     /**
-     * @param string $extension
-     *
-     * @return string
-     *
      * @throws Exception
      */
-    public function convertImageExtensionToRenderMode($extension)
+    public function convertImageExtensionToRenderMode(string $extension): string
     {
         $settings = $this->getSettings();
         $extension = strtolower($extension);
@@ -245,13 +210,11 @@ class ConversionService implements SingletonInterface
     }
 
     /**
-     * @param mixed $src
-     *
-     * @return FileInterface
+     * @param string|FileInterface $src
      *
      * @throws Exception
      */
-    public function convertFileSrcToFileObject($src)
+    public function convertFileSrcToFileObject($src): FileInterface
     {
         $file = null;
         $previousException = null;
@@ -276,20 +239,15 @@ class ConversionService implements SingletonInterface
         return $file;
     }
 
-    /**
-     * @param array $settings
-     */
-    public function setSettings(array $settings)
+    public function setSettings(array $settings): void
     {
         $this->settings = $settings;
     }
 
     /**
-     * @return array
-     *
      * @throws Exception
      */
-    protected function getSettings()
+    protected function getSettings(): array
     {
         if (is_array($this->settings)) {
             return $this->settings;
@@ -298,12 +256,7 @@ class ConversionService implements SingletonInterface
         }
     }
 
-    /**
-     * @param string $imageTypes
-     *
-     * @return array
-     */
-    protected function convertImageTypeStringToImageTypeArray($imageTypes)
+    protected function convertImageTypeStringToImageTypeArray(string $imageTypes): array
     {
         return explode(',', str_replace(' ', '', strtolower($imageTypes)));
     }
