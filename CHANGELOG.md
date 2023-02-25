@@ -4,6 +4,7 @@
 
 - Removes deprecated classes EmptyFPDI and EmptyTCPDF
 - Drops support for TYPO3 9 LTS
+- Drops support for PHP < 7.4
 
 ## 2.5.0 - January 15, 2023
 
