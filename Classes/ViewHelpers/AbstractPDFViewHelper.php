@@ -37,6 +37,8 @@ use Bithost\Pdfviewhelpers\MultiColumn\ContextStack;
 use Bithost\Pdfviewhelpers\Service\HyphenationService;
 use Bithost\Pdfviewhelpers\Service\ConversionService;
 use Bithost\Pdfviewhelpers\Service\ValidationService;
+use ReflectionClass;
+use TCPDF;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -184,5 +186,14 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
         } else {
             throw new ValidationException('No hyphenFile configured, make sure to configure a hyphenFile for the DocumentViewHelper. ERROR: 1536993844', 1536993844);
         }
+    }
+
+    protected function getTCPDFInstallPath(?string $path): string
+    {
+        $reflector = new ReflectionClass(TCPDF::class);
+        $pathParts = pathinfo($reflector->getFileName());
+        $installFolder = $pathParts['dirname'];
+
+        return rtrim($installFolder, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . ltrim($path ?? '', DIRECTORY_SEPARATOR);
     }
 }

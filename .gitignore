@@ -6,3 +6,8 @@
 
 /.Build
 /composer.lock
+
+/Resources/Private/PHP/tcpdf
+!/Resources/Private/PHP/tcpdf/.gitkeep
+/Resources/Private/PHP/fpdi
+!/Resources/Private/PHP/fpdi/src/.gitkeep

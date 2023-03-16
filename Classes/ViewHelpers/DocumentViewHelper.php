@@ -173,8 +173,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper
      */
     protected function loadTcpdfLanguageSettings(): void
     {
-        $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
-        $languageFilePath = $extPath . 'Resources/Private/PHP/tcpdf/examples/lang/' . $this->arguments['language'] . '.php';
+        $languageFilePath = $this->getTCPDFInstallPath('examples/lang/' . $this->arguments['language'] . '.php');
 
         if (!file_exists($languageFilePath) || !is_readable($languageFilePath)) {
             throw new ValidationException('The provided language file "' . $languageFilePath . '" does not exist or the file is not readable. ERROR: 1536487362', 1536487362);
