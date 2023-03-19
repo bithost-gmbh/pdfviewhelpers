@@ -29,7 +29,11 @@
 	"autoload": {
 		"psr-4": {
 			"Bithost\\Pdfviewhelpers\\": "Classes"
-		}
+		},
+		"classmap": [
+			"Resources/Private/PHP/tcpdf/",
+			"Resources/Private/PHP/fpdi/src/"
+		]
 	},
 	"autoload-dev": {
 		"psr-4": {
@@ -50,6 +54,24 @@
 	"scripts": {
 		"post-autoload-dump": [
 			"TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
+		],
+		"prepare-release": [
+			"rm -rf Resources/Private/PHP/tcpdf",
+			"wget https://github.com/tecnickcom/TCPDF/archive/refs/tags/6.6.2.zip -O Resources/Private/PHP/tcpdf.zip",
+			"unzip Resources/Private/PHP/tcpdf.zip -d Resources/Private/PHP/",
+			"mv Resources/Private/PHP/TCPDF-* Resources/Private/PHP/tcpdf",
+			"rm Resources/Private/PHP/tcpdf.zip",
+
+			"rm -rf Resources/Private/PHP/fpdi",
+			"wget https://github.com/Setasign/FPDI/archive/refs/tags/v2.3.7.zip -O Resources/Private/PHP/fpdi.zip",
+			"unzip Resources/Private/PHP/fpdi.zip -d Resources/Private/PHP/",
+			"mv Resources/Private/PHP/FPDI-* Resources/Private/PHP/fpdi",
+			"rm Resources/Private/PHP/fpdi.zip",
+
+			"rm -rf Tests/",
+			"rm -rf .github/",
+			"rm .gitignore",
+			"rm sphinx-build.sh"
 		]
 	},
 	"extra": {
