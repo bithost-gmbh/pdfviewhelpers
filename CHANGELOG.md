@@ -6,7 +6,7 @@
 - Adds support for EXT:news >= 11.0.0
 - Adds support for Extbase FileReference to ImageViewHelper, [#208](https://github.com/bithost-gmbh/pdfviewhelpers/issues/208)
 - Removes deprecated classes EmptyFPDI and EmptyTCPDF
-- Removes TCPDF and FPDI libraries from source code
+- Removes TCPDF and FPDI libraries from source code, [#179](https://github.com/bithost-gmbh/pdfviewhelpers/issues/179)
 - Drops support for TYPO3 9 LTS
 - Drops support for PHP < 7.4
 
