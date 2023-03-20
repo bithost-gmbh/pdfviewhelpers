@@ -19,6 +19,9 @@
 				}
 			}
 		}
+
+		# For EXT:news >= 11.0.0, also see https://docs.typo3.org/p/georgringer/news/main/en-us/Misc/Changelog/11-0-0.html#changed-plugin-registration
+		20 < tt_content.news_newsdetail.20
 	}
 
 	plugin.tx_news {

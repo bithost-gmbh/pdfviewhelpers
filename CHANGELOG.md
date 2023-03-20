@@ -3,6 +3,7 @@
 ## 3.0.0 - Not yet released
 
 - Adds type hints and enforces strict types, [#133](https://github.com/bithost-gmbh/pdfviewhelpers/issues/133)
+- Adds support for EXT:news >= 11.0.0
 - Removes deprecated classes EmptyFPDI and EmptyTCPDF
 - Removes TCPDF and FPDI libraries from source code
 - Drops support for TYPO3 9 LTS
