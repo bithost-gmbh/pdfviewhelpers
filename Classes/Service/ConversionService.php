@@ -35,6 +35,7 @@ use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 
 /**
  * ConversionService
@@ -210,7 +211,7 @@ class ConversionService implements SingletonInterface
     }
 
     /**
-     * @param string|FileInterface $src
+     * @param string|FileInterface|FileReference $src
      *
      * @throws Exception
      */
@@ -222,6 +223,8 @@ class ConversionService implements SingletonInterface
 
         if ($src instanceof FileInterface) {
             $file = $src;
+        } elseif ($src instanceof FileReference) {
+            $file = $src->getOriginalResource();
         } else {
             try {
                 $file = $this->resourceFactory->retrieveFileOrFolderObject($src);

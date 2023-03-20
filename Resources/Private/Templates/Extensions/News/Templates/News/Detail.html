@@ -24,7 +24,7 @@
 		<f:alias map="{mediaElement: newsItem.mediaPreviews.0}">
 			<f:if condition="{mediaElement.originalResource.type} == 2">
 				<pdf:avoidPageBreakInside>
-					<pdf:image src="{mediaElement.originalResource}" link="{f:uri.page(pageUid: mediaElement.link)}" />
+					<pdf:image src="{mediaElement}" link="{f:uri.page(pageUid: mediaElement.link)}" />
 
 					<f:if condition="{mediaElement.description}">
 						<pdf:text type="media-description">{mediaElement.description}</pdf:text>
