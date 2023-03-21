@@ -1,16 +1,15 @@
 [getTSFE().type == 28032013]
-	config {
-		disableAllHeaderCode = 1
-		xhtml_cleaning = none
-		admPanel = 0
-		debug = 0
-		disablePrefixComment = 1
-		linkVars >
-	}
-
 	pageNewsPDF = PAGE
 	pageNewsPDF {
 		typeNum = 28032013
+		config {
+			disableAllHeaderCode = 1
+			xhtml_cleaning = none
+			admPanel = 0
+			debug = 0
+			disablePrefixComment = 1
+			linkVars >
+		}
 		10 < tt_content.list.20.news_pi1
 		10 {
 			switchableControllerActions {
@@ -96,6 +95,4 @@
 			styleSheet = EXT:pdfviewhelpers/Resources/Private/Css/Extensions/News/styles.css
 		}
 	}
-
-	module.tx_pdfviewhelpers < plugin.tx_pdfviewhelpers
 [global]
