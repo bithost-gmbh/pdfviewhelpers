@@ -40,7 +40,7 @@ use Bithost\Pdfviewhelpers\Exception\ValidationException;
 class SpeakingSettingsTest extends AbstractFunctionalTest
 {
     protected array $typoScriptFiles = [
-        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/SpeakingSettings/setup.txt',
+        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/SpeakingSettings/setup.typoscript',
     ];
 
     /**

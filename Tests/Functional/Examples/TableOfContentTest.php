@@ -40,7 +40,7 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
 class TableOfContentTest extends AbstractFunctionalTest
 {
     protected array $typoScriptFiles = [
-        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/TableOfContent.txt',
+        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/TableOfContent.typoscript',
     ];
 
     /**

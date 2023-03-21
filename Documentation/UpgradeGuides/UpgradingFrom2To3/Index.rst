@@ -29,3 +29,7 @@ pdfviewhelpers - EXT:news
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 The TypoScript template ``pdfviewhelpers - EXT:news`` does no longer copy the plugin settings to ``module.tx_pdfviewhelpers``
 and the page config has been moved from ``config`` to ``pageNewsPDF.config``.
+
+TypoScript file extensions
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+All TypoScript file extensions have been changed from ``.txt`` to ``.typoscript``.

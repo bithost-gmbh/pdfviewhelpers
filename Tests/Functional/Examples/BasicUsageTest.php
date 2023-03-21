@@ -40,7 +40,7 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
 class BasicUsageTest extends AbstractFunctionalTest
 {
     protected array $typoScriptFiles = [
-        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/BasicUsage.txt',
+        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/BasicUsage.typoscript',
     ];
 
     /**

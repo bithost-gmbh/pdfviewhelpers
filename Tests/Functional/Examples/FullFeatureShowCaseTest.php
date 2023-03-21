@@ -40,7 +40,7 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
 class FullFeatureShowCaseTest extends AbstractFunctionalTest
 {
     protected array $typoScriptFiles = [
-        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/FullFeatureShowCase.txt',
+        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/FullFeatureShowCase.typoscript',
     ];
 
     /**

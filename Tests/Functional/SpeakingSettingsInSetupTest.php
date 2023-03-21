@@ -38,7 +38,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
 class SpeakingSettingsInSetupTest extends AbstractFunctionalTest
 {
     protected array $typoScriptFiles = [
-        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/SpeakingSettings/setup_speaking.txt',
+        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/SpeakingSettings/setup_speaking.typoscript',
     ];
 
     /**
