@@ -20,3 +20,4 @@ If there is something missing in one of these guides please tell us via mail, a 
 	:titlesonly:
 
 	UpgradingFrom1To2/Index
+	UpgradingFrom2To3/Index
