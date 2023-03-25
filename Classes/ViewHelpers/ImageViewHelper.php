@@ -61,7 +61,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
         $this->registerArgument('alignment', 'string', 'The alignment of the image if it does not fill up the full width.', false, $this->settings['image']['alignment']);
         $this->registerArgument('fitOnPage', 'boolean', 'If true the image will automatically be rescaled to fit on page.', false, $this->settings['image']['fitOnPage']);
         $this->registerArgument('padding', 'array', 'The image padding given as array.', false, []);
-        $this->registerArgument('processingInstructions', 'array', 'The processing instructions applied to the image.', false, $this->settings['image']['processingInstructions']);
+        $this->registerArgument('processingInstructions', 'array', 'The processing instructions applied to the image.', false, []);
     }
 
     /**
@@ -75,6 +75,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
 
         $this->arguments['alignment'] = $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']);
         $this->arguments['padding'] = array_merge($this->settings['image']['padding'], $this->arguments['padding']);
+        $this->arguments['processingInstructions'] = array_merge($this->settings['image']['processingInstructions'], $this->arguments['processingInstructions']);
     }
 
     /**

@@ -5,6 +5,7 @@
 - Adds type hints and enforces strict types, [#133](https://github.com/bithost-gmbh/pdfviewhelpers/issues/133)
 - Adds support for EXT:news >= 11.0.0
 - Adds support for Extbase FileReference to ImageViewHelper, [#208](https://github.com/bithost-gmbh/pdfviewhelpers/issues/208)
+- Adds merging of processingInstructions for ImageViewHelper, [#170](https://github.com/bithost-gmbh/pdfviewhelpers/issues/170)
 - Changes TypoScript file extensions from `.txt` to `.typoscript`
 - Removes deprecated classes EmptyFPDI and EmptyTCPDF
 - Removes TCPDF and FPDI libraries from source code, [#179](https://github.com/bithost-gmbh/pdfviewhelpers/issues/179)

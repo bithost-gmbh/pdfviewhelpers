@@ -33,3 +33,8 @@ and the page config has been moved from ``config`` to ``pageNewsPDF.config``.
 TypoScript file extensions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 All TypoScript file extensions have been changed from ``.txt`` to ``.typoscript``.
+
+ImageViewHelper processingInstructions merging
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The ``processingInstructions`` from TypoScript settings and the Fluid template are now merged instead of overwritten.
+This might lead to TypoScript settings being applied unexpectedly depending on your usage.
