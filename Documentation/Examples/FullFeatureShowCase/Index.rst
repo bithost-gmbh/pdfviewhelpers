@@ -285,7 +285,7 @@ Fluid Template
 					padding="{left: 1.75}"
 					bulletSize="2.5"
 					bulletImageSrc="EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/bullet_image.png"
-					listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}" />
+					listElements="{0: 'Full Stack Application Development', 1: 'Modernizing, Refactoring and Migrating Applications', 2: 'Active Collaboration in an existing Team', 3: 'Consulting and Support for IT Projects'}" />
 			<pdf:list
 					bulletSize="2"
 					bulletColor="#ff642c"

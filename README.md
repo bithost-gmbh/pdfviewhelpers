@@ -93,13 +93,13 @@ So if you feel like this extension was useful to you and saved you and your busi
                 <pdf:text>
                     Lorem ipsum [..] voluptua:
                 </pdf:text>
-                <pdf:list listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}"/>
+                <pdf:list listElements="{0: 'Full Stack Application Development', 1: 'Modernizing, Refactoring [..]'}" />
                 <pdf:text>
                     Lorem ipsum  [..] sit amet.
                 </pdf:text>
             </pdf:column>
             <pdf:column width="45%" padding="{left: 2}">
-                <pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg" />
+                <pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/Bithost.jpg" link="https://bithost.ch/" />
                 <pdf:text padding="{top: 1}" color="#8C8C8C">Esteban Gehring, Markus Mächler</pdf:text>
             </pdf:column>
         </pdf:multiColumn>

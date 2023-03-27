@@ -15,7 +15,7 @@ It is possible to easily define different default styles and apply them using th
 **Basic Usage**
 ::
 
-	<pdf:list listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}"/>
+	<pdf:list listElements="{0: 'Full Stack Application Development', 1: 'Modernizing, Refactoring and Migrating Applications', 2: 'Active Collaboration in an existing Team', 3: 'Consulting and Support for IT Projects'}"/>
 	<pdf:list listElements="{someArrayProperty}"/>
 
 **Advanced Usage**
@@ -39,5 +39,5 @@ It is possible to easily define different default styles and apply them using th
 		bulletImageSrc="EXT:pdfviewhelpers/some/path/image.png"
 		bulletSize="2.5"
 
-		listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}"
+		listElements="{0: 'Full Stack Application Development', 1: 'Modernizing, Refactoring and Migrating Applications', 2: 'Active Collaboration in an existing Team', 3: 'Consulting and Support for IT Projects'}"
 		/>

@@ -58,7 +58,7 @@ class FullFeatureShowCaseTest extends AbstractFunctionalTest
         $this->assertStringContainsStringIgnoringCase('Full Feature Show Case', $pages[0]->getText());
 
         $this->assertStringContainsStringIgnoringCase('hallo@bithost.ch - www.bithost.ch', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('Application Development', $pages[1]->getText());
+        $this->assertStringContainsStringIgnoringCase('Full Stack Application Development', $pages[1]->getText());
         $this->assertStringContainsStringIgnoringCase('This is a h1 headline', $pages[1]->getText());
 
         $this->assertStringContainsStringIgnoringCase('Only this page will have a different header', $pages[2]->getText());

@@ -122,7 +122,7 @@ Fluid Template
 					<pdf:text>
 						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua:
 					</pdf:text>
-					<pdf:list listElements="{0: 'Websites using TYPO3', 1: 'Application Development', 2: 'Mobile Apps', 3: 'Hosting'}"/>
+					<pdf:list listElements="{0: 'Full Stack Application Development', 1: 'Modernizing, Refactoring and Migrating Applications', 2: 'Active Collaboration in an existing Team', 3: 'Consulting and Support for IT Projects'}"/>
 					<pdf:text>
 						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren est Lorem ipsum dolor sit amet.
 					</pdf:text>
