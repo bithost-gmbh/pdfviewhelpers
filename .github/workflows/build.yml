@@ -12,10 +12,10 @@ jobs:
       fail-fast: false
       matrix:
         env:
-          - { php: 7.4, TYPO3_VERSION: ^10 }
-          - { php: 8.0, TYPO3_VERSION: ^11 }
-          - { php: 8.1, TYPO3_VERSION: ^11 }
-          - { php: 8.2, TYPO3_VERSION: ^11 }
+          - { PHP_VERSION: 7.4, TYPO3_VERSION: 10 }
+          - { PHP_VERSION: 8.0, TYPO3_VERSION: 11 }
+          - { PHP_VERSION: 8.1, TYPO3_VERSION: 11 }
+          - { PHP_VERSION: 8.2, TYPO3_VERSION: 11 }
 
     env: ${{ matrix.env }}
 
@@ -26,7 +26,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.env.php }}
+          php-version: ${{ matrix.env.PHP_VERSION }}
           tools: composer
           extensions: pdo, sqlite3
 
@@ -44,7 +44,7 @@ jobs:
         run: composer validate
 
       - name: Install TYPO3 core
-        run: composer require typo3/cms-core="${TYPO3_VERSION}"
+        run: composer require typo3/cms-core="^${TYPO3_VERSION}"
 
       - name: PHPCS
         run: .Build/bin/phpcs -n --standard=PSR12 Classes/
@@ -67,5 +67,5 @@ jobs:
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: examples-output-${{ matrix.env.php }}
+          name: examples-output-${{ matrix.env.TYPO3_VERSION }}-${{ matrix.env.PHP_VERSION }}
           path: Tests/Output
