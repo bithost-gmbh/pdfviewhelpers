@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * ExtendExistingPDFsTest
@@ -48,9 +49,12 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTest
      */
     public function testExtendExistingPDFs(): void
     {
+        $outputPath = GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Tests/Output/ExtendExistingPDFs.pdf');
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('Examples/ExtendExistingPDFs.html'));
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();
+
+        file_put_contents($outputPath, $output);
 
         $this->assertEquals(1, count($pdf->getPages()));
         $this->assertStringContainsStringIgnoringCase('Mega GmbH', $text);
@@ -62,8 +66,8 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTest
 
         $this->validatePDF($output);
 
-        //$expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/ExtendExistingPDFs.pdf')));
-        //$actualHash = sha1($output);
-        //$this->assertEquals($expectedHash, $actualHash);
+        $expectedHash = sha1(file_get_contents($this->getFixtureAbsolutePath('Examples/ExtendExistingPDFs.pdf')));
+        $actualHash = sha1($output);
+        $this->assertEquals($expectedHash, $actualHash);
     }
 }

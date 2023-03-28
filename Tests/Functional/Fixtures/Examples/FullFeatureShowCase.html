@@ -7,7 +7,7 @@
 
 <pdf:document outputDestination="string" outputPath="overwritten_name.pdf" title="Full Feature Show Case">
 
-    <pdf:header>
+    <pdf:header posY="10">
         <pdf:text type="header">Bithost GmbH - Milchbuckstrasse 83 CH-8057 Zürich</pdf:text>
         <pdf:text type="header" posY="10" alignment="right">hallo@bithost.ch - www.bithost.ch</pdf:text>
         <pdf:graphics.line style="{color: '#8C8C8C'}"/>
@@ -97,7 +97,7 @@
     </pdf:page>
 
     <pdf:page orientation="landscape" format="A4" margin="{top: 15}">
-        <pdf:header scope="thisPage">
+        <pdf:header scope="thisPage" posY="10">
             <pdf:text type="header">Only this page will have a different header</pdf:text>
         </pdf:header>
 

@@ -11,3 +11,6 @@
 !/Resources/Private/PHP/tcpdf/.gitkeep
 /Resources/Private/PHP/fpdi
 !/Resources/Private/PHP/fpdi/src/.gitkeep
+
+/Tests/Output/
+!/Tests/Output/.gitkeep

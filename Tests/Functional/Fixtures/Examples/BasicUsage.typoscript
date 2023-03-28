@@ -1,6 +1,5 @@
 plugin.tx_pdfviewhelpers.settings {
 	config {
-		class = Bithost\Pdfviewhelpers\Tests\Functional\Fixtures\Examples\BasicUsageTest
 		language = eng
 	}
 	document {

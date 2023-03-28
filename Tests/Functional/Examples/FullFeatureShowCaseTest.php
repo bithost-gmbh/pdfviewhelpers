@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * FullFeatureShowCaseTest
@@ -48,9 +49,12 @@ class FullFeatureShowCaseTest extends AbstractFunctionalTest
      */
     public function testFullFeatureShowCase(): void
     {
+        $outputPath = GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Tests/Output/FullFeatureShowCase.pdf');
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('Examples/FullFeatureShowCase.html'));
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
+
+        file_put_contents($outputPath, $output);
 
         $this->assertEquals(5, count($pages));
 
@@ -72,10 +76,8 @@ class FullFeatureShowCaseTest extends AbstractFunctionalTest
 
         $this->validatePDF($output);
 
-        //do not assert file equality, because the files generated on the server are not equal to the local files
-        //comparing hashes of two locally generated files works however
-        //$expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/FullFeatureShowCase.pdf')));
-        //$actualHash = sha1($output);
-        //$this->assertEquals($expectedHash, $actualHash);
+        $expectedHash = sha1(file_get_contents($this->getFixtureAbsolutePath('Examples/FullFeatureShowCase.pdf')));
+        $actualHash = sha1($output);
+        $this->assertEquals($expectedHash, $actualHash);
     }
 }

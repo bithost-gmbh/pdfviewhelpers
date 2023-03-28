@@ -1,6 +1,5 @@
 plugin.tx_pdfviewhelpers.settings {
 	config {
-		class = Bithost\Pdfviewhelpers\Model\FullFeatureShowCase
 		jpgQuality = 80
 		fonts {
 			addTTFFont {

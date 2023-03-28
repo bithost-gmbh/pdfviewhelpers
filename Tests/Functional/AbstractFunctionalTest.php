@@ -66,6 +66,7 @@ abstract class AbstractFunctionalTest extends FunctionalTestCase
 
         $baseTypoScripts = [
             'EXT:pdfviewhelpers/Configuration/TypoScript/setup.typoscript',
+            $this->getFixtureExtPath('setup.typoscript'),
         ];
 
         $this->importDataSet($this->getFixtureExtPath('pages.xml'));

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bithost\Pdfviewhelpers\Tests\Functional\Fixtures\Examples;
+namespace Bithost\Pdfviewhelpers\Tests\Functional;
 
 /***
  *
@@ -31,11 +31,11 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Fixtures\Examples;
 use Bithost\Pdfviewhelpers\Model\BasePDF;
 
 /**
- * FullFeatureShowCaseTest
+ * BasicUsageTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class ExtendExistingPDFsTest extends BasePDF
+class TestBasePDF extends BasePDF
 {
     /**
      * @return void

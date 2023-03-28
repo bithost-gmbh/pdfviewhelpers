@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * ExamplesTest
@@ -48,9 +49,12 @@ class BasicUsageTest extends AbstractFunctionalTest
      */
     public function testBasicUsage(): void
     {
+        $outputPath = GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Tests/Output/BasicUsage.pdf');
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('Examples/BasicUsage.html'));
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();
+
+        file_put_contents($outputPath, $output);
 
         $this->assertEquals(1, count($pdf->getPages()));
         $this->assertStringContainsStringIgnoringCase('28.03.2013', $text);
@@ -62,8 +66,8 @@ class BasicUsageTest extends AbstractFunctionalTest
 
         $this->validatePDF($output);
 
-        //$expectedHash = sha1(file_get_contents($this->getFixturePath('Examples/BasicUsage.pdf')));
-        //$actualHash = sha1($output);
-        //$this->assertEquals($expectedHash, $actualHash);
+        $expectedHash = sha1(file_get_contents($this->getFixtureAbsolutePath('Examples/BasicUsage.pdf')));
+        $actualHash = sha1($output);
+        $this->assertEquals($expectedHash, $actualHash);
     }
 }

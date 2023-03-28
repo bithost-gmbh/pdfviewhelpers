@@ -6,7 +6,7 @@
       data-namespace-typo3-fluid="true">
 
 <pdf:document outputDestination="string" title="Bithost Example">
-    <pdf:header>
+    <pdf:header posY="15">
         <pdf:image src="EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/logo.png" width="40"/>
         <pdf:text alignment="right" color="#8C8C8C" paragraphSpacing="0" posY="15">
             Bithost GmbH
@@ -19,8 +19,8 @@
             www.bithost.ch
         </pdf:text>
     </pdf:header>
-    <pdf:footer>
-        <pdf:graphics.line style="{color: '#8C8C8C'}"/>
+    <pdf:footer posY="-15">
+        <pdf:graphics.line style="{color: '#8C8C8C'}" padding="{top: 0, bottom: 1.5}"/>
         <pdf:text color="#8C8C8C">Page {pdf:getPageNumberAlias()}</pdf:text>
         <pdf:text alignment="right" color="#8C8C8C" posY="-13.5">EXT:pdfviewhelpers - Basic usage example</pdf:text>
     </pdf:footer>
