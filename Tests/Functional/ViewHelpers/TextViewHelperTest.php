@@ -31,14 +31,14 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
-use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
+use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
 
 /**
  * TextViewHelperTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class TextViewHelperTest extends AbstractFunctionalTest
+class TextViewHelperTest extends AbstractFunctionalTestCase
 {
     /**
      * @var string

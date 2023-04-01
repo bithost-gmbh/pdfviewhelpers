@@ -33,14 +33,14 @@ namespace Bithost\Pdfviewhelpers\Tests\Unit\Service;
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Service\ValidationService;
-use Bithost\Pdfviewhelpers\Tests\Unit\AbstractUnitTest;
+use Bithost\Pdfviewhelpers\Tests\Unit\AbstractUnitTestCase;
 
 /**
  * ValidationServiceTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class ValidationServiceTest extends AbstractUnitTest
+class ValidationServiceTest extends AbstractUnitTestCase
 {
     protected ValidationService $validationService;
 

@@ -85,7 +85,7 @@ class TableOfContentViewHelper extends AbstractPDFViewHelper
             $this->arguments['characterSpacing'] = $this->settings['generalText']['characterSpacing'];
         }
 
-        $this->arguments['padding'] = array_merge($this->settings['tableOfContent']['padding'], $this->arguments['padding']);
+        $this->arguments['padding'] = array_merge($this->settings['tableOfContent']['padding'] ?? [], $this->arguments['padding']);
 
         $this->viewHelperVariableContainer->addOrUpdate('TableOfContentViewHelper', 'bookmarkTemplates', []);
     }

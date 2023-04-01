@@ -37,7 +37,7 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class ExtendExistingPDFsTest extends AbstractFunctionalTest
+class ExtendExistingPDFsTest extends AbstractFunctionalTestCase
 {
     /**
      * @test

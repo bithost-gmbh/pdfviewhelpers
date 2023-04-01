@@ -30,7 +30,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
+use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -38,7 +38,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class FullFeatureShowCaseTest extends AbstractFunctionalTest
+class FullFeatureShowCaseTest extends AbstractFunctionalTestCase
 {
     protected array $typoScriptFiles = [
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/FullFeatureShowCase.typoscript',

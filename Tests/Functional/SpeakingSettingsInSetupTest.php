@@ -35,7 +35,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class SpeakingSettingsInSetupTest extends AbstractFunctionalTest
+class SpeakingSettingsInSetupTest extends AbstractFunctionalTestCase
 {
     protected array $typoScriptFiles = [
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/SpeakingSettings/setup_speaking.typoscript',

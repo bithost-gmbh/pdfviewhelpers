@@ -48,12 +48,12 @@ class LineViewHelper extends AbstractContentElementViewHelper
     {
         parent::initializeArguments();
 
-        $this->registerArgument('style', 'array', '', false, null);
+        $this->registerArgument('style', 'array', '', false, []);
         $this->registerArgument('fromX', 'integer', '', false, null);
         $this->registerArgument('fromY', 'integer', '', false, null);
         $this->registerArgument('toX', 'integer', '', false, null);
         $this->registerArgument('toY', 'integer', '', false, null);
-        $this->registerArgument('padding', 'array', '', false, null);
+        $this->registerArgument('padding', 'array', '', false, []);
     }
 
     /**
@@ -66,8 +66,8 @@ class LineViewHelper extends AbstractContentElementViewHelper
         parent::initialize();
 
         $pageMargins = $this->getPDF()->getMargins();
-        $this->arguments['style'] = is_array($this->arguments['style']) ? array_merge($this->settings['graphics']['line']['style'], $this->arguments['style']) : $this->settings['graphics']['line']['style'];
-        $this->arguments['padding'] = is_array($this->arguments['padding']) ? array_merge($this->settings['graphics']['line']['padding'], $this->arguments['padding']) : $this->settings['graphics']['line']['padding'];
+        $this->arguments['style'] = array_merge($this->settings['graphics']['line']['style'] ?? [], $this->arguments['style']);
+        $this->arguments['padding'] = array_merge($this->settings['graphics']['line']['padding'] ?? [], $this->arguments['padding']);
 
         $this->validationService->validatePadding($this->arguments['padding']);
 

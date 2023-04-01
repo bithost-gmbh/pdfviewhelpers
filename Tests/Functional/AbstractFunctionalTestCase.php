@@ -41,12 +41,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-abstract class AbstractFunctionalTest extends FunctionalTestCase
+abstract class AbstractFunctionalTestCase extends FunctionalTestCase
 {
-    /**
-     * @var string[]
-     */
-    protected $testExtensionsToLoad = ['typo3conf/ext/pdfviewhelpers'];
+    protected array $testExtensionsToLoad = ['typo3conf/ext/pdfviewhelpers'];
 
     /**
      * 150 words 890 characters
@@ -69,12 +66,11 @@ abstract class AbstractFunctionalTest extends FunctionalTestCase
             $this->getFixtureExtPath('setup.typoscript'),
         ];
 
-        $this->importDataSet($this->getFixtureExtPath('pages.xml'));
+        $this->importCSVDataSet($this->getFixtureAbsolutePath('pages.csv'));
         $this->setUpFrontendRootPage(
             1,
-            array_merge($baseTypoScripts, $this->typoScriptFiles)
+            array_merge($baseTypoScripts, $this->typoScriptFiles),
         );
-        $this->setUpBackendUserFromFixture(1);
     }
 
     protected function renderFluidTemplate(string $templatePath, array $variables = []): string

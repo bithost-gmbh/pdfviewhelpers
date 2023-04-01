@@ -63,7 +63,7 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         parent::initialize();
 
         if (is_array($this->arguments['padding'])) {
-            $this->arguments['padding'] = array_merge($this->settings['html']['padding'], $this->arguments['padding']);
+            $this->arguments['padding'] = array_merge($this->settings['html']['padding'] ?? [], $this->arguments['padding']);
         } else {
             $this->arguments['padding'] = $this->settings['html']['padding'];
         }

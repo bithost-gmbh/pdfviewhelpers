@@ -66,7 +66,7 @@ class PageViewHelper extends AbstractPDFViewHelper
     {
         parent::initialize();
 
-        $this->arguments['margin'] = array_merge($this->settings['page']['margin'], $this->arguments['margin']);
+        $this->arguments['margin'] = array_merge($this->settings['page']['margin'] ?? [], $this->arguments['margin']);
         $this->arguments['orientation'] = $this->conversionService->convertSpeakingOrientationToTcpdfOrientation($this->arguments['orientation']);
 
         $this->setDefaultHeaderFooterScope(BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);

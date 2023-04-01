@@ -37,7 +37,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-abstract class AbstractUnitTest extends UnitTestCase
+abstract class AbstractUnitTestCase extends UnitTestCase
 {
 
 }

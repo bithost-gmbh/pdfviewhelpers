@@ -30,14 +30,14 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
+use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
 
 /**
  * AvoidPageBreakInsideViewHelperTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTest
+class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTestCase
 {
     /**
      * @test

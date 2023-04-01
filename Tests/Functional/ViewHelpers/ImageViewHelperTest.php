@@ -31,7 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
-use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
+use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
 use TYPO3\CMS\Core\Resource\FileInterface;
 
 /**
@@ -39,7 +39,7 @@ use TYPO3\CMS\Core\Resource\FileInterface;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class ImageViewHelperTest extends AbstractFunctionalTest
+class ImageViewHelperTest extends AbstractFunctionalTestCase
 {
     /**
      * @test

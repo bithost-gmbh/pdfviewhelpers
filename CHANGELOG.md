@@ -2,6 +2,7 @@
 
 ## 3.0.0 - Not yet released
 
+- Adds support for TYPO3 12 LTS
 - Adds type hints and enforces strict types, [#133](https://github.com/bithost-gmbh/pdfviewhelpers/issues/133)
 - Adds support for EXT:news >= 11.0.0
 - Adds support for Extbase FileReference to ImageViewHelper, [#208](https://github.com/bithost-gmbh/pdfviewhelpers/issues/208)
@@ -9,7 +10,7 @@
 - Changes TypoScript file extensions from `.txt` to `.typoscript`
 - Removes deprecated classes EmptyFPDI and EmptyTCPDF
 - Removes TCPDF and FPDI libraries from source code, [#179](https://github.com/bithost-gmbh/pdfviewhelpers/issues/179)
-- Drops support for TYPO3 9 LTS
+- Drops support for TYPO3 9 LTS and 10 LTS
 - Drops support for PHP < 7.4
 
 ## 2.5.0 - January 15, 2023

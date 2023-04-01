@@ -30,14 +30,14 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTest;
+use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
 
 /**
  * PDFATest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class PDFATest extends AbstractFunctionalTest
+class PDFATest extends AbstractFunctionalTestCase
 {
     protected array $typoScriptFiles = [
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/PDFA.typoscript',

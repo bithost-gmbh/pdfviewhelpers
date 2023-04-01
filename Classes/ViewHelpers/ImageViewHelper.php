@@ -74,8 +74,8 @@ class ImageViewHelper extends AbstractContentElementViewHelper
         parent::initialize();
 
         $this->arguments['alignment'] = $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']);
-        $this->arguments['padding'] = array_merge($this->settings['image']['padding'], $this->arguments['padding']);
-        $this->arguments['processingInstructions'] = array_merge($this->settings['image']['processingInstructions'], $this->arguments['processingInstructions']);
+        $this->arguments['padding'] = array_merge($this->settings['image']['padding'] ?? [], $this->arguments['padding']);
+        $this->arguments['processingInstructions'] = array_merge($this->settings['image']['processingInstructions'] ?? [], $this->arguments['processingInstructions']);
     }
 
     /**

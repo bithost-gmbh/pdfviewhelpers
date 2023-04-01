@@ -32,14 +32,14 @@ namespace Bithost\Pdfviewhelpers\Tests\Unit\Service;
 
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Service\ConversionService;
-use Bithost\Pdfviewhelpers\Tests\Unit\AbstractUnitTest;
+use Bithost\Pdfviewhelpers\Tests\Unit\AbstractUnitTestCase;
 
 /**
  * SettingsConversionServiceTest
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class SettingsConversionServiceTest extends AbstractUnitTest
+class SettingsConversionServiceTest extends AbstractUnitTestCase
 {
     protected ConversionService $settingsConversionService;
 
