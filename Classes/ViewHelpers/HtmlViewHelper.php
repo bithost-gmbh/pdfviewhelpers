@@ -31,6 +31,12 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use Bithost\Pdfviewhelpers\HtmlRenderer\HtmlRenderer;
+use Bithost\Pdfviewhelpers\HtmlRenderer\HtmlRendererLocator;
+use Bithost\Pdfviewhelpers\HtmlRenderer\TcpdfHtmlRenderer;
+use Psr\Container\ContainerExceptionInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * HtmlViewHelper
@@ -39,6 +45,13 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
  */
 class HtmlViewHelper extends AbstractContentElementViewHelper
 {
+    protected HtmlRendererLocator $htmlRendererLocator;
+
+    public function injectHtmlRendererLocator(HtmlRendererLocator $container): void
+    {
+        $this->htmlRendererLocator = $container;
+    }
+
     /**
      * @inheritDoc
      */
@@ -46,6 +59,8 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
     {
         parent::initializeArguments();
 
+        $this->registerArgument('renderer', 'string', 'The identifier of the HTML renderer to be used.', false, $this->settings['html']['renderer']);
+        $this->registerArgument('rendererOptions', 'array', 'The options passed to the render HTML method of the renderer.', false, []);
         $this->registerArgument('autoHyphenation', 'boolean', 'If true the text will be hyphenated automatically.', false, (bool) $this->settings['generalText']['autoHyphenation']);
         $this->registerArgument('styleSheet', 'string', 'The path to an external style sheet being used to style this HTML content.', false, $this->settings['html']['styleSheet']);
         $this->registerArgument('padding', 'array', 'The padding of the HTML element as array.', false, null);
@@ -67,6 +82,8 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         } else {
             $this->arguments['padding'] = $this->settings['html']['padding'];
         }
+
+        $this->arguments['rendererOptions'] = array_merge($this->settings['html']['rendererOptions'] ?? [], $this->arguments['rendererOptions']);
 
         $this->validationService->validatePadding($this->arguments['padding']);
     }
@@ -116,9 +133,22 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
 
         $this->getPDF()->setY($this->arguments['posY'] + $this->arguments['padding']['top']);
 
-        $this->getPDF()->writeHTML($htmlStyle . $html, true, false, true, false, '');
+        $this->getHtmlRenderer()->renderHtmlToPDF($htmlStyle . $html, $this->getPDF(), $this->settings, $this->arguments);
 
         $this->getPDF()->setY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
         $this->getPDF()->setMargins($initialMargins['left'], $initialMargins['top'], $initialMargins['right']);
+    }
+
+    /**
+     * @throws ValidationException
+     * @throws ContainerExceptionInterface
+     */
+    protected function getHtmlRenderer(): HtmlRenderer
+    {
+        if ($this->arguments['renderer']) {
+            return $this->htmlRendererLocator->get($this->arguments['renderer']);
+        } else {
+            return GeneralUtility::makeInstance(TcpdfHtmlRenderer::class);
+        }
     }
 }

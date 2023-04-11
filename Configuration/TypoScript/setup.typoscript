@@ -185,6 +185,10 @@ plugin.tx_pdfviewhelpers.settings {
 		}
 	}
 	html {
+		renderer = tcpdf
+		rendererOptions {
+
+		}
 		autoHyphenation =
 		styleSheet =
 		padding {

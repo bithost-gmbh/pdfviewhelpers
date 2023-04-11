@@ -6,3 +6,11 @@ services:
 
   Bithost\Pdfviewhelpers\:
     resource: '../Classes/*'
+
+  Bithost\Pdfviewhelpers\HtmlRenderer\HtmlRendererLocator:
+    arguments:
+      - !tagged_locator { tag: 'bithost.pdfviewhelpers.html_renderer', index_by: 'identifier' }
+
+  Bithost\Pdfviewhelpers\HtmlRenderer\TcpdfHtmlRenderer:
+    tags:
+      - { name: 'bithost.pdfviewhelpers.html_renderer', identifier: 'tcpdf' }
