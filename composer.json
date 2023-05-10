@@ -16,7 +16,7 @@
 		}
 	],
 	"require": {
-		"typo3/cms-core": "^11.5 || ^12.3",
+		"typo3/cms-core": "^11.5 || ^12.4",
 		"php": ">=7.4.0",
 		"tecnickcom/tcpdf": "^6.2",
 		"setasign/fpdi": "^2.0"
