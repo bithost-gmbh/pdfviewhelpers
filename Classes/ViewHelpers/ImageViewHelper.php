@@ -170,8 +170,12 @@ class ImageViewHelper extends AbstractContentElementViewHelper
         $imageFileCrop = $imageFile->hasProperty('crop') && $imageFile->getProperty('crop') ? json_decode($imageFile->getProperty('crop'), true) : [];
 
         if (!empty($processingInstructions) || !empty($imageFileCrop)) {
-            $argumentsCrop = is_array($processingInstructions['crop']) ? $processingInstructions['crop'] : json_decode($processingInstructions['crop'] ?? '', true);
-            $argumentsCrop = is_array($argumentsCrop) ? $argumentsCrop : [];
+            if (isset($processingInstructions['crop'])) {
+                $argumentsCrop = is_array($processingInstructions['crop']) ? $processingInstructions['crop'] : json_decode($processingInstructions['crop'] ?? '', true);
+                $argumentsCrop = is_array($argumentsCrop) ? $argumentsCrop : [];
+            } else {
+                $argumentsCrop = [];
+            }
             $crop = array_merge($imageFileCrop, $argumentsCrop);
 
             $cropVariantCollection = CropVariantCollection::create((string) json_encode($crop));
