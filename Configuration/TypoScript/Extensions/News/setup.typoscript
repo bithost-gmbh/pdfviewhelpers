@@ -92,7 +92,7 @@
 			}
 		}
 		html {
-			styleSheet = EXT:pdfviewhelpers/Resources/Private/Css/Extensions/News/styles.css
+			styleSheet = EXT:pdfviewhelpers/Resources/Public/Css/Extensions/News/styles.css
 		}
 	}
 [global]
