@@ -46,6 +46,9 @@ jobs:
       - name: Install TYPO3 core
         run: composer require typo3/cms-core="^${TYPO3_VERSION}"
 
+      - name: Install specific TCPDF version for reproducible tests
+        run: composer require tecnickcom/tcpdf="6.6.2"
+
       - name: PHPCS
         run: .Build/bin/phpcs -n --standard=PSR12 Classes/
 
