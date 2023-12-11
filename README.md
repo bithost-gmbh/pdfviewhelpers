@@ -57,7 +57,7 @@ So if you feel like this extension was useful to you and saved you and your busi
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:pdf="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers"
-      xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/2.3.xsd"
+      xsi:schemaLocation="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers https://pdfviewhelpers.bithost.ch/schema/3.0.xsd"
       data-namespace-typo3-fluid="true">
     
 <pdf:document outputDestination="inline" title="Bithost Example">
