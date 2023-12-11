@@ -100,7 +100,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
                 $this->getPDF()->SetFont($this->arguments['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($this->arguments['fontStyle']));
             }
 
-            $this->arguments['text'] = $this->renderChildren();
+            $this->arguments['text'] = (string) $this->renderChildren();
         }
 
         if ($this->arguments['trim']) {
@@ -108,12 +108,12 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         }
 
         if ($this->arguments['removeDoubleWhitespace']) {
-            $this->arguments['text'] = preg_replace('/[ \t]+/', ' ', $this->arguments['text']);
+            $this->arguments['text'] = preg_replace('/[ \t]+/', ' ', (string) $this->arguments['text']);
         }
 
         if ($this->arguments['autoHyphenation']) {
             $this->arguments['text'] = $this->hyphenationService->hyphenateText(
-                $this->arguments['text'],
+                (string) $this->arguments['text'],
                 $this->hyphenationService->getHyphenFilePath($this->getHyphenFileName())
             );
         }
@@ -156,7 +156,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
     {
         $this->initializeMultiColumnSupport();
 
-        $paragraphs = explode("\n", str_replace("\r\n", "\n", $this->arguments['text']));
+        $paragraphs = explode("\n", str_replace("\r\n", "\n", (string) $this->arguments['text']));
         $posY = $this->arguments['posY'] + $this->arguments['padding']['top'];
 
         foreach ($paragraphs as $paragraph) {
