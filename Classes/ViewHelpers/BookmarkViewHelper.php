@@ -63,7 +63,7 @@ class BookmarkViewHelper extends AbstractPDFViewHelper
         parent::initialize();
 
         if (empty($this->arguments['text'])) {
-            $this->arguments['text'] = $this->renderChildren();
+            $this->arguments['text'] = (string) $this->renderChildren();
         }
 
         if (empty($this->arguments['color'])) {
