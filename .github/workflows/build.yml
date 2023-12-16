@@ -18,7 +18,9 @@ jobs:
           - { TYPO3_VERSION: 12, PHP_VERSION: 8.2 }
           - { TYPO3_VERSION: 12, PHP_VERSION: 8.3 }
 
-    env: ${{ matrix.env }}
+    env:
+      TCPDF_VERSION: 6.6.2
+      FPDI_VERSION: 2.5.0
 
     steps:
       - name: Checkout
@@ -45,12 +47,13 @@ jobs:
         run: composer validate
 
       - name: Install TYPO3 core
+        env: ${{ matrix.env }}
         run: composer require typo3/cms-core="^${TYPO3_VERSION}"
 
       - name: Install specific TCPDF and FPDI versions for reproducible tests
         run: |
-          composer require tecnickcom/tcpdf="6.6.2"
-          composer require setasign/fpdi="2.5.0"
+          composer require tecnickcom/tcpdf="${TCPDF_VERSION}"
+          composer require setasign/fpdi="${FPDI_VERSION}"
 
       - name: PHPCS
         run: .Build/bin/phpcs -n --standard=PSR12 Classes/
