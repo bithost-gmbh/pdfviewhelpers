@@ -16,6 +16,7 @@ jobs:
           - { TYPO3_VERSION: 11, PHP_VERSION: 8.0 }
           - { TYPO3_VERSION: 12, PHP_VERSION: 8.1 }
           - { TYPO3_VERSION: 12, PHP_VERSION: 8.2 }
+          - { TYPO3_VERSION: 12, PHP_VERSION: 8.3 }
 
     env: ${{ matrix.env }}
 
