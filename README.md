@@ -96,7 +96,7 @@ So if you feel like this extension was useful to you and saved you and your busi
                 </pdf:text>
                 <pdf:list listElements="{0: 'Full Stack Application Development', 1: 'Modernizing, Refactoring [..]'}" />
                 <pdf:text>
-                    Lorem ipsum  [..] sit amet.
+                    Lorem ipsum [..] sit amet.
                 </pdf:text>
             </pdf:column>
             <pdf:column width="45%" padding="{left: 2}">
@@ -105,8 +105,8 @@ So if you feel like this extension was useful to you and saved you and your busi
             </pdf:column>
         </pdf:multiColumn>
     
-        <pdf:text>Lorem ipsum  [..]  sit amet.</pdf:text>
-        <pdf:text>Lorem ipsum  [..]  sit amet.</pdf:text>
+        <pdf:text>Lorem ipsum [..] sit amet.</pdf:text>
+        <pdf:text>Lorem ipsum [..] sit amet.</pdf:text>
     </pdf:page>
 </pdf:document>
 
