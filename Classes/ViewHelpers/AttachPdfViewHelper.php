@@ -29,36 +29,34 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class AttachPdfViewHelper extends AbstractPDFViewHelper
 {
     public function initializeArguments()
     {
         $this->registerArgument('path', 'string', 'Path to the PDF', true);
-        $this->registerArgument('prefixPublicPath', 'bool', 'If set, the public path is prefixed', false, false);
     }
 
     public function render()
     {
-        $path = $this->arguments['path'];
-        if ($this->arguments['prefixPublicPath']) {
-            $path = Environment::getPublicPath() . '/' . ltrim($path, '/');
-        }
+        $path = GeneralUtility::getFileAbsFileName($this->arguments['path']);
 
         if (is_file($path)) {
+            // Store source file possibly defined on document level in order to restore it later
+            $previousSourceFile = $this->getPDF()->getSourceFile();
             $pageCount = $this->getPDF()->setSourceFile($path);
+
             for ($pageNumbers = 1; $pageNumbers <= $pageCount; $pageNumbers++) {
                 $templateId = $this->getPDF()->importPage($pageNumbers);
-
                 $size = $this->getPDF()->getTemplateSize($templateId);
-                if ($size['w'] > $size['h']) {
-                    $this->getPDF()->AddPage('L', [$size['w'], $size['h']]);
-                } else {
-                    $this->getPDF()->AddPage('P', [$size['w'], $size['h']]);
-                }
 
+                $this->getPDF()->AddPage($size['orientation'], [$size['width'], $size['height']]);
                 $this->getPDF()->useTemplate($templateId, 0, 0, null, null, true);
+            }
+
+            if ($previousSourceFile !== null) {
+                $this->getPDF()->setSourceFile($previousSourceFile);
             }
         }
     }

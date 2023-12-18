@@ -30,6 +30,7 @@ namespace Bithost\Pdfviewhelpers\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use setasign\Fpdi\PdfParser\StreamReader;
 use setasign\Fpdi\Tcpdf\Fpdi;
 use Closure;
 
@@ -74,7 +75,11 @@ class BasePDF extends Fpdi
      * Indicating whether page break is triggered by PageViewHelper or an auto page break
      */
     protected bool $isAutoPageBreak = false;
-    protected string $currentPageFormat = '';
+
+    /**
+     * @var string|array
+     */
+    protected $currentPageFormat = '';
     protected string $currentTemplate = '';
 
     const SCOPE_THIS_PAGE = 'thisPage';
@@ -85,6 +90,11 @@ class BasePDF extends Fpdi
      * Storing the path of custom fonts to use them on setFont
      */
     protected array $customFontFilePaths = [];
+
+    /**
+     * @var null|string|resource|StreamReader $currentSourceFile
+     */
+    protected $currentSourceFile = null;
 
     /**
      * @inheritdoc
@@ -283,6 +293,21 @@ class BasePDF extends Fpdi
     public function setCustomFontFilePaths(array $customFontFilePaths): void
     {
         $this->customFontFilePaths = $customFontFilePaths;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setSourceFile($file)
+    {
+        $this->currentSourceFile = $file;
+
+        return parent::setSourceFile($file);
+    }
+
+    public function getSourceFile()
+    {
+        return $this->currentSourceFile;
     }
 
     public function getCustomFontFilePaths(): array
