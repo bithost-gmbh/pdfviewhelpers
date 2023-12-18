@@ -24,7 +24,7 @@ Please note that the use of CSS within a style tag can lead to parsing issues wi
 **Advanced Usage**
 ::
 
-	<pdf:html styleSheet="fileadmin/template/pdf_styles.css" autoHyphenation="1" padding="{bottom: 5}">
+	<pdf:html styleSheet="fileadmin/template/pdf_styles.css" autoHyphenation="1" padding="{bottom: 5}" listIndentWidth="0">
 		<style>
 			h1 {
 				color: #ff642c;
