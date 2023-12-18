@@ -49,6 +49,7 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         $this->registerArgument('autoHyphenation', 'boolean', 'If true the text will be hyphenated automatically.', false, (bool) $this->settings['generalText']['autoHyphenation']);
         $this->registerArgument('styleSheet', 'string', 'The path to an external style sheet being used to style this HTML content.', false, $this->settings['html']['styleSheet']);
         $this->registerArgument('padding', 'array', 'The padding of the HTML element as array.', false, null);
+        $this->registerArgument('listIndentWidth', 'float', 'Set custom width for list indentation.', false, null);
 
         if (strlen((string) $this->settings['html']['autoHyphenation'])) {
             $this->overrideArgument('autoHyphenation', 'boolean', '', false, (bool) $this->settings['html']['autoHyphenation']);
@@ -113,6 +114,9 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         $this->getPDF()->setCellPaddings(0, 0, 0, 0); //reset padding to avoid errors on nested tags
         $this->getPDF()->setCellHeightRatio($this->settings['generalText']['lineHeight']);
         $this->getPDF()->setFontSpacing($this->settings['generalText']['characterSpacing']);
+        if(isset($this->arguments['listIndentWidth'])) {
+            $this->getPDF()->setListIndentWidth($this->arguments['listIndentWidth']);
+        }
 
         $this->getPDF()->setY($this->arguments['posY'] + $this->arguments['padding']['top']);
 
