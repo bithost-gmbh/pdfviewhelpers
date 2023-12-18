@@ -1,6 +1,6 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 3.0.0 - Not yet released
+## 3.0.0 - December 18, 2023
 
 - Adds support for TYPO3 12 LTS
 - Adds type hints and enforces strict types, [#133](https://github.com/bithost-gmbh/pdfviewhelpers/issues/133)
