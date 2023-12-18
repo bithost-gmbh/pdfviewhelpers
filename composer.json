@@ -66,7 +66,7 @@
 			"rm Resources/Private/PHP/tcpdf.zip",
 
 			"rm -rf Resources/Private/PHP/fpdi",
-			"wget https://github.com/Setasign/FPDI/archive/refs/tags/v2.5.0.zip -O Resources/Private/PHP/fpdi.zip",
+			"wget https://github.com/Setasign/FPDI/archive/refs/tags/v2.6.0.zip -O Resources/Private/PHP/fpdi.zip",
 			"unzip Resources/Private/PHP/fpdi.zip -d Resources/Private/PHP/",
 			"mv Resources/Private/PHP/FPDI-* Resources/Private/PHP/fpdi",
 			"rm Resources/Private/PHP/fpdi.zip",
