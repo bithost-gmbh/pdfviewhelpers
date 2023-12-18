@@ -31,3 +31,4 @@ For detailed information about the ViewHelper attributes please refer to the Con
 	GetPosViewHelper/Index
 	TableOfContentViewHelper/Index
 	BookmarkViewHelper/Index
+	AttachPdfViewHelper/Index
