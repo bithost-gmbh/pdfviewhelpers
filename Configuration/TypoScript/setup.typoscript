@@ -187,6 +187,7 @@ plugin.tx_pdfviewhelpers.settings {
 	html {
 		autoHyphenation =
 		styleSheet =
+		listIndentWidth =
 		padding {
 			top = 0
 			right = 0
