@@ -134,7 +134,7 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	image.processingInstructions_                  Array                                 {}
 	html.autoHyphenation                           :ref:`t3tsref:data-type-boolean`      *See generalText*
 	html.styleSheet_                               :ref:`t3tsref:data-type-string`
-	html.listIndentWidth_                          :ref:`t3tsref:data-type-integer`
+	html.listIndentWidth_                          :ref:`t3tsref:data-type-float`
 	html.padding_                                  Array                                 {top: 0, right: 0, bottom: 2, left: 0}
 	graphics.line.padding_                         Array                                 {top: 4, right: 0, bottom: 5, left: 0}
 	graphics.line.style_                           Array                                 {width: 0.25, color: #000}
