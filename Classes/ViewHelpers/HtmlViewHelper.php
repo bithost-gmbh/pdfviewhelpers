@@ -114,7 +114,7 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         $this->getPDF()->setCellPaddings(0, 0, 0, 0); //reset padding to avoid errors on nested tags
         $this->getPDF()->setCellHeightRatio($this->settings['generalText']['lineHeight']);
         $this->getPDF()->setFontSpacing($this->settings['generalText']['characterSpacing']);
-        if(!empty($this->arguments['listIndentWidth'])) {
+        if (!empty($this->arguments['listIndentWidth'])) {
             $this->getPDF()->setListIndentWidth($this->arguments['listIndentWidth']);
         }
 
