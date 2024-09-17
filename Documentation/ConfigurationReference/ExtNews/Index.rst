@@ -31,7 +31,7 @@ Please make sure that all your configuration is limited to the page type ``28032
 
 ::
 
-	[getTSFE().type == 28032013]
+	[getTSFE() && getTSFE().type == 28032013]
 		plugin.tx_pdfviewhelpers.settings {
 			text {
 				types {
@@ -61,7 +61,7 @@ that is located in ``EXT:yourext/Resources/Private/Templates/Extensions/News/Tem
 
 ::
 
-	[getTSFE().type == 28032013]
+	[getTSFE() && getTSFE().type == 28032013]
 		plugin.tx_news {
 			view {
 				templateRootPaths {
