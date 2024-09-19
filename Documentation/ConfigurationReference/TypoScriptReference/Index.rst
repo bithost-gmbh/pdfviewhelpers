@@ -453,7 +453,7 @@ page.format
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.page.format =` :ref:`t3tsref:data-type-string`
 
-Defines the format of the current page. Possible values are e.g. ``A0`` - ``A12``, to see all possible values you have to check ``\TCPDF_STATIC::$page_formats``.
+Defines the format of the current page. Possible values are e.g. ``A0`` - ``A12``, to see all possible values you have to check ``\TCPDF_STATIC::$page_formats``. You can also provide numeric values as fluid array e.g. ``{0:210,1:75}`` to set unusual page sizes.
 
 .. _page.keepMargins:
 
