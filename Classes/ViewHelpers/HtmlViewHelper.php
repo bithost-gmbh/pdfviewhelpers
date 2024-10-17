@@ -31,6 +31,8 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * HtmlViewHelper
@@ -95,9 +97,18 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         $this->getPDF()->setMargins($marginLeft, $initialMargins['top'], $marginRight);
 
         if (!empty($this->arguments['styleSheet'])) {
-            $styleSheetFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['styleSheet']);
+            try {
+                $styleSheetFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['styleSheet']);
+                $styleSheetContent = $styleSheetFile->getContents();
+            } catch (ValidationException $e) {
+                $styleSheetFile = GeneralUtility::getFileAbsFileName($this->arguments['styleSheet']);
+                if (!$styleSheetFile) {
+                    throw $e;
+                }
+                $styleSheetContent = file_get_contents($styleSheetFile);
+            }
 
-            $htmlStyle = '<style>' . $styleSheetFile->getContents() . '</style>';
+            $htmlStyle = '<style>' . $styleSheetContent . '</style>';
         }
 
         if ($this->arguments['autoHyphenation']) {
