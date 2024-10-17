@@ -32,6 +32,8 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use UnexpectedValueException;
 
 /**
  * ListViewHelper
@@ -66,8 +68,8 @@ class ListViewHelper extends AbstractTextViewHelper
 
         if (!empty($this->arguments['bulletImageSrc'])) {
             $bulletImageFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['bulletImageSrc']);
-
-            if (!($this->conversionService->convertImageExtensionToRenderMode($bulletImageFile->getExtension()) === 'image')) {
+            $fileExtension = $bulletImageFile ? $bulletImageFile->getExtension() : pathinfo($this->arguments['bulletImageSrc'], PATHINFO_EXTENSION);
+            if ($this->conversionService->convertImageExtensionToRenderMode($fileExtension) !== 'image') {
                 throw new ValidationException('Image type not supported for list. ERROR: 1363771014', 1363771014);
             }
         }
@@ -102,14 +104,26 @@ class ListViewHelper extends AbstractTextViewHelper
         //Update y respecting padding
         $this->getPDF()->setY($this->arguments['posY'] + $this->arguments['padding']['top']);
 
+        $bulletImageFileContent = '';
         if (!empty($this->arguments['bulletImageSrc'])) {
             $bulletImageFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['bulletImageSrc']);
-            $bulletImageFileContent = '@' . $bulletImageFile->getContents();
+            if ($bulletImageFile) {
+                $bulletImageFileContent = $bulletImageFile->getContents();
+            } else {
+                $bulletImageFileName = GeneralUtility::getFileAbsFileName($this->arguments['bulletImageSrc']);
+                if ($bulletImageFileName && file_exists($bulletImageFileName)) {
+                    $bulletImageFileContent = file_get_contents($bulletImageFileName);
+                } else {
+                    throw new UnexpectedValueException('Provided bullet image source can\'t be loaded: ' . $this->arguments['bulletImageSrc'], 1729853326);
+                }
+            }
+            // prepend @ symbol to tell PDF renderer this is inline content
+            $bulletImageFileContent = '@' . $bulletImageFileContent;
         }
 
         //The height of a single text line
         $oneLineTextHeight = $this->getPDF()->getStringHeight($textWidth, '.');
-        $elementEndY = $this->getPDF()->getY();
+        $elementEndY = $this->getPDF()->GetY();
         foreach ($this->arguments['listElements'] as $listElement) {
             if ($this->arguments['autoHyphenation']) {
                 $listElement = $this->hyphenationService->hyphenateText(
@@ -119,7 +133,7 @@ class ListViewHelper extends AbstractTextViewHelper
             }
 
             $elementStartPage = $this->getPDF()->getPage();
-            $elementStartY = $this->getPDF()->getY();
+            $elementStartY = $this->getPDF()->GetY();
 
             if ($this->arguments['paragraphLineFeed']) {
                 $listElement .= "\n";
@@ -128,7 +142,7 @@ class ListViewHelper extends AbstractTextViewHelper
             $this->getPDF()->MultiCell($textWidth, $this->arguments['height'], $listElement, 0, $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), false, 1, $textPosX, null, true, 0, false, true, 0, 'T', false);
 
             $elementEndPage = $this->getPDF()->getPage();
-            $elementEndY = $this->getPDF()->getY();
+            $elementEndY = $this->getPDF()->GetY();
 
             $scaledPageHeight = $this->getPDF()->getScaledPageHeight();
             $breakMargin = $this->getPDF()->getBreakMargin($elementStartPage);
@@ -141,7 +155,7 @@ class ListViewHelper extends AbstractTextViewHelper
                 $this->getPDF()->setPage($elementStartPage);
             }
 
-            if (empty($this->arguments['bulletImageSrc'])) {
+            if (!$bulletImageFileContent) {
                 $this->getPDF()->Rect($bulletPosX, $elementStartY + $relativBulletPosY, $this->arguments['bulletSize'], $this->arguments['bulletSize'], 'F', null, [$this->arguments['bulletColor']['R'], $this->arguments['bulletColor']['G'], $this->arguments['bulletColor']['B']]);
             } else {
                 $this->getPDF()->Image($bulletImageFileContent, $bulletPosX, $elementStartY + $relativBulletPosY, $this->arguments['bulletSize'], null, '', '', '', false, 300, '', false, false, 0, false, false, true, false);

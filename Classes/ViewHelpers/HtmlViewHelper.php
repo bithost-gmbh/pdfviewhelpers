@@ -31,6 +31,8 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use UnexpectedValueException;
 
 /**
  * HtmlViewHelper
@@ -96,8 +98,17 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
 
         if (!empty($this->arguments['styleSheet'])) {
             $styleSheetFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['styleSheet']);
-
-            $htmlStyle = '<style>' . $styleSheetFile->getContents() . '</style>';
+            if ($styleSheetFile) {
+                $styleSheetContent = $styleSheetFile->getContents();
+            } else {
+                $styleSheetFileName = GeneralUtility::getFileAbsFileName($this->arguments['styleSheet']);
+                if ($styleSheetFileName && file_exists($styleSheetFileName)) {
+                    $styleSheetContent = file_get_contents($styleSheetFileName);
+                } else {
+                    throw new UnexpectedValueException('Provided CSS file can\'t be loaded: ' . $this->arguments['styleSheet'], 1729853324);
+                }
+            }
+            $htmlStyle = '<style>' . $styleSheetContent . '</style>';
         }
 
         if ($this->arguments['autoHyphenation']) {
