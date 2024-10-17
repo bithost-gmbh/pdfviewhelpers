@@ -30,8 +30,8 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
+use UnexpectedValueException;
 
 /**
  * HtmlViewHelperTest
@@ -65,7 +65,8 @@ class HtmlViewHelperTest extends AbstractFunctionalTestCase
      */
     public function testInvalidStylesheet(): void
     {
-        $this->expectException(ValidationException::class);
+        $this->expectException(UnexpectedValueException::class);
+        $this->expectExceptionCode(1729853324);
 
         $this->renderFluidTemplate(
             $this->getFixtureExtPath('HtmlViewHelper/Html.html'),
