@@ -45,6 +45,8 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->settingsConversionService = new ConversionService();
     }
 

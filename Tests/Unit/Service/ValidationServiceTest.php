@@ -46,6 +46,8 @@ class ValidationServiceTest extends AbstractUnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->validationService = new ValidationService();
     }
 
