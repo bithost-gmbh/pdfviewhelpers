@@ -35,6 +35,10 @@ use Smalot\PdfParser\Document;
 use Smalot\PdfParser\Parser;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\TypoScript\AST\Node\RootNode;
+use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
 
 /**
  * BaseFunctionalTest
@@ -60,6 +64,13 @@ abstract class AbstractFunctionalTestCase extends FunctionalTestCase
     public function setUp(): void
     {
         parent::setUp();
+
+        $frontendTypoScript = new FrontendTypoScript(new RootNode(), [], [], []);
+        $frontendTypoScript->setSetupArray([]);
+
+        $GLOBALS['TYPO3_REQUEST'] = (new ServerRequest())
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE)
+            ->withAttribute('frontend.typoscript', $frontendTypoScript);
 
         $baseTypoScripts = [
             'EXT:pdfviewhelpers/Configuration/TypoScript/setup.typoscript',
