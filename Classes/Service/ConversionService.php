@@ -35,6 +35,7 @@ use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 
 /**
@@ -212,10 +213,10 @@ class ConversionService implements SingletonInterface
 
     /**
      * @param string|FileInterface|FileReference $src
-     *
+     * @return FileInterface|null return null if the file is not within FAL
      * @throws Exception
      */
-    public function convertFileSrcToFileObject($src): FileInterface
+    public function convertFileSrcToFileObject($src): ?FileInterface
     {
         $file = null;
         $previousException = null;
@@ -226,6 +227,9 @@ class ConversionService implements SingletonInterface
         } elseif ($src instanceof FileReference) {
             $file = $src->getOriginalResource();
         } else {
+            if (PathUtility::isExtensionPath($src)) {
+                return null;
+            }
             try {
                 $file = $this->resourceFactory->retrieveFileOrFolderObject($src);
             } catch (\Exception $e) {

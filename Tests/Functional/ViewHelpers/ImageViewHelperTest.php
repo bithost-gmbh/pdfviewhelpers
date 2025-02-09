@@ -30,9 +30,9 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
 use TYPO3\CMS\Core\Resource\FileInterface;
+use UnexpectedValueException;
 
 /**
  * ImageViewHelperTest
@@ -82,7 +82,8 @@ class ImageViewHelperTest extends AbstractFunctionalTestCase
      */
     public function testInvalidStringSource(): void
     {
-        $this->expectException(ValidationException::class);
+        $this->expectException(UnexpectedValueException::class);
+        $this->expectExceptionCode(1729853325);
 
         $output = $this->renderFluidTemplate(
             $this->getFixtureExtPath('ImageViewHelper/Image.html'),
