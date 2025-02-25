@@ -1,5 +1,13 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 3.0.2 - February 8, 2025
+
+- Fixes version in docs and `ext_emconf.php`
+
+## 3.0.1 - February 7, 2025
+
+- Fixes incompatibility with TCPDF >= v6.8.2 because of missing lang files, [#252](https://github.com/bithost-gmbh/pdfviewhelpers/issues/252)
+
 ## 3.0.0 - December 18, 2023
 
 - Adds support for TYPO3 12 LTS

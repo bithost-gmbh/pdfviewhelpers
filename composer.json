@@ -60,13 +60,13 @@
 		],
 		"prepare-release": [
 			"rm -rf Resources/Private/PHP/tcpdf",
-			"wget https://github.com/tecnickcom/TCPDF/archive/refs/tags/6.6.5.zip -O Resources/Private/PHP/tcpdf.zip",
+			"wget https://github.com/tecnickcom/TCPDF/archive/refs/tags/6.8.2.zip -O Resources/Private/PHP/tcpdf.zip",
 			"unzip Resources/Private/PHP/tcpdf.zip -d Resources/Private/PHP/",
 			"mv Resources/Private/PHP/TCPDF-* Resources/Private/PHP/tcpdf",
 			"rm Resources/Private/PHP/tcpdf.zip",
 
 			"rm -rf Resources/Private/PHP/fpdi",
-			"wget https://github.com/Setasign/FPDI/archive/refs/tags/v2.6.0.zip -O Resources/Private/PHP/fpdi.zip",
+			"wget https://github.com/Setasign/FPDI/archive/refs/tags/v2.6.3.zip -O Resources/Private/PHP/fpdi.zip",
 			"unzip Resources/Private/PHP/fpdi.zip -d Resources/Private/PHP/",
 			"mv Resources/Private/PHP/FPDI-* Resources/Private/PHP/fpdi",
 			"rm Resources/Private/PHP/fpdi.zip",
