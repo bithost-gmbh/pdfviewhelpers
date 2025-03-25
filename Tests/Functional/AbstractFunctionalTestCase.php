@@ -30,6 +30,9 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -92,14 +95,25 @@ abstract class AbstractFunctionalTestCase extends FunctionalTestCase
 
     protected function renderFluidTemplate(string $templatePath, array $variables = []): string
     {
-        /** @var StandaloneView $standaloneView */
-        $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
+        if (GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion() < 13) {
+            /** @var StandaloneView $view */
+            $view = GeneralUtility::makeInstance(StandaloneView::class);
 
-        $standaloneView->setFormat('html');
-        $standaloneView->setTemplatePathAndFilename($templatePath);
-        $standaloneView->assignMultiple($variables);
+            $view->setFormat('html');
+            $view->setTemplatePathAndFilename($templatePath);
+        } else {
+            /** @var ViewFactoryInterface $viewFactory */
+            $viewFactory = GeneralUtility::makeInstance(ViewFactoryInterface::class);
+            $viewFactoryData = new ViewFactoryData(
+                templateRootPaths: [$this->getFixtureExtPath('')],
+                templatePathAndFilename: $templatePath,
+            );
+            $view = $viewFactory->create($viewFactoryData);
+        }
 
-        return (string) $standaloneView->render();
+        $view->assignMultiple($variables);
+
+        return $view->render();
     }
 
     protected function getFixtureExtPath(string $path): string
