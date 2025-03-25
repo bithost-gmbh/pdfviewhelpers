@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * MultiColumnViewHelperTest
@@ -39,9 +40,7 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
  */
 class MultiColumnViewHelperTest extends AbstractFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function testMultipleColumnsRendered(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('MultiColumnViewHelper/MultiColumn.html'));

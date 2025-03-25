@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * TableOfContentTest
@@ -43,9 +44,7 @@ class TableOfContentTest extends AbstractFunctionalTestCase
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/TableOfContent.typoscript',
     ];
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testTableOfContent(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('Examples/TableOfContent.html'));

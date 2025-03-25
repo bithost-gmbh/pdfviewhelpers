@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ExtendExistingPDFsTest
@@ -39,9 +40,7 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
  */
 class ExtendExistingPDFsTest extends AbstractFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function testDoImportOnAutomaticPageBreak(): void
     {
         $output = $this->renderFluidTemplate(
@@ -68,9 +67,7 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[1]->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testDoNotImportOnAutomaticPageBreak(): void
     {
         $output = $this->renderFluidTemplate(
@@ -97,9 +94,7 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[1]->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testImportWrongPage(): void
     {
         $this->expectException(Exception::class);

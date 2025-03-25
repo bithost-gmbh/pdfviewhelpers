@@ -32,6 +32,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ExtendExistingPDFsTest
@@ -44,9 +45,7 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTestCase
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/ExtendExistingPDFs.typoscript',
     ];
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testExtendExistingPDFs(): void
     {
         $outputPath = GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Tests/Output/ExtendExistingPDFs.pdf');

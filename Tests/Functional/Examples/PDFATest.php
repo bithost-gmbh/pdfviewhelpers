@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * PDFATest
@@ -43,9 +44,7 @@ class PDFATest extends AbstractFunctionalTestCase
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/PDFA.typoscript',
     ];
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testPDFA(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('Examples/PDFA.html'));

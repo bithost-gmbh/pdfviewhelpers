@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ListViewHelperTest
@@ -39,9 +40,7 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
  */
 class ListViewHelperTest extends AbstractFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function testListRendered(): void
     {
         $listElements = ['lorem', 'ipsum', 'dolor'];

@@ -32,6 +32,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ExamplesTest
@@ -44,9 +45,7 @@ class BasicUsageTest extends AbstractFunctionalTestCase
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/BasicUsage.typoscript',
     ];
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testBasicUsage(): void
     {
         $outputPath = GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Tests/Output/BasicUsage.pdf');

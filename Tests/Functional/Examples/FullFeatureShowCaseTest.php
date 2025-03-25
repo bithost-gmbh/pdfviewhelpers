@@ -32,6 +32,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * FullFeatureShowCaseTest
@@ -44,9 +45,7 @@ class FullFeatureShowCaseTest extends AbstractFunctionalTestCase
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/FullFeatureShowCase.typoscript',
     ];
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testFullFeatureShowCase(): void
     {
         $outputPath = GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Tests/Output/FullFeatureShowCase.pdf');

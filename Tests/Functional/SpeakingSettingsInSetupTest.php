@@ -30,6 +30,8 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use PHPUnit\Framework\Attributes\Test;
+
 /**
  * SpeakingSettingsInSetupTest
  *
@@ -41,9 +43,7 @@ class SpeakingSettingsInSetupTest extends AbstractFunctionalTestCase
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/SpeakingSettings/setup_speaking.typoscript',
     ];
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testSpeakingSetupSettings()
     {
         $this->markTestSkipped('Changing settings in TS not working because of AbstractViewHelper::$argumentDefinitionCache.');

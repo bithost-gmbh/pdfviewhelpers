@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * AvoidPageBreakInsideViewHelperTest
@@ -39,9 +40,7 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
  */
 class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function testPageBreakPossible1(): void
     {
         $output = $this->renderFluidTemplate(
@@ -61,9 +60,7 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('text2', $pages[1]->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testPageBreakPossible2(): void
     {
         $output = $this->renderFluidTemplate(
@@ -83,9 +80,7 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('text2', $pages[1]->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testImpossibleToAvoid1(): void
     {
         $output = $this->renderFluidTemplate(
@@ -105,9 +100,7 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('text2', $pages[0]->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testImpossibleToAvoid2(): void
     {
         $output = $this->renderFluidTemplate(

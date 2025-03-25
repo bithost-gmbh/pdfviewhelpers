@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * PageBreakViewHelperTest
@@ -39,9 +40,7 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
  */
 class PageBreakViewHelperTest extends AbstractFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function testForcePageBreak(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('PageBreakViewHelper/Pages.html'));
