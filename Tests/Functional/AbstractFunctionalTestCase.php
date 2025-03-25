@@ -30,13 +30,14 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager;
+use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use Smalot\PdfParser\Document;
 use Smalot\PdfParser\Parser;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
-use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\TypoScript\AST\Node\RootNode;
 use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
 
@@ -65,13 +66,6 @@ abstract class AbstractFunctionalTestCase extends FunctionalTestCase
     {
         parent::setUp();
 
-        $frontendTypoScript = new FrontendTypoScript(new RootNode(), [], [], []);
-        $frontendTypoScript->setSetupArray([]);
-
-        $GLOBALS['TYPO3_REQUEST'] = (new ServerRequest())
-            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE)
-            ->withAttribute('frontend.typoscript', $frontendTypoScript);
-
         $baseTypoScripts = [
             'EXT:pdfviewhelpers/Configuration/TypoScript/setup.typoscript',
             $this->getFixtureExtPath('setup.typoscript'),
@@ -80,8 +74,20 @@ abstract class AbstractFunctionalTestCase extends FunctionalTestCase
         $this->importCSVDataSet($this->getFixtureAbsolutePath('pages.csv'));
         $this->setUpFrontendRootPage(
             1,
-            array_merge($baseTypoScripts, $this->typoScriptFiles),
+            [ 'setup' => array_merge($baseTypoScripts, $this->typoScriptFiles)],
         );
+
+        /** @var BackendConfigurationManager $backendConfManager */
+        $backendConfigurationManager  = $this->get(BackendConfigurationManager::class);
+        $backendTypoScriptSetup = $backendConfigurationManager->getTypoScriptSetup(new InternalRequest());
+
+        $frontendTypoScript = new FrontendTypoScript(new RootNode(), [], [], []);
+        $frontendTypoScript->setSetupArray($backendTypoScriptSetup);
+
+        $GLOBALS['TYPO3_REQUEST'] = (new InternalRequest())
+            ->withPageId(1)
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE)
+            ->withAttribute('frontend.typoscript', $frontendTypoScript);
     }
 
     protected function renderFluidTemplate(string $templatePath, array $variables = []): string
