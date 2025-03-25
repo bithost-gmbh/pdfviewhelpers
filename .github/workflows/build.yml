@@ -18,8 +18,8 @@ jobs:
           - { TYPO3_VERSION: 13, PHP_VERSION: 8.4 }
 
     env:
-      TCPDF_VERSION: 6.6.2
-      FPDI_VERSION: 2.5.0
+      TCPDF_VERSION: 6.8.2
+      FPDI_VERSION: 2.6.3
 
     steps:
       - name: Checkout
