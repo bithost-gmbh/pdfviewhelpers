@@ -33,10 +33,9 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Model\BasePDF;
+use Bithost\Pdfviewhelpers\Service\OutputService;
 use setasign\Fpdi\PdfParser\PdfParserException;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * DocumentViewHelper
@@ -59,6 +58,13 @@ class DocumentViewHelper extends AbstractPDFViewHelper
      * TCPDF output destinations that return the pdf as string
      */
     protected array $tcpdfReturnContentDestinations = ['S', 'E'];
+
+    protected OutputService $outputService;
+
+    public function injectOutputService(OutputService $outputService): void
+    {
+        $this->outputService = $outputService;
+    }
 
     /**
      * @inheritDoc
@@ -95,8 +101,8 @@ class DocumentViewHelper extends AbstractPDFViewHelper
 
         $this->arguments['outputDestination'] = $this->conversionService->convertSpeakingOutputDestinationToTcpdfOutputDestination($this->arguments['outputDestination']);
 
-        if (isset($GLOBALS['TSFE']->applicationData) && in_array($this->arguments['outputDestination'], $this->tcpdfOutputContentDestinations)) {
-            $GLOBALS['TSFE']->applicationData['tx_pdfviewhelpers']['pdfOutput'] = true;
+        if (in_array($this->arguments['outputDestination'], $this->tcpdfOutputContentDestinations)) {
+            $this->outputService->setIsOutputDestinationOut(true);
         }
 
         if (!empty($this->settings['config']['class'])) {
@@ -129,10 +135,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $this->getPDF()->setCreator($this->arguments['creator']);
         $this->getPDF()->disableTcpdfLink(); // Part for increasing accessibility (ua-1)
 
-        //Disables cache if set so and in frontend mode
-        if (isset($GLOBALS['TSFE']) && $GLOBALS['TSFE'] instanceof TypoScriptFrontendController && $this->settings['config']['disableCache']) {
-            $GLOBALS['TSFE']->set_no_cache('EXT:pdfviewhelpers force disabled caching, see plugin.tx_pdfviewhelpers.settings.config.disableCache', true);
-        }
+        $this->outputService->setDisableCache($this->settings['config']['disableCache'] === '1');
 
         $this->viewHelperVariableContainer->add('DocumentViewHelper', 'hyphenFile', $this->arguments['hyphenFile']);
         $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'defaultHeaderFooterScope', BasePDF::SCOPE_DOCUMENT);
