@@ -38,7 +38,7 @@ use TYPO3\CMS\Frontend\Event\AfterCacheableContentIsGeneratedEvent;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-final readonly class AfterCacheableContentIsGeneratedEventListener
+class AfterCacheableContentIsGeneratedEventListener
 {
     public function __construct(
         protected OutputService $outputService,
