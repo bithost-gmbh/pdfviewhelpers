@@ -32,6 +32,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * HtmlViewHelperTest
@@ -40,9 +41,7 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
  */
 class HtmlViewHelperTest extends AbstractFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function testRenderRichText(): void
     {
         $html = '<h1>Headline</h1><p>Text</p>';
@@ -60,9 +59,7 @@ class HtmlViewHelperTest extends AbstractFunctionalTestCase
         $this->assertStringNotContainsStringIgnoringCase('<p>', $pdf->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testInvalidStylesheet(): void
     {
         $this->expectException(ValidationException::class);

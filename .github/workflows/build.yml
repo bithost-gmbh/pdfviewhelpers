@@ -6,21 +6,20 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     strategy:
       fail-fast: false
       matrix:
         env:
-          - { TYPO3_VERSION: 11, PHP_VERSION: 7.4 }
-          - { TYPO3_VERSION: 11, PHP_VERSION: 8.0 }
           - { TYPO3_VERSION: 12, PHP_VERSION: 8.1 }
           - { TYPO3_VERSION: 12, PHP_VERSION: 8.2 }
-          - { TYPO3_VERSION: 12, PHP_VERSION: 8.3 }
+          - { TYPO3_VERSION: 13, PHP_VERSION: 8.3 }
+          - { TYPO3_VERSION: 13, PHP_VERSION: 8.4 }
 
     env:
-      TCPDF_VERSION: 6.6.2
-      FPDI_VERSION: 2.5.0
+      TCPDF_VERSION: 6.8.2
+      FPDI_VERSION: 2.6.3
 
     steps:
       - name: Checkout

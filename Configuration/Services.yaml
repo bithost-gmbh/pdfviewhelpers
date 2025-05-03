@@ -6,3 +6,8 @@ services:
 
   Bithost\Pdfviewhelpers\:
     resource: '../Classes/*'
+
+  Bithost\Pdfviewhelpers\EventListener\AfterCacheableContentIsGeneratedEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'bithost/pdfviewhelpers/disable-page-cache'

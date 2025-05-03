@@ -32,6 +32,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * TextViewHelperTest
@@ -45,9 +46,7 @@ class TextViewHelperTest extends AbstractFunctionalTestCase
      */
     protected $untrimmedText = "\n\n\t\t     Some text containing        double whitespaces    \t\n\t\n";
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testTrimAndRemoveDoubleWhitespace(): void
     {
         $output = $this->renderFluidTemplate(
@@ -59,9 +58,7 @@ class TextViewHelperTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('Some text containing double whitespaces', $pdf->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testNotRemoveDoubleWhitespace(): void
     {
         $output = $this->renderFluidTemplate(
@@ -73,9 +70,7 @@ class TextViewHelperTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase(trim($this->untrimmedText), $pdf->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testColorShort(): void
     {
         $output = $this->renderFluidTemplate(
@@ -87,9 +82,7 @@ class TextViewHelperTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('Text', $pdf->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testColorLong(): void
     {
         $output = $this->renderFluidTemplate(
@@ -101,9 +94,7 @@ class TextViewHelperTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('Text', $pdf->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testInvalidColor(): void
     {
         $this->expectException(\Bithost\Pdfviewhelpers\Exception\ValidationException::class);
@@ -114,9 +105,7 @@ class TextViewHelperTest extends AbstractFunctionalTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testPartialPaddingOverwrite(): void
     {
         $output = $this->renderFluidTemplate(
@@ -128,9 +117,7 @@ class TextViewHelperTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('Text', $pdf->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testInvalidPAddingKey(): void
     {
         $this->expectException(ValidationException::class);
@@ -141,9 +128,7 @@ class TextViewHelperTest extends AbstractFunctionalTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testInvalidPAdding(): void
     {
         $this->expectException(ValidationException::class);

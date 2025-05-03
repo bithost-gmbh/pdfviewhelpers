@@ -32,6 +32,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * DocumentViewHelperTest
@@ -40,9 +41,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class DocumentViewHelperTest extends AbstractFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function testMetaInformation(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('DocumentViewHelper/MetaInformation.html'));
@@ -52,9 +51,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTestCase
         $this->assertEquals('TYPO3 EXT:pdfviewhelpers', $details['Creator']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testMetaInformationOverwrite(): void
     {
         $output = $this->renderFluidTemplate(
@@ -67,9 +64,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTestCase
         $this->assertEquals('Some other creator', $details['Creator']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testOutputDestinationF(): void
     {
         $output = $this->renderFluidTemplate(
@@ -84,9 +79,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTestCase
         $this->assertGreaterThan(5000, filesize($savePath));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testOutputDestinationS(): void
     {
         $output = $this->renderFluidTemplate(
@@ -97,9 +90,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTestCase
         $this->assertNotEmpty(trim($output));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testOutputDestinationE(): void
     {
         $output = $this->renderFluidTemplate(

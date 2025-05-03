@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * PageViewHelperTest
@@ -39,9 +40,7 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
  */
 class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function testDocumentScope(): void
     {
         $output = $this->renderFluidTemplate(
@@ -56,9 +55,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
         $this->assertEquals(1, mb_substr_count($text, 'Footer'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testDocumentScopeWithAutoPageBreak(): void
     {
         $output = $this->renderFluidTemplate(
@@ -73,9 +70,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
         $this->assertEquals(2, mb_substr_count($text, 'Footer'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testDocumentScopeEmpty(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('HeaderAndFooterViewHelper/DocumentScopeEmpty.html'));
@@ -87,9 +82,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
         $this->assertEquals(1, mb_substr_count($text, 'Footer'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testPageScope(): void
     {
         $output = $this->renderFluidTemplate(
@@ -104,9 +97,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
         $this->assertEquals(1, mb_substr_count($text, 'Footer'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testPageScopeEmpty(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('HeaderAndFooterViewHelper/PageScopeEmpty.html'));
@@ -118,9 +109,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
         $this->assertEquals(1, mb_substr_count($text, 'Footer'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testPageScopeWithAutoPageBreak(): void
     {
         $output = $this->renderFluidTemplate(
@@ -135,9 +124,7 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
         $this->assertEquals(2, mb_substr_count($text, 'Footer'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testDocumentAndPageScope(): void
     {
         $output = $this->renderFluidTemplate(

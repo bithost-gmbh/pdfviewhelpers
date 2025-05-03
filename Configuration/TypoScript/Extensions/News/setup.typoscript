@@ -1,4 +1,4 @@
-[getTSFE() && getTSFE().type == 28032013]
+[request && traverse(request.getQueryParams(), 'type') == 28032013]
 	pageNewsPDF = PAGE
 	pageNewsPDF {
 		typeNum = 28032013

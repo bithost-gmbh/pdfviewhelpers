@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bithost\Pdfviewhelpers\Hooks;
+namespace Bithost\Pdfviewhelpers\Service;
 
 /* * *
  *
@@ -31,25 +31,40 @@ namespace Bithost\Pdfviewhelpers\Hooks;
  * * */
 
 use TYPO3\CMS\Core\SingletonInterface;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * TypoScriptFrontendController
+ * OutputService
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class TypoScriptFrontendControllerHook implements SingletonInterface
+class OutputService implements SingletonInterface
 {
-    /**
-     * Prevent any output when a pdf is rendered, especially any headers being set!
-     */
-    public function isOutputting(array &$params, TypoScriptFrontendController $ref): void
+    protected bool $isOutputDestinationOut = false;
+
+    protected bool $disableCache = true;
+
+    public function shouldDisablePageCache(): bool
     {
-        if (
-            isset($params['pObj']->applicationData['tx_pdfviewhelpers']['pdfOutput'])
-            && $params['pObj']->applicationData['tx_pdfviewhelpers']['pdfOutput'] === true
-        ) {
-            $params['enableOutput'] = false;
-        }
+        return $this->isOutputDestinationOut() && $this->getDisableCache();
+    }
+
+    public function isOutputDestinationOut(): bool
+    {
+        return $this->isOutputDestinationOut;
+    }
+
+    public function setIsOutputDestinationOut(bool $isOutputDestinationOut): void
+    {
+        $this->isOutputDestinationOut = $isOutputDestinationOut;
+    }
+
+    public function getDisableCache(): bool
+    {
+        return $this->disableCache;
+    }
+
+    public function setDisableCache(bool $disableCache): void
+    {
+        $this->disableCache = $disableCache;
     }
 }

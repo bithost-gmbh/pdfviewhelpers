@@ -11,4 +11,4 @@ assignees: maechler
 - Have you googled your question?
 - Have you asked your colleagues for help?
 
-If you could answer all this questions with yes, please feel free to open an issue with your question. We will try our best to help you.
+If you could answer all these questions with yes, please feel free to open an issue with your question. We will try our best to help you.

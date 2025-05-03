@@ -1,5 +1,11 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 3.1.0 - Not yet released
+
+- Adds support for TYPO3 13 LTS
+- Drops support for TYPO3 11 LTS
+- Drops support for PHP < 8.1
+
 ## 3.0.2 - February 8, 2025
 
 - Fixes version in docs and `ext_emconf.php`

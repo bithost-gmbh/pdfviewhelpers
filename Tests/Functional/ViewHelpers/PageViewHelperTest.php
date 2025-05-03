@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * PageViewHelperTest
@@ -39,9 +40,7 @@ use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
  */
 class PageViewHelperTest extends AbstractFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function testAddPages(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('PageViewHelper/AddPages.html'));
@@ -60,9 +59,7 @@ class PageViewHelperTest extends AbstractFunctionalTestCase
         $this->assertStringNotContainsStringIgnoringCase('Page 2', $pages[2]->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testAutoPageBreakOn(): void
     {
         $longLoremIpsumText = $this->getLongLoremIpsumText(10);
@@ -75,9 +72,7 @@ class PageViewHelperTest extends AbstractFunctionalTestCase
         $this->assertEquals(2, count($pdf->getPages()));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testAutoPageBreakOff(): void
     {
         $longLoremIpsumText = $this->getLongLoremIpsumText(10);

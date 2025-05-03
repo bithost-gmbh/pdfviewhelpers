@@ -33,6 +33,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Unit\Service;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Service\ConversionService;
 use Bithost\Pdfviewhelpers\Tests\Unit\AbstractUnitTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * SettingsConversionServiceTest
@@ -45,12 +46,12 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->settingsConversionService = new ConversionService();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testHexToRGB(): void
     {
         $hexShort = '#05B';
@@ -60,9 +61,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         $this->assertEquals(['R' => 18, 'G' => 171, 'B' => 205], $this->settingsConversionService->convertHexToRGB($hexLong));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testOrientation(): void
     {
         $expectedConversions = [
@@ -77,9 +76,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testInvalidOrientation(): void
     {
         $this->expectException(ValidationException::class);
@@ -87,9 +84,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         $this->settingsConversionService->convertSpeakingOrientationToTcpdfOrientation('foobar');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testOutputDestination(): void
     {
         $expectedConversions = [
@@ -114,9 +109,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testInvalidOutputDestination(): void
     {
         $this->expectException(ValidationException::class);
@@ -124,9 +117,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         $this->settingsConversionService->convertSpeakingOutputDestinationToTcpdfOutputDestination('foobar');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testFontStyle(): void
     {
         $expectedConversions = [
@@ -145,9 +136,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testInvalidFontStyle(): void
     {
         $this->expectException(ValidationException::class);
@@ -155,9 +144,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         $this->settingsConversionService->convertSpeakingFontStyleToTcpdfFontStyle('foobar');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testAlignment(): void
     {
         $expectedConversions = [
@@ -176,9 +163,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testInvalidAlignment(): void
     {
         $this->expectException(ValidationException::class);
@@ -186,9 +171,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         $this->settingsConversionService->convertSpeakingAlignmentToTcpdfAlignment('foobar');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testImageTypes(): void
     {
         $settings = [

@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * SpeakingSettingsTest
@@ -43,9 +44,7 @@ class SpeakingSettingsTest extends AbstractFunctionalTestCase
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/SpeakingSettings/setup.typoscript',
     ];
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testSetupSettings(): void
     {
         $this->markTestSkipped('Changing settings in TS not working because of AbstractViewHelper::$argumentDefinitionCache.');
@@ -57,9 +56,7 @@ class SpeakingSettingsTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('Test', $text);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testFluid(): void
     {
         $outputDestinations = ['string', 'S'];
@@ -91,9 +88,7 @@ class SpeakingSettingsTest extends AbstractFunctionalTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testInvalidOutputDestination(): void
     {
         $this->expectException(ValidationException::class);
@@ -109,9 +104,7 @@ class SpeakingSettingsTest extends AbstractFunctionalTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testInvalidOrientation(): void
     {
         $this->expectException(ValidationException::class);
@@ -127,9 +120,7 @@ class SpeakingSettingsTest extends AbstractFunctionalTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testInvalidFontStyle(): void
     {
         $this->expectException(ValidationException::class);
@@ -145,9 +136,7 @@ class SpeakingSettingsTest extends AbstractFunctionalTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testInvalidAlignment(): void
     {
         $this->expectException(ValidationException::class);

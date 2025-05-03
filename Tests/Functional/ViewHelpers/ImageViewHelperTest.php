@@ -33,6 +33,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
 use TYPO3\CMS\Core\Resource\FileInterface;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * ImageViewHelperTest
@@ -41,9 +42,7 @@ use TYPO3\CMS\Core\Resource\FileInterface;
  */
 class ImageViewHelperTest extends AbstractFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function testStringSource(): void
     {
         $output = $this->renderFluidTemplate(
@@ -57,9 +56,7 @@ class ImageViewHelperTest extends AbstractFunctionalTestCase
         $this->assertCount(1, $images);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testFileSource(): void
     {
         $fileInterfaceMock = $this->createMock(FileInterface::class);
@@ -77,9 +74,7 @@ class ImageViewHelperTest extends AbstractFunctionalTestCase
         $this->assertCount(1, $images);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testInvalidStringSource(): void
     {
         $this->expectException(ValidationException::class);

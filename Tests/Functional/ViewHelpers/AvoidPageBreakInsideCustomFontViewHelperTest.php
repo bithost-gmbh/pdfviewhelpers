@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * AvoidPageBreakInsideCustomFontViewHelperTest
@@ -43,9 +44,7 @@ class AvoidPageBreakInsideCustomFontViewHelperTest extends AbstractFunctionalTes
         'EXT:pdfviewhelpers/Tests/Functional/Fixtures/AvoidPageBreakInsideViewHelper/CustomFont.typoscript',
     ];
 
-    /**
-     * @test
-     */
+    #[Test]
     public function testCustomFont(): void
     {
         $output = $this->renderFluidTemplate(

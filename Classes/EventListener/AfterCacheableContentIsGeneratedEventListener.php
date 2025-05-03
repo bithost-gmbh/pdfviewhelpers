@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
+namespace Bithost\Pdfviewhelpers\EventListener;
 
 /* * *
  *
@@ -30,25 +30,25 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
-use PHPUnit\Framework\Attributes\Test;
+use Bithost\Pdfviewhelpers\Service\OutputService;
+use TYPO3\CMS\Frontend\Event\AfterCacheableContentIsGeneratedEvent;
 
 /**
- * PDFATest
+ * AfterCacheableContentIsGeneratedEventListener
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class PDFATest extends AbstractFunctionalTestCase
+class AfterCacheableContentIsGeneratedEventListener
 {
-    protected array $typoScriptFiles = [
-        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/Examples/PDFA.typoscript',
-    ];
+    public function __construct(
+        protected OutputService $outputService,
+    ) {
+    }
 
-    #[Test]
-    public function testPDFA(): void
+    public function __invoke(AfterCacheableContentIsGeneratedEvent $event): void
     {
-        $output = $this->renderFluidTemplate($this->getFixtureExtPath('Examples/PDFA.html'));
-
-        $this->validatePDF($output);
+        if ($this->outputService->shouldDisablePageCache()) {
+            $event->disableCaching();
+        }
     }
 }
