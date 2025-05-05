@@ -1,5 +1,5 @@
-[![TYPO3](https://img.shields.io/badge/TYPO3-11%20LTS-orange.svg)](https://typo3.org/)
 [![TYPO3](https://img.shields.io/badge/TYPO3-12%20LTS-orange.svg)](https://typo3.org/)
+[![TYPO3](https://img.shields.io/badge/TYPO3-13%20LTS-orange.svg)](https://typo3.org/)
 [![Build Status](https://github.com/bithost-gmbh/pdfviewhelpers/actions/workflows/build.yml/badge.svg)](https://github.com/bithost-gmbh/pdfviewhelpers/actions/)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/bithost-gmbh/pdfviewhelpers)](https://packagist.org/packages/bithost-gmbh/pdfviewhelpers)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGTVWHW8TP8Q4)
