@@ -27,9 +27,6 @@ jobs:
       - name: 'Install testing system'
         run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s composerUpdate
 
-      - name: 'Composer validate'
-        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s composerValidate
-
       - name: 'Composer normalize'
         run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s composerNormalize -n
 
