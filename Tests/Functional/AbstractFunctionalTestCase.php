@@ -30,7 +30,6 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Tests\Functional\Traits\SetUpFrontendSiteTrait;
 use Smalot\PdfParser\Document;
 use Smalot\PdfParser\Parser;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
@@ -49,8 +48,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 abstract class AbstractFunctionalTestCase extends FunctionalTestCase
 {
-    use SetUpFrontendSiteTrait;
-
     protected array $testExtensionsToLoad = [
         'bithost-gmbh/pdfviewhelpers',
     ];
