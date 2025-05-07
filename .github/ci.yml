@@ -1,0 +1,51 @@
+name: Tests
+
+on: [pull_request]
+
+jobs:
+  testing:
+    name: Testing
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+
+      matrix:
+        php:
+          - '8.2'
+          - '8.3'
+
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'Lint PHP'
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s lint
+
+      - name: 'Install testing system'
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s composerUpdate
+
+      - name: 'Composer validate'
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s composerValidate
+
+      - name: 'Composer normalize'
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s composerNormalize -n
+
+      - name: 'CGL'
+        run: Build/Scripts/runTests.sh -n -p ${{ matrix.php }} -s cgl
+
+      - name: 'phpstan'
+        run: Build/Scripts/runTests.sh -n -p ${{ matrix.php }} -s phpstan
+
+      - name: 'Execute unit tests'
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s unit
+
+      - name: 'Execute functional tests'
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -d mysql -s functional
+
+      - name: 'Execute functional tests'
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -d mariadb -s functional
+
+      - name: 'Execute functional tests'
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -d postgres -s functional
