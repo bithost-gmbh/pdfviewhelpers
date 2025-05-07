@@ -5,6 +5,7 @@
 - Adds support for TYPO3 13 LTS
 - Drops support for TYPO3 11 LTS
 - Drops support for PHP < 8.1
+- Fixes loading of resources from Private folder not working, [#247](https://github.com/bithost-gmbh/pdfviewhelpers/issues/247) (Thanks [@liayn](https://github.com/liayn))
 
 ## 3.0.2 - February 8, 2025
 
