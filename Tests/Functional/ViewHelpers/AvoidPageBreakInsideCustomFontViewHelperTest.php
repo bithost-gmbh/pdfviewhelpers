@@ -49,7 +49,7 @@ class AvoidPageBreakInsideCustomFontViewHelperTest extends AbstractFunctionalTes
                             'addTTFFont.' => [
                                 'opensans.' => [
                                     'path' => 'EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf',
-                                ]
+                                ],
                             ],
                         ],
                     ],
