@@ -76,7 +76,6 @@ class FullFeatureShowCaseTest extends AbstractFunctionalTestCase
         $this->validatePDF($output);
 
         $expectedHash = sha1(file_get_contents($this->getFixtureAbsolutePath('Examples/FullFeatureShowCase.pdf')));
-        file_put_contents($this->getFixtureAbsolutePath('Examples/Output.pdf'), $output);
         $actualHash = sha1($output);
         self::assertEquals($expectedHash, $actualHash);
     }

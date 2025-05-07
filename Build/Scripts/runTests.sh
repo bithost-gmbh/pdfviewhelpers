@@ -262,6 +262,8 @@ CI_PARAMS="${CI_PARAMS:-}"
 DOCS_PARAMS="${DOCS_PARAMS:=--pull always}"
 CONTAINER_BIN=""
 CONTAINER_HOST="host.docker.internal"
+TCPDF_VERSION="6.8.2"
+FPDI_VERSION="2.6.3"
 
 # Option parsing updates above default vars
 # Reset in case getopts has been used previously in the shell
@@ -448,7 +450,7 @@ case ${TEST_SUITE} in
         if [ -f "${ROOT_DIR}/composer.json.testing" ]; then
             cp ${ROOT_DIR}/composer.json ${ROOT_DIR}/composer.json.orig
         fi
-        COMMAND=(composer require --no-ansi --no-interaction --no-progress)
+        COMMAND=(composer require setasign/fpdi:${FPDI_VERSION} tecnickcom/tcpdf:${TCPDF_VERSION} --no-ansi --no-interaction --no-progress)
         ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name composer-install-${SUFFIX} -e COMPOSER_CACHE_DIR=.Build/.cache/composer -e COMPOSER_ROOT_VERSION=${COMPOSER_ROOT_VERSION} ${IMAGE_PHP} "${COMMAND[@]}"
         SUITE_EXIT_CODE=$?
         cp ${ROOT_DIR}/composer.json ${ROOT_DIR}/composer.json.testing
