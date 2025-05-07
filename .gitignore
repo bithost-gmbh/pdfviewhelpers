@@ -78,6 +78,7 @@ Documentation-GENERATED-temp/
 
 /.Build
 /composer.lock
+/composer.json.testing
 
 /Resources/Private/PHP/tcpdf
 !/Resources/Private/PHP/tcpdf/.gitkeep
