@@ -48,23 +48,23 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTestCase
             [
                 'importPage' => 1,
                 'importPageOnAutomaticPageBreak' => true,
-                'text' => $this->getLongLoremIpsumText(5)
+                'text' => $this->getLongLoremIpsumText(5),
             ]
         );
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
 
-        $this->assertCount(2, $pages);
+        self::assertCount(2, $pages);
 
-        $this->assertStringContainsStringIgnoringCase('Mega GmbH', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('Ansprechpartner', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('www.bithost.ch', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('Mega GmbH', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('Ansprechpartner', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('www.bithost.ch', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[0]->getText());
 
-        $this->assertStringContainsStringIgnoringCase('Mega GmbH', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('Ansprechpartner', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('www.bithost.ch', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('Mega GmbH', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('Ansprechpartner', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('www.bithost.ch', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[1]->getText());
     }
 
     #[Test]
@@ -75,23 +75,23 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTestCase
             [
                 'importPage' => 1,
                 'importPageOnAutomaticPageBreak' => false,
-                'text' => $this->getLongLoremIpsumText(5)
+                'text' => $this->getLongLoremIpsumText(5),
             ]
         );
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
 
-        $this->assertCount(2, $pages);
+        self::assertCount(2, $pages);
 
-        $this->assertStringContainsStringIgnoringCase('Mega GmbH', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('Ansprechpartner', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('www.bithost.ch', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('Mega GmbH', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('Ansprechpartner', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('www.bithost.ch', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[0]->getText());
 
-        $this->assertStringNotContainsStringIgnoringCase('Mega GmbH', $pages[1]->getText());
-        $this->assertStringNotContainsStringIgnoringCase('Ansprechpartner', $pages[1]->getText());
-        $this->assertStringNotContainsStringIgnoringCase('www.bithost.ch', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[1]->getText());
+        self::assertStringNotContainsStringIgnoringCase('Mega GmbH', $pages[1]->getText());
+        self::assertStringNotContainsStringIgnoringCase('Ansprechpartner', $pages[1]->getText());
+        self::assertStringNotContainsStringIgnoringCase('www.bithost.ch', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $pages[1]->getText());
     }
 
     #[Test]
@@ -104,7 +104,7 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTestCase
             [
                 'importPage' => 2,
                 'importPageOnAutomaticPageBreak' => true,
-                'text' => $this->getLongLoremIpsumText(1)
+                'text' => $this->getLongLoremIpsumText(1),
             ]
         );
     }

@@ -40,9 +40,7 @@ class FullFeatureShowCase extends BasePDF
     /**
      * @inheritdoc
      */
-    public function basePdfHeader(): void
-    {
-    }
+    public function basePdfHeader(): void {}
 
     /**
      * @inheritdoc

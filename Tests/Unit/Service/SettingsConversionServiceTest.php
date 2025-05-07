@@ -57,8 +57,8 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         $hexShort = '#05B';
         $hexLong = '#12ABCD';
 
-        $this->assertEquals(['R' => 0, 'G' => 85, 'B' => 187], $this->settingsConversionService->convertHexToRGB($hexShort));
-        $this->assertEquals(['R' => 18, 'G' => 171, 'B' => 205], $this->settingsConversionService->convertHexToRGB($hexLong));
+        self::assertEquals(['R' => 0, 'G' => 85, 'B' => 187], $this->settingsConversionService->convertHexToRGB($hexShort));
+        self::assertEquals(['R' => 18, 'G' => 171, 'B' => 205], $this->settingsConversionService->convertHexToRGB($hexLong));
     }
 
     #[Test]
@@ -72,7 +72,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         ];
 
         foreach ($expectedConversions as $input => $expectedOutput) {
-            $this->assertEquals($expectedOutput, $this->settingsConversionService->convertSpeakingOrientationToTcpdfOrientation($input));
+            self::assertEquals($expectedOutput, $this->settingsConversionService->convertSpeakingOrientationToTcpdfOrientation($input));
         }
     }
 
@@ -105,7 +105,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         ];
 
         foreach ($expectedConversions as $input => $expectedOutput) {
-            $this->assertEquals($expectedOutput, $this->settingsConversionService->convertSpeakingOutputDestinationToTcpdfOutputDestination($input));
+            self::assertEquals($expectedOutput, $this->settingsConversionService->convertSpeakingOutputDestinationToTcpdfOutputDestination($input));
         }
     }
 
@@ -132,7 +132,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         ];
 
         foreach ($expectedConversions as $input => $expectedOutput) {
-            $this->assertEquals($expectedOutput, $this->settingsConversionService->convertSpeakingFontStyleToTcpdfFontStyle($input));
+            self::assertEquals($expectedOutput, $this->settingsConversionService->convertSpeakingFontStyleToTcpdfFontStyle($input));
         }
     }
 
@@ -159,7 +159,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         ];
 
         foreach ($expectedConversions as $input => $expectedOutput) {
-            $this->assertEquals($expectedOutput, $this->settingsConversionService->convertSpeakingAlignmentToTcpdfAlignment($input));
+            self::assertEquals($expectedOutput, $this->settingsConversionService->convertSpeakingAlignmentToTcpdfAlignment($input));
         }
     }
 
@@ -180,7 +180,7 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
                     'image' => 'png,JPG',
                     'imageEPS' => 'ai,eps',
                     'imageSVG' => 'svG',
-                ]
+                ],
             ],
         ];
 
@@ -194,11 +194,10 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
             'svg' => 'imageSVG',
         ];
 
-
         $this->settingsConversionService->setSettings($settings);
 
         foreach ($expectedConversions as $input => $expectedOutput) {
-            $this->assertEquals($expectedOutput, $this->settingsConversionService->convertImageExtensionToRenderMode($input));
+            self::assertEquals($expectedOutput, $this->settingsConversionService->convertImageExtensionToRenderMode($input));
         }
     }
 }

@@ -44,6 +44,6 @@ class GetPosYViewHelper extends AbstractPDFViewHelper
      */
     public function render(): float
     {
-        return (float) $this->getPDF()->GetY();
+        return (float)$this->getPDF()->GetY();
     }
 }

@@ -178,7 +178,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
             }
             $crop = array_merge($imageFileCrop, $argumentsCrop);
 
-            $cropVariantCollection = CropVariantCollection::create((string) json_encode($crop));
+            $cropVariantCollection = CropVariantCollection::create((string)json_encode($crop));
             $cropVariant = $processingInstructions['cropVariant'] ?? 'default';
             $cropArea = $cropVariantCollection->getCropArea($cropVariant);
 

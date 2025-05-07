@@ -134,6 +134,6 @@ class PageViewHelper extends AbstractPDFViewHelper
 
     protected function pageNeedsHeader(): bool
     {
-        return (bool) $this->viewHelperVariableContainer->get('DocumentViewHelper', 'pageNeedsHeader');
+        return (bool)$this->viewHelperVariableContainer->get('DocumentViewHelper', 'pageNeedsHeader');
     }
 }

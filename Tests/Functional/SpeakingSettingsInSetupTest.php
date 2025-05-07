@@ -46,12 +46,12 @@ class SpeakingSettingsInSetupTest extends AbstractFunctionalTestCase
     #[Test]
     public function testSpeakingSetupSettings()
     {
-        $this->markTestSkipped('Changing settings in TS not working because of AbstractViewHelper::$argumentDefinitionCache.');
+        self::markTestSkipped('Changing settings in TS not working because of AbstractViewHelper::$argumentDefinitionCache.');
 
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('SpeakingSettings/TypoScript.html'));
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();
 
-        $this->assertStringContainsStringIgnoringCase('Test', $text);
+        self::assertStringContainsStringIgnoringCase('Test', $text);
     }
 }

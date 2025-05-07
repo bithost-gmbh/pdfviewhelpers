@@ -51,8 +51,8 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();
 
-        $this->assertEquals(1, mb_substr_count($text, 'Header'));
-        $this->assertEquals(1, mb_substr_count($text, 'Footer'));
+        self::assertEquals(1, mb_substr_count($text, 'Header'));
+        self::assertEquals(1, mb_substr_count($text, 'Footer'));
     }
 
     #[Test]
@@ -66,8 +66,8 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();
 
-        $this->assertEquals(2, mb_substr_count($text, 'Header'));
-        $this->assertEquals(2, mb_substr_count($text, 'Footer'));
+        self::assertEquals(2, mb_substr_count($text, 'Header'));
+        self::assertEquals(2, mb_substr_count($text, 'Footer'));
     }
 
     #[Test]
@@ -78,8 +78,8 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();
 
-        $this->assertEquals(1, mb_substr_count($text, 'Header'));
-        $this->assertEquals(1, mb_substr_count($text, 'Footer'));
+        self::assertEquals(1, mb_substr_count($text, 'Header'));
+        self::assertEquals(1, mb_substr_count($text, 'Footer'));
     }
 
     #[Test]
@@ -93,8 +93,8 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();
 
-        $this->assertEquals(1, mb_substr_count($text, 'Header'));
-        $this->assertEquals(1, mb_substr_count($text, 'Footer'));
+        self::assertEquals(1, mb_substr_count($text, 'Header'));
+        self::assertEquals(1, mb_substr_count($text, 'Footer'));
     }
 
     #[Test]
@@ -105,8 +105,8 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();
 
-        $this->assertEquals(1, mb_substr_count($text, 'Header'));
-        $this->assertEquals(1, mb_substr_count($text, 'Footer'));
+        self::assertEquals(1, mb_substr_count($text, 'Header'));
+        self::assertEquals(1, mb_substr_count($text, 'Footer'));
     }
 
     #[Test]
@@ -120,8 +120,8 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();
 
-        $this->assertEquals(2, mb_substr_count($text, 'Header'));
-        $this->assertEquals(2, mb_substr_count($text, 'Footer'));
+        self::assertEquals(2, mb_substr_count($text, 'Header'));
+        self::assertEquals(2, mb_substr_count($text, 'Footer'));
     }
 
     #[Test]
@@ -135,11 +135,11 @@ class HeaderAndFooterViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
 
-        $this->assertEquals(1, mb_substr_count($pages[0]->getText(), 'FirstPageHeader'));
-        $this->assertEquals(1, mb_substr_count($pages[0]->getText(), 'FirstPageFooter'));
-        $this->assertEquals(1, mb_substr_count($pages[1]->getText(), 'DocumentHeader'));
-        $this->assertEquals(1, mb_substr_count($pages[1]->getText(), 'FirstPageFooter'));
-        $this->assertEquals(1, mb_substr_count($pages[2]->getText(), 'DocumentHeader'));
-        $this->assertEquals(1, mb_substr_count($pages[2]->getText(), 'DocumentFooter'));
+        self::assertEquals(1, mb_substr_count($pages[0]->getText(), 'FirstPageHeader'));
+        self::assertEquals(1, mb_substr_count($pages[0]->getText(), 'FirstPageFooter'));
+        self::assertEquals(1, mb_substr_count($pages[1]->getText(), 'DocumentHeader'));
+        self::assertEquals(1, mb_substr_count($pages[1]->getText(), 'FirstPageFooter'));
+        self::assertEquals(1, mb_substr_count($pages[2]->getText(), 'DocumentHeader'));
+        self::assertEquals(1, mb_substr_count($pages[2]->getText(), 'DocumentFooter'));
     }
 }

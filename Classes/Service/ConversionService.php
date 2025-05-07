@@ -54,7 +54,7 @@ class ConversionService implements SingletonInterface
 
     public function convertHexToRGB(string $colorHex): array
     {
-        $colorHex = str_replace("#", "", $colorHex);
+        $colorHex = str_replace('#', '', $colorHex);
 
         if (strlen($colorHex) == 3) {
             $r = hexdec(substr($colorHex, 0, 1) . substr($colorHex, 0, 1));
@@ -178,7 +178,7 @@ class ConversionService implements SingletonInterface
         if (is_string($width) && mb_substr($width, -1) === '%') {
             $stringPercentage = rtrim($width, '%');
             $invalidWidth = !is_numeric($stringPercentage);
-            $columnWidth = ((float) $stringPercentage / 100) * $fullWidth;
+            $columnWidth = ((float)$stringPercentage / 100) * $fullWidth;
         } else {
             $columnWidth = $width;
             $invalidWidth = !is_numeric($columnWidth);
@@ -188,7 +188,7 @@ class ConversionService implements SingletonInterface
             throw new ValidationException('Invalid width "' . $width . '" provided. ERROR: 1536398597', 1536398597);
         }
 
-        return (float) $columnWidth;
+        return (float)$columnWidth;
     }
 
     /**
@@ -201,13 +201,15 @@ class ConversionService implements SingletonInterface
 
         if (in_array($extension, $this->convertImageTypeStringToImageTypeArray($settings['config']['allowedImageTypes']['image']))) {
             return 'image';
-        } elseif (in_array($extension, $this->convertImageTypeStringToImageTypeArray($settings['config']['allowedImageTypes']['imageEPS']))) {
-            return 'imageEPS';
-        } elseif (in_array($extension, $this->convertImageTypeStringToImageTypeArray($settings['config']['allowedImageTypes']['imageSVG']))) {
-            return 'imageSVG';
-        } else {
-            throw new ValidationException('Image type is not supported. ERROR: 1363778014', 1363778014);
         }
+        if (in_array($extension, $this->convertImageTypeStringToImageTypeArray($settings['config']['allowedImageTypes']['imageEPS']))) {
+            return 'imageEPS';
+        }
+        if (in_array($extension, $this->convertImageTypeStringToImageTypeArray($settings['config']['allowedImageTypes']['imageSVG']))) {
+            return 'imageSVG';
+        }
+        throw new ValidationException('Image type is not supported. ERROR: 1363778014', 1363778014);
+
     }
 
     /**
@@ -236,7 +238,7 @@ class ConversionService implements SingletonInterface
         }
 
         if (!($file instanceof FileInterface)) {
-            throw new ValidationException("Invalid file src provided, must be either a uid, combined identifier, path/filename or implement FileInterface." . $previousExceptionMessage . " ERROR: 1536560752", 1536560752, $previousException);
+            throw new ValidationException('Invalid file src provided, must be either a uid, combined identifier, path/filename or implement FileInterface.' . $previousExceptionMessage . ' ERROR: 1536560752', 1536560752, $previousException);
         }
 
         return $file;
@@ -254,9 +256,9 @@ class ConversionService implements SingletonInterface
     {
         if (is_array($this->settings)) {
             return $this->settings;
-        } else {
-            throw new Exception('No settings found in SettingsConversionService. ERROR: 1536482194', 1536482194);
         }
+        throw new Exception('No settings found in SettingsConversionService. ERROR: 1536482194', 1536482194);
+
     }
 
     protected function convertImageTypeStringToImageTypeArray(string $imageTypes): array

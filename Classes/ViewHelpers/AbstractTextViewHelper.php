@@ -100,20 +100,20 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
                 $this->getPDF()->SetFont($this->arguments['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($this->arguments['fontStyle']));
             }
 
-            $this->arguments['text'] = (string) $this->renderChildren();
+            $this->arguments['text'] = (string)$this->renderChildren();
         }
 
         if ($this->arguments['trim']) {
-            $this->arguments['text'] = trim((string) $this->arguments['text']);
+            $this->arguments['text'] = trim((string)$this->arguments['text']);
         }
 
         if ($this->arguments['removeDoubleWhitespace']) {
-            $this->arguments['text'] = preg_replace('/[ \t]+/', ' ', (string) $this->arguments['text']);
+            $this->arguments['text'] = preg_replace('/[ \t]+/', ' ', (string)$this->arguments['text']);
         }
 
         if ($this->arguments['autoHyphenation']) {
             $this->arguments['text'] = $this->hyphenationService->hyphenateText(
-                (string) $this->arguments['text'],
+                (string)$this->arguments['text'],
                 $this->hyphenationService->getHyphenFilePath($this->getHyphenFileName())
             );
         }
@@ -156,12 +156,12 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
     {
         $this->initializeMultiColumnSupport();
 
-        $paragraphs = explode("\n", str_replace("\r\n", "\n", (string) $this->arguments['text']));
+        $paragraphs = explode("\n", str_replace("\r\n", "\n", (string)$this->arguments['text']));
         $posY = $this->arguments['posY'] + $this->arguments['padding']['top'];
 
         foreach ($paragraphs as $paragraph) {
             if ($this->arguments['trim']) {
-                $paragraph = trim((string) $paragraph);
+                $paragraph = trim((string)$paragraph);
             }
 
             if ($this->arguments['paragraphLineFeed']) {
@@ -221,7 +221,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
 
             if (isset($this->settings[$settingsKey]['types'][$type])) {
                 $mergedSettings = $this->mergeSettingsArrays($mergedSettings, $this->settings[$settingsKey]['types'][$type]);
-            } else if (isset($this->settings['generalText']['types'][$type])) {
+            } elseif (isset($this->settings['generalText']['types'][$type])) {
                 $mergedSettings = $this->mergeSettingsArrays($mergedSettings, $this->settings['generalText']['types'][$type]);
             } else {
                 throw new ValidationException('Unknown text style type "' . $this->arguments['type'] . '" used. ERROR: 1536704610', 1536704610);

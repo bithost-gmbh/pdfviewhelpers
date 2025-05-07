@@ -37,9 +37,6 @@ use Bithost\Pdfviewhelpers\Model\BasePDF;
  */
 class TestBasePDF extends BasePDF
 {
-    /**
-     * @return void
-     */
     public function __construct($orientation = 'P', $unit = 'mm', $format = 'A4', $unicode = true, $encoding = 'UTF-8', $diskcache = false, $pdfa = true)
     {
         parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache, $pdfa);

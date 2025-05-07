@@ -52,9 +52,9 @@ class ValidationService implements SingletonInterface
             && is_numeric($padding['bottom']) && is_numeric($padding['left'])
         ) {
             return true;
-        } else {
-            throw new ValidationException('Invalid padding "' . var_export($padding, true) . '", must be an array with elements: top:[int],right:[int],bottom:[int],left:[int] ERROR: 1363769351', 1363769351);
         }
+        throw new ValidationException('Invalid padding "' . var_export($padding, true) . '", must be an array with elements: top:[int],right:[int],bottom:[int],left:[int] ERROR: 1363769351', 1363769351);
+
     }
 
     /**
@@ -64,9 +64,9 @@ class ValidationService implements SingletonInterface
     {
         if (preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $colorHex)) {
             return true;
-        } else {
-            throw new ValidationException('Invalid color syntax "' . $colorHex . '", must follow syntax #000 or #000000.', 1363765272);
         }
+        throw new ValidationException('Invalid color syntax "' . $colorHex . '", must follow syntax #000 or #000000.', 1363765272);
+
     }
 
     /**
@@ -78,9 +78,9 @@ class ValidationService implements SingletonInterface
     {
         if (is_numeric($width) && $width >= 0 || mb_substr($width, -1) === '%') {
             return true;
-        } else {
-            throw new ValidationException('Invalid width "' . $width . '" provided, must be a floating point or percentage value. ERROR: 1363765672', 1363765372);
         }
+        throw new ValidationException('Invalid width "' . $width . '" provided, must be a floating point or percentage value. ERROR: 1363765672', 1363765372);
+
     }
 
     /**
@@ -92,9 +92,9 @@ class ValidationService implements SingletonInterface
     {
         if (is_numeric($fontSize) && $fontSize >= 0) {
             return true;
-        } else {
-            throw new ValidationException('Invalid fontSize "' . $fontSize . '" provided, must be a floating point value. ERROR: 1363765372', 1363765372);
         }
+        throw new ValidationException('Invalid fontSize "' . $fontSize . '" provided, must be a floating point value. ERROR: 1363765372', 1363765372);
+
     }
 
     /**
@@ -119,9 +119,9 @@ class ValidationService implements SingletonInterface
 
         if ($fontFamily === $tcpdfFontFamilyName) {
             return true;
-        } else {
-            throw new ValidationException('Invalid fontFamily name "' . $fontFamily . '". Name must only contain letters "a-z0-9_" and none of the words "bold", "oblique", "italic" and "regular". ERROR: 1492809393', 1492809393);
         }
+        throw new ValidationException('Invalid fontFamily name "' . $fontFamily . '". Name must only contain letters "a-z0-9_" and none of the words "bold", "oblique", "italic" and "regular". ERROR: 1492809393', 1492809393);
+
     }
 
     /**
@@ -133,9 +133,9 @@ class ValidationService implements SingletonInterface
     {
         if (is_numeric($paragraphSpacing) && $paragraphSpacing >= 0) {
             return true;
-        } else {
-            throw new ValidationException('Invalid paragraphSpacing "' . $paragraphSpacing . '" provided, must be a float value. ERROR: 1363765379', 1363765379);
         }
+        throw new ValidationException('Invalid paragraphSpacing "' . $paragraphSpacing . '" provided, must be a float value. ERROR: 1363765379', 1363765379);
+
     }
 
     /**
@@ -147,9 +147,9 @@ class ValidationService implements SingletonInterface
     {
         if (is_numeric($height) && $height >= 0) {
             return true;
-        } else {
-            throw new ValidationException('Invalid height "' . $height . '" provided, must be a positive float value. ERROR: 1363766372', 1363765372);
         }
+        throw new ValidationException('Invalid height "' . $height . '" provided, must be a positive float value. ERROR: 1363766372', 1363765372);
+
     }
 
     /**
@@ -159,9 +159,9 @@ class ValidationService implements SingletonInterface
     {
         if (count($listElements) == count($listElements, COUNT_RECURSIVE)) {
             return true;
-        } else {
-            throw new ValidationException('Only one dimensional arrays are allowed for the ListViewHelper. ERROR: 1363779014', 1363779014);
         }
+        throw new ValidationException('Only one dimensional arrays are allowed for the ListViewHelper. ERROR: 1363779014', 1363779014);
+
     }
 
     /**
@@ -173,9 +173,9 @@ class ValidationService implements SingletonInterface
     {
         if (is_numeric($lineHeight) && $lineHeight >= 0) {
             return true;
-        } else {
-            throw new ValidationException('Invalid lineHeight "' . $lineHeight . '" provided, must be a positive float value. ERROR: 1536704503', 1536704503);
         }
+        throw new ValidationException('Invalid lineHeight "' . $lineHeight . '" provided, must be a positive float value. ERROR: 1536704503', 1536704503);
+
     }
 
     /**
@@ -187,8 +187,8 @@ class ValidationService implements SingletonInterface
     {
         if (is_numeric($characterSpacing) && $characterSpacing >= 0) {
             return true;
-        } else {
-            throw new ValidationException('Invalid characterSpacing "' . $characterSpacing . '" provided, must be a positive float value. ERROR: 1536704547', 1536704547);
         }
+        throw new ValidationException('Invalid characterSpacing "' . $characterSpacing . '" provided, must be a positive float value. ERROR: 1536704547', 1536704547);
+
     }
 }

@@ -82,10 +82,10 @@ class DocumentViewHelper extends AbstractPDFViewHelper
         $this->registerArgument('outputPath', 'string', 'The name or path of the saved document.', false, $this->settings['document']['outputPath']);
         $this->registerArgument('sourceFile', 'string', 'The path to the source file for templates to be applied to this document.', false, $this->settings['document']['sourceFile']);
         $this->registerArgument('unit', 'string', 'The default unit of measure.', false, $this->settings['document']['unit']);
-        $this->registerArgument('unicode', 'boolean', 'If true unicode is used.', false, (bool) $this->settings['document']['unicode']);
+        $this->registerArgument('unicode', 'boolean', 'If true unicode is used.', false, (bool)$this->settings['document']['unicode']);
         $this->registerArgument('encoding', 'string', 'The encoding of the document.', false, $this->settings['document']['encoding']);
-        $this->registerArgument('pdfa', 'boolean', 'If true PDF/A mode is enabled.', false, (bool) $this->settings['document']['pdfa']);
-        $this->registerArgument('pdfua', 'boolean', 'If true PDF/UA-1 mode is enabled.', false, (bool) $this->settings['document']['pdfua']);
+        $this->registerArgument('pdfa', 'boolean', 'If true PDF/A mode is enabled.', false, (bool)$this->settings['document']['pdfa']);
+        $this->registerArgument('pdfua', 'boolean', 'If true PDF/UA-1 mode is enabled.', false, (bool)$this->settings['document']['pdfua']);
         $this->registerArgument('language', 'string', 'The language of the document.', false, $this->settings['document']['language']);
         $this->registerArgument('hyphenFile', 'string', 'The hyphen file to be used for the automatic hyphenation.', false, $this->settings['document']['hyphenFile']);
     }
@@ -205,14 +205,14 @@ class DocumentViewHelper extends AbstractPDFViewHelper
             $path = GeneralUtility::getFileAbsFileName($ttfFont['path']);
             $type = isset($ttfFont['type']) ? $ttfFont['type'] : '';
             $enc = isset($ttfFont['enc']) ? $ttfFont['enc'] : '';
-            $flags = isset($ttfFont['flags']) ? (int) $ttfFont['flags'] : 32;
+            $flags = isset($ttfFont['flags']) ? (int)$ttfFont['flags'] : 32;
             $fontName = \TCPDF_FONTS::addTTFfont($path, $type, $enc, $flags, $outputPath);
 
             if ($fontName === false) {
                 throw new ValidationException('Font "' . $ttfFontName . '" could not be added. ERROR: 1492808000', 1492808000);
-            } else {
-                $this->getPDF()->addCustomFontFilePath($fontName, $outputPath . $fontName . '.php');
             }
+            $this->getPDF()->addCustomFontFilePath($fontName, $outputPath . $fontName . '.php');
+
         }
     }
 

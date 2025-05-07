@@ -53,10 +53,10 @@ class HtmlViewHelperTest extends AbstractFunctionalTestCase
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertStringContainsStringIgnoringCase('Headline', $pdf->getText());
-        $this->assertStringContainsStringIgnoringCase('Text', $pdf->getText());
-        $this->assertStringNotContainsStringIgnoringCase('<h1>', $pdf->getText());
-        $this->assertStringNotContainsStringIgnoringCase('<p>', $pdf->getText());
+        self::assertStringContainsStringIgnoringCase('Headline', $pdf->getText());
+        self::assertStringContainsStringIgnoringCase('Text', $pdf->getText());
+        self::assertStringNotContainsStringIgnoringCase('<h1>', $pdf->getText());
+        self::assertStringNotContainsStringIgnoringCase('<p>', $pdf->getText());
     }
 
     #[Test]

@@ -44,6 +44,6 @@ class GetTotalNumberOfPagesAliasViewHelper extends AbstractPDFViewHelper
      */
     public function render(): string
     {
-        return (string) $this->getPDF()->getAliasNbPages();
+        return (string)$this->getPDF()->getAliasNbPages();
     }
 }

@@ -30,19 +30,19 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Smalot\PdfParser\Document;
+use Smalot\PdfParser\Parser;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\TypoScript\AST\Node\RootNode;
+use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\View\ViewFactoryData;
 use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
-use Smalot\PdfParser\Document;
-use Smalot\PdfParser\Parser;
-use TYPO3\CMS\Fluid\View\StandaloneView;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
-use TYPO3\CMS\Core\TypoScript\AST\Node\RootNode;
-use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
 
 /**
  * BaseFunctionalTest
@@ -145,7 +145,7 @@ abstract class AbstractFunctionalTestCase extends FunctionalTestCase
         $longLoremIpsumText = '';
         $duplicates = max($duplicates, 0);
 
-        for ($i=0; $i < $duplicates; $i++) {
+        for ($i = 0; $i < $duplicates; $i++) {
             $longLoremIpsumText .= $this->loremIpsumText;
         }
 
@@ -162,7 +162,7 @@ abstract class AbstractFunctionalTestCase extends FunctionalTestCase
         // Redirect stderr to stdout and silent regular stdout
         exec('qpdf --check ' . escapeshellarg($tempFilePath) . ' 2>&1 >/dev/null', $output, $resultCode);
 
-        $this->assertEquals(0, $resultCode, implode(PHP_EOL, $output));
-        $this->assertEmpty($output, implode(PHP_EOL, $output));
+        self::assertEquals(0, $resultCode, implode(PHP_EOL, $output));
+        self::assertEmpty($output, implode(PHP_EOL, $output));
     }
 }

@@ -31,8 +31,8 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * ExtendExistingPDFsTest
@@ -55,18 +55,18 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTestCase
 
         file_put_contents($outputPath, $output);
 
-        $this->assertEquals(1, count($pdf->getPages()));
-        $this->assertStringContainsStringIgnoringCase('Mega GmbH', $text);
-        $this->assertStringContainsStringIgnoringCase('Ansprechpartner', $text);
-        $this->assertStringContainsStringIgnoringCase('www.bithost.ch', $text);
-        $this->assertStringContainsStringIgnoringCase('Here is your header', $text);
-        $this->assertStringContainsStringIgnoringCase('Here is the HTML header', $text);
-        $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $text);
+        self::assertEquals(1, count($pdf->getPages()));
+        self::assertStringContainsStringIgnoringCase('Mega GmbH', $text);
+        self::assertStringContainsStringIgnoringCase('Ansprechpartner', $text);
+        self::assertStringContainsStringIgnoringCase('www.bithost.ch', $text);
+        self::assertStringContainsStringIgnoringCase('Here is your header', $text);
+        self::assertStringContainsStringIgnoringCase('Here is the HTML header', $text);
+        self::assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $text);
 
         $this->validatePDF($output);
 
         $expectedHash = sha1(file_get_contents($this->getFixtureAbsolutePath('Examples/ExtendExistingPDFs.pdf')));
         $actualHash = sha1($output);
-        $this->assertEquals($expectedHash, $actualHash);
+        self::assertEquals($expectedHash, $actualHash);
     }
 }

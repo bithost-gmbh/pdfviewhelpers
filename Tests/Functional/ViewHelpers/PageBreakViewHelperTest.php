@@ -47,8 +47,8 @@ class PageBreakViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
 
-        $this->assertEquals(2, count($pages));
-        $this->assertStringContainsStringIgnoringCase('Page 1', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('Page 2', $pages[1]->getText());
+        self::assertEquals(2, count($pages));
+        self::assertStringContainsStringIgnoringCase('Page 1', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('Page 2', $pages[1]->getText());
     }
 }

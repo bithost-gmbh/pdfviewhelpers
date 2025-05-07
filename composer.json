@@ -1,10 +1,17 @@
 {
 	"name": "bithost-gmbh/pdfviewhelpers",
-	"type": "typo3-cms-extension",
-	"license": "GPL-3.0-or-later",
 	"description": "This is a TYPO3 CMS extension that provides various Fluid ViewHelpers to generate PDF documents.",
-	"keywords": ["PDF", "ViewHelpers", "Fluid", "generation", "generator", "TCPDF", "FPDI"],
-	"homepage": "https://github.com/bithost-gmbh/pdfviewhelpers",
+	"license": "GPL-3.0-or-later",
+	"type": "typo3-cms-extension",
+	"keywords": [
+		"PDF",
+		"ViewHelpers",
+		"Fluid",
+		"generation",
+		"generator",
+		"TCPDF",
+		"FPDI"
+	],
 	"authors": [
 		{
 			"name": "Markus Mächler",
@@ -15,11 +22,12 @@
 			"email": "esteban.gehring@bithost.ch"
 		}
 	],
+	"homepage": "https://github.com/bithost-gmbh/pdfviewhelpers",
 	"require": {
-		"typo3/cms-core": "^12.4 || ^13.4",
 		"php": ">=8.1.0",
+		"setasign/fpdi": "^2.0",
 		"tecnickcom/tcpdf": "^6.2",
-		"setasign/fpdi": "^2.0"
+		"typo3/cms-core": "^12.4 || ^13.4"
 	},
 	"require-dev": {
 		"ergebnis/composer-normalize": "^2.44",
@@ -29,6 +37,9 @@
 		"squizlabs/php_codesniffer": "^3.7",
 		"typo3/coding-standards": "^0.8",
 		"typo3/testing-framework": "^9.0.1"
+	},
+	"replace": {
+		"typo3-ter/pdfviewhelpers": "self.version"
 	},
 	"autoload": {
 		"psr-4": {
@@ -44,9 +55,6 @@
 			"Bithost\\Pdfviewhelpers\\Tests\\": "Tests"
 		}
 	},
-	"replace": {
-		"typo3-ter/pdfviewhelpers": "self.version"
-	},
 	"config": {
 		"allow-plugins": {
 			"ergebnis/composer-normalize": true,
@@ -56,6 +64,13 @@
 		"bin-dir": ".Build/bin",
 		"sort-packages": true,
 		"vendor-dir": ".Build/vendor"
+	},
+	"extra": {
+		"typo3/cms": {
+			"app-dir": ".Build",
+			"extension-key": "pdfviewhelpers",
+			"web-dir": ".Build/public"
+		}
 	},
 	"scripts": {
 		"post-autoload-dump": [
@@ -67,24 +82,15 @@
 			"unzip Resources/Private/PHP/tcpdf.zip -d Resources/Private/PHP/",
 			"mv Resources/Private/PHP/TCPDF-* Resources/Private/PHP/tcpdf",
 			"rm Resources/Private/PHP/tcpdf.zip",
-
 			"rm -rf Resources/Private/PHP/fpdi",
 			"wget https://github.com/Setasign/FPDI/archive/refs/tags/v2.6.3.zip -O Resources/Private/PHP/fpdi.zip",
 			"unzip Resources/Private/PHP/fpdi.zip -d Resources/Private/PHP/",
 			"mv Resources/Private/PHP/FPDI-* Resources/Private/PHP/fpdi",
 			"rm Resources/Private/PHP/fpdi.zip",
-
 			"rm -rf Tests/",
 			"rm -rf .github/",
 			"rm .gitignore",
 			"rm sphinx-build.sh"
 		]
-	},
-	"extra": {
-		"typo3/cms": {
-			"app-dir": ".Build",
-			"extension-key": "pdfviewhelpers",
-			"web-dir": ".Build/public"
-		}
 	}
 }

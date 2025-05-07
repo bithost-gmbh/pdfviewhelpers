@@ -1,4 +1,5 @@
 <?php
+
 //============================================================+
 // File name   : por.php
 // Begin       : 2004-03-03
@@ -19,7 +20,6 @@
 
 /**
  * TCPDF language file (contains translated texts).
- * @package com.tecnick.tcpdf
  * @brief TCPDF language file: Portuguese
  * @author Nicola Asuni
  * @since 2004-03-03
@@ -28,7 +28,7 @@
 // Portuguese
 
 global $l;
-$l = Array();
+$l = [];
 
 // PAGE META DESCRIPTORS --------------------------------------
 

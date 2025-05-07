@@ -48,16 +48,16 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTestCase
             [
                 'text1' => 'text1' . $this->getLongLoremIpsumText(5), //6 duplicates fit on one page
                 'text2' => 'text2' . $this->getLongLoremIpsumText(5),
-                'breakIfImpossibleToAvoid' => false
+                'breakIfImpossibleToAvoid' => false,
             ]
         );
 
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
 
-        $this->assertCount(2, $pages);
-        $this->assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('text2', $pages[1]->getText());
+        self::assertCount(2, $pages);
+        self::assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('text2', $pages[1]->getText());
     }
 
     #[Test]
@@ -68,16 +68,16 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTestCase
             [
                 'text1' => 'text1' . $this->getLongLoremIpsumText(5), //6 duplicates fit on one page
                 'text2' => 'text2' . $this->getLongLoremIpsumText(5),
-                'breakIfImpossibleToAvoid' => true
+                'breakIfImpossibleToAvoid' => true,
             ]
         );
 
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
 
-        $this->assertCount(2, $pages);
-        $this->assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('text2', $pages[1]->getText());
+        self::assertCount(2, $pages);
+        self::assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('text2', $pages[1]->getText());
     }
 
     #[Test]
@@ -88,16 +88,16 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTestCase
             [
                 'text1' => 'text1' . $this->getLongLoremIpsumText(5), //6 duplicates fit on one page
                 'text2' => 'text2' . $this->getLongLoremIpsumText(7),
-                'breakIfImpossibleToAvoid' => false
+                'breakIfImpossibleToAvoid' => false,
             ]
         );
 
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
 
-        $this->assertCount(2, $pages);
-        $this->assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('text2', $pages[0]->getText());
+        self::assertCount(2, $pages);
+        self::assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('text2', $pages[0]->getText());
     }
 
     #[Test]
@@ -108,15 +108,15 @@ class AvoidPageBreakInsideViewHelperTest extends AbstractFunctionalTestCase
             [
                 'text1' => 'text1' . $this->getLongLoremIpsumText(5), //6 duplicates fit on one page
                 'text2' => 'text2' . $this->getLongLoremIpsumText(7),
-                'breakIfImpossibleToAvoid' => true
+                'breakIfImpossibleToAvoid' => true,
             ]
         );
 
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
 
-        $this->assertCount(3, $pages);
-        $this->assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('text2', $pages[1]->getText());
+        self::assertCount(3, $pages);
+        self::assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('text2', $pages[1]->getText());
     }
 }

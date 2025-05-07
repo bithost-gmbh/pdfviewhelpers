@@ -41,8 +41,7 @@ class StopOutputMiddleware implements MiddlewareInterface
 {
     public function __construct(
         protected OutputService $outputService,
-    ) {
-    }
+    ) {}
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

@@ -42,8 +42,7 @@ class AfterCacheableContentIsGeneratedEventListener
 {
     public function __construct(
         protected OutputService $outputService,
-    ) {
-    }
+    ) {}
 
     public function __invoke(AfterCacheableContentIsGeneratedEvent $event): void
     {
