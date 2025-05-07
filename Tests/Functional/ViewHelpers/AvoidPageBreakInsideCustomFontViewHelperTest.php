@@ -40,8 +40,22 @@ use PHPUnit\Framework\Attributes\Test;
  */
 class AvoidPageBreakInsideCustomFontViewHelperTest extends AbstractFunctionalTestCase
 {
-    protected array $typoScriptFiles = [
-        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/AvoidPageBreakInsideViewHelper/CustomFont.typoscript',
+    protected array $overrideTypoScript = [
+        'plugin.' => [
+            'tx_pdfviewhelpers.' => [
+                'settings.' => [
+                    'config.' => [
+                        'fonts.' => [
+                            'addTTFFont.' => [
+                                'opensans.' => [
+                                    'path' => 'EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf',
+                                ]
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     #[Test]

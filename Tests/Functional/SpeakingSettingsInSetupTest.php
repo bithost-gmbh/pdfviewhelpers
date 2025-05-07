@@ -39,15 +39,36 @@ use PHPUnit\Framework\Attributes\Test;
  */
 class SpeakingSettingsInSetupTest extends AbstractFunctionalTestCase
 {
-    protected array $typoScriptFiles = [
-        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/SpeakingSettings/setup_speaking.typoscript',
+    protected array $overrideTypoScript = [
+        'plugin.' => [
+            'tx_pdfviewhelpers.' => [
+                'settings.' => [
+                    'document.' => [
+                        'outputDestination' => 'string',
+                    ],
+                    'page.' => [
+                        'outputDestination' => 'portrait',
+                    ],
+                    'text.' => [
+                        'fontStyle' => 'regular',
+                        'alignment' => 'left',
+                    ],
+                    'headline.' => [
+                        'fontStyle' => 'bold',
+                        'alignment' => 'center',
+                    ],
+                    'list.' => [
+                        'fontStyle' => 'italic',
+                        'alignment' => 'right',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     #[Test]
     public function testSpeakingSetupSettings()
     {
-        self::markTestSkipped('Changing settings in TS not working because of AbstractViewHelper::$argumentDefinitionCache.');
-
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('SpeakingSettings/TypoScript.html'));
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();

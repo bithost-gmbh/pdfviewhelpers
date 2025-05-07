@@ -40,8 +40,31 @@ use PHPUnit\Framework\Attributes\Test;
  */
 class SpeakingSettingsTest extends AbstractFunctionalTestCase
 {
-    protected array $typoScriptFiles = [
-        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/SpeakingSettings/setup.typoscript',
+    protected array $overrideTypoScript = [
+        'plugin.' => [
+            'tx_pdfviewhelpers.' => [
+                'settings.' => [
+                    'document.' => [
+                        'outputDestination' => 'S',
+                    ],
+                    'page.' => [
+                        'outputDestination' => 'P',
+                    ],
+                    'text.' => [
+                        'fontStyle' => 'R',
+                        'alignment' => 'L',
+                    ],
+                    'headline.' => [
+                        'fontStyle' => 'B',
+                        'alignment' => 'C',
+                    ],
+                    'list.' => [
+                        'fontStyle' => 'I',
+                        'alignment' => 'R',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     #[Test]

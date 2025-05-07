@@ -30,17 +30,16 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Bithost\Pdfviewhelpers\Tests\Functional\Traits\SetUpFrontendSiteTrait;
 use Smalot\PdfParser\Document;
 use Smalot\PdfParser\Parser;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
-use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\TypoScript\AST\Node\RootNode;
 use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\View\ViewFactoryData;
 use TYPO3\CMS\Core\View\ViewFactoryInterface;
-use TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -51,6 +50,8 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 abstract class AbstractFunctionalTestCase extends FunctionalTestCase
 {
+    use SetUpFrontendSiteTrait;
+
     protected array $testExtensionsToLoad = [
         'bithost-gmbh/pdfviewhelpers',
     ];
@@ -60,58 +61,269 @@ abstract class AbstractFunctionalTestCase extends FunctionalTestCase
      */
     protected string $loremIpsumText = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
 
-    protected array $typoScriptFiles = [];
+    private array $baseTypoScript = [
+        'plugin.' => [
+            'tx_pdfviewhelpers.' => [
+                'settings.' => [
+                    'staticTypoScriptSetupIncluded' => 1,
+                    'config.' => [
+                        'class' => 'Bithost\\Pdfviewhelpers\\Tests\\Functional\\TestBasePDF',
+                        'disableCache' => 1,
+                        'exitAfterPdfContentOutput' => 0,
+                        'jpgQuality' => 100,
+                        'sRGBMode' => 0,
+                        'allowedImageTypes.' => [
+                            'image' => 'jpg,jpeg,png,gif',
+                            'imageEPS' => 'ai,eps',
+                            'imageSVG' => 'svg',
+                        ],
+                        'fonts.' => [
+                            'subset' => 1,
+                            'outputPath' => 'typo3temp/pdfviewhelpers/fonts/',
+                            'addTTFFont.' => [
+                                // Example fonts can be added here
+                                // 'roboto.' => [
+                                //     'path' => 'EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/Roboto.ttf',
+                                // ],
+                                // 'opensans.' => [
+                                //     'path' => 'EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf',
+                                // ],
+                            ],
+                        ],
+                    ],
+                    'document.' => [
+                        'title' => '',
+                        'subject' => '',
+                        'author' => '',
+                        'keywords' => '',
+                        'creator' => 'TYPO3 EXT:pdfviewhelpers',
+                        'outputDestination' => 'inline',
+                        'outputPath' => 'document.pdf',
+                        'sourceFile' => '',
+                        'unit' => 'mm',
+                        'unicode' => 1,
+                        'encoding' => 'UTF-8',
+                        'pdfa' => 0,
+                        'pdfua' => 0,
+                        'language' => 'ger',
+                        'hyphenFile' => 'hyph-de-ch-1901.tex',
+                    ],
+                    'page.' => [
+                        'autoPageBreak' => 1,
+                        'margin.' => [
+                            'top' => 15,
+                            'right' => 15,
+                            'bottom' => 15,
+                            'left' => 15,
+                        ],
+                        'importPage' => '',
+                        'importPageOnAutomaticPageBreak' => 1,
+                        'orientation' => 'portrait',
+                        'format' => 'A4',
+                        'keepMargins' => 0,
+                        'tableOfContentPage' => 0,
+                    ],
+                    'header.' => [
+                        'posY' => 5,
+                    ],
+                    'footer.' => [
+                        'posY' => -10,
+                    ],
+                    'avoidPageBreakInside.' => [
+                        'breakIfImpossibleToAvoid' => 0,
+                    ],
+                    'generalText.' => [
+                        'trim' => 1,
+                        'removeDoubleWhitespace' => 1,
+                        'color' => '#000',
+                        'fontFamily' => 'helvetica',
+                        'fontSize' => 11,
+                        'fontStyle' => 'regular',
+                        'lineHeight' => 1.25,
+                        'characterSpacing' => 0,
+                        'alignment' => 'left',
+                        'paragraphSpacing' => 2,
+                        'paragraphLineFeed' => 0,
+                        'autoHyphenation' => 0,
+                        'padding.' => [
+                            'top' => 0,
+                            'right' => 0,
+                            'bottom' => 0,
+                            'left' => 0,
+                        ],
+                        'types.' => [],
+                    ],
+                    'text.' => [
+                        'trim' => '',
+                        'removeDoubleWhitespace' => '',
+                        'color' => '',
+                        'fontFamily' => '',
+                        'fontSize' => '',
+                        'fontStyle' => '',
+                        'lineHeight' => '',
+                        'characterSpacing' => '',
+                        'alignment' => '',
+                        'paragraphSpacing' => '',
+                        'paragraphLineFeed' => '',
+                        'autoHyphenation' => '',
+                        'padding.' => [],
+                        'types.' => [],
+                    ],
+                    'headline.' => [
+                        'trim' => '',
+                        'removeDoubleWhitespace' => '',
+                        'color' => '',
+                        'fontFamily' => '',
+                        'fontSize' => 16,
+                        'fontStyle' => '',
+                        'lineHeight' => '',
+                        'characterSpacing' => '',
+                        'alignment' => '',
+                        'paragraphSpacing' => 0,
+                        'paragraphLineFeed' => '',
+                        'autoHyphenation' => '',
+                        'addToTableOfContent' => 0,
+                        'tableOfContentLevel' => 0,
+                        'padding.' => [
+                            'top' => 6,
+                            'bottom' => 3,
+                        ],
+                        'types.' => [],
+                    ],
+                    'list.' => [
+                        'trim' => '',
+                        'removeDoubleWhitespace' => '',
+                        'color' => '',
+                        'fontFamily' => '',
+                        'fontSize' => '',
+                        'fontStyle' => '',
+                        'lineHeight' => '',
+                        'characterSpacing' => '',
+                        'paragraphLineFeed' => '',
+                        'alignment' => 'left',
+                        'autoHyphenation' => '',
+                        'padding.' => [
+                            'bottom' => 2,
+                            'left' => 1.5,
+                        ],
+                        'bulletColor' => '',
+                        'bulletImageSrc' => '',
+                        'bulletSize' => 1.5,
+                        'types.' => [],
+                    ],
+                    'image.' => [
+                        'alignment' => 'left',
+                        'fitOnPage' => 1,
+                        'padding.' => [
+                            'top' => 0,
+                            'right' => 0,
+                            'bottom' => 2,
+                            'left' => 0,
+                        ],
+                        'processingInstructions.' => [
+                            // Example crop instructions can be implemented here
+                            // 'width' => '',
+                            // 'height' => '',
+                            // 'crop.' => [
+                            //     'custom_crop.' => [
+                            //         'cropArea.' => [
+                            //             'width' => 0.5,
+                            //             'height' => 0.5,
+                            //             'x' => 0,
+                            //             'y' => 0,
+                            //         ],
+                            //     ],
+                            // ],
+                        ],
+                    ],
+                    'html.' => [
+                        'autoHyphenation' => '',
+                        'styleSheet' => '',
+                        'listIndentWidth' => '',
+                        'padding.' => [
+                            'top' => 0,
+                            'right' => 0,
+                            'bottom' => 2,
+                            'left' => 0,
+                        ],
+                    ],
+                    'graphics.' => [
+                        'line.' => [
+                            'padding.' => [
+                                'top' => 4,
+                                'right' => 0,
+                                'bottom' => 5,
+                                'left' => 0,
+                            ],
+                            'style.' => [
+                                'width' => 0.25,
+                                'color' => '#000',
+                            ],
+                        ],
+                    ],
+                    'tableOfContent.' => [
+                        'page' => 1,
+                        'numbersFont' => '',
+                        'filter' => '.',
+                        'name' => '',
+                        'htmlMode' => 0,
+                        'fontFamily' => '',
+                        'fontSize' => '',
+                        'lineHeight' => '',
+                        'characterSpacing' => '',
+                        'padding.' => [
+                            'top' => 0,
+                            'right' => 0,
+                            'bottom' => 2,
+                            'left' => 0,
+                        ],
+                    ],
+                    'htmlBookmarkTemplate.' => [
+                        'level' => 0,
+                        'sanitizeWhitespace' => 1,
+                    ],
+                    'bookmark.' => [
+                        'level' => 0,
+                        'fontStyle' => '',
+                        'color' => '',
+                    ],
+                ],
+            ],
+        ],
+        'module.' => [
+            'tx_pdfviewhelpers' => '< plugin.tx_pdfviewhelpers',
+        ],
+    ];
+
+    protected array $overrideTypoScript = [];
 
     /**
      * Setup TYPO3 environment
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function setUp(): void
     {
         parent::setUp();
 
-        $baseTypoScripts = [
-            'EXT:pdfviewhelpers/Configuration/TypoScript/setup.typoscript',
-            $this->getFixtureExtPath('setup.typoscript'),
-        ];
-
-        $this->importCSVDataSet($this->getFixtureAbsolutePath('pages.csv'));
-        $this->setUpFrontendRootPage(
-            1,
-            [ 'setup' => array_merge($baseTypoScripts, $this->typoScriptFiles)],
-        );
-
-        /** @var BackendConfigurationManager $backendConfManager */
-        $backendConfigurationManager  = $this->get(BackendConfigurationManager::class);
-        $backendTypoScriptSetup = $backendConfigurationManager->getTypoScriptSetup(new InternalRequest());
-
         $frontendTypoScript = new FrontendTypoScript(new RootNode(), [], [], []);
-        $frontendTypoScript->setSetupArray($backendTypoScriptSetup);
+        $frontendTypoScript->setSetupArray(array_merge($this->baseTypoScript, $this->overrideTypoScript));
 
-        $GLOBALS['TYPO3_REQUEST'] = (new InternalRequest())
-            ->withPageId(1)
+        $GLOBALS['TYPO3_REQUEST'] = (new ServerRequest())
             ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE)
             ->withAttribute('frontend.typoscript', $frontendTypoScript);
     }
 
     protected function renderFluidTemplate(string $templatePath, array $variables = []): string
     {
-        if (GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion() < 13) {
-            /** @var StandaloneView $view */
-            $view = GeneralUtility::makeInstance(StandaloneView::class);
-
-            $view->setFormat('html');
-            $view->setTemplatePathAndFilename($templatePath);
-        } else {
-            /** @var ViewFactoryInterface $viewFactory */
-            $viewFactory = GeneralUtility::makeInstance(ViewFactoryInterface::class);
-            $viewFactoryData = new ViewFactoryData(
-                templateRootPaths: [$this->getFixtureExtPath('')],
-                templatePathAndFilename: $templatePath,
-            );
-            $view = $viewFactory->create($viewFactoryData);
-        }
+        /** @var ViewFactoryInterface $viewFactory */
+        $viewFactory = GeneralUtility::makeInstance(ViewFactoryInterface::class);
+        $viewFactoryData = new ViewFactoryData(
+            templateRootPaths: [$this->getFixtureExtPath('')],
+            templatePathAndFilename: $templatePath,
+            request: $GLOBALS['TYPO3_REQUEST'],
+        );
+        $view = $viewFactory->create($viewFactoryData);
 
         $view->assignMultiple($variables);
 
