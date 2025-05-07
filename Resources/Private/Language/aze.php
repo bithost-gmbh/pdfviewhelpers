@@ -1,4 +1,5 @@
 <?php
+
 //============================================================+
 // File name   : aze.php
 // Begin       : 2010-10-26
@@ -19,7 +20,6 @@
 
 /**
  * TCPDF language file (contains translated texts).
- * @package com.tecnick.tcpdf
  * @brief TCPDF language file: Azerbaijani
  * @author Nicola Asuni
  * @since 2010-10-26
@@ -28,7 +28,7 @@
 // Azerbaijani
 
 global $l;
-$l = Array();
+$l = [];
 
 // PAGE META DESCRIPTORS --------------------------------------
 

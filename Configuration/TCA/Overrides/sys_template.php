@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('TYPO3')) {
-	die ('Access denied.');
+    die('Access denied.');
 }
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('pdfviewhelpers', 'Configuration/TypoScript', 'pdfviewhelpers');

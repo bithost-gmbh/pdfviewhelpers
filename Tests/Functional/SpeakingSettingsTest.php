@@ -40,20 +40,41 @@ use PHPUnit\Framework\Attributes\Test;
  */
 class SpeakingSettingsTest extends AbstractFunctionalTestCase
 {
-    protected array $typoScriptFiles = [
-        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/SpeakingSettings/setup.typoscript',
+    protected array $overrideTypoScript = [
+        'plugin.' => [
+            'tx_pdfviewhelpers.' => [
+                'settings.' => [
+                    'document.' => [
+                        'outputDestination' => 'S',
+                    ],
+                    'page.' => [
+                        'outputDestination' => 'P',
+                    ],
+                    'text.' => [
+                        'fontStyle' => 'R',
+                        'alignment' => 'L',
+                    ],
+                    'headline.' => [
+                        'fontStyle' => 'B',
+                        'alignment' => 'C',
+                    ],
+                    'list.' => [
+                        'fontStyle' => 'I',
+                        'alignment' => 'R',
+                    ],
+                ],
+            ],
+        ],
     ];
 
     #[Test]
     public function testSetupSettings(): void
     {
-        $this->markTestSkipped('Changing settings in TS not working because of AbstractViewHelper::$argumentDefinitionCache.');
-
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('SpeakingSettings/TypoScript.html'));
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();
 
-        $this->assertStringContainsStringIgnoringCase('Test', $text);
+        self::assertStringContainsStringIgnoringCase('Test', $text);
     }
 
     #[Test]
@@ -71,7 +92,7 @@ class SpeakingSettingsTest extends AbstractFunctionalTestCase
 
         $maxElements = max($outputDestinationsCount, $orientationsCount, $fontStylesCount, $alignmentsCount);
 
-        for ($i=0; $i<$maxElements; $i++) {
+        for ($i = 0; $i < $maxElements; $i++) {
             $output = $this->renderFluidTemplate(
                 $this->getFixtureExtPath('SpeakingSettings/FluidAttributes.html'),
                 [
@@ -84,7 +105,7 @@ class SpeakingSettingsTest extends AbstractFunctionalTestCase
             $pdf = $this->parseContent($output);
             $text = $pdf->getText();
 
-            $this->assertStringContainsStringIgnoringCase('Test', $text);
+            self::assertStringContainsStringIgnoringCase('Test', $text);
         }
     }
 

@@ -51,7 +51,7 @@ class ListViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
 
         foreach ($listElements as $listElement) {
-            $this->assertStringContainsStringIgnoringCase($listElement, $pdf->getText());
+            self::assertStringContainsStringIgnoringCase($listElement, $pdf->getText());
         }
     }
 }

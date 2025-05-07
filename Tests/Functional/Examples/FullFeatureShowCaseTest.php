@@ -31,8 +31,8 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\Examples;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * FullFeatureShowCaseTest
@@ -55,28 +55,28 @@ class FullFeatureShowCaseTest extends AbstractFunctionalTestCase
 
         file_put_contents($outputPath, $output);
 
-        $this->assertEquals(5, count($pages));
+        self::assertEquals(5, count($pages));
 
-        $this->assertStringContainsStringIgnoringCase('hallo@bithost.ch - www.bithost.ch', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('Full Feature Show Case', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('hallo@bithost.ch - www.bithost.ch', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('Full Feature Show Case', $pages[0]->getText());
 
-        $this->assertStringContainsStringIgnoringCase('hallo@bithost.ch - www.bithost.ch', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('Full Stack Application Development', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('This is a h1 headline', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('hallo@bithost.ch - www.bithost.ch', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('Full Stack Application Development', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('This is a h1 headline', $pages[1]->getText());
 
-        $this->assertStringContainsStringIgnoringCase('Only this page will have a different header', $pages[2]->getText());
+        self::assertStringContainsStringIgnoringCase('Only this page will have a different header', $pages[2]->getText());
 
-        $this->assertStringContainsStringIgnoringCase('hallo@bithost.ch - www.bithost.ch', $pages[3]->getText());
-        $this->assertStringContainsStringIgnoringCase('HTML content being styled externally', $pages[3]->getText());
-        $this->assertStringContainsStringIgnoringCase('A Link to click', $pages[3]->getText());
-        $this->assertStringContainsStringIgnoringCase('We are on page 4 of 5 pages.', $pages[3]->getText());
+        self::assertStringContainsStringIgnoringCase('hallo@bithost.ch - www.bithost.ch', $pages[3]->getText());
+        self::assertStringContainsStringIgnoringCase('HTML content being styled externally', $pages[3]->getText());
+        self::assertStringContainsStringIgnoringCase('A Link to click', $pages[3]->getText());
+        self::assertStringContainsStringIgnoringCase('We are on page 4 of 5 pages.', $pages[3]->getText());
 
-        $this->assertStringContainsStringIgnoringCase('Avoid page break inside', $pages[4]->getText());
+        self::assertStringContainsStringIgnoringCase('Avoid page break inside', $pages[4]->getText());
 
         $this->validatePDF($output);
 
         $expectedHash = sha1(file_get_contents($this->getFixtureAbsolutePath('Examples/FullFeatureShowCase.pdf')));
         $actualHash = sha1($output);
-        $this->assertEquals($expectedHash, $actualHash);
+        self::assertEquals($expectedHash, $actualHash);
     }
 }

@@ -64,7 +64,7 @@ class ColumnViewHelper extends AbstractPDFViewHelper
 
         $this->validationService->validatePadding($this->arguments['padding']);
 
-        if (strlen((string) $this->arguments['width'])) {
+        if (strlen((string)$this->arguments['width'])) {
             if ($this->validationService->validateWidth($this->arguments['width'])) {
                 $multiColumnContext['columnWidth'] = $this->conversionService->convertSpeakingWidthToTcpdfWidth($this->arguments['width'], $multiColumnContext['pageWidthWithoutMargins']);
             }

@@ -54,7 +54,7 @@ class HtmlBookmarkTemplateViewHelper extends AbstractPDFViewHelper
         $template = $this->renderChildren();
 
         if ($this->arguments['sanitizeWhitespace']) {
-            $template = trim((string) $template);
+            $template = trim((string)$template);
             $template = preg_replace('/(\>)\s*(\<)/m', '$1$2', $template);
         }
 

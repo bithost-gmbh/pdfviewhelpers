@@ -55,7 +55,7 @@ class TextViewHelperTest extends AbstractFunctionalTestCase
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertStringContainsStringIgnoringCase('Some text containing double whitespaces', $pdf->getText());
+        self::assertStringContainsStringIgnoringCase('Some text containing double whitespaces', $pdf->getText());
     }
 
     #[Test]
@@ -67,7 +67,7 @@ class TextViewHelperTest extends AbstractFunctionalTestCase
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertStringContainsStringIgnoringCase(trim($this->untrimmedText), $pdf->getText());
+        self::assertStringContainsStringIgnoringCase(trim($this->untrimmedText), $pdf->getText());
     }
 
     #[Test]
@@ -79,7 +79,7 @@ class TextViewHelperTest extends AbstractFunctionalTestCase
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertStringContainsStringIgnoringCase('Text', $pdf->getText());
+        self::assertStringContainsStringIgnoringCase('Text', $pdf->getText());
     }
 
     #[Test]
@@ -91,7 +91,7 @@ class TextViewHelperTest extends AbstractFunctionalTestCase
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertStringContainsStringIgnoringCase('Text', $pdf->getText());
+        self::assertStringContainsStringIgnoringCase('Text', $pdf->getText());
     }
 
     #[Test]
@@ -114,7 +114,7 @@ class TextViewHelperTest extends AbstractFunctionalTestCase
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertStringContainsStringIgnoringCase('Text', $pdf->getText());
+        self::assertStringContainsStringIgnoringCase('Text', $pdf->getText());
     }
 
     #[Test]

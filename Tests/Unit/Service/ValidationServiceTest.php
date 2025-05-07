@@ -57,7 +57,7 @@ class ValidationServiceTest extends AbstractUnitTestCase
     {
         $padding = ['top' => 10, 'right' => 0, 'bottom' => 20, 'left' => 10];
 
-        $this->assertTrue($this->validationService->validatePadding($padding));
+        self::assertTrue($this->validationService->validatePadding($padding));
     }
 
     #[Test]
@@ -72,9 +72,9 @@ class ValidationServiceTest extends AbstractUnitTestCase
 
             try {
                 $this->validationService->validatePadding($localPadding);
-                $this->fail();
+                self::fail();
             } catch (Exception $e) {
-                $this->assertInstanceOf(ValidationException::class, $e);
+                self::assertInstanceOf(ValidationException::class, $e);
             }
         }
     }
@@ -91,9 +91,9 @@ class ValidationServiceTest extends AbstractUnitTestCase
 
             try {
                 $this->validationService->validatePadding($localPadding);
-                $this->fail();
+                self::fail();
             } catch (Exception $e) {
-                $this->assertInstanceOf(ValidationException::class, $e);
+                self::assertInstanceOf(ValidationException::class, $e);
             }
         }
     }
@@ -113,8 +113,8 @@ class ValidationServiceTest extends AbstractUnitTestCase
         $colorShort = '#1B3';
         $colorLong = '#8ABC99';
 
-        $this->assertTrue($this->validationService->validateColor($colorShort));
-        $this->assertTrue($this->validationService->validateColor($colorLong));
+        self::assertTrue($this->validationService->validateColor($colorShort));
+        self::assertTrue($this->validationService->validateColor($colorLong));
     }
 
     #[Test]
@@ -125,9 +125,9 @@ class ValidationServiceTest extends AbstractUnitTestCase
         foreach ($invalidColors as $color) {
             try {
                 $this->validationService->validateColor($color);
-                $this->fail();
+                self::fail();
             } catch (Exception $e) {
-                $this->assertInstanceOf(ValidationException::class, $e);
+                self::assertInstanceOf(ValidationException::class, $e);
             }
         }
     }
@@ -138,7 +138,7 @@ class ValidationServiceTest extends AbstractUnitTestCase
         $validWidths = ['10', '0', '1', '100.5'];
 
         foreach ($validWidths as $width) {
-            $this->assertTrue($this->validationService->validateWidth($width));
+            self::assertTrue($this->validationService->validateWidth($width));
         }
     }
 
@@ -150,9 +150,9 @@ class ValidationServiceTest extends AbstractUnitTestCase
         foreach ($invalidWidths as $width) {
             try {
                 $this->validationService->validateWidth($width);
-                $this->fail();
+                self::fail();
             } catch (Exception $e) {
-                $this->assertInstanceOf(ValidationException::class, $e);
+                self::assertInstanceOf(ValidationException::class, $e);
             }
         }
     }
@@ -163,7 +163,7 @@ class ValidationServiceTest extends AbstractUnitTestCase
         $validFontSizes = ['10', '0', '1', '100.5'];
 
         foreach ($validFontSizes as $fontSize) {
-            $this->assertTrue($this->validationService->validateFontSize($fontSize));
+            self::assertTrue($this->validationService->validateFontSize($fontSize));
         }
     }
 
@@ -175,9 +175,9 @@ class ValidationServiceTest extends AbstractUnitTestCase
         foreach ($invalidFontSizes as $fontSize) {
             try {
                 $this->validationService->validateFontSize($fontSize);
-                $this->fail();
+                self::fail();
             } catch (Exception $e) {
-                $this->assertInstanceOf(ValidationException::class, $e);
+                self::assertInstanceOf(ValidationException::class, $e);
             }
         }
     }
@@ -188,7 +188,7 @@ class ValidationServiceTest extends AbstractUnitTestCase
         $fontFamilies = ['robotob', 'courieri', 'timesb'];
 
         foreach ($fontFamilies as $fontFamily) {
-            $this->assertTrue($this->validationService->validateFontFamily($fontFamily));
+            self::assertTrue($this->validationService->validateFontFamily($fontFamily));
         }
     }
 
@@ -200,9 +200,9 @@ class ValidationServiceTest extends AbstractUnitTestCase
         foreach ($invalidFontFamilies as $fontFamily) {
             try {
                 $this->validationService->validateFontFamily($fontFamily);
-                $this->fail();
+                self::fail();
             } catch (Exception $e) {
-                $this->assertInstanceOf(ValidationException::class, $e);
+                self::assertInstanceOf(ValidationException::class, $e);
             }
         }
     }
@@ -213,7 +213,7 @@ class ValidationServiceTest extends AbstractUnitTestCase
         $validParagraphSpacing = ['10', '0', '1', '100.5'];
 
         foreach ($validParagraphSpacing as $paragraphSpacing) {
-            $this->assertTrue($this->validationService->validateParagraphSpacing($paragraphSpacing));
+            self::assertTrue($this->validationService->validateParagraphSpacing($paragraphSpacing));
         }
     }
 
@@ -225,9 +225,9 @@ class ValidationServiceTest extends AbstractUnitTestCase
         foreach ($invalidParagraphSpacing as $paragraphSpacing) {
             try {
                 $this->validationService->validateParagraphSpacing($paragraphSpacing);
-                $this->fail();
+                self::fail();
             } catch (Exception $e) {
-                $this->assertInstanceOf(ValidationException::class, $e);
+                self::assertInstanceOf(ValidationException::class, $e);
             }
         }
     }
@@ -238,7 +238,7 @@ class ValidationServiceTest extends AbstractUnitTestCase
         $validHeight = ['10', '0', '1', '100.5'];
 
         foreach ($validHeight as $height) {
-            $this->assertTrue($this->validationService->validateHeight($height));
+            self::assertTrue($this->validationService->validateHeight($height));
         }
     }
 
@@ -250,9 +250,9 @@ class ValidationServiceTest extends AbstractUnitTestCase
         foreach ($invalidHeight as $height) {
             try {
                 $this->validationService->validateHeight($height);
-                $this->fail();
+                self::fail();
             } catch (Exception $e) {
-                $this->assertInstanceOf(ValidationException::class, $e);
+                self::assertInstanceOf(ValidationException::class, $e);
             }
         }
     }

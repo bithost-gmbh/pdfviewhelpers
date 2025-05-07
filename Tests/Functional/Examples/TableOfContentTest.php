@@ -51,40 +51,40 @@ class TableOfContentTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
 
-        $this->assertCount(5, $pages);
+        self::assertCount(5, $pages);
 
-        $this->assertStringContainsStringIgnoringCase('HTML Table of content', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('html-table-of-content-header', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('html-table-of-content-footer', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('LEVEL 0: Headline page 1', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('LEVEL 0: Headline page 2', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('LEVEL 1: Headline page 2, level 1', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('LEVEL 0: Adding custom styled bookmark for a text', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('LEVEL 0: Adding custom styled ADVANCED bookmark for a text', $pages[0]->getText());
-        $this->assertStringNotContainsStringIgnoringCase('Headline not in table of content', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('HTML Table of content', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('html-table-of-content-header', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('html-table-of-content-footer', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('LEVEL 0: Headline page 1', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('LEVEL 0: Headline page 2', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('LEVEL 1: Headline page 2, level 1', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('LEVEL 0: Adding custom styled bookmark for a text', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('LEVEL 0: Adding custom styled ADVANCED bookmark for a text', $pages[0]->getText());
+        self::assertStringNotContainsStringIgnoringCase('Headline not in table of content', $pages[0]->getText());
 
-        $this->assertStringContainsStringIgnoringCase('Regular table of content', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('regular-table-of-content-header', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('regular-table-of-content-footer', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('Headline page 1', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('Headline page 2', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('Headline page 2, level 1', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('Adding custom styled bookmark for a text', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('Adding custom styled ADVANCED bookmark for a text', $pages[1]->getText());
-        $this->assertStringNotContainsStringIgnoringCase('LEVEL 0', $pages[1]->getText());
-        $this->assertStringNotContainsStringIgnoringCase('Headline not in table of content', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('Regular table of content', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('regular-table-of-content-header', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('regular-table-of-content-footer', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('Headline page 1', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('Headline page 2', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('Headline page 2, level 1', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('Adding custom styled bookmark for a text', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('Adding custom styled ADVANCED bookmark for a text', $pages[1]->getText());
+        self::assertStringNotContainsStringIgnoringCase('LEVEL 0', $pages[1]->getText());
+        self::assertStringNotContainsStringIgnoringCase('Headline not in table of content', $pages[1]->getText());
 
-        $this->assertStringContainsStringIgnoringCase('Headline page 1', $pages[2]->getText());
-        $this->assertStringContainsStringIgnoringCase('General Header', $pages[2]->getText());
-        $this->assertStringContainsStringIgnoringCase('General Footer', $pages[2]->getText());
+        self::assertStringContainsStringIgnoringCase('Headline page 1', $pages[2]->getText());
+        self::assertStringContainsStringIgnoringCase('General Header', $pages[2]->getText());
+        self::assertStringContainsStringIgnoringCase('General Footer', $pages[2]->getText());
 
-        $this->assertStringContainsStringIgnoringCase('Headline page 2', $pages[3]->getText());
-        $this->assertStringContainsStringIgnoringCase('Headline page 2, level 1', $pages[3]->getText());
-        $this->assertStringContainsStringIgnoringCase('Headline page 2, level 2', $pages[3]->getText());
+        self::assertStringContainsStringIgnoringCase('Headline page 2', $pages[3]->getText());
+        self::assertStringContainsStringIgnoringCase('Headline page 2, level 1', $pages[3]->getText());
+        self::assertStringContainsStringIgnoringCase('Headline page 2, level 2', $pages[3]->getText());
 
-        $this->assertStringContainsStringIgnoringCase('Headline not in table of content', $pages[4]->getText());
-        $this->assertStringContainsStringIgnoringCase('Here is some text', $pages[4]->getText());
-        $this->assertStringContainsStringIgnoringCase('Headline not in table of content', $pages[4]->getText());
+        self::assertStringContainsStringIgnoringCase('Headline not in table of content', $pages[4]->getText());
+        self::assertStringContainsStringIgnoringCase('Here is some text', $pages[4]->getText());
+        self::assertStringContainsStringIgnoringCase('Headline not in table of content', $pages[4]->getText());
 
         //Do not validate as TCPDF does not produce valid documents having bookmarks
         //$this->validatePDF($output);

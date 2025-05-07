@@ -33,8 +33,6 @@ namespace Bithost\Pdfviewhelpers\Service;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TCPDF;
-use TCPDF_STATIC;
 
 /**
  * HyphenationService
@@ -43,7 +41,7 @@ use TCPDF_STATIC;
  */
 class HyphenationService implements SingletonInterface
 {
-    protected TCPDF $pdf;
+    protected \TCPDF $pdf;
 
     /**
      * Used to cache loading of hyphen patterns
@@ -60,7 +58,7 @@ class HyphenationService implements SingletonInterface
         }
 
         if (!isset($this->hyphenPatterns[$hyphenFilePath])) {
-            $this->hyphenPatterns[$hyphenFilePath] = TCPDF_STATIC::getHyphenPatternsFromTEX($hyphenFilePath);
+            $this->hyphenPatterns[$hyphenFilePath] = \TCPDF_STATIC::getHyphenPatternsFromTEX($hyphenFilePath);
         }
 
         return $this->pdf->hyphenateText($text, $this->hyphenPatterns[$hyphenFilePath]);
@@ -71,7 +69,7 @@ class HyphenationService implements SingletonInterface
         return GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Resources/Private/Hyphenation/' . $hyphenFile);
     }
 
-    public function setPDF(TCPDF $pdf): void
+    public function setPDF(\TCPDF $pdf): void
     {
         $this->pdf = $pdf;
     }

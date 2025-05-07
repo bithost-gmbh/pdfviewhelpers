@@ -31,8 +31,8 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * DocumentViewHelperTest
@@ -48,7 +48,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $details = $pdf->getDetails();
 
-        $this->assertEquals('TYPO3 EXT:pdfviewhelpers', $details['Creator']);
+        self::assertEquals('TYPO3 EXT:pdfviewhelpers', $details['Creator']);
     }
 
     #[Test]
@@ -61,7 +61,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $details = $pdf->getDetails();
 
-        $this->assertEquals('Some other creator', $details['Creator']);
+        self::assertEquals('Some other creator', $details['Creator']);
     }
 
     #[Test]
@@ -73,10 +73,10 @@ class DocumentViewHelperTest extends AbstractFunctionalTestCase
         );
         $savePath = GeneralUtility::getFileAbsFileName('DocumentOutputDestination.pdf');
 
-        $this->assertEmpty(trim($output));
-        $this->assertFileExists($savePath);
-        $this->assertNotEmpty(file_get_contents($savePath));
-        $this->assertGreaterThan(5000, filesize($savePath));
+        self::assertEmpty(trim($output));
+        self::assertFileExists($savePath);
+        self::assertNotEmpty(file_get_contents($savePath));
+        self::assertGreaterThan(5000, filesize($savePath));
     }
 
     #[Test]
@@ -87,7 +87,7 @@ class DocumentViewHelperTest extends AbstractFunctionalTestCase
             ['outputDestination' => 'S']
         );
 
-        $this->assertNotEmpty(trim($output));
+        self::assertNotEmpty(trim($output));
     }
 
     #[Test]
@@ -98,6 +98,6 @@ class DocumentViewHelperTest extends AbstractFunctionalTestCase
             ['outputDestination' => 'E']
         );
 
-        $this->assertNotEmpty(trim($output));
+        self::assertNotEmpty(trim($output));
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 //============================================================+
 // File name   : est.php
 // Begin       : 2010-10-26
@@ -19,7 +20,6 @@
 
 /**
  * TCPDF language file (contains translated texts).
- * @package com.tecnick.tcpdf
  * @brief TCPDF language file: Estonian
  * @author Nicola Asuni
  * @since 2010-10-26
@@ -28,7 +28,7 @@
 // Estonian
 
 global $l;
-$l = Array();
+$l = [];
 
 // PAGE META DESCRIPTORS --------------------------------------
 

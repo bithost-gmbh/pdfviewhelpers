@@ -35,6 +35,4 @@ namespace Bithost\Pdfviewhelpers\Exception;
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
-class ValidationException extends Exception
-{
-}
+class ValidationException extends Exception {}

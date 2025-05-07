@@ -76,7 +76,7 @@ class LineViewHelper extends AbstractContentElementViewHelper
         }
 
         if (is_numeric($this->arguments['style']['width'])) {
-            $this->arguments['style']['width'] = (float) $this->arguments['style']['width'];
+            $this->arguments['style']['width'] = (float)$this->arguments['style']['width'];
         } else {
             throw new ValidationException('Invalid Line width "' . $this->arguments['style']['width'] . '" provided, must be numeric. ERROR: 1536157900', 1536157900);
         }

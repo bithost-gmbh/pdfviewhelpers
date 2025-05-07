@@ -30,9 +30,9 @@ namespace Bithost\Pdfviewhelpers\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
+use Closure;
 use setasign\Fpdi\PdfParser\StreamReader;
 use setasign\Fpdi\Tcpdf\Fpdi;
-use Closure;
 
 /**
  * BasePDF
@@ -50,24 +50,24 @@ class BasePDF extends Fpdi
     /**
      * Document wide HeaderViewHelper
      */
-    protected ?Closure $documentHeaderClosure = null;
+    protected ?\Closure $documentHeaderClosure = null;
 
     /**
      * Page wide HeaderViewHelper, overwriting Document wide HeaderViewHelper
      */
-    protected ?Closure $pageHeaderClosure = null;
+    protected ?\Closure $pageHeaderClosure = null;
 
     protected string $pageHeaderScope = '';
 
     /**
      * Document wide FooterViewHelper
      */
-    protected ?Closure $documentFooterClosure = null;
+    protected ?\Closure $documentFooterClosure = null;
 
     /**
      * Page wide FooterViewHelper, overwriting Document wide FooterViewHelper
      */
-    protected ?Closure $pageFooterClosure = null;
+    protected ?\Closure $pageFooterClosure = null;
 
     protected string $pageFooterScope = '';
 
@@ -82,9 +82,9 @@ class BasePDF extends Fpdi
     protected $currentPageFormat = '';
     protected string $currentTemplate = '';
 
-    const SCOPE_THIS_PAGE = 'thisPage';
-    const SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS = 'thisPageIncludingPageBreaks';
-    const SCOPE_DOCUMENT = 'document';
+    public const SCOPE_THIS_PAGE = 'thisPage';
+    public const SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS = 'thisPageIncludingPageBreaks';
+    public const SCOPE_DOCUMENT = 'document';
 
     /**
      * Storing the path of custom fonts to use them on setFont
@@ -92,9 +92,9 @@ class BasePDF extends Fpdi
     protected array $customFontFilePaths = [];
 
     /**
-     * @var null|string|resource|StreamReader $currentSourceFile
+     * @var string|resource|StreamReader|null $currentSourceFile
      */
-    protected $currentSourceFile = null;
+    protected $currentSourceFile;
 
     /**
      * @inheritdoc
@@ -131,25 +131,21 @@ class BasePDF extends Fpdi
     /**
      * Use this method uf you extend BasePDF and want to render a header by accessing the TCPDF API directly
      */
-    protected function basePdfHeader(): void
-    {
-    }
+    protected function basePdfHeader(): void {}
 
     /**
      * Use this method uf you extend BasePDF and want to render a footer by accessing the TCPDF API directly
      */
-    protected function basePdfFooter(): void
-    {
-    }
+    protected function basePdfFooter(): void {}
 
     /**
      * @inheritdoc
      */
     public function Header() // phpcs:ignore
     {
-        if ($this->pageHeaderClosure instanceof Closure) {
+        if ($this->pageHeaderClosure instanceof \Closure) {
             $this->pageHeaderClosure->__invoke();
-        } else if ($this->documentHeaderClosure instanceof Closure) {
+        } elseif ($this->documentHeaderClosure instanceof \Closure) {
             $this->documentHeaderClosure->__invoke();
         }
 
@@ -165,9 +161,9 @@ class BasePDF extends Fpdi
         $initialPageBreakTrigger = $this->PageBreakTrigger;
         $this->PageBreakTrigger = $this->h;
 
-        if ($this->pageFooterClosure instanceof Closure) {
+        if ($this->pageFooterClosure instanceof \Closure) {
             $this->pageFooterClosure->__invoke();
-        } else if ($this->documentFooterClosure instanceof Closure) {
+        } elseif ($this->documentFooterClosure instanceof \Closure) {
             $this->documentFooterClosure->__invoke();
         }
 
@@ -213,21 +209,21 @@ class BasePDF extends Fpdi
         $this->importTemplateOnThisPage = $importTemplateOnThisPage;
     }
 
-    public function setHeaderClosure(?Closure $closure = null, string $scope = self::SCOPE_DOCUMENT): void
+    public function setHeaderClosure(?\Closure $closure = null, string $scope = self::SCOPE_DOCUMENT): void
     {
         if ($scope === self::SCOPE_DOCUMENT) {
             $this->documentHeaderClosure = $closure;
-        } else if (in_array($scope, [self::SCOPE_THIS_PAGE, self::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS])) {
+        } elseif (in_array($scope, [self::SCOPE_THIS_PAGE, self::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS])) {
             $this->pageHeaderScope = $scope;
             $this->pageHeaderClosure = $closure;
         }
     }
 
-    public function setFooterClosure(?Closure $closure = null, string $scope = self::SCOPE_DOCUMENT): void
+    public function setFooterClosure(?\Closure $closure = null, string $scope = self::SCOPE_DOCUMENT): void
     {
         if ($scope === self::SCOPE_DOCUMENT) {
             $this->documentFooterClosure = $closure;
-        } else if (in_array($scope, [self::SCOPE_THIS_PAGE, self::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS])) {
+        } elseif (in_array($scope, [self::SCOPE_THIS_PAGE, self::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS])) {
             $this->pageFooterScope = $scope;
             $this->pageFooterClosure = $closure;
         }
@@ -271,7 +267,7 @@ class BasePDF extends Fpdi
      *
      * @inheritdoc
      */
-    public function AddFont($family, $style='', $fontfile='', $subset='default') // phpcs:ignore
+    public function AddFont($family, $style = '', $fontfile = '', $subset = 'default') // phpcs:ignore
     {
         $familyWithStyle = $family . strtolower($style);
 
@@ -320,14 +316,14 @@ class BasePDF extends Fpdi
         $pageWidth = $this->getPageWidth();
         $pageMargins = $this->getMargins();
 
-        return (float) $pageWidth - $pageMargins['left'] - $pageMargins['right'];
+        return (float)$pageWidth - $pageMargins['left'] - $pageMargins['right'];
     }
 
     public function getScaledInnerPageHeight(): float
     {
         $margins = $this->getMargins();
 
-        return (float) $this->getScaledPageHeight() - $margins['top'] - $margins['bottom'];
+        return (float)$this->getScaledPageHeight() - $margins['top'] - $margins['bottom'];
     }
 
     public function getScaledPageHeight(?int $page = null): float
@@ -336,7 +332,7 @@ class BasePDF extends Fpdi
             $page = $this->getPage();
         }
 
-        return (float) $this->getPageHeight($page) / $this->getScaleFactor();
+        return (float)$this->getPageHeight($page) / $this->getScaleFactor();
     }
 
     public function getCurrentPageOrientation(): string

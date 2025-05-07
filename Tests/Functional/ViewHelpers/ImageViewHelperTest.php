@@ -32,8 +32,8 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional\ViewHelpers;
 
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Tests\Functional\AbstractFunctionalTestCase;
-use TYPO3\CMS\Core\Resource\FileInterface;
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Resource\FileInterface;
 
 /**
  * ImageViewHelperTest
@@ -53,7 +53,7 @@ class ImageViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $images = $pdf->getObjectsByType('XObject', 'Image');
 
-        $this->assertCount(1, $images);
+        self::assertCount(1, $images);
     }
 
     #[Test]
@@ -71,7 +71,7 @@ class ImageViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $images = $pdf->getObjectsByType('XObject', 'Image');
 
-        $this->assertCount(1, $images);
+        self::assertCount(1, $images);
     }
 
     #[Test]

@@ -40,8 +40,22 @@ use PHPUnit\Framework\Attributes\Test;
  */
 class AvoidPageBreakInsideCustomFontViewHelperTest extends AbstractFunctionalTestCase
 {
-    protected array $typoScriptFiles = [
-        'EXT:pdfviewhelpers/Tests/Functional/Fixtures/AvoidPageBreakInsideViewHelper/CustomFont.typoscript',
+    protected array $overrideTypoScript = [
+        'plugin.' => [
+            'tx_pdfviewhelpers.' => [
+                'settings.' => [
+                    'config.' => [
+                        'fonts.' => [
+                            'addTTFFont.' => [
+                                'opensans.' => [
+                                    'path' => 'EXT:pdfviewhelpers/Resources/Public/Examples/FullFeatureShowCase/OpenSans.ttf',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ];
 
     #[Test]
@@ -58,8 +72,8 @@ class AvoidPageBreakInsideCustomFontViewHelperTest extends AbstractFunctionalTes
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
 
-        $this->assertCount(1, $pages);
-        $this->assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('text2', $pages[0]->getText());
+        self::assertCount(1, $pages);
+        self::assertStringContainsStringIgnoringCase('text1', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('text2', $pages[0]->getText());
     }
 }

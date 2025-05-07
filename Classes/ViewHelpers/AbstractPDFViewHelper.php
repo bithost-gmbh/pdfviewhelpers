@@ -34,12 +34,12 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use Bithost\Pdfviewhelpers\Model\BasePDF;
 use Bithost\Pdfviewhelpers\MultiColumn\ContextStack;
-use Bithost\Pdfviewhelpers\Service\HyphenationService;
 use Bithost\Pdfviewhelpers\Service\ConversionService;
+use Bithost\Pdfviewhelpers\Service\HyphenationService;
 use Bithost\Pdfviewhelpers\Service\ValidationService;
-use ReflectionClass;
-use TCPDF;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -52,26 +52,27 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     /**
      * Do not escape output of ViewHelpers
      *
-     * @var boolean
+     * @var bool
      */
     protected $escapeChildren = false;
 
     /**
      * Do not escape output of ViewHelpers
      *
-     * @var boolean
+     * @var bool
      */
     protected $escapeOutput = false;
 
     protected array $settings = [];
-    protected ConfigurationManagerInterface $configurationManager;
+
+    protected TypoScriptService $typoScriptService;
     protected ValidationService $validationService;
     protected HyphenationService $hyphenationService;
     protected ConversionService $conversionService;
 
-    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
+    public function injectTypoScriptService(TypoScriptService $typoScriptService): void
     {
-        $this->configurationManager = $configurationManager;
+        $this->typoScriptService = $typoScriptService;
     }
 
     public function injectValidationService(ValidationService $validationService): void
@@ -90,13 +91,19 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
-    public function initializeObject(): void
+    public function setRenderingContext(RenderingContextInterface $renderingContext): void
     {
-        $this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'Pdfviewhelpers', 'tx_pdfviewhelpers');
+        parent::setRenderingContext($renderingContext);
 
-        if (!is_array($this->settings) || !isset($this->settings['staticTypoScriptSetupIncluded'])) {
+        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        $fullTypoScript = $request->getAttribute('frontend.typoscript')->getSetupArray();
+        if (isset($fullTypoScript['plugin.']['tx_pdfviewhelpers.']['settings.']) && is_array($fullTypoScript['plugin.']['tx_pdfviewhelpers.']['settings.'])) {
+            $this->settings = $this->typoScriptService->convertTypoScriptArrayToPlainArray($fullTypoScript['plugin.']['tx_pdfviewhelpers.']['settings.']);
+        }
+
+        if (!isset($this->settings['staticTypoScriptSetupIncluded'])) {
             throw new Exception('No pdfviewhelpers settings found. Please make sure you have included the static TypoScript template. ERROR: 1470982083', 1470982083);
         }
 
@@ -116,9 +123,9 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     {
         if ($this->viewHelperVariableContainer->exists('DocumentViewHelper', 'pdf')) {
             return $this->viewHelperVariableContainer->get('DocumentViewHelper', 'pdf');
-        } else {
-            throw new Exception('No PDF Object found. Please use the DocumentViewHelper first in your template! ERROR: 1363682433', 1363682433);
         }
+        throw new Exception('No PDF Object found. Please use the DocumentViewHelper first in your template! ERROR: 1363682433', 1363682433);
+
     }
 
     /**
@@ -153,9 +160,9 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
             $contextStack = $this->viewHelperVariableContainer->get('MultiColumnViewHelper', 'contextStack');
 
             return $contextStack->pop();
-        } else {
-            return null;
         }
+        return null;
+
     }
 
     protected function getCurrentMultiColumnContext(): ?array
@@ -165,9 +172,9 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
             $top = $contextStack->top();
 
             return is_array($top) ? $top : null;
-        } else {
-            return null;
         }
+        return null;
+
     }
 
     protected function setCurrentMultiColumnContext(array $multiColumnContext): void
@@ -183,14 +190,14 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     {
         if ($this->viewHelperVariableContainer->exists('DocumentViewHelper', 'hyphenFile')) {
             return $this->viewHelperVariableContainer->get('DocumentViewHelper', 'hyphenFile');
-        } else {
-            throw new ValidationException('No hyphenFile configured, make sure to configure a hyphenFile for the DocumentViewHelper. ERROR: 1536993844', 1536993844);
         }
+        throw new ValidationException('No hyphenFile configured, make sure to configure a hyphenFile for the DocumentViewHelper. ERROR: 1536993844', 1536993844);
+
     }
 
     protected function getTCPDFInstallPath(?string $path): string
     {
-        $reflector = new ReflectionClass(TCPDF::class);
+        $reflector = new \ReflectionClass(\TCPDF::class);
         $pathParts = pathinfo($reflector->getFileName());
         $installFolder = $pathParts['dirname'];
 

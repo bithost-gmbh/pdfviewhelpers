@@ -47,16 +47,16 @@ class PageViewHelperTest extends AbstractFunctionalTestCase
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
 
-        $this->assertEquals(3, count($pages));
-        $this->assertStringContainsStringIgnoringCase('Page 1', $pages[0]->getText());
-        $this->assertStringNotContainsStringIgnoringCase('Page 2', $pages[0]->getText());
-        $this->assertStringNotContainsStringIgnoringCase('Page 3', $pages[0]->getText());
-        $this->assertStringContainsStringIgnoringCase('Page 2', $pages[1]->getText());
-        $this->assertStringNotContainsStringIgnoringCase('Page 1', $pages[1]->getText());
-        $this->assertStringNotContainsStringIgnoringCase('Page 3', $pages[1]->getText());
-        $this->assertStringContainsStringIgnoringCase('Page 3', $pages[2]->getText());
-        $this->assertStringNotContainsStringIgnoringCase('Page 1', $pages[2]->getText());
-        $this->assertStringNotContainsStringIgnoringCase('Page 2', $pages[2]->getText());
+        self::assertEquals(3, count($pages));
+        self::assertStringContainsStringIgnoringCase('Page 1', $pages[0]->getText());
+        self::assertStringNotContainsStringIgnoringCase('Page 2', $pages[0]->getText());
+        self::assertStringNotContainsStringIgnoringCase('Page 3', $pages[0]->getText());
+        self::assertStringContainsStringIgnoringCase('Page 2', $pages[1]->getText());
+        self::assertStringNotContainsStringIgnoringCase('Page 1', $pages[1]->getText());
+        self::assertStringNotContainsStringIgnoringCase('Page 3', $pages[1]->getText());
+        self::assertStringContainsStringIgnoringCase('Page 3', $pages[2]->getText());
+        self::assertStringNotContainsStringIgnoringCase('Page 1', $pages[2]->getText());
+        self::assertStringNotContainsStringIgnoringCase('Page 2', $pages[2]->getText());
     }
 
     #[Test]
@@ -69,7 +69,7 @@ class PageViewHelperTest extends AbstractFunctionalTestCase
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertEquals(2, count($pdf->getPages()));
+        self::assertEquals(2, count($pdf->getPages()));
     }
 
     #[Test]
@@ -82,6 +82,6 @@ class PageViewHelperTest extends AbstractFunctionalTestCase
         );
         $pdf = $this->parseContent($output);
 
-        $this->assertEquals(1, count($pdf->getPages()));
+        self::assertEquals(1, count($pdf->getPages()));
     }
 }
