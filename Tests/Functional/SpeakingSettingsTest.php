@@ -70,8 +70,6 @@ class SpeakingSettingsTest extends AbstractFunctionalTestCase
     #[Test]
     public function testSetupSettings(): void
     {
-        self::markTestSkipped('Changing settings in TS not working because of AbstractViewHelper::$argumentDefinitionCache.');
-
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('SpeakingSettings/TypoScript.html'));
         $pdf = $this->parseContent($output);
         $text = $pdf->getText();
