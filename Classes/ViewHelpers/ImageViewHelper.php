@@ -33,7 +33,9 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
 use Bithost\Pdfviewhelpers\Exception\Exception;
 use TYPO3\CMS\Core\Imaging\ImageManipulation\CropVariantCollection;
 use TYPO3\CMS\Core\Resource\FileInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Service\ImageService;
+use UnexpectedValueException;
 
 /**
  * ImageViewHelper
@@ -86,10 +88,22 @@ class ImageViewHelper extends AbstractContentElementViewHelper
         $this->initializeMultiColumnSupport();
 
         $imageFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['src']);
-        $processedImage = $this->processImage($imageFile, $this->arguments['processingInstructions']);
+        if ($imageFile) {
+            $processedImage = $this->processImage($imageFile, $this->arguments['processingInstructions']);
 
-        $src = '@' . $processedImage->getContents();
-        $extension = $processedImage->getExtension();
+            $src = $processedImage->getContents();
+            $extension = $processedImage->getExtension();
+        } else {
+            $imageFileName = GeneralUtility::getFileAbsFileName($this->arguments['src']);
+            if ($imageFileName && file_exists($imageFileName)) {
+                $src = file_get_contents($imageFileName);
+                $extension = pathinfo($imageFileName, PATHINFO_EXTENSION);
+            } else {
+                throw new UnexpectedValueException('Provided image source can\'t be loaded: ' . $this->arguments['src'], 1729853325);
+            }
+        }
+        // prepend @ symbol to tell PDF renderer this is inline content
+        $src = '@' . $src;
 
         $multiColumnContext = $this->getCurrentMultiColumnContext();
         $isInAColumn = is_array($multiColumnContext) && ($multiColumnContext['isInAColumn'] ?? false);
