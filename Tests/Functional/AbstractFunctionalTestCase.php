@@ -51,7 +51,9 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 abstract class AbstractFunctionalTestCase extends FunctionalTestCase
 {
-    protected array $testExtensionsToLoad = ['typo3conf/ext/pdfviewhelpers'];
+    protected array $testExtensionsToLoad = [
+        'bithost-gmbh/pdfviewhelpers',
+    ];
 
     /**
      * 150 words 890 characters
