@@ -86,6 +86,7 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         $this->initializeMultiColumnSupport();
 
         $initialMargins = $this->getPDF()->getMargins();
+        $initialPosX = $this->getPDF()->getX();
         $marginLeft = $this->arguments['posX'] + $this->arguments['padding']['left'];
 
         if (is_null($this->arguments['width'])) {
@@ -134,6 +135,7 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         $this->getPDF()->writeHTML($htmlStyle . $html, true, false, true, false, '');
 
         $this->getPDF()->setY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
+        $this->getPDF()->setX($initialPosX);
         $this->getPDF()->setMargins($initialMargins['left'], $initialMargins['top'], $initialMargins['right']);
     }
 }
