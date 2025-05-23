@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 3.1.1 - May 23, 2025
+
+- Fixes missing dependencies in TER release
+
 ## 3.1.0 - May 15, 2025
 
 - Adds support for TYPO3 13 LTS
