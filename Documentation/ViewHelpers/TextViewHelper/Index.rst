@@ -13,12 +13,14 @@ Rendering text using the settings for text.
 It is possible to easily define different default styles and apply them using the ``type`` attribute, see chapter :ref:`Text Types <text-types>`.
 
 **Basic Usage**
+
 ::
 
 	<pdf:text>Title</pdf:text>
 	<pdf:text text="Alternative syntax"/>
 
 **Advanced Usage**
+
 ::
 
 	<pdf:text

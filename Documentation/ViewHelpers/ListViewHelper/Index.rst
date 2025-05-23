@@ -13,12 +13,14 @@ Rendering a list given as a one dimensional array.
 It is possible to easily define different default styles and apply them using the ``type`` attribute, see chapter :ref:`Text Types <text-types>`.
 
 **Basic Usage**
+
 ::
 
 	<pdf:list listElements="{0: 'Full Stack Application Development', 1: 'Modernizing, Refactoring and Migrating Applications', 2: 'Active Collaboration in an existing Team', 3: 'Consulting and Support for IT Projects'}"/>
 	<pdf:list listElements="{someArrayProperty}"/>
 
 **Advanced Usage**
+
 ::
 
 	<pdf:list

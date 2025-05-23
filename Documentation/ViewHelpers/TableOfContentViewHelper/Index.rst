@@ -19,6 +19,7 @@ Please see the examples section for an extended :ref:`example of the table of co
 Although most PDF viewers are still able to render the document you might run into validity troubles using these ViewHelpers.
 
 **Regular Mode**
+
 ::
 
 	<pdf:page tableOfContentPage="1">

@@ -14,6 +14,7 @@ It is possible to include a css style tag and also inline styles. This ViewHelpe
 Please note that the use of CSS within a style tag can lead to parsing issues with Fluid, use an external style sheet in that case.
 
 **Basic Usage**
+
 ::
 
 	<pdf:html>
@@ -22,6 +23,7 @@ Please note that the use of CSS within a style tag can lead to parsing issues wi
 	</pdf:html>
 
 **Advanced Usage**
+
 ::
 
 	<pdf:html styleSheet="fileadmin/template/pdf_styles.css" autoHyphenation="1" padding="{bottom: 5}" listIndentWidth="0">

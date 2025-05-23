@@ -15,6 +15,7 @@ It is however possible to specify the ``width`` of a column with an absolute or 
 
 
 **Basic Usage**
+
 ::
 
 	<pdf:multiColumn>
@@ -30,6 +31,7 @@ It is however possible to specify the ``width`` of a column with an absolute or 
 	</pdf:multiColumn>
 
 **Advanced Usage**
+
 ::
 
 	<pdf:multiColumn>

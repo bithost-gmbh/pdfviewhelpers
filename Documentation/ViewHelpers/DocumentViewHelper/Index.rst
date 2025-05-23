@@ -12,6 +12,7 @@ This ViewHelper must be the first to be used in your template and wrap all the o
 generating the document.
 
 **Basic Usage**
+
 ::
 
 	<pdf:document>
@@ -19,6 +20,7 @@ generating the document.
 	</pdf:document>
 
 **Advanced Usage**
+
 ::
 
 	<pdf:document

@@ -13,11 +13,13 @@ It is however also possible to specify start and end point of the line explicitl
 Please see https://tcpdf.org/examples/example_012/ to find out what values can be used on the style attribute.
 
 **Basic Usage**
+
 ::
 
 	<pdf:graphics.line />
 
 **Advanced Usage**
+
 ::
 
 	<pdf:graphics.line

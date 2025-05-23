@@ -15,12 +15,14 @@ Text rendered with a ``HeadlineViewHelper`` can be added to the table of content
 Although most PDF viewers are still able to render the document you might run into validity troubles using these ViewHelpers.
 
 **Basic Usage**
+
 ::
 
 	 <pdf:bookmark text="Adding custom bookmark" />
 	 <pdf:bookmark>Adding custom bookmark</pdf:bookmark>
 
 **Advanced Usage**
+
 ::
 
 	<pdf:bookmark text="Adding custom bookmark" level="1" fontStyle="bold" color="#ff642c" />

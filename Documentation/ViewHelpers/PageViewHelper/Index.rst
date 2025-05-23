@@ -11,6 +11,7 @@ PageViewHelper
 This ViewHelper must be placed right within a document ViewHelper. It can be used to manually add new pages.
 
 **Basic Usage**
+
 ::
 
 	<pdf:document>
@@ -23,6 +24,7 @@ This ViewHelper must be placed right within a document ViewHelper. It can be use
 	</pdf:document>
 
 **Advanced Usage**
+
 ::
 
 	<pdf:document>

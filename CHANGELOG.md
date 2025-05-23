@@ -3,6 +3,7 @@
 ## 3.1.1 - May 23, 2025
 
 - Fixes missing dependencies in TER release
+- Fixes template rendering in docs
 
 ## 3.1.0 - May 15, 2025
 

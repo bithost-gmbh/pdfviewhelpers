@@ -24,6 +24,7 @@ ViewHelpers that are defined within a ``PageViewHelper`` may overwrite ViewHelpe
 for an extended :ref:`example of the header and footer usage <headerandfooter>`.
 
 **Document wide header and footer**
+
 ::
 
 	<pdf:document>
@@ -40,6 +41,7 @@ for an extended :ref:`example of the header and footer usage <headerandfooter>`.
 	</pdf:document>
 
 **Page wide header and footer**
+
 ::
 
 	<pdf:document>

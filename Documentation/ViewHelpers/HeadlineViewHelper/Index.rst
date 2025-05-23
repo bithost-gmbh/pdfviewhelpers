@@ -13,12 +13,14 @@ It is possible to easily define different default styles and apply them using th
 Text rendered with a ``HeadlineViewHelper`` can be added to the table of content automatically by setting ``plugin.tx_pdfviewhelpers.settings.headline.addToTableOfContent = 1``.
 
 **Basic Usage**
+
 ::
 
 	<pdf:headline>Title</pdf:headline>
 	<pdf:headline text="Alternative syntax"/>
 
 **Advanced Usage**
+
 ::
 
 	<pdf:headline
