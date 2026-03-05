@@ -39,6 +39,8 @@ use Bithost\Pdfviewhelpers\Exception\Exception;
  */
 abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
 {
+    protected $escapeChildren = false;
+
     /**
      * @inheritDoc
      */

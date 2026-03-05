@@ -49,18 +49,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 abstract class AbstractPDFViewHelper extends AbstractViewHelper
 {
-    /**
-     * Do not escape output of ViewHelpers
-     *
-     * @var boolean
-     */
-    protected $escapeChildren = false;
-
-    /**
-     * Do not escape output of ViewHelpers
-     *
-     * @var boolean
-     */
+    protected $escapeChildren = true;
     protected $escapeOutput = false;
 
     protected array $settings = [];

@@ -41,6 +41,8 @@ use UnexpectedValueException;
  */
 class HtmlViewHelper extends AbstractContentElementViewHelper
 {
+    protected $escapeChildren = true;
+
     /**
      * @inheritDoc
      */

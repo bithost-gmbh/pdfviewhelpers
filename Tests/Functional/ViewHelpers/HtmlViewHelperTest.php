@@ -70,4 +70,16 @@ class HtmlViewHelperTest extends AbstractFunctionalTestCase
             ['html' => '', 'styleSheet' => $this->getFixtureExtPath('HtmlViewHelper/NonExistingPath.css')]
         );
     }
+
+    #[Test]
+    public function textIsEscapedCorrectly(): void
+    {
+        $output = $this->renderFluidTemplate(
+            $this->getFixtureExtPath('HtmlViewHelper/Html2.html'),
+            ['text' => '0 < 1']
+        );
+        $pdf = $this->parseContent($output);
+
+        $this->assertStringContainsStringIgnoringCase('0 < 1', $pdf->getText());
+    }
 }
