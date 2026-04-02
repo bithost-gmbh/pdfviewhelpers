@@ -1,9 +1,13 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## Not yet released
+
+- Fixes template rendering in docs
+- Fixes escaping of children in HtmlViewHelper, [#261](https://github.com/bithost-gmbh/pdfviewhelpers/issues/261) (Thanks [@liayn](https://github.com/liayn))
+
 ## 3.1.1 - May 23, 2025
 
 - Fixes missing dependencies in TER release
-- Fixes template rendering in docs
 
 ## 3.1.0 - May 15, 2025
 

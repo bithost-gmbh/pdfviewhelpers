@@ -36,5 +36,7 @@ Please note that the use of CSS within a style tag can lead to parsing issues wi
 		<h1>Some html headline</h1>
 		<p style="color: #3a718a;">Lorem ipsum</p>
 
-		{someAdditionalRichText}
+		{someText}
+
+		<f:format.html>{someRichText}</f:format.html>
 	</pdf:html>
