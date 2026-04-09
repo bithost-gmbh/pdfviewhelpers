@@ -1,4 +1,4 @@
-[request && traverse(request.getQueryParams(), 'type') == 28032013]
+[request && request.getPageArguments()?.getPageType() == 28032013]
 	pageNewsPDF = PAGE
 	pageNewsPDF {
 		typeNum = 28032013
