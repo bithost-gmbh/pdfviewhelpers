@@ -43,7 +43,7 @@ class BookmarkViewHelper extends AbstractPDFViewHelper
     /**
      * @inheritDoc
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -58,7 +58,7 @@ class BookmarkViewHelper extends AbstractPDFViewHelper
      *
      * @throws ValidationException
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 

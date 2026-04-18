@@ -33,12 +33,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class AttachPdfViewHelper extends AbstractPDFViewHelper
 {
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('path', 'string', 'Path to the PDF', true);
     }
 
-    public function render()
+    public function render(): void
     {
         $path = GeneralUtility::getFileAbsFileName($this->arguments['path']);
 

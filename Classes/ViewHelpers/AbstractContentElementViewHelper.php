@@ -44,7 +44,7 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
     /**
      * @inheritDoc
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -59,7 +59,7 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
      *
      * @throws Exception
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 

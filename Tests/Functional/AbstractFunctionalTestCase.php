@@ -30,7 +30,6 @@ namespace Bithost\Pdfviewhelpers\Tests\Functional;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\View\ViewFactoryData;
 use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager;
@@ -38,7 +37,6 @@ use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use Smalot\PdfParser\Document;
 use Smalot\PdfParser\Parser;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\TypoScript\AST\Node\RootNode;
@@ -82,34 +80,27 @@ abstract class AbstractFunctionalTestCase extends FunctionalTestCase
 
         /** @var BackendConfigurationManager $backendConfManager */
         $backendConfigurationManager  = $this->get(BackendConfigurationManager::class);
-        $backendTypoScriptSetup = $backendConfigurationManager->getTypoScriptSetup(new InternalRequest());
+        $backendTypoScriptSetup = $backendConfigurationManager->getTypoScriptSetup((new InternalRequest())->withPageId(1)->withQueryParams(['id' => 1]));
 
         $frontendTypoScript = new FrontendTypoScript(new RootNode(), [], [], []);
         $frontendTypoScript->setSetupArray($backendTypoScriptSetup);
 
         $GLOBALS['TYPO3_REQUEST'] = (new InternalRequest())
             ->withPageId(1)
+            ->withQueryParams(['id' => 1])
             ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE)
             ->withAttribute('frontend.typoscript', $frontendTypoScript);
     }
 
     protected function renderFluidTemplate(string $templatePath, array $variables = []): string
     {
-        if (GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion() < 13) {
-            /** @var StandaloneView $view */
-            $view = GeneralUtility::makeInstance(StandaloneView::class);
-
-            $view->setFormat('html');
-            $view->setTemplatePathAndFilename($templatePath);
-        } else {
-            /** @var ViewFactoryInterface $viewFactory */
-            $viewFactory = GeneralUtility::makeInstance(ViewFactoryInterface::class);
-            $viewFactoryData = new ViewFactoryData(
-                templateRootPaths: [$this->getFixtureExtPath('')],
-                templatePathAndFilename: $templatePath,
-            );
-            $view = $viewFactory->create($viewFactoryData);
-        }
+        /** @var ViewFactoryInterface $viewFactory */
+        $viewFactory = GeneralUtility::makeInstance(ViewFactoryInterface::class);
+        $viewFactoryData = new ViewFactoryData(
+            templateRootPaths: [$this->getFixtureExtPath('')],
+            templatePathAndFilename: $templatePath,
+        );
+        $view = $viewFactory->create($viewFactoryData);
 
         $view->assignMultiple($variables);
 

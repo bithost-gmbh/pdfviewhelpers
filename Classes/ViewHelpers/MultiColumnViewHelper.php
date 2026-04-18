@@ -43,16 +43,11 @@ use TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\ViewHelperNode;
 class MultiColumnViewHelper extends AbstractPDFViewHelper
 {
     /**
-     * @inheritdoc
-     */
-    protected $childNodes = [];
-
-    /**
      * @inheritDoc
      *
      * @throws Exception
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 
@@ -70,7 +65,7 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper
         $multiColumnContext['currentPosX'] = $this->getPDF()->GetX();
         $multiColumnContext['startingPage'] = $this->getPDF()->getPage();
 
-        foreach ($this->childNodes as $childNode) {
+        foreach ($this->viewHelperNode->getChildNodes() as $childNode) {
             if (
                 $childNode instanceof ViewHelperNode
                 && $childNode->getViewHelperClassName() === 'Bithost\Pdfviewhelpers\ViewHelpers\ColumnViewHelper'
@@ -123,14 +118,6 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @inheritDoc
-     */
-    public function setChildNodes(array $childNodes)
-    {
-        $this->childNodes = $childNodes;
-    }
-
-    /**
      * Disable compilation of templates using MultiColumnViewHelper because it is currently not possible
      * to access child nodes within a compiled template.
      *
@@ -142,10 +129,8 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper
      *
      * @return string
      */
-    public function compile($argumentsName, $closureName, &$initializationPhpCode, ViewHelperNode $node, TemplateCompiler $compiler)
+    public function compile($argumentsName, $closureName, &$initializationPhpCode, ViewHelperNode $node, TemplateCompiler $compiler): string
     {
         $compiler->disable();
-
-        return '\'\'';
     }
 }
