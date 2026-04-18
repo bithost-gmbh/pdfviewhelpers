@@ -46,7 +46,7 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
     /**
      * @inheritDoc
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -56,14 +56,14 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
         $this->registerArgument('listIndentWidth', 'float', 'Set custom width for list indentation.', false, $this->settings['html']['listIndentWidth']);
 
         if (strlen((string) $this->settings['html']['autoHyphenation'])) {
-            $this->overrideArgument('autoHyphenation', 'boolean', '', false, (bool) $this->settings['html']['autoHyphenation']);
+            $this->registerArgument('autoHyphenation', 'boolean', '', false, (bool) $this->settings['html']['autoHyphenation']);
         }
     }
 
     /**
      * @inheritDoc
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 

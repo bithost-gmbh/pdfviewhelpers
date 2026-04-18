@@ -43,7 +43,7 @@ class PageViewHelper extends AbstractPDFViewHelper
     /**
      * @inheritDoc
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -62,7 +62,7 @@ class PageViewHelper extends AbstractPDFViewHelper
      *
      * @throws Exception
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 

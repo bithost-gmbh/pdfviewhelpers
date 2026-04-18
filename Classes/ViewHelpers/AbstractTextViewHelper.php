@@ -62,7 +62,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
     /**
      * @inheritDoc
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -70,7 +70,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         $this->registerArgument('removeDoubleWhitespace', 'boolean', 'If true double whitespaces are removed.', false, null);
         $this->registerArgument('color', 'string', 'The color in HEX format: #000 or #000000.', false, null);
         $this->registerArgument('fontFamily', 'string', 'The font family name.', false, null);
-        $this->registerArgument('fontSize', 'integer', 'The font size.', false, null);
+        $this->registerArgument('fontSize', 'float', 'The font size.', false, null);
         $this->registerArgument('fontStyle', 'string', 'The font style: regular, bold, italic or underline', false, null);
         $this->registerArgument('lineHeight', 'float', 'The relative line height.', false, null);
         $this->registerArgument('characterSpacing', 'float', 'The spacing between individual characters.', false, null);
@@ -88,7 +88,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
      *
      * @throws Exception
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 

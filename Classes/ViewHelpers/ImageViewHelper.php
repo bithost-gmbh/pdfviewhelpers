@@ -54,7 +54,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
     /**
      * @inheritDoc
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -71,7 +71,7 @@ class ImageViewHelper extends AbstractContentElementViewHelper
      *
      * @throws Exception
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 

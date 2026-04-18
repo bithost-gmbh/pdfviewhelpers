@@ -42,7 +42,7 @@ class TableOfContentViewHelper extends AbstractPDFViewHelper
     /**
      * @inheritDoc
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -52,7 +52,7 @@ class TableOfContentViewHelper extends AbstractPDFViewHelper
         $this->registerArgument('name', 'string', 'The name used for the table of content bookmark.', false, $this->settings['tableOfContent']['name']);
         $this->registerArgument('htmlMode', 'boolean', 'If true HTML mode is used.', false, $this->settings['tableOfContent']['htmlMode']);
         $this->registerArgument('fontFamily', 'string', 'The font family for the entries.', false, $this->settings['tableOfContent']['fontFamily']);
-        $this->registerArgument('fontSize', 'integer', 'The font size for the entries.', false, $this->settings['tableOfContent']['fontSize']);
+        $this->registerArgument('fontSize', 'float', 'The font size for the entries.', false, $this->settings['tableOfContent']['fontSize']);
         $this->registerArgument('lineHeight', 'float', 'The line height for the entries.', false, $this->settings['tableOfContent']['lineHeight']);
         $this->registerArgument('characterSpacing', 'float', 'The character spacing for the entries.', false, $this->settings['tableOfContent']['characterSpacing']);
         $this->registerArgument('padding', 'array', 'The padding for the entries.', false, []);
@@ -61,7 +61,7 @@ class TableOfContentViewHelper extends AbstractPDFViewHelper
     /**
      * @inheritDoc
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 

@@ -44,15 +44,15 @@ class LineViewHelper extends AbstractContentElementViewHelper
     /**
      * @inheritDoc
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
         $this->registerArgument('style', 'array', '', false, []);
-        $this->registerArgument('fromX', 'integer', '', false, null);
-        $this->registerArgument('fromY', 'integer', '', false, null);
-        $this->registerArgument('toX', 'integer', '', false, null);
-        $this->registerArgument('toY', 'integer', '', false, null);
+        $this->registerArgument('fromX', 'float', '', false, null);
+        $this->registerArgument('fromY', 'float', '', false, null);
+        $this->registerArgument('toX', 'float', '', false, null);
+        $this->registerArgument('toY', 'float', '', false, null);
         $this->registerArgument('padding', 'array', '', false, []);
     }
 
@@ -61,7 +61,7 @@ class LineViewHelper extends AbstractContentElementViewHelper
      *
      * @throws Exception
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 

@@ -40,7 +40,7 @@ class HtmlBookmarkTemplateViewHelper extends AbstractPDFViewHelper
     /**
      * @inheritDoc
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 

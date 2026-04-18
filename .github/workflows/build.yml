@@ -12,10 +12,10 @@ jobs:
       fail-fast: false
       matrix:
         env:
-          - { TYPO3_VERSION: 12, PHP_VERSION: 8.1 }
-          - { TYPO3_VERSION: 12, PHP_VERSION: 8.2 }
+          - { TYPO3_VERSION: 13, PHP_VERSION: 8.2 }
           - { TYPO3_VERSION: 13, PHP_VERSION: 8.3 }
-          - { TYPO3_VERSION: 13, PHP_VERSION: 8.4 }
+          - { TYPO3_VERSION: 14, PHP_VERSION: 8.4 }
+          - { TYPO3_VERSION: 14, PHP_VERSION: 8.5 }
 
     env:
       TCPDF_VERSION: 6.11.2
@@ -64,7 +64,7 @@ jobs:
         run: sudo /etc/init.d/mysql start
 
       - name: Functional Tests
-        run: .Build/bin/phpunit -c .Build/vendor/typo3/testing-framework/Resources/Core/Build/FunctionalTests.xml Tests/Functional/;
+        run: .Build/bin/phpunit -c ./Build/FunctionalTests.xml Tests/Functional/;
         env:
           typo3DatabaseName: typo3
           typo3DatabaseHost: 127.0.0.1

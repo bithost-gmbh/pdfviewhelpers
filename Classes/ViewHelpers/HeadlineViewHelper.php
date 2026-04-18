@@ -47,7 +47,7 @@ class HeadlineViewHelper extends AbstractTextViewHelper
     /**
      * @inheritDoc
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -60,7 +60,7 @@ class HeadlineViewHelper extends AbstractTextViewHelper
      *
      * @throws Exception
      */
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 
