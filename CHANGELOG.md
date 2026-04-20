@@ -2,8 +2,12 @@
 
 ## Not yet released
 
+- Adds support for TYPO3 14 LTS
+- Drops support for TYPO3 12 LTS
+- Drops support for PHP < 8.2
 - Fixes template rendering in docs
 - Fixes escaping of children in HtmlViewHelper, [#261](https://github.com/bithost-gmbh/pdfviewhelpers/issues/261) (Thanks [@liayn](https://github.com/liayn))
+- Fixes reading of the page param type from query params to support route enhancers, [#260](https://github.com/bithost-gmbh/pdfviewhelpers/issues/260) (Thanks [@PBahner](https://github.com/PBahner))
 
 ## 3.1.1 - May 23, 2025
 
