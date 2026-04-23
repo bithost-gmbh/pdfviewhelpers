@@ -1,4 +1,4 @@
-[request?.getPeageArguments()?.getPageType() == 28032013]
+[request?.getPageArguments()?.getPageType() == 28032013]
 	pageNewsPDF = PAGE
 	pageNewsPDF {
 		typeNum = 28032013
