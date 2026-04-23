@@ -1,5 +1,5 @@
 plugin.tx_pdfviewhelpers.settings {
-	# this is just setting to determine whether the static TypoScript setup has been included or not
+	# this is just a setting to determine whether the static TypoScript setup has been included or not
 	staticTypoScriptSetupIncluded = 1
 	config {
 		class = Bithost\Pdfviewhelpers\Model\BasePDF
