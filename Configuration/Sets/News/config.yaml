@@ -1,0 +1,6 @@
+name: bithost/pdfviewhelpers-news
+label: 'EXT:pdfviewhelpers - News'
+dependencies:
+  - bithost/pdfviewhelpers
+optionalDependencies:
+  - georgringer/news
