@@ -3,6 +3,7 @@
 ## Not yet released
 
 - Adds support for TYPO3 14 LTS
+- Adds Site Sets for basic TypoScript setup
 - Drops support for TYPO3 12 LTS
 - Drops support for PHP < 8.2
 - Fixes template rendering in docs
