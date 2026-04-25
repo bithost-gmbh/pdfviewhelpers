@@ -52,7 +52,7 @@ class PageViewHelper extends AbstractPDFViewHelper
         $this->registerArgument('importPage', 'integer', 'The page number to be imported as template.', false, $this->settings['page']['importPage']);
         $this->registerArgument('importPageOnAutomaticPageBreak', 'boolean', 'If true the template is also applied if an automatic page break occurs.', false, $this->settings['page']['importPageOnAutomaticPageBreak']);
         $this->registerArgument('orientation', 'string', 'The orientation of the page: portrait, landscape', false, $this->settings['page']['orientation']);
-        $this->registerArgument('format', 'string', 'The format of the page, e.g. A4', false, $this->settings['page']['format']);
+        $this->registerArgument('format', 'string|array', 'The format of the page, e.g. A4 or an array of [width, height]', false, $this->settings['page']['format']);
         $this->registerArgument('keepMargins', 'boolean', 'If true overwrites the default page margins with the current margins.', false, $this->settings['page']['keepMargins']);
         $this->registerArgument('tableOfContentPage', 'boolean', 'If true the page will be rendered as a table of content page, e.g. it can be moved to the front.', false, $this->settings['page']['tableOfContentPage']);
     }
