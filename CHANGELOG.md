@@ -1,6 +1,6 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## Not yet released
+## 4.0.0 - Not yet released
 
 - Adds support for TYPO3 14 LTS
 - Adds Site Sets for basic TypoScript setup
