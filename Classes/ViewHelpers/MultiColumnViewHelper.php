@@ -132,5 +132,6 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper
     public function compile($argumentsName, $closureName, &$initializationPhpCode, ViewHelperNode $node, TemplateCompiler $compiler): string
     {
         $compiler->disable();
+        return '';
     }
 }
