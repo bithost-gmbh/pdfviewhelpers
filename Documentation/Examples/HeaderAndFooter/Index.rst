@@ -88,8 +88,7 @@ Fluid Template
 				<pdf:text color="#AAA" alignment="right" posY="10" paragraphSpacing="0">
 					Bithost GmbH
 					Milchbuckstrasse 83
-					CH-8057 Zürich
-					044 585 28 20
+					8057 Zürich
 				</pdf:text>
 			</pdf:header>
 			<pdf:footer>

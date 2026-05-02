@@ -67,11 +67,9 @@ So if you feel like this extension was useful to you and saved you and your busi
         <pdf:text alignment="right" color="#8C8C8C" paragraphSpacing="0" posY="15">
             Bithost GmbH
             Milchbuckstrasse 83
-            CH-8057 Zürich
+            8057 Zürich
     
             hallo@bithost.ch
-            044 585 28 20
-    
             www.bithost.ch
         </pdf:text>
     </pdf:header>

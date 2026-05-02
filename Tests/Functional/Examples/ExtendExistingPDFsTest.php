@@ -59,7 +59,7 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('Mega GmbH', $text);
         $this->assertStringContainsStringIgnoringCase('Ansprechpartner', $text);
         $this->assertStringContainsStringIgnoringCase('www.bithost.ch', $text);
-        $this->assertStringContainsStringIgnoringCase('Here is your header', $text);
+        $this->assertStringContainsStringIgnoringCase('Here is the header', $text);
         $this->assertStringContainsStringIgnoringCase('Here is the HTML header', $text);
         $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $text);
 

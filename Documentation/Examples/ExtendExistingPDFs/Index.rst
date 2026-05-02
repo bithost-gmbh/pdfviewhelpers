@@ -62,7 +62,7 @@ Fluid Template
 
 	<pdf:document sourceFile="EXT:pdfviewhelpers/Resources/Public/Examples/ExtendExistingPDFs/pdf_template.pdf">
 		<pdf:page importPage="1" margin="{top: 80, right: 20, bottom: 40, left: 20}">
-			<pdf:headline>Here is your header</pdf:headline>
+			<pdf:headline>Here is the header</pdf:headline>
 			<pdf:text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</pdf:text>
 			<pdf:html autoHyphenation="1">
 				<h1 style="font-weight: normal; font-size: 16px;">Here is the HTML header</h1>
