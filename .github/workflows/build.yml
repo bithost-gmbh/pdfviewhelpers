@@ -18,7 +18,7 @@ jobs:
           - { TYPO3_VERSION: 14, PHP_VERSION: 8.5 }
 
     env:
-      TCPDF_VERSION: 6.11.2
+      TCPDF_VERSION: 6.11.3
       FPDI_VERSION: 2.6.6
 
     steps:
