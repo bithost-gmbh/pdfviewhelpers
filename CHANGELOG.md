@@ -1,6 +1,6 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
-## 4.0.0 - Not yet released
+## 4.0.0 - May 3, 2026
 
 - Adds support for TYPO3 14 LTS
 - Adds Site Sets for basic TypoScript setup
