@@ -4,6 +4,7 @@
 
 - Adds support for TYPO3 14 LTS
 - Adds Site Sets for basic TypoScript setup
+- Updates TCPDF and FPDI versions for TER release
 - Drops support for TYPO3 12 LTS
 - Drops support for PHP < 8.2
 - Fixes template rendering in docs
