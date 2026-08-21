@@ -27,17 +27,12 @@
 
 // Brazilian
 
-global $l;
-$l = Array();
-
-// PAGE META DESCRIPTORS --------------------------------------
-
-$l['a_meta_charset'] = 'UTF-8';
-$l['a_meta_dir'] = 'ltr';
-$l['a_meta_language'] = 'pt';
-
-// TRANSLATIONS --------------------------------------
-$l['w_page'] = 'página';
+return [
+    'a_meta_charset' => 'UTF-8',
+    'a_meta_dir' => 'ltr',
+    'a_meta_language' => 'pt',
+    'w_page' => 'página',
+];
 
 //============================================================+
 // END OF FILE

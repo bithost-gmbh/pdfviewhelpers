@@ -27,17 +27,12 @@
 
 // Slovene
 
-global $l;
-$l = Array();
-
-// PAGE META DESCRIPTORS --------------------------------------
-
-$l['a_meta_charset'] = 'UTF-8';
-$l['a_meta_dir'] = 'ltr';
-$l['a_meta_language'] = 'sl';
-
-// TRANSLATIONS --------------------------------------
-$l['w_page'] = 'stran';
+return [
+    'a_meta_charset' => 'UTF-8',
+    'a_meta_dir' => 'ltr',
+    'a_meta_language' => 'sl',
+    'w_page' => 'stran',
+];
 
 //============================================================+
 // END OF FILE

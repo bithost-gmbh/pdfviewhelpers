@@ -27,17 +27,12 @@
 
 // Norwegian Bokmål
 
-global $l;
-$l = Array();
-
-// PAGE META DESCRIPTORS --------------------------------------
-
-$l['a_meta_charset'] = 'UTF-8';
-$l['a_meta_dir'] = 'ltr';
-$l['a_meta_language'] = 'nb';
-
-// TRANSLATIONS --------------------------------------
-$l['w_page'] = 'side';
+return [
+    'a_meta_charset' => 'UTF-8',
+    'a_meta_dir' => 'ltr',
+    'a_meta_language' => 'nb',
+    'w_page' => 'side',
+];
 
 //============================================================+
 // END OF FILE

@@ -27,17 +27,12 @@
 
 // Welsh
 
-global $l;
-$l = Array();
-
-// PAGE META DESCRIPTORS --------------------------------------
-
-$l['a_meta_charset'] = 'UTF-8';
-$l['a_meta_dir'] = 'ltr';
-$l['a_meta_language'] = 'cy';
-
-// TRANSLATIONS --------------------------------------
-$l['w_page'] = 'tudalen';
+return [
+    'a_meta_charset' => 'UTF-8',
+    'a_meta_dir' => 'ltr',
+    'a_meta_language' => 'cy',
+    'w_page' => 'tudalen',
+];
 
 //============================================================+
 // END OF FILE
