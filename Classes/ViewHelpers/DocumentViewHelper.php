@@ -182,7 +182,7 @@ class DocumentViewHelper extends AbstractPDFViewHelper
             throw new ValidationException('The provided language file "' . $languageFilePath . '" does not exist or the file is not readable. ERROR: 1536487362', 1536487362);
         }
 
-        require_once($languageFilePath);
+        $this->getPDF()->setLanguageArray(require($languageFilePath));
     }
 
     /**

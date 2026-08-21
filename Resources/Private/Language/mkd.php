@@ -27,17 +27,12 @@
 
 // Macedonian
 
-global $l;
-$l = Array();
-
-// PAGE META DESCRIPTORS --------------------------------------
-
-$l['a_meta_charset'] = 'UTF-8';
-$l['a_meta_dir'] = 'ltr';
-$l['a_meta_language'] = 'mk';
-
-// TRANSLATIONS --------------------------------------
-$l['w_page'] = 'страница';
+return [
+    'a_meta_charset' => 'UTF-8',
+    'a_meta_dir' => 'ltr',
+    'a_meta_language' => 'mk',
+    'w_page' => 'страница',
+];
 
 //============================================================+
 // END OF FILE

@@ -27,17 +27,12 @@
 
 // Arabic
 
-global $l;
-$l = Array();
-
-// PAGE META DESCRIPTORS --------------------------------------
-
-$l['a_meta_charset'] = 'UTF-8';
-$l['a_meta_dir'] = 'rtl';
-$l['a_meta_language'] = 'ar';
-
-// TRANSLATIONS --------------------------------------
-$l['w_page'] = 'صفحة';
+return [
+    'a_meta_charset' => 'UTF-8',
+    'a_meta_dir' => 'rtl',
+    'a_meta_language' => 'ar',
+    'w_page' => 'صفحة',
+];
 
 //============================================================+
 // END OF FILE

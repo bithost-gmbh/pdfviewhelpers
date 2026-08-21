@@ -27,17 +27,12 @@
 
 // Korean
 
-global $l;
-$l = Array();
-
-// PAGE META DESCRIPTORS --------------------------------------
-
-$l['a_meta_charset'] = 'UTF-8';
-$l['a_meta_dir'] = 'ltr';
-$l['a_meta_language'] = 'ko';
-
-// TRANSLATIONS --------------------------------------
-$l['w_page'] = '페이지';
+return [
+    'a_meta_charset' => 'UTF-8',
+    'a_meta_dir' => 'ltr',
+    'a_meta_language' => 'ko',
+    'w_page' => '페이지',
+];
 
 //============================================================+
 // END OF FILE
