@@ -19,7 +19,7 @@ jobs:
 
     env:
       TCPDF_VERSION: 6.11.3
-      FPDI_VERSION: 2.6.6
+      FPDI_VERSION: 2.6.8
 
     steps:
       - name: Checkout
