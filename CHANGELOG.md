@@ -1,5 +1,10 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 4.0.1 - August 24, 2026
+
+- Updates TCPDF and FPDI versions for TER release
+- Fixes language metadata not correctly loaded, [#273](https://github.com/bithost-gmbh/pdfviewhelpers/issues/273)
+
 ## 4.0.0 - May 3, 2026
 
 - Adds support for TYPO3 14 LTS
