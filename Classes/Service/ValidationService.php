@@ -185,7 +185,7 @@ class ValidationService implements SingletonInterface
      */
     public function validateCharacterSpacing($characterSpacing): bool
     {
-        if (is_numeric($characterSpacing) && $characterSpacing >= 0) {
+        if (is_numeric($characterSpacing)) {
             return true;
         } else {
             throw new ValidationException('Invalid characterSpacing "' . $characterSpacing . '" provided, must be a positive float value. ERROR: 1536704547', 1536704547);
