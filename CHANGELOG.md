@@ -1,5 +1,9 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 4.0.2 - September 11, 2026
+
+- Fixes `characterSpacing` validation not allowing negative values, [#275](https://github.com/bithost-gmbh/pdfviewhelpers/issues/275)
+
 ## 4.0.1 - August 24, 2026
 
 - Updates TCPDF and FPDI versions for TER release
