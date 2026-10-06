@@ -31,7 +31,7 @@ namespace Bithost\Pdfviewhelpers\Model;
  ***/
 
 /**
- * PdfaShowCase, overrides constructor to set pdfa param as true
+ * PdfaShowCase, overrides constructor to enable the PDF/A-1b mode
  *
  * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
  */
@@ -40,9 +40,8 @@ class PdfaShowCase extends BasePDF
     /**
      * @inheritdoc
      */
-    public function __construct($orientation = 'P', $unit = 'mm', $format = 'A4', $unicode = true, $encoding = 'UTF-8', $diskcache = false, $pdfa = true)
+    public function __construct(string $unit = 'mm', bool $subsetFonts = true, string $mode = 'pdfa1b')
     {
-        // Set pdfa parameter to true
-        parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache, true);
+        parent::__construct($unit, $subsetFonts, 'pdfa1b');
     }
 }

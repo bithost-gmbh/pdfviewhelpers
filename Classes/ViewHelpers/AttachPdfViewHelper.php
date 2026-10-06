@@ -43,21 +43,7 @@ class AttachPdfViewHelper extends AbstractPDFViewHelper
         $path = GeneralUtility::getFileAbsFileName($this->arguments['path']);
 
         if (is_file($path)) {
-            // Store source file possibly defined on document level in order to restore it later
-            $previousSourceFile = $this->getPDF()->getSourceFile();
-            $pageCount = $this->getPDF()->setSourceFile($path);
-
-            for ($pageNumbers = 1; $pageNumbers <= $pageCount; $pageNumbers++) {
-                $templateId = $this->getPDF()->importPage($pageNumbers);
-                $size = $this->getPDF()->getTemplateSize($templateId);
-
-                $this->getPDF()->AddPage($size['orientation'], [$size['width'], $size['height']]);
-                $this->getPDF()->useTemplate($templateId, 0, 0, null, null, true);
-            }
-
-            if ($previousSourceFile !== null) {
-                $this->getPDF()->setSourceFile($previousSourceFile);
-            }
+            $this->getPDF()->attachPdf($path);
         }
     }
 }

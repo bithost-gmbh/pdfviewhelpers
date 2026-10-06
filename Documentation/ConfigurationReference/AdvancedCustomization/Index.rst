@@ -5,6 +5,8 @@
 
 .. include:: ../../Includes.txt
 
+.. _advanced-customization:
+
 Advanced Customization
 ----------------------
 
@@ -14,7 +16,7 @@ If you feel like your custom ViewHelper might be useful for everybody, feel free
 Create your own ViewHelper
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Creating your own ViewHelper might be necessary if you need access to a TCPDF method that is not yet available through the implemented ViewHelpers
+Creating your own ViewHelper might be necessary if you need a feature of tc-lib-pdf that is not yet available through the implemented ViewHelpers
 or if you have a complex layout to realise.
 
 When writing your own ViewHelper you have the options to extend ``AbstractContentElementViewHelper`` or ``AbstractPDFViewHelper``. If your ViewHelper
@@ -22,10 +24,29 @@ will add some content to the PDF (e.g. ``TextViewHelper`` or ``LineViewHelper``)
 in order to inherit its position properties and allow the header and footer ViewHelpers to work properly.
 If your ViewHelper does not add content (e.g. ``GetPosXViewHelper`` or ``PageBreakViewHelper``) you can directly extend ``AbstractPDFViewHelper``.
 
-Within your ViewHelper you have full access to the public API of TCPDF using ``$this->getPDF()``. Please see the TCPDF examples in order to see what
-you can do with it: https://tcpdf.org/examples/
+Within your ViewHelper you have access to the PDF object using ``$this->getPDF()``. It is an instance of ``Bithost\Pdfviewhelpers\Model\BasePDF``
+which extends ``Com\Tecnick\Pdf\Tcpdf`` of tc-lib-pdf_. tc-lib-pdf places content at absolute positions, ``BasePDF`` adds a cursor
+and automatic page breaks on top of it. The most important methods of ``BasePDF`` are:
 
-The following example shows a ViewHelper that could be used to render a TCPDF barcode.
+	==================================================== =====================================================================================
+	Method                                               Description
+	==================================================== =====================================================================================
+	getX(), getY(), setX(), setY(), setXY()              The cursor position, content is usually rendered at the cursor. A negative y is measured from the bottom of the page.
+	getPageId(), setPageId()                             The current page, page ids start at 0.
+	getMargins(), getPageWidth(), getPageHeight()        The dimensions of the current page.
+	setFont(), setFontSize(), setTextColor()             The text style, colors are given in HEX format e.g. ``#000``.
+	setLineHeight(), setCharacterSpacing()               More text style settings.
+	writeText(), writeHtml()                             Writes text or HTML, breaks pages automatically and moves the cursor below the content.
+	drawImage(), drawLine(), drawRect()                  Draws images and graphics.
+	addPage(), checkPageBreak()                          Adds a page or adds a page if an element does not fit on the current page.
+	==================================================== =====================================================================================
+
+Everything else of tc-lib-pdf can be used as well, please see the tc-lib-pdf examples in order to see what you can do with it:
+https://github.com/tecnickcom/tc-lib-pdf/tree/main/examples
+
+.. _tc-lib-pdf: https://github.com/tecnickcom/tc-lib-pdf
+
+The following example shows a ViewHelper that could be used to render a barcode.
 
 *PHP*
 
@@ -35,70 +56,29 @@ The following example shows a ViewHelper that could be used to render a TCPDF ba
 
     namespace Vendor\YourExtension\ViewHelpers;
 
-    /***
-     *
-     * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
-     *
-     *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
-     *           Esteban Gehring <esteban.gehring@bithost.ch>, Bithost GmbH
-     *
-     *  All rights reserved
-     *
-     *  This script is part of the TYPO3 project. The TYPO3 project is
-     *  free software; you can redistribute it and/or modify
-     *  it under the terms of the GNU General Public License as published by
-     *  the Free Software Foundation; either version 3 of the License, or
-     *  (at your option) any later version.
-     *
-     *  The GNU General Public License can be found at
-     *  http://www.gnu.org/copyleft/gpl.html.
-     *
-     *  This script is distributed in the hope that it will be useful,
-     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *  GNU General Public License for more details.
-     *
-     *  This copyright notice MUST APPEAR in all copies of the script!
-     ***/
-
     use Bithost\Pdfviewhelpers\ViewHelpers\AbstractContentElementViewHelper;
 
-    /**
-     * BarcodeViewHelper
-     *
-     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
-     */
-    class BarcodeViewHelper extends AbstractContentElementViewHelper {
-        /**
-         * @param string $title
-         * @param string $code
-         * @param string $type
-         *
-         * @return void
-         */
-        public function render($title, $code, $type)
+    class BarcodeViewHelper extends AbstractContentElementViewHelper
+    {
+        public function initializeArguments(): void
         {
-            $style = [
-                'position' => '',
-                'align' => 'C',
-                'stretch' => FALSE,
-                'fitwidth' => TRUE,
-                'cellfitalign' => '',
-                'border' => TRUE,
-                'hpadding' => 'auto',
-                'vpadding' => 'auto',
-                'fgcolor' => [0,0,0],
-                'bgcolor' => FALSE,
-                'text' => TRUE,
-                'font' => 'helvetica',
-                'fontsize' => 8,
-                'stretchtext' => 4
-            ];
+            parent::initializeArguments();
 
-            $this->getPDF()->SetFontSize($this->settings['generalText']['fontSize']);
-            $this->getPDF()->Cell(0, 0, $title, 0, 1);
+            $this->registerArgument('code', 'string', 'The content of the barcode.', true);
+            $this->registerArgument('type', 'string', 'The type of the barcode, e.g. C128 or QRCODE.', false, 'C128');
+        }
 
-            $this->getPDF()->write1DBarcode($code, $type, '', '', '', 18, 0.4, $style, 'N');
+        public function render(): void
+        {
+            $pdf = $this->getPDF();
+            $height = 15;
+
+            // add a new page if the barcode does not fit on the current page
+            $pdf->setXY($this->arguments['posX'], $this->arguments['posY']);
+            $pdf->checkPageBreak($height);
+
+            $pdf->page->addContent($pdf->getBarcode($this->arguments['type'], $this->arguments['code'], $pdf->getX(), $pdf->getY(), -1, $height));
+            $pdf->setY($pdf->getY() + $height);
         }
     }
 
@@ -111,7 +91,7 @@ The following example shows a ViewHelper that could be used to render a TCPDF ba
 
 	<pdf:document>
 		<pdf:page>
-			<you:barcode title="Some Title" code="CODE 39" type="C39" />
+			<you:barcode code="CODE 128" />
 		</pdf:page>
 	</pdf:document>
 
@@ -120,6 +100,8 @@ Extend BasePDF class
 ^^^^^^^^^^^^^^^^^^^^
 You can provide your own PDF class in the TypoScript settings in order to customize its behaviour as you want.
 Your own PDF class is required to extend ``Bithost\Pdfviewhelpers\Model\BasePDF``.
+The methods ``basePdfHeader`` and ``basePdfFooter`` are called for every page and can be used to render a header and footer.
+``$this->page::PAGE_NUM`` and ``$this->page::PAGE_TOT`` are replaced with the page number and the total number of pages.
 
 *TypoScript*
 
@@ -139,77 +121,30 @@ Your own PDF class is required to extend ``Bithost\Pdfviewhelpers\Model\BasePDF`
 
     namespace Vendor\YourExtension\Model;
 
-    /***
-     *
-     * This file is part of the "PDF ViewHelpers" Extension for TYPO3 CMS.
-     *
-     *  (c) 2016 Markus Mächler <markus.maechler@bithost.ch>, Bithost GmbH
-     *           Esteban Gehring <esteban.gehring@bithost.ch>, Bithost GmbH
-     *
-     *  All rights reserved
-     *
-     *  This script is part of the TYPO3 project. The TYPO3 project is
-     *  free software; you can redistribute it and/or modify
-     *  it under the terms of the GNU General Public License as published by
-     *  the Free Software Foundation; either version 3 of the License, or
-     *  (at your option) any later version.
-     *
-     *  The GNU General Public License can be found at
-     *  http://www.gnu.org/copyleft/gpl.html.
-     *
-     *  This script is distributed in the hope that it will be useful,
-     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *  GNU General Public License for more details.
-     *
-     *  This copyright notice MUST APPEAR in all copies of the script!
-     ***/
+    use Bithost\Pdfviewhelpers\Model\BasePDF;
+    use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-    use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-
-    /**
-     * MyPDF
-     *
-     * @author Markus Mächler <markus.maechler@bithost.ch>, Esteban Gehring <esteban.gehring@bithost.ch>
-     */
-    class MyPDF extends \Bithost\Pdfviewhelpers\Model\BasePDF
+    class MyPDF extends BasePDF
     {
-        /**
-         * @return void
-         */
-        public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $pdfa=false)
+        protected function basePdfHeader(): void
         {
-            $myFormat = 'A3';
-            parent::__construct($orientation, $unit, $myFormat, $unicode, $encoding, $diskcache, $pdfa);
+            $logo = file_get_contents(GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Resources/Public/Examples/BasicUsage/logo.png'));
+
+            $this->drawImage($logo, 'image', 15, 15, 56);
+
+            $this->setTextColor('#8c8c8c');
+            $this->setFontSize(11);
+            $this->writeText("Bithost GmbH\nMilchbuckstrasse 83\n8057 Zürich", 15, 15, $this->getPageWidth() - 30, 'R');
         }
 
-        /**
-         * @return void
-         */
-        public function basePdfHeader()
+        protected function basePdfFooter(): void
         {
-            $extPath = ExtensionManagementUtility::extPath('pdfviewhelpers');
-            $address = "Bithost GmbH \nMilchbuckstrasse 83 \n8057 Zürich \n\nhallo@bithost.ch \n\nwww.bithost.ch";
+            $posY = $this->getPageHeight() - 20;
 
-            $this->SetTextColor(140, 140, 140);
-            $this->SetFontSize(11);
+            $this->drawLine(15, $posY, $this->getPageWidth() - 15, $posY, ['lineWidth' => 0.2, 'lineColor' => '#8c8c8c']);
 
-            $this->Image($extPath . 'Resources/Public/Examples/BasicUsage/logo.png', 15, 15, 56, 24, '', '', '', FALSE, 300, '', FALSE, FALSE, 0, FALSE, FALSE, FALSE, FALSE);
-            $this->MultiCell(null, null, $address, 0, 'R', FALSE, 1, 0, 45, TRUE, 0, FALSE, TRUE, 0, 'T', FALSE);
-        }
-
-        /**
-         * @return void
-         */
-        public function basePdfFooter()
-        {
-            $this->SetY(-20);
-            $this->SetDrawColor(140, 140, 140);
-            $this->Line(15, $this->y, $this->w - 15, $this->y);
-
-            $this->SetY(-17);
-            $this->SetTextColor(140, 140, 140);
-            $this->SetFontSize(11);
-            $this->Cell($this->w - 15, 10, 'Page '.$this->getAliasNumPage() . ' of '.$this->getAliasNbPages(), 0, false, 'C', 0, '', 1, false, 'T', 'M');
+            $this->setTextColor('#8c8c8c');
+            $this->setFontSize(11);
+            $this->writeText('Page ' . $this->page::PAGE_NUM . ' of ' . $this->page::PAGE_TOT, 15, $posY + 3, $this->getPageWidth() - 30, 'C');
         }
     }

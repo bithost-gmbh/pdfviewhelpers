@@ -30,7 +30,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Exception\Exception;
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use UnexpectedValueException;
 
@@ -77,67 +77,67 @@ class HtmlViewHelper extends AbstractContentElementViewHelper
     }
 
     /**
-     * @throws Exception if an invalid style sheet path is provided
+     * @inheritDoc
+     *
+     * @throws ValidationException
      */
     public function render(): void
     {
         $html = $this->renderChildren();
-        $htmlStyle = '';
-        $color = $this->conversionService->convertHexToRGB($this->settings['generalText']['color']);
+        $pdf = $this->getPDF();
+        $generalText = $this->settings['generalText'];
 
         $this->initializeMultiColumnSupport();
 
-        $initialMargins = $this->getPDF()->getMargins();
-        $initialPosX = $this->getPDF()->getX();
-        $marginLeft = $this->arguments['posX'] + $this->arguments['padding']['left'];
+        $posX = $this->arguments['posX'] + $this->arguments['padding']['left'];
 
         if (is_null($this->arguments['width'])) {
-            $marginRight = $initialMargins['right'] + $this->arguments['padding']['right'];
+            $width = $pdf->getPageWidth() - $pdf->getMargins()['right'] - $this->arguments['padding']['right'] - $posX;
         } else {
-            $marginRight = $this->getPDF()->getPageWidth() - $marginLeft - $this->arguments['width'] + $this->arguments['padding']['right'];
+            $width = $this->arguments['width'] - $this->arguments['padding']['left'] - $this->arguments['padding']['right'];
         }
 
-        $this->getPDF()->setMargins($marginLeft, $initialMargins['top'], $marginRight);
+        // The HTML is rendered using the general text settings, the style sheet can overwrite them
+        $this->validationService->validateColor($generalText['color']);
+        $styles = 'body{color:' . $generalText['color'] . ';line-height:' . (float) $generalText['lineHeight'] . ';}';
+
+        if (!empty($this->arguments['listIndentWidth'])) {
+            $styles .= 'ul,ol{padding-left:' . (float) $this->arguments['listIndentWidth'] . $pdf->getUnit() . ';}';
+        }
 
         if (!empty($this->arguments['styleSheet'])) {
-            $styleSheetFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['styleSheet']);
-            if ($styleSheetFile) {
-                $styleSheetContent = $styleSheetFile->getContents();
-            } else {
-                $styleSheetFileName = GeneralUtility::getFileAbsFileName($this->arguments['styleSheet']);
-                if ($styleSheetFileName && file_exists($styleSheetFileName)) {
-                    $styleSheetContent = file_get_contents($styleSheetFileName);
-                } else {
-                    throw new UnexpectedValueException('Provided CSS file can\'t be loaded: ' . $this->arguments['styleSheet'], 1729853324);
-                }
-            }
-            $htmlStyle = '<style>' . $styleSheetContent . '</style>';
+            $styles .= $this->getStyleSheet();
         }
 
-        if ($this->arguments['autoHyphenation']) {
-            $html = $this->hyphenationService->hyphenateText(
-                $html,
-                $this->hyphenationService->getHyphenFilePath($this->getHyphenFileName())
-            );
+        $textStyle = $pdf->getTextStyle();
+        $pdf->setFont($generalText['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($generalText['fontStyle']), (float) $generalText['fontSize']);
+        $pdf->setCharacterSpacing((float) $generalText['characterSpacing']);
+        $pdf->setHyphenation($this->arguments['autoHyphenation'] ? $this->getHyphenFilePath() : '');
+
+        $pdf->writeHtml('<style>' . $styles . '</style>' . $html, $posX, $this->arguments['posY'] + $this->arguments['padding']['top'], $width);
+
+        $pdf->setHyphenation('');
+        $pdf->setTextStyle($textStyle);
+        $pdf->setY($pdf->getY() + $this->arguments['padding']['bottom']);
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    protected function getStyleSheet(): string
+    {
+        $styleSheetFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['styleSheet']);
+
+        if ($styleSheetFile) {
+            return $styleSheetFile->getContents();
         }
 
-        //reset settings to generalText
-        $this->getPDF()->setTextColor($color['R'], $color['G'], $color['B']);
-        $this->getPDF()->setFontSize($this->settings['generalText']['fontSize']);
-        $this->getPDF()->SetFont($this->settings['generalText']['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($this->settings['generalText']['fontStyle']));
-        $this->getPDF()->setCellPaddings(0, 0, 0, 0); //reset padding to avoid errors on nested tags
-        $this->getPDF()->setCellHeightRatio($this->settings['generalText']['lineHeight']);
-        $this->getPDF()->setFontSpacing($this->settings['generalText']['characterSpacing']);
-        if (!empty($this->arguments['listIndentWidth'])) {
-            $this->getPDF()->setListIndentWidth($this->arguments['listIndentWidth']);
+        $styleSheetFileName = GeneralUtility::getFileAbsFileName($this->arguments['styleSheet']);
+
+        if ($styleSheetFileName && file_exists($styleSheetFileName)) {
+            return file_get_contents($styleSheetFileName);
         }
 
-        $this->getPDF()->setY($this->arguments['posY'] + $this->arguments['padding']['top']);
-
-        $this->getPDF()->writeHTML($htmlStyle . $html, true, false, true, false, '');
-
-        $this->getPDF()->setY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
-        $this->getPDF()->setX($initialPosX);
-        $this->getPDF()->setMargins($initialMargins['left'], $initialMargins['top'], $initialMargins['right']);
+        throw new UnexpectedValueException('Provided CSS file can\'t be loaded: ' . $this->arguments['styleSheet'], 1729853324);
     }
 }

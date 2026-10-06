@@ -1,0 +1,10 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:pdf="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers" data-namespace-typo3-fluid="true">
+<pdf:document outputDestination="string">
+    <pdf:footer posY="-20"><pdf:html><p>HTML footer {pdf:getPageNumberAlias()}</p></pdf:html><pdf:text fontFamily="roboto">Roboto footer {pdf:getPageNumberAlias()} of {pdf:getTotalNumberOfPagesAlias()}</pdf:text></pdf:footer>
+    <pdf:page>
+        <pdf:text fontFamily="roboto">Roboto body {pdf:getPageNumberAlias()} of {pdf:getTotalNumberOfPagesAlias()}</pdf:text>
+        <pdf:pageBreak />
+        <pdf:text>Helvetica body {pdf:getPageNumberAlias()} of {pdf:getTotalNumberOfPagesAlias()}</pdf:text>
+    </pdf:page>
+</pdf:document>
+</html>

@@ -26,7 +26,7 @@ PDF ViewHelpers
 		Various Fluid ViewHelpers that help you to make any Fluid Template into a PDF document.
 
 	:Keywords:
-		pdf, generation, generator, fluid, viewhelper, fpdi, tcpdf
+		pdf, generation, generator, fluid, viewhelper, tcpdf, tc-lib-pdf
 
 	:Copyright:
 		2016 - 2026

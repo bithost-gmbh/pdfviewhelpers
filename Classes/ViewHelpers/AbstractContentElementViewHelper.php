@@ -72,11 +72,14 @@ abstract class AbstractContentElementViewHelper extends AbstractPDFViewHelper
         }
 
         if (is_null($this->arguments['posX'])) {
-            $this->arguments['posX'] = $this->getPDF()->GetX();
+            $this->arguments['posX'] = $this->getPDF()->getX();
         }
 
         if (is_null($this->arguments['posY'])) {
-            $this->arguments['posY'] = $this->getPDF()->GetY();
+            $this->arguments['posY'] = $this->getPDF()->getY();
+        } elseif ($this->arguments['posY'] < 0) {
+            // a negative position is measured from the bottom of the page
+            $this->arguments['posY'] = $this->getPDF()->getPageHeight() + $this->arguments['posY'];
         }
 
         $this->initializeHeaderAndFooter();

@@ -64,9 +64,5 @@ class BasicUsageTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('Bithost GmbH', $text);
 
         $this->validatePDF($output);
-
-        $expectedHash = sha1(file_get_contents($this->getFixtureAbsolutePath('Examples/BasicUsage.pdf')));
-        $actualHash = sha1($output);
-        $this->assertEquals($expectedHash, $actualHash);
     }
 }

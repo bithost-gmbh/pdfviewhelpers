@@ -178,7 +178,6 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
             'config' => [
                 'allowedImageTypes' => [
                     'image' => 'png,JPG',
-                    'imageEPS' => 'ai,eps',
                     'imageSVG' => 'svG',
                 ]
             ],
@@ -189,8 +188,6 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
             'PNG' => 'image',
             'jpg' => 'image',
             'JpG' => 'image',
-            'ai' => 'imageEPS',
-            'eps' => 'imageEPS',
             'svg' => 'imageSVG',
         ];
 
@@ -200,5 +197,14 @@ class SettingsConversionServiceTest extends AbstractUnitTestCase
         foreach ($expectedConversions as $input => $expectedOutput) {
             $this->assertEquals($expectedOutput, $this->settingsConversionService->convertImageExtensionToRenderMode($input));
         }
+    }
+
+    #[Test]
+    public function testUnsupportedImageType(): void
+    {
+        $this->expectException(ValidationException::class);
+
+        $this->settingsConversionService->setSettings(['config' => ['allowedImageTypes' => ['image' => 'png', 'imageSVG' => 'svg']]]);
+        $this->settingsConversionService->convertImageExtensionToRenderMode('eps');
     }
 }

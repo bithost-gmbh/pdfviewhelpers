@@ -55,8 +55,6 @@ Properties in plugin.tx_pdfviewhelpers.settings
 	:ref:`document.outputPath`                           :ref:`t3tsref:data-type-string`       document.pdf
 	:ref:`document.sourceFile`                           :ref:`t3tsref:data-type-string`
 	:ref:`document.unit`                                 :ref:`t3tsref:data-type-string`       mm
-	:ref:`document.unicode`                              :ref:`t3tsref:data-type-boolean`      1
-	:ref:`document.encoding`                             :ref:`t3tsref:data-type-string`       UTF-8
 	:ref:`document.pdfa`                                 :ref:`t3tsref:data-type-boolean`      0
 	:ref:`document.pdfua`                                :ref:`t3tsref:data-type-boolean`      0
 	:ref:`document.language`                             :ref:`t3tsref:data-type-string`       ger
@@ -172,7 +170,7 @@ config.class
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.config.class =` :ref:`t3tsref:data-type-string`
 
-Decides which PHP class should be used as TCPDF object. You can easily provide your own class in order to render custom header and footers or to customize TCPDF in any way.
+Decides which PHP class should be used as PDF object. You can easily provide your own class in order to render custom header and footers or to customize the PDF in any way.
 Your provided class must inherit from Bithost\\Pdfviewhelpers\\Model\\BasePDF.
 
 .. _config.disableCache:
@@ -210,7 +208,7 @@ config.sRGBMode
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.config.sRGBMode =` :ref:`t3tsref:data-type-boolean`
 
-Enable sRGBMode, see TCPDF documentation for further information.
+If true an sRGB output intent is added to the document.
 
 .. _config.allowedImageTypes:
 
@@ -219,7 +217,7 @@ config.allowedImageTypes
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.config.allowedImageTypes =` Array
 
-Mapping of TCPDF image functions to their corresponding image file extensions.
+Mapping of the image render modes ``image`` (raster images) and ``imageSVG`` to their corresponding image file extensions.
 
 .. _config.fonts.subset:
 
@@ -301,7 +299,7 @@ document.outputDestination
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.document.outputDestination =` :ref:`t3tsref:data-type-string`
 
-The TCPDF output destination for the PDF. Possible values are:
+The output destination for the PDF. Possible values are:
 
 	================== ======================================================================================
 	outputDestination  Description
@@ -322,7 +320,7 @@ document.outputPath
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.document.outputPath =` :ref:`t3tsref:data-type-string`
 
-The TCPDF output path of the document. If you are saving the file to filesystem this is a relative path from the
+The output path of the document. If you are saving the file to filesystem this is a relative path from the
 webroot directory e.g. ``fileadmin/pdfviewhelpers/projectXY.pdf``.
 If you are sending it inline or as file download it is simply the name of the document e.g. ``projectXY.pdf``.
 
@@ -343,24 +341,6 @@ document.unit
 :typoscript:`plugin.tx_pdfviewhelpers.settings.document.unit =` :ref:`t3tsref:data-type-string`
 
 The measurement unit used. Possible values are ``pt``, ``mm``, ``cm`` and ``in``.
-
-.. _document.unicode:
-
-document.unicode
-""""""""""""""""
-
-:typoscript:`plugin.tx_pdfviewhelpers.settings.document.unicode =` :ref:`t3tsref:data-type-boolean`
-
-Determines whether the input text is unicode or not.
-
-.. _document.encoding:
-
-document.encoding
-"""""""""""""""""
-
-:typoscript:`plugin.tx_pdfviewhelpers.settings.document.encoding =` :ref:`t3tsref:data-type-string`
-
-Charset encoding (used only when converting back html entities).
 
 .. _document.pdfa:
 
@@ -387,7 +367,7 @@ document.language
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.document.language =` :ref:`t3tsref:data-type-string`
 
-Decides which language settings are used from TCPDF. All possible language codes can be found in ``Resources/Private/tcpdf/examples/lang/``.
+Decides which language settings are used, e.g. the language stored in the document meta data. All possible language codes can be found in ``Resources/Private/Language/``.
 
 .. _document.hyphenFile:
 
@@ -408,7 +388,7 @@ page.autoPageBreak
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.page.autoPageBreak =` :ref:`t3tsref:data-type-boolean`
 
-Decides whether TCPDF uses auto page break or not. You can always add a new page by adding a new ``<pdf:page>`` tag to your template.
+Decides whether a new page is added automatically if the content does not fit on the current page. You can always add a new page by adding a new ``<pdf:page>`` tag to your template.
 
 .. _page.margin:
 
@@ -453,7 +433,7 @@ page.format
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.page.format =` :ref:`t3tsref:data-type-string`
 
-Defines the format of the current page. Possible values are e.g. ``A0`` - ``A12``, to see all possible values you have to check ``\TCPDF_STATIC::$page_formats``. You can also provide numeric values as fluid array e.g. ``{0:210,1:75}`` to set unusual page sizes.
+Defines the format of the current page. Possible values are e.g. ``A0`` - ``A12``, to see all possible values you have to check ``\Com\Tecnick\Pdf\Page\Format::FORMAT``. You can also provide numeric values as fluid array e.g. ``{0:210,1:75}`` to set unusual page sizes.
 
 .. _page.keepMargins:
 
@@ -615,7 +595,7 @@ generalText.autoHyphenation
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.generalText.autoHyphenation =` :ref:`t3tsref:data-type-boolean`
 
-A boolean value indicating whether to use TCPDF's automatic hyphenation or not. You can also add soft hyphens yourself to your text with "&shy;".
+A boolean value indicating whether to use automatic hyphenation or not. Within the HtmlViewHelper you can also add soft hyphens yourself with "&shy;".
 If you use automatic hyphenation please make sure that you configure "config.hyphenFile" to match your language.
 
 .. _headline.addToTableOfContent:
@@ -756,7 +736,7 @@ graphics.line.style
 
 :typoscript:`plugin.tx_pdfviewhelpers.settings.graphics.line.style =` Array
 
-An array defining line styles, please see the https://tcpdf.org/examples/example_012/ for all possible values.
+An array defining line styles, possible keys are ``width``, ``color``, ``cap`` (butt, round, square), ``join`` (miter, round, bevel), ``dash`` (e.g. ``3,1``) and ``phase``.
 
 .. _tableOfContent.page:
 

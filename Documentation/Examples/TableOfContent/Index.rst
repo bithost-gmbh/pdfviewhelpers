@@ -10,9 +10,6 @@
 Table Of Content
 ================
 
-**IMPORTANT NOTICE:** Please note that TCPDF does not produce valid PDF documents when bookmarks are used.
-Although most PDF viewers are still able to render the document you might run into validity troubles using these ViewHelpers.
-
 .. _tableofcontent_typoscript:
 
 TypoScript

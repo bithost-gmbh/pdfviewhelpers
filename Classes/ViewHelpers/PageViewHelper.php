@@ -73,49 +73,60 @@ class PageViewHelper extends AbstractPDFViewHelper
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws Exception
      */
     public function render(): void
     {
-        $template = '';
-        $hasImportedPage = !empty($this->arguments['importPage']);
+        $pdf = $this->getPDF();
+        $template = null;
 
-        if ($hasImportedPage) {
+        if (!empty($this->arguments['importPage'])) {
             try {
-                $template = $this->getPDF()->importPage($this->arguments['importPage']);
+                $template = $pdf->importSourcePage((int) $this->arguments['importPage']);
             } catch (\Exception $e) {
                 throw new Exception('Could not import page. ' . $e->getMessage() . ' ERROR: 1538067206 ', 1538067206, $e);
             }
         }
 
-        $this->getPDF()->setIsAutoPageBreak(false);
-        $this->getPDF()->setImportTemplateOnThisPage(false);
-        $this->getPDF()->setMargins($this->arguments['margin']['left'], $this->arguments['margin']['top'], $this->arguments['margin']['right']);
-        $this->getPDF()->setAutoPageBreak($this->arguments['autoPageBreak'], $this->arguments['margin']['bottom']);
+        $margins = $this->arguments['margin'];
 
-        $this->getPDF()->AddPage($this->arguments['orientation'], $this->arguments['format'], $this->arguments['keepMargins'], $this->arguments['tableOfContentPage']);
+        if ($this->arguments['keepMargins'] && $pdf->page->getPages() !== []) {
+            // like TCPDF only the horizontal margins of the current page are kept
+            $margins['left'] = $pdf->getMargins()['left'];
+            $margins['right'] = $pdf->getMargins()['right'];
+        }
 
-        if ($hasImportedPage) {
-            $this->getPDF()->useTemplate($template);
-            $this->getPDF()->setPageMark();
+        $pdf->setIsAutoPageBreak(false);
+        $pdf->setImportTemplateOnThisPage(false);
+        $pdf->addPageWithSettings($this->arguments['orientation'], $this->arguments['format'], $margins, (bool) $this->arguments['autoPageBreak']);
+
+        if ($template !== null) {
+            $pdf->drawTemplate($template);
+        }
+
+        if ($this->arguments['tableOfContentPage']) {
+            $pdf->startTableOfContentPage();
         }
 
         $this->setPageNeedsHeader(true);
-        $this->getPDF()->setIsAutoPageBreak(true);
-        $this->getPDF()->setHeaderClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
-        $this->getPDF()->setFooterClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
-        $this->getPDF()->setImportTemplateOnThisPage($hasImportedPage && $this->arguments['importPageOnAutomaticPageBreak']);
+        $pdf->setIsAutoPageBreak(true);
+        $pdf->setHeaderClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
+        $pdf->setFooterClosure(null, BasePDF::SCOPE_THIS_PAGE_INCLUDING_PAGE_BREAKS);
+        $pdf->setCurrentTemplate($template);
+        $pdf->setImportTemplateOnThisPage($template !== null && $this->arguments['importPageOnAutomaticPageBreak']);
 
         $this->renderChildren();
 
         if ($this->pageNeedsHeader()) {
             //no auto page break occurred or no element was rendered, we still need to set the header
             $this->setPageNeedsHeader(false);
-            $this->getPDF()->renderHeader();
+            $pdf->renderHeader();
         }
 
         if ($this->arguments['tableOfContentPage']) {
-            $this->getPDF()->endTOCPage();
+            $pdf->moveTableOfContent();
         }
 
         //reset default header and footer scope to document

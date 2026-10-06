@@ -54,10 +54,6 @@ class GetPosXViewHelper extends AbstractPDFViewHelper
      */
     public function render(): float
     {
-        if ($this->arguments['absolute']) {
-            return (float) $this->getPDF()->GetAbsX();
-        } else {
-            return (float) $this->getPDF()->GetX();
-        }
+        return $this->getPDF()->getX();
     }
 }

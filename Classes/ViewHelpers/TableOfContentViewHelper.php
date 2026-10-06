@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use Bithost\Pdfviewhelpers\Model\BasePDF;
 
 /**
  * TableOfContentViewHelper
@@ -91,15 +92,18 @@ class TableOfContentViewHelper extends AbstractPDFViewHelper
     }
 
     /**
+     * @inheritDoc
+     *
      * @throws Exception
      */
     public function render(): void
     {
-        $this->getPDF()->setFontSize($this->arguments['fontSize']);
-        $this->getPDF()->SetFont($this->arguments['fontFamily']);
-        $this->getPDF()->setCellPaddings($this->arguments['padding']['left'], $this->arguments['padding']['top'], $this->arguments['padding']['right'], $this->arguments['padding']['bottom']);
-        $this->getPDF()->setCellHeightRatio($this->settings['generalText']['lineHeight']);
-        $this->getPDF()->setFontSpacing($this->arguments['characterSpacing']);
+        $pdf = $this->getPDF();
+        $pdf->setFont($this->arguments['fontFamily'], '', (float) $this->arguments['fontSize']);
+        $pdf->setLineHeight((float) $this->arguments['lineHeight']);
+        $pdf->setCharacterSpacing((float) $this->arguments['characterSpacing']);
+        $pdf->setCellPadding(0, 0);
+        $pdf->setTextColor($this->settings['generalText']['color']);
 
         if ($this->arguments['htmlMode']) {
             $this->renderChildren();
@@ -109,9 +113,75 @@ class TableOfContentViewHelper extends AbstractPDFViewHelper
                 throw new Exception('No html bookmark templates found, please add templates using the HtmlBookmarkTemplateViewHelper. ERROR: 1555308328', 1555308328);
             }
 
-            $this->getPDF()->addHTMLTOC($this->arguments['page'], $this->arguments['name'], $bookmarkTemplates);
+            $renderEntry = fn (BasePDF $pdf, array $bookmark, string $pageNumber) => $this->renderHtmlEntry($pdf, $bookmark, $pageNumber, $bookmarkTemplates);
         } else {
-            $this->getPDF()->addTOC($this->arguments['page'], $this->arguments['numbersFont'], $this->arguments['filter'], $this->arguments['name']);
+            $renderEntry = $this->renderTextEntry(...);
+        }
+
+        $pdf->writeTableOfContent((int) $this->arguments['page'], (string) $this->arguments['name'], $renderEntry);
+    }
+
+    /**
+     * Renders an entry like "Title ........ 3" with the page number aligned right
+     */
+    protected function renderTextEntry(BasePDF $pdf, array $bookmark, string $pageNumber): void
+    {
+        $padding = $this->arguments['padding'];
+        $textStyle = $pdf->getTextStyle();
+        $pdf->setY($pdf->getY() + $padding['top']);
+
+        // the first level is bold, deeper levels get smaller and indented
+        $pdf->setFont($this->arguments['fontFamily'], $bookmark['l'] === 0 ? $bookmark['s'] . 'B' : $bookmark['s'], $this->arguments['fontSize'] - $bookmark['l']);
+        $pdf->setTextColor($bookmark['c'] ?: $textStyle['color']);
+
+        $posX = $pdf->getMargins()['left'] + $padding['left'] + $pdf->getTextWidth('    ') * $bookmark['l'];
+        $width = $pdf->getPageWidth() - $pdf->getMargins()['right'] - $padding['right'] - $posX;
+
+        $pdf->setFont($this->arguments['numbersFont'], '');
+        $numberWidth = $pdf->getTextWidth(' ' . $pageNumber);
+        $fillerWidth = $this->arguments['filter'] === '' ? 0 : $pdf->getTextWidth($this->arguments['filter']);
+
+        $pdf->setFont($this->arguments['fontFamily'], $bookmark['l'] === 0 ? $bookmark['s'] . 'B' : $bookmark['s']);
+        $title = $bookmark['t'] . ' ';
+        $titleWidth = $pdf->getTextWidth($title);
+        $firstLine = $pdf->writeText($title, $posX, $pdf->getY(), $width - $numberWidth);
+        $endPage = $pdf->getPageId();
+        $endY = $pdf->getY();
+
+        $filler = '';
+
+        if ($fillerWidth > 0 && $titleWidth < $width - $numberWidth) {
+            $filler = str_repeat($this->arguments['filter'], (int) floor(($width - $numberWidth - $titleWidth) / $fillerWidth));
+        }
+
+        // the page number is written once the document is complete, as pages might still be moved by another table of content
+        $link = $pdf->addInternalLink($bookmark['p'], $bookmark['y']);
+        $pdf->setPageId($firstLine['page']);
+        $pdf->setFont($this->arguments['numbersFont'], '');
+        $pdf->writeLinkPageNumber($filler . ' #PAGE#', $link, $posX, $firstLine['y'], $width);
+        $pdf->page->addAnnotRef($pdf->setLink($posX, $firstLine['y'], $width, $pdf->getLineHeight(), $link));
+
+        $pdf->setTextStyle($textStyle);
+        $pdf->setPageId($endPage);
+        $pdf->setY($endY + $padding['bottom']);
+    }
+
+    /**
+     * Renders an entry using the HTML template of its level, the markers #TOC_DESCRIPTION# and #TOC_PAGE_NUMBER# are replaced
+     */
+    protected function renderHtmlEntry(BasePDF $pdf, array $bookmark, string $pageNumber, array $bookmarkTemplates): void
+    {
+        $template = $bookmarkTemplates[$bookmark['l']] ?? $bookmarkTemplates[max(array_keys($bookmarkTemplates))];
+        $html = str_replace(['#TOC_DESCRIPTION#', '#TOC_PAGE_NUMBER#'], [htmlspecialchars($bookmark['t']), $pageNumber], $template);
+        $posX = $pdf->getMargins()['left'];
+        $startPage = $pdf->getPageId();
+        $startY = $pdf->getY();
+
+        $pdf->writeHtml($html, $posX, $startY, $pdf->getInnerPageWidth());
+
+        if ($startPage === $pdf->getPageId()) {
+            $link = $pdf->addInternalLink($bookmark['p'], $bookmark['y']);
+            $pdf->page->addAnnotRef($pdf->setLink($posX, $startY, $pdf->getInnerPageWidth(), $pdf->getY() - $startY, $link));
         }
     }
 }

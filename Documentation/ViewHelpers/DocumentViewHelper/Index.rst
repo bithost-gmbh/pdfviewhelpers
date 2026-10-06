@@ -32,8 +32,6 @@ generating the document.
 		outputPath="example.pdf"
 		sourceFile="EXT:pdfviewhelpers/Resources/Public/Examples/ExtendExistingPDFs/pdf_template.pdf"
 		unit="cm"
-		unicode="1"
-		encoding="UTF-8"
 		pdfa="1">
 		[..]
 	</pdf:document>

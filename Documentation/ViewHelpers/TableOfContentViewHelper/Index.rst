@@ -15,9 +15,6 @@ Additionally it is possible to use the ``BookmarkViewHelper`` to add entries to 
 Note that the ``TableOfContentViewHelper`` should be placed on the last page of the document, using the ``page`` attribute it can be moved to the front.
 Please see the examples section for an extended :ref:`example of the table of content usage <tableofcontent>`.
 
-**IMPORTANT NOTICE:** Please note that TCPDF does not produce valid PDF documents when bookmarks are used.
-Although most PDF viewers are still able to render the document you might run into validity troubles using these ViewHelpers.
-
 **Regular Mode**
 
 ::

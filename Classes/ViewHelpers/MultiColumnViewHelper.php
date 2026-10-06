@@ -58,12 +58,12 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper
         $multiColumnContext['columns'] = [];
         $multiColumnContext['columnPadding'] = [];
         $multiColumnContext['numberOfColumns'] = 0;
-        $multiColumnContext['posY'] = $this->getPDF()->GetY();
+        $multiColumnContext['posY'] = $this->getPDF()->getY();
         $multiColumnContext['longestColumnPage'] = 0;
         $multiColumnContext['longestColumnPosY'] = 0;
-        $multiColumnContext['posX'] = $this->getPDF()->GetX();
-        $multiColumnContext['currentPosX'] = $this->getPDF()->GetX();
-        $multiColumnContext['startingPage'] = $this->getPDF()->getPage();
+        $multiColumnContext['posX'] = $this->getPDF()->getX();
+        $multiColumnContext['currentPosX'] = $this->getPDF()->getX();
+        $multiColumnContext['startingPage'] = $this->getPDF()->getPageId();
 
         foreach ($this->viewHelperNode->getChildNodes() as $childNode) {
             if (
@@ -90,7 +90,7 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper
 
         /** @var ViewHelperNode $column */
         foreach ($multiColumnContext['columns'] as $column) {
-            $this->getPDF()->setPage($multiColumnContext['startingPage']);
+            $this->getPDF()->setPageId($multiColumnContext['startingPage']);
             $this->getPDF()->setY($multiColumnContext['posY']);
 
             $column->evaluate($this->renderingContext);
@@ -99,18 +99,18 @@ class MultiColumnViewHelper extends AbstractPDFViewHelper
             $multiColumnContext = $this->getCurrentMultiColumnContext();
 
             if (
-                $multiColumnContext['longestColumnPage'] < $this->getPDF()->getPage()
-                || ($multiColumnContext['longestColumnPage'] === $this->getPDF()->getPage() &&  $multiColumnContext['longestColumnPosY'] < $this->getPDF()->GetY())
+                $multiColumnContext['longestColumnPage'] < $this->getPDF()->getPageId()
+                || ($multiColumnContext['longestColumnPage'] === $this->getPDF()->getPageId() &&  $multiColumnContext['longestColumnPosY'] < $this->getPDF()->getY())
             ) {
-                $multiColumnContext['longestColumnPosY'] = $this->getPDF()->GetY();
-                $multiColumnContext['longestColumnPage'] = $this->getPDF()->getPage();
+                $multiColumnContext['longestColumnPosY'] = $this->getPDF()->getY();
+                $multiColumnContext['longestColumnPage'] = $this->getPDF()->getPageId();
             }
 
             $multiColumnContext['currentPosX'] += $multiColumnContext['columnWidth'] + $multiColumnContext['columnPadding']['right'];
             $this->setCurrentMultiColumnContext($multiColumnContext);
         }
 
-        $this->getPDF()->setPage($multiColumnContext['longestColumnPage']);
+        $this->getPDF()->setPageId($multiColumnContext['longestColumnPage']);
         $this->getPDF()->setY($multiColumnContext['longestColumnPosY']);
         $this->getPDF()->setX($multiColumnContext['posX']);
 

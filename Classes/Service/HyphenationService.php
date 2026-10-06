@@ -33,8 +33,6 @@ namespace Bithost\Pdfviewhelpers\Service;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TCPDF;
-use TCPDF_STATIC;
 
 /**
  * HyphenationService
@@ -43,36 +41,19 @@ use TCPDF_STATIC;
  */
 class HyphenationService implements SingletonInterface
 {
-    protected TCPDF $pdf;
-
     /**
-     * Used to cache loading of hyphen patterns
-     */
-    protected array $hyphenPatterns = [];
-
-    /**
+     * Returns the absolute path of a TeX hyphenation pattern file shipped with this extension
+     *
      * @throws ValidationException
      */
-    public function hyphenateText(string $text, string $hyphenFilePath): string
+    public function getHyphenFilePath(string $hyphenFile): string
     {
+        $hyphenFilePath = GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Resources/Private/Hyphenation/' . $hyphenFile);
+
         if (!file_exists($hyphenFilePath) || !is_readable($hyphenFilePath)) {
             throw new ValidationException('Path to hyphen file "' . $hyphenFilePath . '" does not exist or file is not readable. ERROR: 1525410458', 1525410458);
         }
 
-        if (!isset($this->hyphenPatterns[$hyphenFilePath])) {
-            $this->hyphenPatterns[$hyphenFilePath] = TCPDF_STATIC::getHyphenPatternsFromTEX($hyphenFilePath);
-        }
-
-        return $this->pdf->hyphenateText($text, $this->hyphenPatterns[$hyphenFilePath]);
-    }
-
-    public function getHyphenFilePath(string $hyphenFile): string
-    {
-        return GeneralUtility::getFileAbsFileName('EXT:pdfviewhelpers/Resources/Private/Hyphenation/' . $hyphenFile);
-    }
-
-    public function setPDF(TCPDF $pdf): void
-    {
-        $this->pdf = $pdf;
+        return $hyphenFilePath;
     }
 }

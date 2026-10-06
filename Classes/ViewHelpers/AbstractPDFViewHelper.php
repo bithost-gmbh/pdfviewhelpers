@@ -37,8 +37,6 @@ use Bithost\Pdfviewhelpers\MultiColumn\ContextStack;
 use Bithost\Pdfviewhelpers\Service\HyphenationService;
 use Bithost\Pdfviewhelpers\Service\ConversionService;
 use Bithost\Pdfviewhelpers\Service\ValidationService;
-use ReflectionClass;
-use TCPDF;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -95,7 +93,6 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     protected function setPDF(BasePDF $pdf): void
     {
         $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pdf', $pdf);
-        $this->hyphenationService->setPDF($pdf);
     }
 
     /**
@@ -166,23 +163,16 @@ abstract class AbstractPDFViewHelper extends AbstractViewHelper
     }
 
     /**
+     * Returns the path of the hyphenation pattern file configured for the current document
+     *
      * @throws ValidationException
      */
-    protected function getHyphenFileName(): string
+    protected function getHyphenFilePath(): string
     {
         if ($this->viewHelperVariableContainer->exists('DocumentViewHelper', 'hyphenFile')) {
-            return $this->viewHelperVariableContainer->get('DocumentViewHelper', 'hyphenFile');
+            return $this->hyphenationService->getHyphenFilePath($this->viewHelperVariableContainer->get('DocumentViewHelper', 'hyphenFile'));
         } else {
             throw new ValidationException('No hyphenFile configured, make sure to configure a hyphenFile for the DocumentViewHelper. ERROR: 1536993844', 1536993844);
         }
-    }
-
-    protected function getTCPDFInstallPath(?string $path): string
-    {
-        $reflector = new ReflectionClass(TCPDF::class);
-        $pathParts = pathinfo($reflector->getFileName());
-        $installFolder = $pathParts['dirname'];
-
-        return rtrim($installFolder, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . ltrim($path ?? '', DIRECTORY_SEPARATOR);
     }
 }

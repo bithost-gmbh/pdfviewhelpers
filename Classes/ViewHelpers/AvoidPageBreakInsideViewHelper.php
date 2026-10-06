@@ -30,9 +30,6 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Exception\Exception;
-use Bithost\Pdfviewhelpers\Model\BasePDF;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * AvoidPageBreakInsideViewHelper
@@ -52,60 +49,40 @@ class AvoidPageBreakInsideViewHelper extends AbstractPDFViewHelper
     }
 
     /**
-     * @throws Exception
+     * @inheritDoc
      */
     public function render(): void
     {
         $realPDF = $this->getPDF();
-        $shadowPDF = $this->prepareShadowPdf($realPDF);
-        $startPage = $shadowPDF->getPage();
+        $startPage = $realPDF->getPageId();
+        $startY = $realPDF->getY();
 
-        $shadowPDF->SetY($realPDF->GetY());
+        // render the children into a shadow document in order to find out whether they break across pages
+        $shadowPDF = $realPDF->createShadow();
+        $pageNeedsHeader = $this->viewHelperVariableContainer->get('DocumentViewHelper', 'pageNeedsHeader');
         $this->setPDF($shadowPDF);
         $this->renderChildren();
         $this->setPDF($realPDF);
+        $this->viewHelperVariableContainer->addOrUpdate('DocumentViewHelper', 'pageNeedsHeader', $pageNeedsHeader);
 
-        $endPage = $shadowPDF->getPage();
-        $pageStep = $endPage - $startPage;
+        $pageStep = $shadowPDF->getPageId();
 
         if ($pageStep > 0) {
             if ($this->arguments['breakIfImpossibleToAvoid']) {
                 //we always break, even if a page break is unavoidable because the content is too long
-                $realPDF->AddPage();
-            } else if ($pageStep === 1) {
+                $realPDF->nextPage();
+            } elseif ($pageStep === 1) {
                 //only break if the content fits on the next page
-                $firstPageChildrenHeight = $realPDF->getScaledPageHeight($startPage) - $realPDF->GetY() - $realPDF->getBreakMargin($startPage);
-                $secondPageChildrenHeight = $shadowPDF->GetY() - $realPDF->getMargins()['top'];
-                $totalChildrenHeight = $firstPageChildrenHeight + $secondPageChildrenHeight;
-                $innerPageHeight = $realPDF->getScaledInnerPageHeight();
+                $firstPageChildrenHeight = $realPDF->getPageBreakY() - $startY;
+                $secondPageChildrenHeight = $shadowPDF->getY() - $realPDF->getMargins()['top'];
 
-                if ($totalChildrenHeight <= $innerPageHeight) {
-                    $realPDF->AddPage();
+                if ($firstPageChildrenHeight + $secondPageChildrenHeight <= $realPDF->getInnerPageHeight()) {
+                    $realPDF->nextPage();
                 }
-            } else {
-                //Content is longer than one page, do not add page break
             }
+            //else the content is longer than one page, do not add page break
         }
 
         $this->renderChildren();
-    }
-
-    protected function prepareShadowPdf(BasePDF $realPdf): BasePDF
-    {
-        /** @var BasePDF $shadowPDF */
-        $shadowPDF = GeneralUtility::makeInstance(
-            $this->settings['config']['class'],
-            $realPdf->getCurrentPageOrientation(),
-            $realPdf->getPdfUnit(),
-            $realPdf->getCurrentPageFormat()
-        );
-        $realPdfMargins = $realPdf->getMargins();
-
-        $shadowPDF->SetMargins($realPdfMargins['left'], $realPdfMargins['top'], $realPdfMargins['right']);
-        $shadowPDF->SetAutoPageBreak(true, $realPdfMargins['bottom']);
-        $shadowPDF->setCustomFontFilePaths($realPdf->getCustomFontFilePaths());
-        $shadowPDF->AddPage();
-
-        return $shadowPDF;
     }
 }

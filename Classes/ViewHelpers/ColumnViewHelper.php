@@ -84,8 +84,8 @@ class ColumnViewHelper extends AbstractPDFViewHelper
      */
     public function render(): void
     {
-        $this->getPDF()->setY($this->getPDF()->GetY() + $this->arguments['padding']['top']);
+        $this->getPDF()->setY($this->getPDF()->getY() + $this->arguments['padding']['top']);
         $this->renderChildren();
-        $this->getPDF()->setY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
+        $this->getPDF()->setY($this->getPDF()->getY() + $this->arguments['padding']['bottom']);
     }
 }

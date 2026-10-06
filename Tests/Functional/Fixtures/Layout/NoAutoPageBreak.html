@@ -1,0 +1,7 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:pdf="http://typo3.org/ns/Bithost/Pdfviewhelpers/ViewHelpers" data-namespace-typo3-fluid="true">
+<pdf:document outputDestination="string">
+    <pdf:page format="{0: 100, 1: 80}" autoPageBreak="0" margin="{top: 10, right: 10, bottom: 10, left: 10}">
+        <f:for each="{0:1,1:2,2:3,3:4,4:5}" as="i"><pdf:text>Paragraph {i} Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</pdf:text></f:for>
+    </pdf:page>
+</pdf:document>
+</html>

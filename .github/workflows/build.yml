@@ -17,10 +17,6 @@ jobs:
           - { TYPO3_VERSION: 14, PHP_VERSION: 8.4 }
           - { TYPO3_VERSION: 14, PHP_VERSION: 8.5 }
 
-    env:
-      TCPDF_VERSION: 6.11.3
-      FPDI_VERSION: 2.6.8
-
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -48,11 +44,6 @@ jobs:
       - name: Install TYPO3 core
         env: ${{ matrix.env }}
         run: composer require typo3/cms-core="^${TYPO3_VERSION}"
-
-      - name: Install specific TCPDF and FPDI versions for reproducible tests
-        run: |
-          composer require tecnickcom/tcpdf="${TCPDF_VERSION}"
-          composer require setasign/fpdi="${FPDI_VERSION}"
 
       - name: PHPCS
         run: .Build/bin/phpcs -n --standard=PSR12 Classes/

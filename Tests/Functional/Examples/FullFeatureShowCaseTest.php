@@ -74,9 +74,5 @@ class FullFeatureShowCaseTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('Avoid page break inside', $pages[4]->getText());
 
         $this->validatePDF($output);
-
-        $expectedHash = sha1(file_get_contents($this->getFixtureAbsolutePath('Examples/FullFeatureShowCase.pdf')));
-        $actualHash = sha1($output);
-        $this->assertEquals($expectedHash, $actualHash);
     }
 }

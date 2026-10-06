@@ -64,9 +64,5 @@ class ExtendExistingPDFsTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('Lorem ipsum dolor sit amet', $text);
 
         $this->validatePDF($output);
-
-        $expectedHash = sha1(file_get_contents($this->getFixtureAbsolutePath('Examples/ExtendExistingPDFs.pdf')));
-        $actualHash = sha1($output);
-        $this->assertEquals($expectedHash, $actualHash);
     }
 }

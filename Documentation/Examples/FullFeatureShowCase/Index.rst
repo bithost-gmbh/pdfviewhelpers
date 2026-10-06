@@ -173,25 +173,17 @@ PHP
 	class FullFeatureShowCase extends BasePDF
 	{
 		/**
-		 * @return void
+		 * @inheritdoc
 		 */
-		public function basePdfHeader()
+		protected function basePdfFooter(): void
 		{
-		}
+			$posY = $this->getPageHeight() - 20;
 
-		/**
-		 * @return void
-		 */
-		public function basePdfFooter()
-		{
-			$this->SetY(-20);
-			$this->SetDrawColor(140, 140, 140);
-			$this->Line(15, $this->y, $this->w - 15, $this->y);
+			$this->drawLine(15, $posY, $this->getPageWidth() - 15, $posY, ['lineWidth' => 0.2, 'lineColor' => '#8c8c8c']);
 
-			$this->SetY(-17);
-			$this->SetTextColor(140, 140, 140);
-			$this->SetFontSize(11);
-			$this->Cell($this->w - 15, 10, 'Page ' . $this->getAliasNumPage() . ' of ' . $this->getAliasNbPages(), 0, false, 'C', 0, '', 1, false, 'T', 'M');
+			$this->setTextColor('#8c8c8c');
+			$this->setFontSize(11);
+			$this->writeText('Page ' . $this->page::PAGE_NUM . ' of ' . $this->page::PAGE_TOT, 15, $posY + 3, $this->getPageWidth() - 30, 'C');
 		}
 	}
 
@@ -377,6 +369,7 @@ Fluid Template
 				<pdf:headline>Avoid page break inside</pdf:headline>
 				<pdf:text>EXT:pdfviewhelpers tries to avoid page breaks inside ViewHelpers that are wrapped with an AvoidPageBreakInsideViewHelper.</pdf:text>
 				<pdf:text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</pdf:text>
+				<pdf:text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</pdf:text>
 				<pdf:text>That is why all these elements are rendered on the next page.</pdf:text>
 			</pdf:avoidPageBreakInside>
 		</pdf:page>

@@ -3,7 +3,7 @@
 	"type": "typo3-cms-extension",
 	"license": "GPL-3.0-or-later",
 	"description": "This is a TYPO3 CMS extension that provides various Fluid ViewHelpers to generate PDF documents.",
-	"keywords": ["PDF", "ViewHelpers", "Fluid", "generation", "generator", "TCPDF", "FPDI"],
+	"keywords": ["PDF", "ViewHelpers", "Fluid", "generation", "generator", "TCPDF", "tc-lib-pdf"],
 	"homepage": "https://github.com/bithost-gmbh/pdfviewhelpers",
 	"authors": [
 		{
@@ -19,8 +19,8 @@
 		"ext-json": "*",
 		"typo3/cms-core": "^13.4 || ^14.3",
 		"php": ">=8.2.0",
-		"tecnickcom/tcpdf": "^6.2",
-		"setasign/fpdi": "^2.0"
+		"tecnickcom/tc-lib-pdf": "^8.78",
+		"tecnickcom/tc-lib-pdf-font": "^4.5"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^11",
@@ -33,8 +33,7 @@
 			"Bithost\\Pdfviewhelpers\\": "Classes"
 		},
 		"classmap": [
-			"Resources/Private/PHP/tcpdf/",
-			"Resources/Private/PHP/fpdi/src/"
+			"Resources/Private/PHP/"
 		]
 	},
 	"autoload-dev": {
@@ -59,17 +58,9 @@
 			"TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
 		],
 		"prepare-release": [
-			"rm -rf Resources/Private/PHP/tcpdf",
-			"wget https://github.com/tecnickcom/TCPDF/archive/refs/tags/6.11.3.zip -O Resources/Private/PHP/tcpdf.zip",
-			"unzip Resources/Private/PHP/tcpdf.zip -d Resources/Private/PHP/",
-			"mv Resources/Private/PHP/TCPDF-* Resources/Private/PHP/tcpdf",
-			"rm Resources/Private/PHP/tcpdf.zip",
-
-			"rm -rf Resources/Private/PHP/fpdi",
-			"wget https://github.com/Setasign/FPDI/archive/refs/tags/v2.6.8.zip -O Resources/Private/PHP/fpdi.zip",
-			"unzip Resources/Private/PHP/fpdi.zip -d Resources/Private/PHP/",
-			"mv Resources/Private/PHP/FPDI-* Resources/Private/PHP/fpdi",
-			"rm Resources/Private/PHP/fpdi.zip",
+			"rm -rf Resources/Private/PHP/vendor",
+			"@composer require --working-dir=Resources/Private/PHP --no-interaction --no-plugins --no-scripts tecnickcom/tc-lib-pdf:8.78.2",
+			"rm -rf Resources/Private/PHP/composer.json Resources/Private/PHP/composer.lock Resources/Private/PHP/vendor/composer Resources/Private/PHP/vendor/autoload.php",
 
 			"rm -rf Tests/",
 			"rm -rf .github/",

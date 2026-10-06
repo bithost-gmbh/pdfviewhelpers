@@ -44,6 +44,6 @@ class PageBreakViewHelper extends AbstractPDFViewHelper
      */
     public function render(): void
     {
-        $this->getPDF()->AddPage();
+        $this->getPDF()->nextPage();
     }
 }

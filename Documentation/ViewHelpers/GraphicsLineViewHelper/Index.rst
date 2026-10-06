@@ -10,7 +10,7 @@ Graphics LineViewHelper
 
 This ViewHelper allows to render a simple line. By default it renders a horizontal line matching the current page width.
 It is however also possible to specify start and end point of the line explicitly.
-Please see https://tcpdf.org/examples/example_012/ to find out what values can be used on the style attribute.
+The style attribute supports the keys ``width``, ``color``, ``cap`` (butt, round, square), ``join`` (miter, round, bevel), ``dash`` (e.g. ``3,1``) and ``phase``.
 
 **Basic Usage**
 

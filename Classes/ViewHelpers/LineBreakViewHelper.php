@@ -54,6 +54,6 @@ class LineBreakViewHelper extends AbstractPDFViewHelper
      */
     public function render(): void
     {
-        $this->getPDF()->Ln($this->arguments['height']);
+        $this->getPDF()->addVerticalSpace((float) $this->arguments['height']);
     }
 }

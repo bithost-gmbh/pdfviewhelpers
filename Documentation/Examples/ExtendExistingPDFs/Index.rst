@@ -18,10 +18,10 @@ Intro
 -----
 
 There is the possibility to load existing PDF documents and use them as template. Under the hood pdfviewhelpers
-uses FPDI_ to import PDF documents as template. You must include the static TypoScript template of the extension
+uses the PDF import of tc-lib-pdf_ to use pages of PDF documents as template. You must include the static TypoScript template of the extension
 in order to make this example work.
 
-.. _FPDI: https://www.setasign.com/
+.. _tc-lib-pdf: https://github.com/tecnickcom/tc-lib-pdf
 
 .. _extendexistingpdfs_typoscript:
 
@@ -65,7 +65,7 @@ Fluid Template
 			<pdf:headline>Here is the header</pdf:headline>
 			<pdf:text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</pdf:text>
 			<pdf:html autoHyphenation="1">
-				<h1 style="font-weight: normal; font-size: 16px;">Here is the HTML header</h1>
+				<h1 style="font-weight: normal; font-size: 16pt;">Here is the HTML header</h1>
 				<p>Lorem ipsum dolor sit amet, consetetur
 					sadipscingelitrseddiamnonumyeirmodtemporinviduntutlaboreetdoloremagnaaliquyameratseddiam
 					voluptua. At vero eos et dolores et ea rebum. Stet

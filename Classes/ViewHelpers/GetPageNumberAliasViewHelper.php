@@ -44,6 +44,6 @@ class GetPageNumberAliasViewHelper extends AbstractPDFViewHelper
      */
     public function render(): string
     {
-        return $this->getPDF()->getAliasNumPage();
+        return $this->getPDF()->page::PAGE_NUM;
     }
 }

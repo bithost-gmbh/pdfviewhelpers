@@ -30,7 +30,6 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * * */
 
-use Bithost\Pdfviewhelpers\Exception\Exception;
 use Bithost\Pdfviewhelpers\Exception\ValidationException;
 
 /**
@@ -86,7 +85,7 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
     /**
      * @inheritDoc
      *
-     * @throws Exception
+     * @throws ValidationException
      */
     public function initialize(): void
     {
@@ -95,11 +94,6 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
         $this->mergeSettingsAndArguments();
 
         if (empty($this->arguments['text'])) {
-            // Workaround for an issue with the PageNumberAliasViewHelper and custom fonts, also see https://github.com/bithost-gmbh/pdfviewhelpers/issues/187
-            if ($this->validationService->validateFontFamily($this->arguments['fontFamily'])) {
-                $this->getPDF()->SetFont($this->arguments['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($this->arguments['fontStyle']));
-            }
-
             $this->arguments['text'] = (string) $this->renderChildren();
         }
 
@@ -111,53 +105,45 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
             $this->arguments['text'] = preg_replace('/[ \t]+/', ' ', (string) $this->arguments['text']);
         }
 
-        if ($this->arguments['autoHyphenation']) {
-            $this->arguments['text'] = $this->hyphenationService->hyphenateText(
-                (string) $this->arguments['text'],
-                $this->hyphenationService->getHyphenFilePath($this->getHyphenFileName())
-            );
-        }
-
         if ($this->validationService->validateColor($this->arguments['color'])) {
-            $this->arguments['color'] = $this->conversionService->convertHexToRGB($this->arguments['color']);
-            $this->getPDF()->setTextColor($this->arguments['color']['R'], $this->arguments['color']['G'], $this->arguments['color']['B']);
+            $this->getPDF()->setTextColor($this->arguments['color']);
         }
 
         if ($this->validationService->validateFontSize($this->arguments['fontSize'])) {
-            $this->getPDF()->setFontSize($this->arguments['fontSize']);
+            $this->getPDF()->setFontSize((float) $this->arguments['fontSize']);
         }
 
         if ($this->validationService->validateFontFamily($this->arguments['fontFamily'])) {
-            $this->getPDF()->SetFont($this->arguments['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($this->arguments['fontStyle']));
+            $this->getPDF()->setFont($this->arguments['fontFamily'], $this->conversionService->convertSpeakingFontStyleToTcpdfFontStyle($this->arguments['fontStyle']));
         }
 
         if ($this->validationService->validateLineHeight($this->arguments['lineHeight'])) {
-            $this->getPDF()->setCellHeightRatio($this->arguments['lineHeight']);
+            $this->getPDF()->setLineHeight((float) $this->arguments['lineHeight']);
         }
 
         if ($this->validationService->validateCharacterSpacing($this->arguments['characterSpacing'])) {
-            $this->getPDF()->setFontSpacing($this->arguments['characterSpacing']);
+            $this->getPDF()->setCharacterSpacing((float) $this->arguments['characterSpacing']);
         }
 
         if ($this->validationService->validatePadding($this->arguments['padding'])) {
-            $this->getPDF()->setCellPaddings(
-                $this->arguments['padding']['left'],
-                0,
-                $this->arguments['padding']['right'],
-                0
-            );
+            $this->getPDF()->setCellPadding((float) $this->arguments['padding']['left'], (float) $this->arguments['padding']['right']);
         }
     }
 
     /**
-     * @throws Exception
+     * @inheritDoc
+     *
+     * @throws ValidationException
      */
     public function render(): void
     {
         $this->initializeMultiColumnSupport();
 
+        $pdf = $this->getPDF();
         $paragraphs = explode("\n", str_replace("\r\n", "\n", (string) $this->arguments['text']));
         $posY = $this->arguments['posY'] + $this->arguments['padding']['top'];
+
+        $pdf->setHyphenation($this->arguments['autoHyphenation'] ? $this->getHyphenFilePath() : '');
 
         foreach ($paragraphs as $paragraph) {
             if ($this->arguments['trim']) {
@@ -168,16 +154,17 @@ abstract class AbstractTextViewHelper extends AbstractContentElementViewHelper
                 $paragraph .= "\n";
             }
 
-            $this->getPDF()->MultiCell($this->arguments['width'], $this->arguments['height'] / count($paragraphs), $paragraph, 0, $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), false, 1, $this->arguments['posX'], $posY, true, 0, false, true, 0, 'T', false);
+            $pdf->writeText($paragraph, (float) $this->arguments['posX'], $posY, $this->arguments['width'], $this->conversionService->convertSpeakingAlignmentToTcpdfAlignment($this->arguments['alignment']), (float) $this->arguments['height'] / count($paragraphs));
 
             if ($this->validationService->validateParagraphSpacing($this->arguments['paragraphSpacing']) && $this->arguments['paragraphSpacing'] > 0) {
-                $this->getPDF()->Ln((float)$this->arguments['paragraphSpacing'], false);
+                $pdf->addVerticalSpace((float) $this->arguments['paragraphSpacing']);
             }
 
-            $posY = $this->getPDF()->GetY();
+            $posY = $pdf->getY();
         }
 
-        $this->getPDF()->setY($this->getPDF()->GetY() + $this->arguments['padding']['bottom']);
+        $pdf->setHyphenation('');
+        $pdf->setY($pdf->getY() + $this->arguments['padding']['bottom']);
     }
 
     protected function mergeSettingsArrays(array $default, array $overwrite): array

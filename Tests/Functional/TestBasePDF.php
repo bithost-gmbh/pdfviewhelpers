@@ -37,16 +37,15 @@ use Bithost\Pdfviewhelpers\Model\BasePDF;
  */
 class TestBasePDF extends BasePDF
 {
-    /**
-     * @return void
-     */
-    public function __construct($orientation = 'P', $unit = 'mm', $format = 'A4', $unicode = true, $encoding = 'UTF-8', $diskcache = false, $pdfa = true)
+    public function __construct(string $unit = 'mm', bool $subsetFonts = true, string $mode = '')
     {
-        parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache, $pdfa);
+        parent::__construct($unit, $subsetFonts, $mode);
 
-        //overwrite creation time and file_id in order to be able to compare file contents
-        $this->doc_creation_timestamp = strtotime('28 mar 2013');
-        $this->doc_modification_timestamp = $this->doc_creation_timestamp;
-        $this->file_id = md5('foobar');
+        //overwrite creation time and file id in order to get reproducible documents, e.g. to compare them
+        $time = (int) strtotime('28 mar 2013 UTC');
+        $this->setDocCreationDate($time);
+        $this->setDocModificationDate($time);
+        $this->setFileId(md5('foobar'));
+        $this->setDocumentId(md5('foobar'));
     }
 }

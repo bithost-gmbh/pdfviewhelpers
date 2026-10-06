@@ -1,5 +1,15 @@
 # Changelog for TYPO3 CMS Extension pdfviewhelpers
 
+## 5.0.0 - Unreleased
+
+- Replaces TCPDF and FPDI with tc-lib-pdf, see the upgrade guide for breaking changes
+- Adds the core fonts and their PDF/A variants to the extension
+- Adds support for page number aliases with custom fonts in headers and footers
+- Drops support for EPS and AI images
+- Removes the `unicode` and `encoding` settings of the `DocumentViewHelper`
+- Fixes header not being rendered if the first element of a page is wrapped by an `AvoidPageBreakInsideViewHelper`
+- Fixes invalid PDF documents when using bookmarks
+
 ## 4.0.2 - September 11, 2026
 
 - Fixes `characterSpacing` validation not allowing negative values, [#275](https://github.com/bithost-gmbh/pdfviewhelpers/issues/275)

@@ -202,8 +202,6 @@ class ConversionService implements SingletonInterface
 
         if (in_array($extension, $this->convertImageTypeStringToImageTypeArray($settings['config']['allowedImageTypes']['image']))) {
             return 'image';
-        } elseif (in_array($extension, $this->convertImageTypeStringToImageTypeArray($settings['config']['allowedImageTypes']['imageEPS']))) {
-            return 'imageEPS';
         } elseif (in_array($extension, $this->convertImageTypeStringToImageTypeArray($settings['config']['allowedImageTypes']['imageSVG']))) {
             return 'imageSVG';
         } else {

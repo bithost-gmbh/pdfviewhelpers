@@ -48,6 +48,7 @@ class TableOfContentTest extends AbstractFunctionalTestCase
     public function testTableOfContent(): void
     {
         $output = $this->renderFluidTemplate($this->getFixtureExtPath('Examples/TableOfContent.html'));
+        file_put_contents(__DIR__ . '/../../Output/TableOfContent.pdf', $output);
         $pdf = $this->parseContent($output);
         $pages = $pdf->getPages();
 
@@ -86,7 +87,6 @@ class TableOfContentTest extends AbstractFunctionalTestCase
         $this->assertStringContainsStringIgnoringCase('Here is some text', $pages[4]->getText());
         $this->assertStringContainsStringIgnoringCase('Headline not in table of content', $pages[4]->getText());
 
-        //Do not validate as TCPDF does not produce valid documents having bookmarks
-        //$this->validatePDF($output);
+        $this->validatePDF($output);
     }
 }

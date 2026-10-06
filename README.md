@@ -9,7 +9,7 @@
 ## Introduction
 This is a TYPO3 CMS extension that provides various Fluid ViewHelpers to generate PDF documents.
 Using the ViewHelpers from this extension you can make any Fluid template into a PDF document.
-The extension `pdfviewhelpers` is using [TCPDF](https://tcpdf.org/) and [FPDI](https://www.setasign.com/products/fpdi) for the PDF generation.
+The extension `pdfviewhelpers` is using [tc-lib-pdf](https://github.com/tecnickcom/tc-lib-pdf), the successor of [TCPDF](https://tcpdf.org/), for the PDF generation.
 
 ## Key features
 

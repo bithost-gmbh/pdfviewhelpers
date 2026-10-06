@@ -2,7 +2,7 @@
 
 $EM_CONF[$_EXTKEY] = [
 	'title' => 'PDF ViewHelpers',
-	'description' => 'Provides various Fluid ViewHelpers to create PDF documents. Under the hood pdfviewhelpers uses TCPDF and FPDI.',
+	'description' => 'Provides various Fluid ViewHelpers to create PDF documents. Under the hood pdfviewhelpers uses tc-lib-pdf.',
 	'category' => 'fe',
 	'author' => 'Markus Mächler, Esteban Gehring',
 	'author_email' => 'markus.maechler@bithost.ch, esteban.gehring@bithost.ch',

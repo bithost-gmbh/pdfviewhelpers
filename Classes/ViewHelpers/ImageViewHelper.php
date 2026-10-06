@@ -31,6 +31,7 @@ namespace Bithost\Pdfviewhelpers\ViewHelpers;
  * * */
 
 use Bithost\Pdfviewhelpers\Exception\Exception;
+use Bithost\Pdfviewhelpers\Exception\ValidationException;
 use TYPO3\CMS\Core\Imaging\ImageManipulation\CropVariantCollection;
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -81,102 +82,57 @@ class ImageViewHelper extends AbstractContentElementViewHelper
     }
 
     /**
-     * @throws Exception
+     * @inheritDoc
+     *
+     * @throws ValidationException
      */
     public function render(): void
     {
         $this->initializeMultiColumnSupport();
 
         $imageFile = $this->conversionService->convertFileSrcToFileObject($this->arguments['src']);
+
         if ($imageFile) {
             $processedImage = $this->processImage($imageFile, $this->arguments['processingInstructions']);
-
-            $src = $processedImage->getContents();
+            $data = $processedImage->getContents();
             $extension = $processedImage->getExtension();
         } else {
             $imageFileName = GeneralUtility::getFileAbsFileName($this->arguments['src']);
+
             if ($imageFileName && file_exists($imageFileName)) {
-                $src = file_get_contents($imageFileName);
+                $data = file_get_contents($imageFileName);
                 $extension = pathinfo($imageFileName, PATHINFO_EXTENSION);
             } else {
                 throw new UnexpectedValueException('Provided image source can\'t be loaded: ' . $this->arguments['src'], 1729853325);
             }
         }
-        // prepend @ symbol to tell PDF renderer this is inline content
-        $src = '@' . $src;
 
+        $pdf = $this->getPDF();
         $multiColumnContext = $this->getCurrentMultiColumnContext();
         $isInAColumn = is_array($multiColumnContext) && ($multiColumnContext['isInAColumn'] ?? false);
-        $initialMargins = $this->getPDF()->getMargins();
-        $this->arguments['posY'] += $this->arguments['padding']['top'];
+        $alignLeft = $this->arguments['posX'] + $this->arguments['padding']['left'];
 
         if ($isInAColumn) {
-            $marginLeft = $this->arguments['posX'] + $this->arguments['padding']['left'];
-            $marginRight =  $this->getPDF()->getPageWidth() - $marginLeft - $multiColumnContext['columnWidth'] + $this->arguments['padding']['right'];
+            $alignRight = $alignLeft + $multiColumnContext['columnWidth'] - $this->arguments['padding']['right'];
         } else {
-            $marginLeft = $this->arguments['posX'] + $this->arguments['padding']['left'];
-            $marginRight = $initialMargins['right'] + $this->arguments['padding']['right'];
+            $alignRight = $pdf->getPageWidth() - $pdf->getMargins()['right'] - $this->arguments['padding']['right'];
         }
 
-        $this->getPDF()->setMargins($marginLeft, $initialMargins['top'], $marginRight);
+        $pdf->drawImage(
+            $data,
+            $this->conversionService->convertImageExtensionToRenderMode($extension) === 'imageSVG' ? 'svg' : 'image',
+            (float) $this->arguments['posX'],
+            $this->arguments['posY'] + $this->arguments['padding']['top'],
+            $this->arguments['width'] ? (float) $this->arguments['width'] : null,
+            $this->arguments['height'] ? (float) $this->arguments['height'] : null,
+            $this->arguments['alignment'],
+            $alignLeft,
+            $alignRight,
+            (bool) $this->arguments['fitOnPage'],
+            (string) $this->arguments['link'],
+        );
 
-        switch ($this->conversionService->convertImageExtensionToRenderMode($extension)) {
-            case 'image':
-                $this->getPDF()->Image(
-                    $src,
-                    $this->arguments['posX'],
-                    $this->arguments['posY'],
-                    $this->arguments['width'],
-                    $this->arguments['height'],
-                    $extension,
-                    $this->arguments['link'],
-                    '',
-                    false,
-                    300,
-                    $this->arguments['alignment'],
-                    false,
-                    false,
-                    0,
-                    true,
-                    false,
-                    $this->arguments['fitOnPage'],
-                    false
-                );
-                break;
-            case 'imageEPS':
-                $this->getPDF()->ImageEps(
-                    $src,
-                    $this->arguments['posX'],
-                    $this->arguments['posY'],
-                    $this->arguments['width'],
-                    $this->arguments['height'],
-                    $this->arguments['link'],
-                    true,
-                    '',
-                    $this->arguments['alignment'],
-                    0,
-                    $this->arguments['fitOnPage'],
-                    false
-                );
-                break;
-            case 'imageSVG':
-                $this->getPDF()->ImageSVG(
-                    $src,
-                    $this->arguments['posX'],
-                    $this->arguments['posY'],
-                    $this->arguments['width'],
-                    $this->arguments['height'],
-                    $this->arguments['link'],
-                    '',
-                    $this->arguments['alignment'],
-                    0,
-                    $this->arguments['fitOnPage']
-                );
-                break;
-        }
-
-        $this->getPDF()->setMargins($initialMargins['left'], $initialMargins['top'], $initialMargins['right']);
-        $this->getPDF()->setY($this->getPDF()->getImageRBY() + $this->arguments['padding']['bottom']);
+        $pdf->setY($pdf->getY() + $this->arguments['padding']['bottom']);
     }
 
     protected function processImage(FileInterface $imageFile, array $processingInstructions): FileInterface

@@ -71,13 +71,9 @@ class LineViewHelper extends AbstractContentElementViewHelper
 
         $this->validationService->validatePadding($this->arguments['padding']);
 
-        if ($this->validationService->validateColor($this->arguments['style']['color'])) {
-            $this->arguments['style']['color'] = $this->conversionService->convertHexToRGB($this->arguments['style']['color']);
-        }
+        $this->validationService->validateColor($this->arguments['style']['color']);
 
-        if (is_numeric($this->arguments['style']['width'])) {
-            $this->arguments['style']['width'] = (float) $this->arguments['style']['width'];
-        } else {
+        if (!is_numeric($this->arguments['style']['width'])) {
             throw new ValidationException('Invalid Line width "' . $this->arguments['style']['width'] . '" provided, must be numeric. ERROR: 1536157900', 1536157900);
         }
 
@@ -86,13 +82,13 @@ class LineViewHelper extends AbstractContentElementViewHelper
             $this->arguments['fromX'] = $pageMargins['left'];
         }
         if ($this->arguments['fromY'] === null) {
-            $this->arguments['fromY'] = $this->getPDF()->GetY();
+            $this->arguments['fromY'] = $this->getPDF()->getY();
         }
         if ($this->arguments['toX'] === null) {
             $this->arguments['toX'] =  $this->getPDF()->getPageWidth() - $pageMargins['right'];
         }
         if ($this->arguments['toY'] === null) {
-            $this->arguments['toY'] = $this->getPDF()->GetY();
+            $this->arguments['toY'] = $this->getPDF()->getY();
         }
     }
 
@@ -101,16 +97,25 @@ class LineViewHelper extends AbstractContentElementViewHelper
      */
     public function render(): void
     {
-        $this->getPDF()->Line(
+        $style = $this->arguments['style'];
+
+        $this->getPDF()->drawLine(
             $this->arguments['fromX'] + $this->arguments['padding']['left'],
             $this->arguments['fromY'] + $this->arguments['padding']['top'],
             $this->arguments['toX'] - $this->arguments['padding']['right'],
             $this->arguments['toY'] + $this->arguments['padding']['top'],
-            $this->arguments['style']
+            array_filter([
+                'lineWidth' => (float) $style['width'],
+                'lineColor' => $style['color'],
+                'lineCap' => $style['cap'] ?? null,
+                'lineJoin' => $style['join'] ?? null,
+                'dashArray' => !empty($style['dash']) ? array_map('floatval', explode(',', (string) $style['dash'])) : null,
+                'dashPhase' => isset($style['phase']) ? (float) $style['phase'] : null,
+            ], fn ($value) => $value !== null)
         );
 
         if ($this->arguments['padding']['bottom'] > 0) {
-            $this->getPDF()->setAbsY($this->getPDF()->GetY() + $this->arguments['padding']['top'] + $this->arguments['padding']['bottom']);
+            $this->getPDF()->setY($this->getPDF()->getY() + $this->arguments['padding']['top'] + $this->arguments['padding']['bottom']);
         }
     }
 }

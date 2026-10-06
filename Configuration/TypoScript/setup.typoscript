@@ -9,7 +9,6 @@ plugin.tx_pdfviewhelpers.settings {
 		sRGBMode = 0
 		allowedImageTypes {
 			image = jpg,jpeg,png,gif
-			imageEPS = ai,eps
 			imageSVG = svg
 		}
 		fonts {
@@ -35,8 +34,6 @@ plugin.tx_pdfviewhelpers.settings {
 		outputPath = document.pdf
 		sourceFile =
 		unit = mm
-		unicode = 1
-		encoding = UTF-8
 		pdfa = 0
 		pdfua = 0
 		language = ger

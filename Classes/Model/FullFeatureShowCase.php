@@ -40,22 +40,14 @@ class FullFeatureShowCase extends BasePDF
     /**
      * @inheritdoc
      */
-    public function basePdfHeader(): void
+    protected function basePdfFooter(): void
     {
-    }
+        $posY = $this->getPageHeight() - 20;
 
-    /**
-     * @inheritdoc
-     */
-    public function basePdfFooter(): void
-    {
-        $this->setY(-20);
-        $this->setDrawColor(140, 140, 140);
-        $this->Line(15, $this->y, $this->w - 15, $this->y);
+        $this->drawLine(15, $posY, $this->getPageWidth() - 15, $posY, ['lineWidth' => 0.2, 'lineColor' => '#8c8c8c']);
 
-        $this->setY(-17);
-        $this->setTextColor(140, 140, 140);
+        $this->setTextColor('#8c8c8c');
         $this->setFontSize(11);
-        $this->Cell($this->w - 15, 10, 'Page ' . $this->getAliasNumPage() . ' of ' . $this->getAliasNbPages(), 0, false, 'C', 0, '', 1);
+        $this->writeText('Page ' . $this->page::PAGE_NUM . ' of ' . $this->page::PAGE_TOT, 15, $posY + 3, $this->getPageWidth() - 30, 'C');
     }
 }

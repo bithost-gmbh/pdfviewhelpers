@@ -65,14 +65,7 @@ class HeadlineViewHelper extends AbstractTextViewHelper
         parent::initialize();
 
         if ($this->arguments['addToTableOfContent']) {
-            $this->getPDF()->Bookmark(
-                $this->arguments['text'],
-                $this->arguments['tableOfContentLevel'],
-                -1,
-                '',
-                '',
-                $this->arguments['color']
-            );
+            $this->getPDF()->addBookmark($this->arguments['text'], (int) $this->arguments['tableOfContentLevel'], '', $this->arguments['color']);
         }
     }
 }

@@ -70,9 +70,7 @@ class BookmarkViewHelper extends AbstractPDFViewHelper
             $this->arguments['color'] = $this->settings['generalText']['color'];
         }
 
-        if ($this->validationService->validateColor($this->arguments['color'])) {
-            $this->arguments['color'] = $this->conversionService->convertHexToRGB($this->arguments['color']);
-        }
+        $this->validationService->validateColor($this->arguments['color']);
 
         if (empty($this->arguments['fontStyle'])) {
             $this->arguments['fontStyle'] = $this->settings['generalText']['fontStyle'];
@@ -86,15 +84,6 @@ class BookmarkViewHelper extends AbstractPDFViewHelper
      */
     public function render(): void
     {
-        $this->getPDF()->Bookmark(
-            $this->arguments['text'],
-            $this->arguments['level'],
-            -1,
-            '',
-            $this->arguments['fontStyle'],
-            $this->arguments['color'],
-            -1,
-            ''
-        );
+        $this->getPDF()->addBookmark($this->arguments['text'], (int) $this->arguments['level'], $this->arguments['fontStyle'], $this->arguments['color']);
     }
 }

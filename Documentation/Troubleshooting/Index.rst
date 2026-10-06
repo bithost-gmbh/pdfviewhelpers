@@ -74,7 +74,7 @@ Also ensure you have disabled all html header output:
 pdfviewhelpers can not be installed via TER
 """""""""""""""""""""""""""""""""""""""""""
 
-The extension ``pdfviewhelpers`` is quite big compared to other extensions, as it ships with the entire ``TCPDF`` in order to be easily installable via TER.
+The extension ``pdfviewhelpers`` is quite big compared to other extensions, as it ships with the entire ``tc-lib-pdf`` in order to be easily installable via TER.
 The size ``EXT:pdfviewhelpers`` might be an issue if your ``memory_limit`` or ``max_execution_time`` is quite low, try increasing these values.
 
 *PHP*
